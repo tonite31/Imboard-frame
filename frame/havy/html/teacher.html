@@ -1,0 +1,55 @@
+<script id="teacherLiveTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="p33">
+	<a class="thumbnail">
+		<img src="{{thumbnailUrl}}" alt="..." />
+		<span class="info">{{subject}}</span>
+	</a>
+</div>
+{{/each}}
+{{/if}}
+</script>
+
+<script id="teacher-list" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="colgroup" style="margin-bottom:60px;">
+<div class="col col-1-3" style="padding: 0 10px; text-align:center;">
+<img src="{{thumbnailUrl}}"/>
+</div>
+<div class="col col-2-3" style="padding-left:10px;">
+	<div class="teacher-name">
+		<h4>{{subject}}</h4>
+		<div>
+			{{#sign %{user.level} "<" 0}}
+			<a href="?piece=registerTeacher&menu=teacher&seq={{seq}}" class="btn btn-default">수정</a><button type="button" data-id="{{seq}}" class="btn btn-default">삭제</button>
+			{{/sign}}
+		</div>
+	</div>
+	<div class="teacher-carrer">
+		{{{content}}}
+	</div>
+	<div class="panel panel-default imgList">
+		<div class="panel-body" style="margin-left:-5px;" data-bind="articleList" data-param='{"boardId" : "live", "searchData" : {"startIndex" : 0, "endIndex" : 3, "tag" : "(강사) {{subject}}"}}' data-template-id="teacherLiveTemplate"></div>
+	</div>
+</div>
+</div>
+{{/each}}
+{{/if}}
+</script>
+
+<script id="registerTeacherTemplate" type="text/x-handlebars-template">
+{{#if user}}
+{{#sign user.level "<" 0}}
+<a class="btn btn-default" href="?piece=registerTeacher">강사등록</a>
+{{/sign}}
+{{/if}}
+</script>
+
+<div class="teacher-background">
+	<h2 style="margin-top:0;"><img src="/content/frame/havy/images/teacher_main.png" alt="학원강사단체사진"/></h2>
+	<h3><img src="/content/frame/havy/images/teacher_about.png" alt="학원포부로고" style="margin-top:10px;"/></h3>
+	<div style="text-align: right;margin: 10px 0;" data-bind="signedUser" data-template-id="registerTeacherTemplate"></div>
+	<div class="teacher" data-bind="articleList" data-param='{"boardId" : "teacher", "searchData" : {"withContent" : "true", "orderByGroupId" : "ASC"}}' data-template-id="teacher-list"></div>
+</div>

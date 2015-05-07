@@ -1,0 +1,34 @@
+.teacher-name
+{
+	background-color: #141414;
+	margin:0;
+	padding: 20px 10px;
+	
+	position: relative;
+}
+
+.teacher-name > h4
+{
+	color:white;
+	font-size:25px;
+	font-weight: bold;
+	margin:0;
+}
+
+.teacher-name .btn
+{
+	position: absolute;
+	right: 10px;
+	top: 15px;
+}
+
+.teacher-name .btn:FIRST-CHILD
+{
+	right: 60px;
+}
+
+.teacher-carrer
+{
+	padding: 10px 5px;
+	font-size:13px;
+}

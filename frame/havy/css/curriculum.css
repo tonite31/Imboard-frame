@@ -1,0 +1,117 @@
+.category
+{
+	display:inline-block;
+	width:100%;
+	box-sizing: border-box;
+	list-style: none;
+	margin:0;
+	padding:0;
+	text-align: center;
+	background-color: #ececec;
+}
+
+.category li
+{
+	list-style: none;
+	margin:0;
+	padding: 5px 40px 5px 40px;
+	display:inline-block;
+}
+
+.category li a
+{
+	cursor: pointer;
+	font-size: 15px;
+	color:#797979;
+}
+
+.category li a.selected
+{
+	color:black;
+	font-size:16px;
+}
+
+.scrollwrapper
+{
+	display:inline-block;
+	overflow: hidden;
+}
+
+.scrollwrapper .detail
+{
+	display:inline-block;
+	width: 500%;
+	height: 100%;
+	
+	-webkit-transition: margin-left 0.5s;
+	-moz-transition: margin-left 0.5s;
+	transition: margin-left 0.5s;
+}
+
+.scrollwrapper .detail img
+{
+	width: 100%;
+}
+
+.scrollwrapper .detail > div
+{
+	display:inline-block;
+	width: 20%;
+	height: 100%;
+	float:left;
+}
+
+.scrollwrapper .detail > div > p
+{
+	margin:5px 0px 50px 0px;
+	padding:10px;
+}
+
+.scrollwrapper .detail > div > p > label
+{
+	text-align:left;
+	font-size:12px;
+	color:#336699;
+	display:inline-block;
+}
+
+.scrollwrapper .detail > div > table
+{
+	width: 90%;
+	border-spacing:0;
+	margin-left:5%;
+}
+
+.scrollwrapper .detail > div > table > thead > tr
+{
+	height: 30px;
+}
+
+.scrollwrapper .detail > div > table > thead > tr > th
+{
+	font-size: 15px;
+	background-color: #EEE;
+}
+
+.scrollwrapper .detail > div > table > tbody > tr
+{
+	height: 40px;
+}
+
+.scrollwrapper .detail > div > table > tbody > tr > td
+{
+	padding:5px;
+	font-size:13px;
+	color:#333333;
+	
+	border-bottom:1px dotted #bfbfbf;
+}
+
+.scrollwrapper .detail > div > table > tbody > tr > td:nth-child(2)
+{
+	text-align: left;
+}
+
+.detail th, .detail table tbody tr td:first-child, .detail table tbody tr td:nth-child(3), .detail table tbody tr td:nth-child(4)
+{
+	text-align: center;

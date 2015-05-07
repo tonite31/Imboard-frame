@@ -1,0 +1,20 @@
+.teacher-image-upload-area
+{
+	width:100%;
+	min-height: 350px;
+	border: 1px solid #dedede;
+	margin-top:5px;
+	line-height: 350px;
+	text-align: center;
+	color:#797979;
+	cursor: pointer;
+}
+
+.teacher-image-upload-area > label
+{
+	cursor: pointer;
+	position: absolute;
+	left:0;
+	top:0;
+	width:100%;
+}

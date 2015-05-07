@@ -1,0 +1,37 @@
+.answer-area
+{
+	border-bottom: 1px solid #dfdfdf;
+	margin-bottom: 10px;
+}
+
+.answer-area p
+{
+	border-top: 1px dashed #dfdfdf;
+	margin:0;
+	padding: 10px;
+}
+
+.answer-area p:FIRST-CHILD
+{
+	border:0;
+}
+
+.commentConent
+{
+	width: 90%;
+	height:100px;
+	border: 1px solid #ccc;
+	border-right:0;
+	font-size:13px;
+	vertical-align:top;
+	resize:none;
+}
+
+.writeCommentBtn
+{
+	width: 10%;
+	height:100px;
+	vertical-align:top;
+	border-top-left-radius:0;
+	border-bottom-left-radius:0;
+}

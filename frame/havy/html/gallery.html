@@ -1,0 +1,47 @@
+<script id="galleryListTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+<div class="colgroup">
+{{#each articleList}}
+<div class="col col-1-4" style="padding: 0 5px; position:relative;">
+	<a class="thumbnail" href="?piece=viewArticle&menu=gallery&boardId={{boardId}}&seq={{seq}}">
+		<img src="{{thumbnailUrl}}" alt="..." />
+		<div class="info">
+			<p style="margin:0;">{{subject}}</p>
+			<p style="margin:0;">{{hit}}</p>
+		</div>
+	</a>
+</div>
+{{/each}}
+</div>
+{{/if}}
+</script>
+
+<script id="galleryPaginationTemplate" type="text/x-handlebars-template">
+{{#sign pageIndex ">" "1"}}
+<a style="font-size:12px;" href="?piece=gallery&boardId=#{boardId}&pageIndex={{math pageIndex "-" 1}}">이전</a>
+{{/sign}}
+{{#if pageList}}
+{{#each pageList}}
+<a class="number {{#equals ../pageIndex pageNumber}}selected{{/equals}}" href="?piece=gallery&boardId=#{boardId}&pageIndex={{pageNumber}}">{{pageNumber}}</a>
+{{/each}}
+{{/if}}
+{{#if maxPage}}
+{{#notequals pageIndex maxPage}}
+<a href="?piece=gallery&boardId=#{boardId}&pageIndex={{math pageIndex "+" 1}}">다음</a>
+{{/notequals}}
+{{/if}}
+</script>
+
+<script id="writeTemplate" type="text/x-handlebars-template">
+{{#sign user.level "lt" 0}}
+<a href="?piece=writeArticle&menu=gallery&boardId=#{boardId}" class="btn btn-default">글쓰기</a>
+{{/sign}}
+</script>
+
+<div style="position:relative;">
+	<div style="text-align: right; position:absolute; right:5px; top: -45px;" data-bind="signedUser" data-template-id="writeTemplate"></div>
+</div>
+<div data-bind="article-component" data-param='{"boardId" : "#{boardId}"}'>
+	<div data-parts="body" data-template-id="galleryListTemplate"></div>
+	<div data-parts="pagination" data-template-id="galleryPaginationTemplate" style="text-align: center;"></div>
+</div>

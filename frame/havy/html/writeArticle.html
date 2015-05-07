@@ -1,0 +1,21 @@
+<form id="form" data-component="form">
+	<p>
+		<input type="text" id="subject" class="textinput" name="subject" placeholder="제목을 입력해주세요" style="width:100%;" required="required" />
+	</p>
+	<p>
+		<input type="checkbox" name="isNotice" id="isNotice" value="Y"/><span style="padding:0 5px;">공지로지정</span>
+	</p>
+	<p>
+		<button id="uploadImage" type="button" class="btn btn-default" data-component="image-uploader" data-autocompile="true" data-target="ckeditor" data-target-type="ckeditor">이미지</button>
+		<button id="uploadYoutube" type="button" class="btn btn-default" data-component="youtube-uploader" data-autocompile="true" data-target="ckeditor" data-target-type="ckeditor">유투브</button>
+	</p>
+	<p>
+		<textarea id="ckeditor" style="margin-top:10px;" data-component="ckeditor" data-autocompile="true" data-theme="simple" data-config='{"height" : "400px"}'></textarea>
+	</p>
+	<p>
+		<input type="text" id="tag" class="textinput" name="tag" placeholder="태그를 입력해주세요" style="width: 30%;"/>
+	</p>
+	<p style="text-align: center;">
+		<input type="submit" class="btn btn-default" id="submit" value="저장"/>
+	</p>
+</form>
