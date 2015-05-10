@@ -24,11 +24,6 @@ ul
 	padding-left:10px;
 }
 
-h1, h2, p
-{
-	color: #efefef;
-}
-
 .btn
 {
 	border-radius:0;
@@ -36,7 +31,7 @@ h1, h2, p
 
 .btn-outline
 {
-	color: #efefef;
+	color: #333;
 	background-color: transparent;
 	border-color:#dfdfdf;
 }
@@ -44,7 +39,6 @@ h1, h2, p
 .btn-outline:HOVER {
 	background-color: #efefef;
 	border-color: #a0a0a0;
-	color:#333;
 }
 
 .btn-outline span
@@ -75,7 +69,6 @@ h1, h2, p
 .box
 {
 	padding:30px;
-	background-color: rgba(0, 0, 0, 0.7);
 	border: 1px solid #767676;
 }
 
