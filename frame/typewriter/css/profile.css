@@ -1,0 +1,51 @@
+.user-profile
+{
+	width: 400px;
+	margin: 0 auto;
+	text-align: center;	
+}
+
+.textinput:ACTIVE, .textinput:FOCUS, .linkUrl:ACTIVE, .linkUrl:FOCUS {
+	outline: 2px solid #337ab7;
+}
+
+.profileImageContainer
+{
+	width: 300px;
+	min-height: 200px;
+	border: 1px solid #dfdfdf;
+	border-radius: 5px;
+	margin:10px auto;
+}
+
+.profileImageContainer img
+{
+	border-radius: 5px;
+}
+
+.profileImgButton
+{
+	margin:0 5px;
+	cursor: pointer;
+	position: relative;
+}
+
+.hiddenFile
+{
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	width: 100%;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.linkUrl
+{
+	width: 0;
+	opacity:0;
+	padding: 5px;
+	border: 1px solid #dfdfdf;
+}

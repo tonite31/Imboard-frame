@@ -1,0 +1,124 @@
+<script id="newPaperButtonTemplate" type="text/x-handlebars-template">
+{{#equals user.displayId "#{query.username}"}}
+	{{#notequals "#{query.bookpiece}" "write"}}
+		<a href="?piece=book&username=#{query.username}&boardId={{id}}&bookpiece=write" class="btn btn-default">새로운 페이퍼</a>
+	{{/notequals}}
+{{/equals}}
+</script>
+
+<script id="profileTemplate" type="text/x-handlebars-template">
+<img src="{{user.profileImgUrl}}" alt="..." style="width:100%; border-radius: 5px;" id="profileImg">
+<div class="noProfileImg" style="height: 200px;display:none;">
+	<div class="verticalBar"></div>
+	{{#if user.profileImgUrl}}
+	<span>프로필 이미지를 불러오는데 실패했습니다</span>
+	{{else}}
+	<span>프로필 이미지가 없습니다</span>
+	{{/if}}
+</div>
+<p class="pendescription">{{user.name}}</p>
+</script>
+
+<script id="menuListTemplate" type="text/x-handlebars-template">
+{{#if menuList}}
+{{#each menuList}}
+{{#if articleCount}}
+<li class="list-group-item {{#equals id "#{query.boardId}"}}active{{/equals}}"><a href="?piece=book&username=#{query.username}&boardId={{id}}">{{name}}<span class="badge">{{articleCount}}</span></a></li>
+{{/if}}
+{{/each}}
+{{/if}}
+</script>
+
+<script id="paperListTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="paper panel {{#equals status 1}}panel-primary{{else}}panel-default unpublished{{/equals}}" style="position: relative;">
+	<div class="panel-heading">
+		<p class="paperInfo">
+			{{#equals status 1}}
+			<span class="label label-primary">{{boardName}}</span>
+			{{else}}
+			<span class="label label-default boardName">{{boardName}}</span>
+			{{/equals}}
+			<span>조회 {{hit}}</span>
+			<span>덧글 {{commentCount}}</span>
+			<span>{{shortDate registerDate}}</span>
+		</p>
+		<p class="bookFunction">
+			<small></small>
+			{{#equals writerId "#{user.id}"}}
+				{{#equals status 0}}
+					<small class="unpublished-paper">미발행 페이퍼입니다.</small>
+					<a style="cursor: pointer;" data-id="publish" data-board-id="{{boardId}}" data-seq="{{seq}}"><span class="glyphicon glyphicon-share share" title="발행"></span></a>
+				{{/equals}}
+				<span data-id="deletePaper" class="glyphicon glyphicon-trash delete" title="삭제"></span>
+				<span data-id="deleteConfirm" data-board-id="{{boardId}}" data-seq="{{seq}}" style="display:none;" class="delete" style="font-size:12px;">삭제</span>
+			{{/equals}}
+		</p>
+	</div>
+	<div class="panel-body" style="position: relative;">
+		<a class="paperCorver" href="?piece=book&bookpiece=paper&username={{displayId}}&boardId={{boardId}}&seq={{seq}}"></a>
+		<h3 class="subject">{{subject}}</h3>
+		<article>
+			{{#if thumbnailUrl}}<figure class="thumbnailFigure">{{{thumbnailUrl}}}</figure>{{/if}}
+			<div>{{{textThumbnail content "</div>" 3}}}</div>
+		</article>
+	</div>
+</div>
+{{/each}}
+{{else}}
+<h2 style="text-align: center;">작성된 페이퍼가 없습니다</h2>
+{{/if}}
+</script>
+
+<script id="paperPaginationTemplate" type="text/x-handlebars-template">
+{{#if pageList}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li><a href="?piece=book&username=#{query.username}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}><a href="?piece=book&username=#{query.username}&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a></li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li><a href="?piece=book&username=#{query.username}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next"><span aria-hidden="true">다음</span></a></li>
+		{{/sign}}
+	</ul>
+</nav>
+{{/if}}
+</script>
+
+<div style="text-align: center; margin-bottom: 15px;" data-bind="signedUser" data-template-id="newPaperButtonTemplate"></div>
+<div style="padding: 0 10px;" data-bind="signedUser">
+{{#if \"#{query.username}\"}}
+	<div class="col-xs-1"></div>
+	<div class="col-xs-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<p class="penname" style="position: relative;">
+					<a href="?piece=book&username=#{query.username}" style="color:#fff;">#{query.username}</a>
+					{{#if user}}{{#equals user.displayId \"#{query.username}\"}}<a href="?piece=profile" title="프로필편집"><span class="glyphicon glyphicon-edit" style="position: absolute; top:4px; right: 0; color:#fff;"></span></a>{{/equals}}{{/if}}
+				</p>
+			</div>
+			<div class="panel-body" data-bind="getUser" data-param='{"displayId" : "#{query.username}"}' data-template-id="profileTemplate"></div>
+		</div>
+		<nav>
+			<ul class="list-group" id="list" data-bind="menuListWithArticleCount" data-template-id="menuListTemplate" data-param='{"parentMenuId" : "#{query.username}"}'></ul>
+		</nav>
+	</div>
+	<div class="col-xs-7">
+		<div data-component="piece" data-key="bookpiece">
+			<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}", "cpp" : "5", "searchData" : {"displayId" : "#{query.username}", "withContent" : "true", "orderByGroupId" : "DESC", "orderBySeq" : "DESC"}}'>
+				<div data-parts="body" data-template-id="paperListTemplate" class="row"></div>
+				<div data-parts="pagination" data-template-id="paperPaginationTemplate" style="clear:both;"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-1">
+		<div id="bannerArea"></div>
+	</div>
+{{else}}
+	<h2 style="text-align:center;">존재하지 않는 북페이지 입니다.</h2>
+{{/if}}
+</div>

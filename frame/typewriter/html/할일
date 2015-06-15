@@ -1,0 +1,20 @@
+typewriter 이미지 업로드시 프로그레스 필요
+typewriter 이미지 리사이즈 컨테이너 쪽의 약간의 버그 커서가 있는데 포커스가 안나옴.
+typewriter 이미지 리사이즈 컨테이너는 컨텐트에디터블 폴스
+
+index.html 에서 스크롤 하단까지 왔을때 다음페이지 가져와서 붙여주는 기능.
+
+페이퍼 점수주는 기능.
+페이퍼 점수집계 기능.
+
+프로필 이미지 gif로 등록하면 png뜨고 가져다대면 gif로 바꿔주는 기능
+book.html에서 프로필쪽에 구독하기 버튼 및 기능 만들기
+페이퍼 클립하는 기능
+미발행된 페이퍼 모아보는 메뉴 추가
+
+typewriter block에 따른 span 처리해야함
+typewriter 폰트 사이즈 조절 기능 추가
+typewriter 폰트 웨이트 조절 기능 추가
+typewriter text-decoration 기능 추가
+
+서버로 데이터 바인드 태워서 가져오는 기능

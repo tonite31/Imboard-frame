@@ -1,0 +1,306 @@
+html, body
+{
+	margin:0;
+	padding:0;
+	width: 100%;
+	height: 100%;
+}
+
+a, .thumbnail .caption, .well, .btn-default
+{
+	color: #444;
+}
+
+header
+{
+	position: fixed;
+	border-radius:0;
+	background: white;
+	border-bottom: 1px solid #dfdfdf;
+	margin-bottom:10px;
+	
+	height: 52px;
+	width: 100%;
+	top:0;
+	
+	z-index:100;
+}
+
+header > div
+{
+	position: absolute;
+	height: 100%;
+}
+
+header > div.left
+{
+	left:0; top:0;
+	width: 20%;
+}
+
+header > div.center
+{
+	left:20%; top:0;
+	width: 60%;
+}
+
+header > div.right
+{
+	left: 80%; top:0;
+	width: 20%;
+	
+	text-align: right;
+}
+
+.logo
+{
+	font-family: arial;
+	font-size: 25px;
+	font-weight: bold;
+	line-height: 50px;
+	padding-left:20px;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.menu-container
+{
+	height: 100%;
+}
+
+.menu-container > div
+{
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.navbar-nav li a:HOVER, .menu-container .nav-pills li a:HOVER
+{
+	background-color: white;
+}
+
+.menu-container .nav-pills li.active a:HOVER
+{
+	background-color: #337ab7;
+}
+
+.title
+{
+	display:block;
+	line-height: 1.1;
+	color: inherit;
+	font-family: inherit;
+	padding: 10px 0;
+}
+
+.title-large
+{
+	font-size:20px;
+}
+
+.title-medium
+{
+	font-size: 15px;
+}
+
+.title-small
+{
+	font-size:12px;
+}
+
+.title-xsmall
+{
+	font-size:10px;
+}
+
+.well
+{
+	background: white;
+	box-shadow:none;
+}
+
+.well hr
+{
+	border-color: #dadada;
+}
+
+.input-label
+{
+	position: relative;
+	top:1.5px;
+	padding: 0 5px;
+}
+
+.input-label *
+{
+	vertical-align: middle;
+}
+
+.input-label span
+{
+}
+
+.featuredTag
+{
+	border: 1px solid #dfdfdf;
+	border-radius: 2px;
+	padding: 3px 10px;
+  	margin-right: 6px;
+  	margin-bottom: 6px;
+  	line-height: 22px;
+  	display: inline-block;
+  	cursor: pointer;
+}
+
+.featuredTag:HOVER
+{
+	background-color: #BBDEFF;
+	border: 1px solid #2D98FD;
+	color: #0E3C67;
+	text-decoration: none;
+}
+
+.paperContainer
+{
+	position: relative;
+}
+
+.paperCorver
+{
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index: 100;
+}
+
+.panel-primary .panel-heading
+{
+	background-image: linear-gradient(to bottom,#337ab7 0,#2b669a 100%);
+}
+
+.panel-default .panel-heading
+{
+	background: #f5f5f5;
+}
+
+.profile-image, .profile-info, .paper-info
+{
+	display:inline-block; vertical-align: middle;
+}
+
+.profile-image > figure
+{
+	width: 36px; height: 36px;
+}
+
+.profile-image > figure img
+{
+	width: 100%; height:100%;
+	border-radius:5px;
+}
+
+.profile-info
+{
+	padding-left: 10px;
+}
+
+.profile-info p
+{
+	margin:0; padding: 2px 0;
+	font-size: 12px;
+}
+
+.profile-info .username
+{
+	font-size: 14px;
+}
+
+.paper-info
+{
+	position: absolute;
+	right:10px;
+	top:18px;
+}
+
+.paper-info span
+{
+	font-size:75%;
+	margin:0 2px;
+	color: #666;
+}
+
+.panel-body .subject
+{
+	margin: 5px 0 20px 0;
+	text-overflow: ellipsis; white-space: nowrap; overflow: hidden; 
+}
+
+.panel-body article div
+{
+	margin: 20px 0 5px 0;
+}
+
+.panel-footer
+{
+	background: white;
+	margin:0 15px;
+	padding:10px 0;	
+}
+
+.unknownUser
+{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 25px;
+	text-align: center;
+	padding-top: 5px;
+	opacity: 0.5;
+}
+
+.card
+{
+	position: absolute;
+}
+
+.verticalBar
+{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.noProfileImg
+{
+	width: 100%; height: 100%; border-radius:5px; border: 1px solid #dfdfdf; text-align:center;
+}
+
+.panel-primary .panel-heading span, .panel-primary .panel-heading p
+{
+	color: #fff;
+}
+
+.thumbnailImg > img
+{
+	width: 100% !important;
+}
+
+.tag
+{
+	margin-right: 5px; font-size:12px; cursor:pointer;
+}
+
+.thumbnailFigure
+{
+	max-height: 300px;
+	overflow: hidden;
+}
+
+.thumbnailFigure img
+{
+	max-width: 100%;
+}

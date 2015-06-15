@@ -1,0 +1,7 @@
+<div data-bind="userList">
+{{#if userList}}
+{{#each userList}}
+<a href="?piece=book&username={{displayId}}">{{displayId}}</a>
+{{/each}}
+{{/if}}
+</div>

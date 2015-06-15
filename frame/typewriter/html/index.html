@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="Title" content="TYPEWRITER">
+<meta name="author" content="Alprensia"/>
+<meta name="reply-to" content="tonite32@gmail.com"/>
+<meta name="robots" content="INDEX, FOLLOW" />
+<meta name="description" content="Easy write, Use everywhere"/>
+
+<title>TYPEWRITER</title>
+
+<link rel="stylesheet" type="text/css" href="#{frame.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="#{frame.root}/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="#{frame.root}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/content/module/imboard/css/imboard-ui-1.0.css" />
+<link rel="stylesheet" type="text/css" href="#{frame.root}/lib/typewriter/typewriter-0.0.1.css" />
+
+<script src="/content/lib/jquery/jquery-1.10.2.js"></script>
+<script src="/content/lib/handlebars/handlebars-v1.3.0.js"></script>
+<script src="#{frame.root}/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="#{frame.root}/lib/typewriter/typewriter-0.0.1.js"></script>
+
+<script src="/content/module/imboard/js/imboard-api-1.0.js"></script>
+<script src="/content/module/imboard/js/imboard-1.0.js"></script>
+<script src="/content/module/imboard/js/imboard-ui-1.0.js"></script>
+<script src="/content/module/imboard/js/handlebar-helper-1.0.js"></script>
+
+<script src="#{frame.root}/js/index.js"></script>
+
+<script id="rightButtonsTemplate" type="text/x-handlebars-template">
+{{#if user}}
+<!--<li role="presentation"><a href="?piece=subscription" title="구독페이퍼"><span class="glyphicon glyphicon-inbox"></span></a></li>-->
+<!--<li role="presentation"><a href="?piece=clip" title="클립한 페이퍼 목록"><span class="glyphicon glyphicon-paperclip"></span></a></li>-->
+{{#if user.displayId}}
+<li role="presentation"><a href="?piece=book&bookpiece=write&username={{user.displayId}}" title="새 페이퍼 작성"><span class="glyphicon glyphicon-file"></span></a></li>
+<li role="presentation"><a href="?piece=book&username={{user.displayId}}"><span class="glyphicon glyphicon-home"></span></a></li>
+{{else}}
+<li role="presentation"><a href="?piece=profile"><span class="glyphicon glyphicon-home"></span></a></li>
+{{/if}}
+<li role="presentation"><a href="/signout.do">로그아웃</a></li>
+{{else}}
+<li><a href="/signin">로그인</a></li>
+{{/if}}
+</script>
+
+<script id="titleTemplate" type="text/x-handlebars-template">
+{{#equals "#{query.type}" "top"}}
+	최근 한달간 인기있는 페이퍼들입니다
+{{/equals}}
+{{#empty "#{query.type}"}}
+	최근 발행된 페이퍼를 둘러보세요
+{{/empty}}
+</script>
+
+<script id="articleTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="card col-xs-3">
+	<div class="panel panel-primary">
+		<div class="paperContainer">
+			<div class="panel-heading" style="position: relative;">
+				<div class="profile-image">
+					{{#if profileImgUrl}}
+					<figure>
+						<a href="?piece=book&username={{displayId}}"><img src="{{profileImgUrl}}" data-id="profileImg"/></a>
+					</figure>
+					{{else}}
+						<span class="glyphicon glyphicon-user unknownUser"></span>
+					{{/if}}
+				</div>
+				<div class="profile-info">
+					<p class="username">{{displayId}}</p>
+				</div>
+				<div class="paper-info">
+					<span>조회 {{hit}}</span>
+					<span>덧글 {{commentCount}}</span>
+					<span>{{shortDate registerDate}}</span>
+				</div>
+			</div>
+			<div class="panel-body" style="position: relative;">
+				<a class="paperCorver" href="?piece=book&bookpiece=paper&username={{displayId}}&boardId={{boardId}}&seq={{seq}}"></a>
+				<h3 class="subject">{{subject}}</h3>
+				<article>
+					{{#if thumbnailUrl}}<figure class="thumbnailFigure">{{{thumbnailUrl}}}</figure>{{/if}}
+					<div>{{{textThumbnail content "</div>" 3}}}</div>
+				</article>
+			</div>
+			<div class="panel-footer">
+				<div>
+					{{{split " " tag "<a class='label label-primary tag'>${value}</a>"}}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/each}}
+{{/if}}
+</script>
+
+</head>
+<body style="min-width: 1200px;">
+<div>
+	<header>
+		<div class="left">
+			<h1 style="margin:0;"><a class="logo" href="/">TYPEWRITER</a></h1>
+		</div>
+		<div class="center">
+			<nav class="menu-container" style="text-align: center;">
+				<div>
+					<ul class="nav nav-pills">
+						<li role="presentation"><a href="/"><span class="glyphicon glyphicon-search"></span></a></li>
+						<li role="presentation"><a href="/?type=top"><span class="glyphicon glyphicon-star"></span></a></li>
+						<li role="presentation"><a href="?piece=user"><span class="glyphicon glyphicon-user"></span></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="right">
+			<nav class="menu-container">
+				<div>
+					<ul class="nav nav-pills" style="float:right;" data-bind="signedUser" data-template-id="rightButtonsTemplate"></ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+</div>
+<div style="min-width: 1000px; max-width: 1500px; margin:0 auto; padding-top:80px;" data-component="piece" data-key="piece" id="body">
+	<div>
+		<form data-component="form" id="searchForm">
+			<p class="title title-medium" style="text-align: center;" data-bind="noparam" data-template-id="titleTemplate"></p>
+			<div class="input-group" style="width: 700px; margin:0 auto; margin-bottom: 30px;">
+				<span class="input-group-addon" style="background-color: white;">
+					<label class="input-label"><input type="radio" name="search" value="tag" checked="checked" /> <span>태그</span></label>
+					<label class="input-label"><input type="radio" name="search" value="subject" /> <span>제목</span></label>
+					<label class="input-label"><input type="radio" name="search" value="content" /> <span>내용</span></label>
+					<label class="input-label"><input type="radio" name="search" value="likeDisplayId" /> <span>작성자</span></label>
+				</span>
+				<input type="text" class="form-control" name="searchValue" placeholder="검색어를 입력하세요" aria-label="검색용 태그" required="required">
+				<span class="input-group-addon" style="cursor: pointer;" data-role="submit" id="search"><span class="glyphicon glyphicon-search"></span></span>
+			</div>
+		</form>
+	</div>
+	<div data-bind="articleComponent" data-param='{"searchData" : {"withContent" : "true", "useOrderByGroupId" : "N", "useOrderBySeq" : "N", "checkSigninUser" : "N"}}'>
+		<div data-parts="body" data-template-id="articleTemplate" style="position: relative; padding: 15px;" id="paperListBody"></div>
+	</div>
+</div>
+</body>
+</html>
