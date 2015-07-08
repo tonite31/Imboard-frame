@@ -1,8 +1,8 @@
 $(document).ready(function()
 {
-	if($.global.query.piece)
+	if($.query.fragment)
 	{
 		$(".navbar-nav li").removeAttr("active");
-		$(".navbar-nav li a[href='?piece=" + $.global.query.piece + "']").parent().addClass("active");
+		$(".navbar-nav li a[href='?fragment=" + $.query.fragment + "']").parent().addClass("active");
 	}
 });
