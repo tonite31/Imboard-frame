@@ -16,7 +16,11 @@ function setSelectedContent()
 	$("#documentArea *[id^=doc]").each(function()
 	{
 		var rect = this.getBoundingClientRect();
-		if(rect.top <= 0)
+		if($(window).scrollTop() + $(window).height() == $(document).height()) 
+		{
+			minTarget = {distance : rect.top, element : $("#documentArea *[id^=doc]:last")};
+		}
+		else if(rect.top <= 0)
 		{
 			if(!minTarget || minTarget.distance < rect.top)
 			{
@@ -27,7 +31,15 @@ function setSelectedContent()
 	
 	if(minTarget)
 	{
-		$("#contentList li a[href='#" + $(minTarget.element).attr("id") + "']").parent().addClass("selected");
+		var a = $("#contentList li a[href='#" + $(minTarget.element).attr("id") + "']");
+		a.parent().addClass("selected");
+		
+		$("#contentList ul").hide();
+		
+		var href = a.attr("href").split("-")[0];
+		var ul = $("#contentList a[href='" + href + "']").next();
+		ul.show();
+		ul.find("ul").show();
 	}
 	else
 	{
