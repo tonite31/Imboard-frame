@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+
+<meta name="Title" content="임보드">
+<meta name="author" content="Alprensia"/>
+<meta name="reply-to" content="tonite32@gmail.com"/>
+<meta name="robots" content="INDEX, FOLLOW" />
+<meta name="description" content="가장 간편한 웹페이지 제작 플랫폼"/>
+
+<title>Imboard</title>
+
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
+
+<script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
+<script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="#{path.lib}/handlebars/handlebars-v1.3.0.js"></script>
+
+<script src="#{path.module}/imboard/js/imboard-api.js"></script>
+<script src="#{path.module}/imboard/js/imboard-ui.js"></script>
+<script src="#{path.module}/imboard/js/handlebar-helper.js"></script>
+
+<script src="#{path.root}/js/index.js"></script>
+
+</head>
+
+<body>
+	<header class="nav-header">
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+				      	<a class="navbar-brand" href="/">Localhost</a>
+				    </div>
+				
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#">로그인</a></li>
+						</ul>
+				    </div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</div>
+	</header>
+	<div class="container" style="padding-top: 20px;">
+		<div class="col-xs-3" data-bind="signedUser">
+			{{#if user}}
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div>
+					{{#if user.profileImgUrl}}
+						<img src="{{user.profileImgUrl}}" />
+					{{else}}
+						<div style="width: 100%; height:200px; border: 1px solid #dfdfdf; text-align:center;">
+							<div style="width:0; height:100%; vertical-align:middle; display:inline-block;"></div>
+							<span>프로필 이미지가 없습니다</span>
+						</div>
+					{{/if}}
+					</div>
+			      	<div>
+			        	<p>user.displayId</p>
+			        	<p>user.description</p>
+			      	</div>
+			      	<nav class="navmenu">
+						<ul class="list-group">
+							<li class="list-group-item"><a>전체글보기</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			{{/if}}
+			<nav class="navmenu">
+				<ul class="list-group">
+					<li class="list-group-item"><a>광장</a></li>
+					<li class="list-group-item"><a>버그제보 및 건의사항</a></li>
+					<li class="list-group-item"><a>질문과 답변</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-xs-9">
+			<div>
+				<div class="summary">
+					<div class="tag">
+						<span>태그1</span>
+						<span>태그2</span>
+						<span>태그3</span>
+					</div>
+					<div class="info">
+						<div>
+							<span>0</span>
+							<span>good</span>
+						</div>
+						<div>
+							<span>0</span>
+							<span>comment</span>
+						</div>
+						<div>
+							<span>0</span>
+							<span>views</span>
+						</div>
+					</div>
+					<div>
+						<img src=""/>
+						<h3><a href="#">PL/pgSQL , How to make a function using Raise notices and export the messages from the console to a text file from the Code</a></h3>
+					</div>
+					<div style="text-align:right; position: relative;">
+						<span style="position: absolute; left:15px; top:10px;">Alprensia</span>
+						<span style="padding: 10px; display:inline-block;">2015-05-07</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

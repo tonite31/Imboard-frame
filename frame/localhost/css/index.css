@@ -1,0 +1,70 @@
+header
+{
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.navbar
+{
+	background: white;
+	box-shadow: none;
+	border:0;
+	border-radius:0;
+	margin:0;
+}
+
+.navmenu ul > li:FIRST-CHILD, .navmenu ul > li:LAST-CHILD
+{
+	border-radius:0;
+}
+
+.summary
+{
+	position: relative;
+	border: 1px solid #dfdfdf;
+	padding: 5px;
+	
+	margin-bottom: 10px;
+}
+
+.summary .tag > span
+{
+	padding: 5px 10px;
+	position: relative;
+	border: 1px solid #dfdfdf;
+	top:25px;
+	left: 10px;
+}
+
+.summary .info
+{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.summary .info > div
+{
+	display: inline-block;
+	padding: 5px 10px;
+	width: 80px;
+	border: 1px solid #dfdfdf;
+}
+
+.summary .info > div > span
+{
+	text-align: center;
+	display: block;
+}
+
+.summary h3
+{
+	margin-top: 55px;
+	padding: 0 15px;
+	line-height: 30px;
+	font-size: 20px;
+}
+
+.summary h3 a:HOVER
+{
+	text-decoration: none;
+}
