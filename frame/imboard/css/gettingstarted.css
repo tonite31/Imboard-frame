@@ -1,7 +1,4 @@
-@media (min-width: 768px)
+.doc > div
 {
-	.btn
-	{
-		
-	}
+	padding: 10px 0;
 }
