@@ -1,0 +1,18 @@
+$(document).ready(function()
+{
+	$("#updateForm").compile(function(data)
+	{
+		if($.query.id)
+		{
+			//편집화면
+			$.api.board.updateBoard(data);
+		}
+		else
+		{
+			//생성화면
+			$.api.board.insertBoard(data);
+		}
+		
+		location.href = "/";
+	});
+});

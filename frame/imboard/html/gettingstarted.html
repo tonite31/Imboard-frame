@@ -14,56 +14,67 @@
 			<p>결과물 스크린샷</p>
 		</div>
 		<div class="doc">
-			<h2 id="doc2">2. 프레임 생성</h2>
+			<h2 id="doc2">2. 프레임구조 생성</h2>
 			<p>임보드 어플리케이션은 프레임단위로 실행됩니다. 웹페이지 제작은 프레임을 생성하는것부터 시작됩니다.</p>
 			<p>다음과 같은 구조로 프레임 디렉토리를 구성합니다. index.html은 시작화면으로써 반드시 필요한 파일입니다.</p>
-			<p>폴더구조 스크린샷</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/directory_structure.png" alt="프레임 디렉토리구조 스크린샷"/></p>
 		</div>
 		<div class="doc">
-			<h2 id="doc3">3. index.html</h2>
+			<h2 id="doc3">3. index.html 작성</h2>
 			<p>index.html은 웹페이지의 시작화면입니다. 따라서 완전한 html구조를 가지고 있어야 합니다. 아래 코드와같이 기본 뼈대를 작성합니다.</p>
-			<p>index.html코드 삽입</p>
+			<p>index.css파일은 미리 작성되어있으므로 다운로드 받아서 사용할 수 있습니다. <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>를 sample 프레임 하위의 css폴더에 다운로드 받아서 사용하십시오.</p>
+			<pre data-html="/gettingstarted/doc3.html"></pre>
 		</div>
 		<div class="doc">
-			<h2 id="doc4">4. 레이아웃</h2>
-			<p>가장먼저 header부분과 body부분으로 나뉘는 레이아웃을 작성합니다. data-fragment 속성이 지정된 div는 앞으로 body라고 부릅니다. body부분은 화면 조각들이 보여질 컨테이너 역할을 하게됩니다.</p>
-			<p>예를들어 URL에 <strong>?body=boardList</strong>가 지정되면 2번에서 작성한 html폴더내부에 boardList.html을 불러와서 body 내부로 보여줍니다.</p>
-			<p>레이아웃 나눠진 코드 삽입</p>
+			<h2 id="doc4">4. 레이아웃 구성</h2>
+			<p>가장먼저 header부분과 body부분으로 나뉘는 레이아웃을 작성합니다.</p>
+			<pre data-html="/gettingstarted/doc4.html"></pre>
+			<p>data-fragment 속성이 지정된 div 태그는 화면 조각들이 보여질 컨테이너 역할을 하게됩니다.</p>
+			<p>예를들어 URL에 <strong>?body=boardList</strong>가 지정되면 html 디렉토리 하위의 boardList.html을 불러와서 body 내부로 보여줍니다.</p>
 		</div>
 		<div class="doc">
 			<h2 id="doc5">5. 데이터조합</h2>
-			<p>body부분에 기본적으로 보여질 화면은 게시판목록입니다. 게시판 목록은 서버로부터 불러와서 handlebars문법을 사용해 화면에 보여지게 됩니다.</p>
+			<p>body부분에 기본적으로 보여질 화면은 게시판목록입니다. 게시판 목록은 서버로부터 데이터를 불러와서 handlebars문법을 사용해 화면에 보여지게 됩니다.</p>
 			<p>아래 코드와 같이 div 태그에 <strong>data-bind="boardList"</strong> 속성을 지정하면 서버의 boardList모듈을 통해 데이터를 받아옵니다.</p>
-			<p>data-bind 속성과 data-template-id속성이 지정된 태그 삽입</p>
-			<p>받아온 데이터는 data-template-id속성에 지정된 아이디에 해당하는 템플릿을 통해 화면에 조합됩니다. 템플릿은 아래와 같이 &lt;script&gt;&lt;/script&gt; 태그 사이에 작성합니다. id는 boardListTemplate로 지정하고 type은 반드시 text/x-handlebars-template로 지정합니다.</p>
-			<p>스크립트 코드 삽입</p>
+			<pre data-html="/gettingstarted/doc5-1.html"></pre>
+			<p>받아온 데이터는 data-template-id속성에 지정된 아이디에 해당하는 템플릿을 통해 화면에 조합됩니다. 템플릿은 아래와 같이 head 태그 사이에 script 태그로 작성합니다. id는 boardListTemplate로 지정하고 type은 반드시 text/x-handlebars-template로 지정합니다.</p>
+			<pre data-html="/gettingstarted/doc5-2.html"></pre>
 			<p>여기까지 작성한 후 임보드가 설치된 루트 디렉토리에서 <strong>node app.js</strong> 명령어를 수행해서 어플리케이션을 실행한 뒤 브라우저에서 http://localhost:3000으로 접속합니다.</p>
-			<p>스크린샷 삽입</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="게시판 목록 결과 스크린샷" style="width:100%;"/></p>
 		</div>
 		<div class="doc">
-			<h2 id="doc6">6. 페이지조각</h2>
-			<p>이번에는 게시판을 생성하는 화면을 제작합니다. 게시판생성 화면은 페이지 조각으로 제작됩니다. 위에서 작성한 boardList가 보여지는 div상위에 아래와 같이 태그를 작성합니다.</p>
-			<p>a태그가 들어있는 코드 일부</p>
-			<p>이 버튼을 클릭하면 게시판생성 화면조각을 불러와서 body부분에 보여줍니다.</p>
-			<p>html폴더에 <strong>addBoard.html</strong> 파일을 생성합니다. 이 파일은 조각파일로 완전한 html구조를 갖추지 않아도 됩니다.</p>
+			<h2 id="doc6">6. 페이지조각 제작</h2>
+			<p>이번에는 게시판을 생성하고 편집할 수 있는 화면을 제작합니다. 게시판생성 및 편집 화면은 페이지 조각으로 제작됩니다. index.html 파일을 아래와 같이 수정합니다. 굵은 글씨 부분이 수정되거나 추가된 코드입니다.</p>
+			<pre data-html="/gettingstarted/doc6-1.html"></pre>
+			<p>게시판 생성 버튼을 클릭하거나 테이블의 게시판 아이디부분을 클릭하면 게시판생성 및 편집 화면조각을 불러와서 화면에 보여줄 수 있도록 해야합니다.</p>
+			<p>html폴더에 <strong>updateBoard.html</strong> 파일을 생성합니다. 이 파일은 조각파일로 완전한 html구조를 갖추지 않아도 됩니다.</p>
 			<p>게시판생성에 필요한 정보를 입력받기 위해 아래와 같은 코드를 작성합니다. 각 input태그에는 적절한 name속성을 지정하고 id와 같이 반드시 필요한 값은 <strong>required="required"</strong> 속성을 지정해서 validation 체크도 될 수 있게 합니다.</p>
-			<p>이 화면조각은 게시판을 생성함과 동시에 편집도 가능하게 하기 위해 아래와 같이 <strong>data-bind="board"</strong>속성을 지정합니다. <strong>data-param='{"id" : "#{id}"}'</strong>속성을 지정해주면 파라미터에 id값을 ##{id}부분에 치환해서 board모듈을 호출합니다. 만약 id에 해당하는 게시판데이터가 있다면 각 input태그에 값이 보여질것입니다.</p>
-			<p>form태그 코드 삽입</p>
-			<p>이제 각 input 태그에 입력된 정보를 가져와서 서버로 게시판 생성을 위한 요청을 보내야합니다. js폴더에 addBoard.js파일을 생성합니다. 화면조각 html파일과 동일한 이름으로 js파일을 생성하면 해당 html이 보여질때 js파일도 함께 import가 됩니다.</p>
-			<p>파라미터에 id값이 없다면 게시판을 생성하는 로직을 수행하고 id값이 있다면 게시판을 편집하는 로직을 수행하는 코드입니다.</p>
-			<p>js코드 삽입</p>
+			<p>이 화면조각은 게시판을 생성함과 동시에 편집도 가능하게 하기 위해 <strong>data-bind="board"</strong>속성과 <strong>data-param='{"id" : "##{query.id}"}'</strong>속성을 지정합니다. 만약 URL querystring에 id값이 있다면 해당하는 게시판 데이터를 보여줍니다. </p>
+			<pre data-html="/gettingstarted/doc6-2.html"></pre>
+			<p>이제 각 input 태그에 입력된 정보를 가져와서 서버로 게시판 생성을 위한 요청을 보내야합니다. js폴더에 updateBoard.js파일을 생성합니다. 화면조각 html파일과 동일한 이름으로 js파일을 생성하면 해당 html이 보여질때 js파일도 함께 import가 됩니다. 마찬가지로 css파일도 함께 import가 되므로 <a href="http://resources.imboard.io/gettingstarted/updateBoard.css">updateBoard.css</a> 파일을 sample 프레임 하위의 css폴더에 다운로드 받아서 사용하십시오.</p>
+			<p>아래 코드는 URL querystring에 id값이 없다면 게시판을 생성하는 로직을 수행하고 id값이 있다면 게시판을 편집하는 로직을 수행하는 코드입니다.</p>
+			<p>URL querystring의 값은 $.query 객체를 통해 손쉽게 접근할 수 있습니다. 이 객체를 사용하거나 $.api 함수를 사용하기 위해서는 index.html파일에 imboard-api.js파일이 import되어있어야 합니다.</p>
+			<pre data-html="/gettingstarted/doc6-3.html"></pre>
 			<p>form태그의 id를 활용해 위와같이 compile함수를 호출하면 form태그에 submit이 일어났을때 callback함수의 파라미터로 input태그에 입력된 값들을 json 형식으로 전달해줍니다. 이를 위해서는 반드시 각 input태그에 name속성이 지정되어있어야 합니다.</p>
 			<p>이 기능을 사용하기 위해서는 반드시 index.html파일에 imboard-ui.js파일이 import되어있어야 합니다.</p>
-			<p>여기까지 작성한 후 http://localhost:3000이 입력된 브라우저에서 새로고침을 해서 정상적으로 동작하는지 확인합니다.</p>
-			<p>결과 스크린샷삽입</p>
+			<p>여기까지 작성한 후 http://localhost:3000이 입력된 브라우저를 새로고침합니다.</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample 프레임 제작 결과 스크린샷" style="width: 100%;"/></p>
 		</div>
 		<div class="doc">
 			<h2 id="doc7">7. 마무리</h2>
-			<p>더 다양한 모듈과 기능들은 <a href="?fragment=document">문서</a>페이지에서 확인할 수 있으며 버그제보 또는 건의사항, Q&amp;A등이 필요하다면 임보드의 커뮤니티사이트인 <a>Localhost</a>에 접속하십시오.</p>
+			<p><a href="http://resources.imboard.io/gettingstarted/GettingStarted.zip">GettingStarted.zip</a>를 다운로드 받으면 최종결과물을 이클립스 프로젝트 형태로 확인할 수 있습니다.</p>
+			<p>더 다양한 모듈과 기능들은 <a href="?fragment=document">문서</a> 페이지에서 확인할 수 있으며 버그제보 또는 건의사항, Q&amp;A등이 필요하다면 임보드의 커뮤니티사이트인 <a href="#">Localhost(준비중)</a>에 접속하십시오.</p>
 		</div>
 	</div>
 	<div class="col-xs-3">
 		<ul id="contentList" data-component="scrollFollower">
+			<li><a href="#doc1">1. 개요</a></li>
+			<li><a href="#doc2">2. 프레임구조 생성</a></li>
+			<li><a href="#doc3">3. index.html 작성</a></li>
+			<li><a href="#doc4">4. 레이아웃 구성</a></li>
+			<li><a href="#doc5">5. 데이터조합</a></li>
+			<li><a href="#doc6">6. 페이지조각 제작</a></li>
+			<li><a href="#doc7">7. 마무리</a></li>
 		</ul>
 	</div>
 </div>

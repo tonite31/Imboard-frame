@@ -1,0 +1,35 @@
+&lt;script id="boardListTemplate" type="text/x-handlebars-template"&gt;
+{{#if boardList}}
+&lt;table class="dataTable"&gt;
+	&lt;colgroup&gt;
+		&lt;col style="width:20%;"/&gt;
+		&lt;col style="width:30%;"/&gt;
+		&lt;col style="width:10%;"/&gt;
+		&lt;col style="width:30%;"/&gt;
+		&lt;col style="width:10%;"/&gt;
+	&lt;/colgroup&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;아이디&lt;/th&gt;
+			&lt;th&gt;이름&lt;/th&gt;
+			&lt;th&gt;우선순위&lt;/th&gt;
+			&lt;th&gt;설명&lt;/th&gt;
+			&lt;th&gt;사용여부&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/tehad&gt;
+	&lt;tbody&gt;
+	{{#each boardList}}
+		&lt;tr&gt;
+			&lt;td&gt;{{id}}&lt;/td&gt;
+			&lt;td&gt;{{name}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{priority}}&lt;/td&gt;
+			&lt;td&gt;{{description}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{useYn}}&lt;/td&gt;
+		&lt;/tr&gt;
+	{{/each}}
+	&lt;/tbody&gt;
+&lt;/table&gt;
+{{else}}
+&lt;span&gt;게시판 목록이 없습니다.&lt;/span&gt;
+{{/if}}
+&lt;/script&gt;

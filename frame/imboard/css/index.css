@@ -177,3 +177,36 @@ footer p a
 	font-size: 15px;
 	padding: 10px;
 }
+
+#contentList li, #contentList ul
+{
+	list-style: none;
+}
+
+#contentList li
+{
+	margin:5px 0;
+	padding-left: 10px;
+}
+
+#contentList ul
+{
+	padding-left: 10px;
+	display:none;
+}
+
+#contentList li a
+{
+	padding-left: 10px;
+	color:#666;
+}
+
+#contentList li.selected > a
+{
+	border-left: 2px solid #337ab7;	
+}
+
+#contentList li.selected > a
+{
+	color:#337ab7;
+}
