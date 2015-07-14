@@ -1,0 +1,19 @@
+.article
+{
+	margin-bottom: 25px;
+}
+
+.article h3
+{
+	position: relative;
+}
+
+.article h3 small
+{
+	position: absolute;
+	
+	right:0px;
+	bottom: 10px;
+	
+	font-size:12px;
+}
