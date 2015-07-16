@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/typewriter/typewriter-0.0.1.css" />
 
 <link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
 
@@ -27,6 +28,36 @@
 <script src="#{path.module}/imboard/js/handlebar-helper.js"></script>
 
 <script src="#{path.root}/js/index.js"></script>
+
+<script src="#{path.root}/lib/typewriter/typewriter-0.0.1.js"></script>
+
+<script id="pagingTemplate" type="text/x-handlebars-template">
+{{#if pageList}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li>
+			<a href="#{query}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
+				<span aria-hidden="true">이전</span>
+			</a>
+		</li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
+			<a href="#{query}&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a>
+		</li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li>
+			<a href="#{query}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
+				<span aria-hidden="true">다음</span>
+			</a>
+		</li>
+		{{/sign}}
+	</ul>
+</nav>
+{{/if}}
+</script>
 
 </head>
 
@@ -52,10 +83,11 @@
 						  	<li><a href="?fragment=gettingstarted">시작하기</a></li>
 						  	<li><a href="?fragment=document">문서</a></li>
 						  	<li><a href="?fragment=patchnote">패치노트</a></li>
-						  	<li><a href="?fragment=qna">질문 및 건의사항</a></li>
 						  	<li><a href="?fragment=showcase">쇼케이스</a></li>
+						  	<li><a href="?fragment=community">커뮤니티</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
+							<li><a href="/signin">로그인</a></li>
 						</ul>
 				    </div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->

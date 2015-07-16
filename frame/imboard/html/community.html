@@ -1,0 +1,68 @@
+<script id="communityBodyTemplate" type="text/x-handlebars-template">
+<table class="dataTable">
+	<colgroup>
+		<col style="width:10%;"/>
+		<col style="width:50%;"/>
+		<col style="width:15%;"/>
+		<col style="width:15%;"/>
+		<col style="width:10%;"/>
+	</colgroup>
+	<thead>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#if articleList}}
+	{{#each articleList}}
+		<tr>
+			<td class="center">{{seq}}</td>
+			<td>{{subject}}</td>
+			<td>{{displayId}}</td>
+			<td class="center">{{shortDate registerDate}}</td>
+			<td class="center">{{hit}}</td>
+		</tr>
+	{{/each}}
+	{{else}}
+		<tr><td colspan="5" class="center">작성된 글이 없습니다.</td></tr>
+	{{/if}}
+	</tbody>
+</table>
+</script>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1>커뮤니티</h1>
+		<p>버그리포트 또는 질문 및 건의사항을 올리거나 임보드에대해 자유롭게 이야기할 수 있는 공간입니다.</p>
+	</div>
+</div>
+
+<div class="container">
+	<div class="col-xs-3">
+		<ul class="list-group">
+			<li class="list-group-item"><a href="?fragment=community&boardId=forum">포럼</a></li>
+			<li class="list-group-item"><a href="?fragment=community&boardId=qna">질문 및 건의사항</a></li>
+			<li class="list-group-item"><a href="?fragment=community&boardId=issue">이슈</a></li>
+		</ul>
+	</div>
+	<div class="col-xs-9" data-bind="template" data-fragment="sub">
+		<p style="text-align: right;">
+			<a href="?fragment=community&sub=write&boardId=#{query.boardId}" class="btn btn-default">글쓰기</a>
+		</p>
+		{{#if \"#{query.boardId}\"}}
+		<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}"}'>
+			<div data-parts="body" data-template-id="communityBodyTemplate"></div>
+			<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+		</div>
+		{{else}}
+		<div data-bind="articleComponent" data-param='{"boardId" : "forum"}'>
+			<div data-parts="body" data-template-id="communityBodyTemplate"></div>
+			<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+		</div>
+		{{/if}}
+	</div>
+</div>

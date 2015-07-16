@@ -31,15 +31,20 @@ function setSelectedContent()
 	
 	if(minTarget)
 	{
-		var a = $("#contentList li a[href='#" + $(minTarget.element).attr("id") + "']");
-		a.parent().addClass("selected");
-		
 		$("#contentList ul").hide();
 		
-		var href = a.attr("href").split("-")[0];
-		var ul = $("#contentList a[href='" + href + "']").next();
-		ul.show();
-		ul.find("ul").show();
+		var a = $("#contentList li a[href='#" + $(minTarget.element).attr("id") + "']");
+		a.parent().addClass("selected");
+		a.parent().children("ul").show();
+		
+		var parent = a.parent();
+		while(parent && parent.attr("id") != "contentList")
+		{
+			if(parent.get(0).nodeName == "UL")
+				parent.show();
+			
+			parent = parent.parent();
+		}
 	}
 	else
 	{

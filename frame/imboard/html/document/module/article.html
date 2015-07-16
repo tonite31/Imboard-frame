@@ -1,42 +1,31 @@
-<script id="articleListTemplate" type="text/x-handlebars-template">
-{{#if articleList}}
+<script id="articleTemplate" type="text/x-handlebars-template">
 <table class="dataTable">
 	<colgroup>
-		<col style="width: 10%;"/>
-		<col style="width: 40%;"/>
-		<col style="width: 20%;"/>
-		<col style="width: 20%;"/>
-		<col style="width: 10%;"/>
+		<col style="width: 30%;"/>
+		<col style="width: 70%;"/>
 	</colgroup>
-	<thead>
-		<tr>
-			<th class="center">번호</th>
-			<th class="center">제목</th>
-			<th class="center">작성자</th>
-			<th class="center">작성날짜</th>
-			<th class="center">조회수</th>
-		</tr>
-	</thead>
-{{#each articleList}}
 	<tbody>
 		<tr>
-			<td class="center">{{seq}}</td>
+			<th class="center">번호</th>
+			<td>{{seq}}</td>
+		</tr>
+		<tr>
+			<th class="center">제목</th>
 			<td>{{subject}}</td>
-			<td>{{writerName}}</td>
-			<td class="center">{{registerDate}}</td>
-			<td class="center">{{hit}}</td>
+		</tr>
+		<tr>
+			<th class="center">내용</th>
+			<td><div>{{{content}}}</div></td>
 		</tr>
 	</tbody>
-{{/each}}
 </table>
-{{/if}}
 </script>
 
 <div class="panel panel-default">
-	<div class="panel-heading"><h4 id="doc4-2-3-1">articleList</h4></div>
+	<div class="panel-heading"><h4 id="doc4-2-3-3">article</h4></div>
 	<div class="panel-body">
 		<div class="content-header">예제</div>
-		<div data-bind="articleList" data-param='{"boardId" : "document-article"}' data-template-id="articleListTemplate"></div>
+		<div data-bind="article" data-param='{"boardId" : "document-article", "seq" : "0"}' data-template-id="articleTemplate"></div>
 		<div class="content-header">파라미터</div>
 		<table class="dataTable">
 			<colgroup>
@@ -56,9 +45,15 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th colspan="2">boardId</th>
+					<th colspan="2">boardId <span class="label label-primary">필수</span></th>
 					<td class="center">String</td>
 					<td>게시판 아이디</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th colspan="2">seq <span class="label label-primary">필수</span></th>
+					<td class="center">String</td>
+					<td>게시글 번호</td>
 					<td class="center">=</td>
 				</tr>
 				<tr>
@@ -66,6 +61,12 @@
 					<th>subject</th>
 					<td class="center">String</td>
 					<td>게시글 제목</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>content</th>
+					<td class="center">String</td>
+					<td>게시글 내용</td>
 					<td class="center">LIKE</td>
 				</tr>
 				<tr>
@@ -130,44 +131,14 @@
 				</tr>
 				<tr>
 					<th>existThumbnailUrl</th>
-					<td class="center">Boolean (true, or false)</td>
+					<td class="center">Boolean (true or false)</td>
 					<td>썸네일 존재 여부</td>
 					<td class="center">=</td>
 				</tr>
 				<tr>
-					<th>useOrderByGroupId</th>
-					<td class="center">Boolean</td>
-					<td>그룹아이디 정렬방법 사용여부</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>orderByGroupId</th>
-					<td class="center">String (DESC or ASC)</td>
-					<td>그룹아이디 정렬방법</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>useOrderBySeq</th>
-					<td class="center">Boolean</td>
-					<td>게시글 번호 정렬방법 사용여부</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>orderBySeq</th>
-					<td class="center">String (DESC or ASC)</td>
-					<td>게시글 번호 정렬방법</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>withContent</th>
-					<td class="center">Boolean</td>
-					<td>게시글 내용 포함 여부</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
 					<th>isNotice</th>
-					<td class="center">String (Y or N or null)</td>
-					<td>공지글 포함 여부<br/>Y : 공지로 지정된 게시글만 검색됩니다.<br/>N : 공지로 지정되지 않은 게시글만 검색됩니다.<br/>null : 아무것도 입력하지 않을경우 공지글을 포함한 전체 글이 검색됩니다.</td>
+					<td class="center">String (Y or N)</td>
+					<td>공지글여부</td>
 					<td class="center">=</td>
 				</tr>
 			</tbody>
@@ -175,22 +146,18 @@
 		<div class="content-header">데이터</div>
 		<table class="dataTable">
 			<colgroup>
-				<col style="width: 15%;"/>
-				<col style="width: 20%;"/>
+				<col style="width: 35%;"/>
 				<col style="width: 20%;"/>
 				<col style="width: 50%;"/>
 			</colgroup>
 			<thead>
 				<tr>
-					<th colspan="2" class="center">변수명</th>
+					<th class="center">변수명</th>
 					<th class="center">변수타입</th>
 					<th class="center">설명</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th rowspan="23">articleList</th>
-				</tr>
 				<tr>
 					<th>boardId</th>
 					<td class="center">String</td>
@@ -300,41 +267,30 @@
 		</table>
 		<div class="content-header">코드</div>
 		<pre class="content-code">
-&lt;script id="articleListTemplate" type="text/x-handlebars-template"&gt;
-{{#if articleList}}
+&lt;script id="articleTemplate" type="text/x-handlebars-template"&gt;
 &lt;table class="dataTable"&gt;
 	&lt;colgroup&gt;
-		&lt;col style="width: 10%;"/&gt;
-		&lt;col style="width: 40%;"/&gt;
-		&lt;col style="width: 20%;"/&gt;
-		&lt;col style="width: 20%;"/&gt;
-		&lt;col style="width: 10%;"/&gt;
+		&lt;col style="width: 30%;"/&gt;
+		&lt;col style="width: 70%;"/&gt;
 	&lt;/colgroup&gt;
-	&lt;thead&gt;
-		&lt;tr&gt;
-			&lt;th class="center"&gt;번호&lt;/th&gt;
-			&lt;th class="center"&gt;제목&lt;/th&gt;
-			&lt;th class="center"&gt;작성자&lt;/th&gt;
-			&lt;th class="center"&gt;작성날짜&lt;/th&gt;
-			&lt;th class="center"&gt;조회수&lt;/th&gt;
-		&lt;/tr&gt;
-	&lt;/thead&gt;
-	{{#each articleList}}
 	&lt;tbody&gt;
 		&lt;tr&gt;
-			&lt;td class="center"&gt;{{seq}}&lt;/td&gt;
+			&lt;th class="center"&gt;번호&lt;/th&gt;
+			&lt;td&gt;{{seq}}&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th class="center"&gt;제목&lt;/th&gt;
 			&lt;td&gt;{{subject}}&lt;/td&gt;
-			&lt;td&gt;{{writerName}}&lt;/td&gt;
-			&lt;td class="center"&gt;{{registerDate}}&lt;/td&gt;
-			&lt;td class="center"&gt;{{hit}}&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th class="center"&gt;내용&lt;/th&gt;
+			&lt;td&gt;&lt;div&gt;{{{content}}}&lt;/div&gt;&lt;/td&gt;
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
-	{{/each}}
 &lt;/table&gt;
-{{/if}}
 &lt;/script&gt;
 
-&lt;div data-bind="articleList" data-param='{"boardId" : "게시판아이디"}' data-template-id="articleListTemplate"&gt;&lt;/div&gt;
+&lt;div data-bind="article" data-param='{"boardId" : "게시판 아이디", "seq" : "게시글 번호"}' data-template-id="articleTemplate"&gt;&lt;/div&gt;
 		</pre>
 	</div>
 </div>

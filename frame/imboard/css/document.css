@@ -8,40 +8,6 @@
 	padding: 10px 0;
 }
 
-.dataTable
-{
-	width: 100%;
-}
-
-.dataTable th
-{
-	padding: 10px;
-	font-size: 13px;
-	border: 1px solid #dfdfdf;
-}
-
-.dataTable td
-{
-	padding: 10px;
-	font-size: 13px;
-	border: 1px solid #dfdfdf;
-}
-
-.dataTable .left
-{
-	text-align: left;
-}
-
-.dataTable .center
-{
-	text-align: center;
-}
-
-.dataTable .right
-{
-	text-align: right;
-}
-
 .content-header
 {
 	font-size: 17px;

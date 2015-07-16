@@ -1,39 +1,31 @@
 <script id="articleComponentTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
 <div class="article">
-	<h3 class="page-header">0.1.3<small>2015-07-14</small></h3>
+	<h3 class="page-header">{{subject}}<small>{{shortDate registerDate}}</small></h3>
 	<div>
-		<h4 class="subject">BoardRouter.js, MenuRouter.js</h4>
-		<article class="content">creator값이 null인 board와 menu에 대해서는 누구나 update와 delete를 수행할 수 있도록 변경되었습니다. 비교적 간단한 기능구현시에도 update와 delete를 위해서 특별한 권한이 필요해 불편하던부분이 해소되었을것이라 믿습니다. 누구나 update, delete를 수행하지 못하게 하려면 반드시 creator값을 지정해주세요!</article>
+		<article>{{{content}}}</article>
 	</div>
 </div>
+{{/each}}
+{{else}}
+<p style="text-align:center; margin:0;">패치내용이 없습니다.</p>
+{{/if}}
 </script>
 
-<script id="articleComponentPagingTemplate" type="text/x-handlebars-template">
-{{#if pageList}}
-<nav style='text-align:center;'>
-	<ul class="pagination">
-		{{#sign pageIndex ">" 1}}
-		<li>
-			<a href="#pageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
-				<span aria-hidden="true">이전</span>
-			</a>
-		</li>
-		{{/sign}}
-		{{#each pageList}}
-		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
-			<a href="#pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a>
-		</li>
-		{{/each}}
-		{{#sign pageIndex "<" maxPage}}
-		<li>
-			<a href="#pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
-				<span aria-hidden="true">다음</span>
-			</a>
-		</li>
-		{{/sign}}
-	</ul>
-</nav>
-{{/if}}
+<script id="newArticleTemplate" type="text/x-handlebars-template">
+<form data-component="form" id="saveForm">
+<div class="article">
+	<input type="hidden" name="seq"/>
+	<h3 class="page-header"><input type="text" class="textinput" name="subject" placeholder="버전" required="required"/></h3>
+	<div>
+		<article id="content"></article>
+	</div>
+	<p style="text-align:center;">
+		<input type="submit" class="btn btn-default" value="저장"/>
+	</p>
+</div>
+</form>
 </script>
 
 <div class="jumbotron">
@@ -43,14 +35,14 @@
 	</div>
 </div>
 
-<div class="container" data-bind="signedUser">
+<div class="container" data-bind="signedUser" style="margin: 50px auto;">
 	{{#sign user.level \"lt\" 0}}
-	<p style="text-align: right;">
+	<p style="text-align: center; margin-bottom: 40px;">
 		<button id="newPatchnote" class="btn btn-default">패치노트 작성하기</button>
 	</p>
 	{{/sign}}
-	<div data-bind="articleComponent" data-param='{"boardId" : "patchnote"}'>
-		<div data-parts="body" data-template-id="articleComponentTemplate"></div>
-		<div data-parts="pagination" data-template-id="articleComponentPagingTemplate"></div>
+	<div data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
+		<div data-parts="body" data-template-id="articleComponentTemplate" id="articleBody"></div>
+		<div data-parts="pagination" data-template-id="pagingTemplate"></div>
 	</div>
 </div>

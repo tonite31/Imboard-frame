@@ -1,0 +1,75 @@
+<h2 id="doc4-3">4-3. Handlebars Helper</h2>
+<div>
+	<p>data-bind 모듈로 가져온 데이터는 Handlebars 문법으로 화면에 조합됩니다. 여기서는 추가적으로 구현된 Helper 문법을 소개하며 Handlebars의 기본적인 문법은 <a href="http://handlebarsjs.com/" target="_blank">Handlebars 홈페이지</a>를 참고하십시오.</p>
+	<table class="dataTable">
+		<colgroup>
+			<col style="width: 15%;"/>
+			<col style="width: 85%;"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th rowspan="2" class="center">equals</th>
+				<td>첫번째 파라미터와 두번째 파라미터가 일치하면 true, 일치하지 않으면 false</td>
+			</tr>
+			<tr>
+				<td>{{#equals param1 param2}} ... {{else}} ... {{/equals}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">notequals</th>
+				<td>첫번째 파라미터와 두번째 파라미터가 일치하지 않으면 true, 일치하면 false</td>
+			</tr>
+			<tr>
+				<td>{{#notequals param1 param2}} ... {{else}} ... {{/equals}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">empty</th>
+				<td>첫번째 파라미터가 빈값이면 true, 그렇지 않으면 false</td>
+			</tr>
+			<tr>
+				<td>{{#empty param}} ... {{else}} ... {{/equals}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">notempty</th>
+				<td>첫번째 파라미터가 빈값이 아니면 true, 그렇지 않으면 false</td>
+			</tr>
+			<tr>
+				<td>{{#notempty param}} ... {{else}} ... {{/equals}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">tojson</th>
+				<td>첫번째 파라미터가 JSON형태의 object이고 두번째 파라미터가 object의 key값일때 value를 리턴합니다.</td>
+			</tr>
+			<tr>
+				<td>{{tojson param1 param2}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">math</th>
+				<td>첫번째 파라미터와 세번째 파라미터를 두번째 파라미터로 연산한 결과를 리턴합니다.</td>
+			</tr>
+			<tr>
+				<td>{{math param1 "(+, -, *, /, %)" param3}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">sign</th>
+				<td>첫번째 파라미터와 세번째 파라미터를 두번째 파라미터로 비교한 결과를 리턴합니다.</td>
+			</tr>
+			<tr>
+				<td>{{sign param1 "(&lt;, lt, &lt;=, lt=, &gt;, gt, &gt;=, gt=, ==, ===, !=, !==)" param3}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">shortDate</th>
+				<td>첫번째 파라미터가 yyyy-mm-dd hh:mm:ss형식일때 오늘이면 hh:mm:ss형태로 오늘이 아니면 yyyy-MM-dd 형태로 리턴합니다.</td>
+			</tr>
+			<tr>
+				<td>{{shortDate param1}}</td>
+			</tr>
+			<tr>
+				<th rowspan="2" class="center">escape</th>
+				<td>첫번째 파라미터를 escape처리해서 리턴합니다.</td>
+			</tr>
+			<tr>
+				<td>{{escape param1}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

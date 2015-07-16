@@ -1,6 +1,8 @@
 .article
 {
-	margin-bottom: 25px;
+	margin: 25px 0;
+	display: inline-block;
+	width: 100%;
 }
 
 .article h3
