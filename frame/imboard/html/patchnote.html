@@ -15,9 +15,9 @@
 
 <script id="newArticleTemplate" type="text/x-handlebars-template">
 <form data-component="form" id="saveForm">
-<div class="article">
+<div class="article container" style="width: 60%;">
 	<input type="hidden" name="seq"/>
-	<h3 class="page-header"><input type="text" class="textinput" name="subject" placeholder="버전" required="required"/></h3>
+	<h3 style="margin-top:0; margin-bottom:20px;"><input type="text" class="textinput" style="width: 100%;" name="subject" placeholder="버전" required="required"/></h3>
 	<div>
 		<article id="content"></article>
 	</div>
@@ -41,7 +41,7 @@
 		<button id="newPatchnote" class="btn btn-default">패치노트 작성하기</button>
 	</p>
 	{{/sign}}
-	<div data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
+	<div id="listContainer" style="clear:both;" data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
 		<div data-parts="body" data-template-id="articleComponentTemplate" id="articleBody"></div>
 		<div data-parts="pagination" data-template-id="pagingTemplate"></div>
 	</div>

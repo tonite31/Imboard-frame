@@ -6,18 +6,9 @@ $(document).ready(function()
 		$(".navbar-nav li a[href^='?fragment=" + $.query.fragment + "']").parent().addClass("active");
 	}
 
-	setFooterPosition();
-	$(window).scroll(function()
+	var result = $.api.article.getArticleList({boardId : "patchnote", searchData : {startIndex:0, endIndex:1}});
+	if(result.code == 1000 && result.data.length > 0)
 	{
-		setFooterPosition();
-	});
-});
-
-function setFooterPosition()
-{
-	var rect = $("footer").getRect();
-	if(rect.bottom < $(window).height())
-	{
-		$("footer").css("position", "absolute").css("bottom", "0").css("left", "0").css("right", "0");
+		$("*[data-id='currentVersion']").text(result.data[0].subject);
 	}
-}
+});

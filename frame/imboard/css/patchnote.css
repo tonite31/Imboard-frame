@@ -1,8 +1,6 @@
 .article
 {
-	margin: 25px 0;
-	display: inline-block;
-	width: 100%;
+	margin: 25px auto;
 }
 
 .article h3
@@ -18,4 +16,10 @@
 	bottom: 10px;
 	
 	font-size:12px;
+}
+
+.typewriter-content
+{
+	border-bottom: 1px solid #dfdfdf;
+	margin-bottom: 10px;
 }
