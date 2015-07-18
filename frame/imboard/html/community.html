@@ -50,7 +50,9 @@
 			<div class="list-group" data-bind="boardList" style="margin-top: 20px;">
 			{{#if boardList}}
 			{{#each boardList}}
+			{{#notequals id \"patchnote\"}}
 				<a href="?fragment=community&boardId={{id}}" class="list-group-item" id="{{id}}">{{name}}</a>
+			{{/notequals}}
 			{{/each}}
 			{{/if}}
 			</div>
