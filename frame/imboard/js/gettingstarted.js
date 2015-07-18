@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-	$("#contentList").compile({top : 20, direction : "vertical"});
+	$("#contentList").compile({top : 70, direction : "vertical"});
 	$("#contentList li:first").addClass("selected");
 	$(window).on("scroll", setSelectedContent);
 	setSelectedContent.call(window);

@@ -11,7 +11,11 @@
 
 .nav-header
 {
+	position: fixed;
+	width: 100%;
 	background-color: #fefefe;
+	z-index: 1000;
+	border-bottom: 1px solid #dfdfdf;
 }
 
 .nav-header .navbar
@@ -40,9 +44,15 @@
 	color:#444;
 }
 
+.contnetContainer
+{
+	padding-top: 50px;
+}
+
 .jumbotron
 {
 	background-color: #183F66;
+	padding: 35px 0;
 }
 
 .jumbotron h1, .jumbotron p
@@ -253,12 +263,22 @@ footer p a
 
 .textinput:FOCUS, .textinput:ACTIVE
 {
-	border:2px solid #ccc;
-	outline:0;
+	outline: 2px solid #ccc;
 }
 
 .typewriter-content
 {
 	height: 400px;
 	overflow: auto;
+}
+
+.horizontalContainer
+{
+	font-size:0;
+}
+
+.horizontalContainer > *
+{
+	display:inline-block;
+	font-size: 12px;
 }

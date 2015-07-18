@@ -1,0 +1,40 @@
+.list-group
+{
+}
+
+.list-group-item:FIRST-CHILD, .list-group-item:LAST-CHILD
+{
+	border-radius:0;
+}
+
+.typewriter
+{
+	border: 1px solid #dfdfdf;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.dataTable th
+{
+	text-align: center;
+	background-color: #FAFAFA;
+}
+
+.dataTable tbody .subject, .dataTable tbody .displayId
+{
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-wrap:normal
+}
+
+.articleContainer
+{
+	padding: 5px 15px;
+	border: 1px solid #dfdfdf;
+	margin-bottom: 40px;
+}
+
+.articleContainer article
+{
+	padding: 20px 0;
+}

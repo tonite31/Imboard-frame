@@ -1,68 +1,80 @@
 <script id="communityBodyTemplate" type="text/x-handlebars-template">
 <table class="dataTable">
-	<colgroup>
-		<col style="width:10%;"/>
-		<col style="width:50%;"/>
-		<col style="width:15%;"/>
-		<col style="width:15%;"/>
-		<col style="width:10%;"/>
-	</colgroup>
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회</th>
-		</tr>
-	</thead>
-	<tbody>
-	{{#if articleList}}
-	{{#each articleList}}
-		<tr>
-			<td class="center">{{seq}}</td>
-			<td>{{subject}}</td>
-			<td>{{displayId}}</td>
-			<td class="center">{{shortDate registerDate}}</td>
-			<td class="center">{{hit}}</td>
-		</tr>
-	{{/each}}
-	{{else}}
-		<tr><td colspan="5" class="center">작성된 글이 없습니다.</td></tr>
-	{{/if}}
-	</tbody>
+<colgroup>
+	<col style="width: 7%;"/>
+	<col style="width: 7%;"/>
+	<col style="width: 54%;"/>
+	<col style="width: 15%;"/>
+	<col style="width: 10%;"/>
+	<col style="width: 7%;"/>
+</colgroup>
+<thead>
+	<tr>
+		<th>포인트</th>
+		<th>번호</th>
+		<th>제목</th>
+		<th>작성자</th>
+		<th>작성일</th>
+		<th>조회</th>
+	</tr>
+</thead>
+<tbody>
+{{#if articleList}}
+{{#each articleList}}
+	<tr>
+		<td class="center">{{good}}</td>
+		<td class="center">{{seq}}</td>
+		<td class="subject"><a href="?fragment=community&sub=community/article&boardId={{boardId}}&seq={{seq}}">{{subject}}</a>{{#sign commentCount "gt" 0}}[{{commentCount}}]{{/sign}}</td>
+		<td class="center displayId">{{#if displayId}}{{displayId}}{{else}}익명사용자{{/if}}</td>
+		<td class="center">{{shortDate registerDate}}</td>
+		<td class="center">{{hit}}</td>
+	</tr>
+{{/each}}
+{{else}}
+<tr><td colspan="6" class="center">작성된 글이 없습니다.</td></tr>
+{{/if}}
+</tbody>
 </table>
 </script>
 
 <div class="jumbotron">
 	<div class="container">
 		<h1>커뮤니티</h1>
-		<p>버그리포트 또는 질문 및 건의사항을 올리거나 임보드에대해 자유롭게 이야기할 수 있는 공간입니다.</p>
+		<p>임보드에 대해 자유롭게 이야기할 수 있는 공간입니다.</p>
 	</div>
 </div>
 
 <div class="container">
-	<div class="col-xs-3">
-		<ul class="list-group">
-			<li class="list-group-item"><a href="?fragment=community&boardId=forum">포럼</a></li>
-			<li class="list-group-item"><a href="?fragment=community&boardId=qna">질문 및 건의사항</a></li>
-			<li class="list-group-item"><a href="?fragment=community&boardId=issue">이슈</a></li>
-		</ul>
-	</div>
-	<div class="col-xs-9" data-bind="template" data-fragment="sub">
-		<p style="text-align: right;">
-			<a href="?fragment=community&sub=write&boardId=#{query.boardId}" class="btn btn-default">글쓰기</a>
-		</p>
-		{{#if \"#{query.boardId}\"}}
-		<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}"}'>
-			<div data-parts="body" data-template-id="communityBodyTemplate"></div>
-			<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+	<div class="row">
+		<div class="col-xs-2">
+			<div class="list-group" data-bind="boardList" style="margin-top: 20px;">
+			{{#if boardList}}
+			{{#each boardList}}
+				<a href="?fragment=community&boardId={{id}}" class="list-group-item" id="{{id}}">{{name}}</a>
+			{{/each}}
+			{{/if}}
+			</div>
 		</div>
-		{{else}}
-		<div data-bind="articleComponent" data-param='{"boardId" : "forum"}'>
-			<div data-parts="body" data-template-id="communityBodyTemplate"></div>
-			<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+		<div class="col-xs-10" data-bind="template" data-fragment="sub">
+			<div class="horizontalContainer" style="margin-bottom: 10px;">
+				<div style="width: 50%;" data-bind="board" data-param='{"id" : "#{query.boardId}"}'>
+					<h2>{{name}}</h2>
+				</div>
+				<div style="width: 50%; text-align: right;">
+					<a href="?fragment=community&sub=community/write&boardId=#{query.boardId}" class="btn btn-default">글쓰기</a>
+				</div>
+			</div>
+			{{#if \"#{query.boardId}\"}}
+			<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}"}'>
+				<div data-parts="body" data-template-id="communityBodyTemplate"></div>
+				<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+			</div>
+			{{else}}
+			<div data-bind="articleComponent" data-param='{"boardId" : "forum"}'>
+				<div data-parts="body" data-template-id="communityBodyTemplate"></div>
+				<div data-parts="pagination" data-template-id="pagingTemplate"></div>
+			</div>
+			{{/if}}
 		</div>
-		{{/if}}
 	</div>
 </div>
