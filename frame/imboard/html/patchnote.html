@@ -6,26 +6,19 @@
 	<div>
 		<article>{{{content}}}</article>
 	</div>
+	{{#sign "#{user.level}" "<" 0}}
+	<form data-component="form" style="text-align:right;">
+		<input type="hidden" name="boardId" value="{{boardId}}"/>
+		<input type="hidden" name="seq" value="{{seq}}"/>
+		<a href="?fragment=patchnote&sub=patchnote/write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
+		<input type="button" class="btn btn-default" data-role="submit" data-role-type="delete" value="삭제"/>
+	</form>
+	{{/sign}}
 </div>
 {{/each}}
 {{else}}
 <p style="text-align:center; margin:0;">패치내용이 없습니다.</p>
 {{/if}}
-</script>
-
-<script id="newArticleTemplate" type="text/x-handlebars-template">
-<form data-component="form" id="saveForm">
-<div class="article container" style="width: 60%;">
-	<input type="hidden" name="seq"/>
-	<h3 style="margin-top:0; margin-bottom:20px;"><input type="text" class="textinput" style="width: 100%;" name="subject" placeholder="버전" required="required"/></h3>
-	<div>
-		<article id="content"></article>
-	</div>
-	<p style="text-align:center;">
-		<input type="submit" class="btn btn-default" value="저장"/>
-	</p>
-</div>
-</form>
 </script>
 
 <div class="jumbotron">
@@ -35,13 +28,13 @@
 	</div>
 </div>
 
-<div class="container" data-bind="signedUser" style="margin: 50px auto;">
+<div class="container" data-bind="signedUser" style="margin: 50px auto;" data-fragment="sub">
 	{{#sign user.level \"lt\" 0}}
 	<p style="text-align: center; margin-bottom: 40px;">
-		<button id="newPatchnote" class="btn btn-default">패치노트 작성하기</button>
+		<a href="?fragment=patchnote&sub=patchnote/write" class="btn btn-default">패치노트 작성하기</a>
 	</p>
 	{{/sign}}
-	<div id="listContainer" style="clear:both;" data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
+	<div style="clear:both;" data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
 		<div data-parts="body" data-template-id="articleComponentTemplate" id="articleBody"></div>
 		<div data-parts="pagination" data-template-id="pagingTemplate"></div>
 	</div>

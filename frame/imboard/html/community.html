@@ -24,7 +24,7 @@
 	<tr>
 		<td class="center">{{good}}</td>
 		<td class="center">{{seq}}</td>
-		<td class="subject"><a href="?fragment=community&sub=community/article&boardId={{boardId}}&seq={{seq}}">{{subject}}</a>{{#sign commentCount "gt" 0}}[{{commentCount}}]{{/sign}}</td>
+		<td class="subject"><a href="?fragment=community&sub=community/article&boardId={{boardId}}&seq={{seq}}">{{subject}} {{#sign commentCount "gt" 0}}[{{commentCount}}]{{/sign}}</a></td>
 		<td class="center displayId">{{#if displayId}}{{displayId}}{{else}}익명사용자{{/if}}</td>
 		<td class="center">{{shortDate registerDate}}</td>
 		<td class="center">{{hit}}</td>

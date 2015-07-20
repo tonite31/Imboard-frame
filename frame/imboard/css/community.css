@@ -38,3 +38,25 @@
 {
 	padding: 20px 0;
 }
+
+.commentContainer
+{
+	border: 1px solid #dfdfdf;
+	padding: 15px;
+	margin: 5px 0;
+}
+
+.commentContainer p
+{
+	margin:0;
+}
+
+.commentContainer .info
+{
+	border-bottom: 1px solid #dfdfdf; padding-bottom: 5px;
+}
+
+.commentContainer .content
+{
+	padding: 10px 0;
+}
