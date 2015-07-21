@@ -65,5 +65,7 @@ function bindReplyComment()
 				console.error(result);
 			}
 		});
+		
+		$(form).find("textarea").focus();
 	});
 }
