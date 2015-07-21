@@ -60,3 +60,13 @@
 {
 	padding: 10px 0;
 }
+
+.textButton
+{
+	cursor: pointer;
+}
+
+.textButton:HOVER
+{
+	text-decoration: underline;
+}

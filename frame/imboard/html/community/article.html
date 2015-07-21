@@ -1,12 +1,21 @@
 <script id="communityCommentTemplate" type="text/x-handlebars-template" data-precompile="true">
 {{#if commentList}}
 {{#each commentList}}
-<div class="commentContainer">
-	<p class="info">{{#if displayId}}{{displayId}}{{else}}익명사용자{{/if}} <small> | {{registerDate}}</small> <small> | 덧글</small></p>
+<div class="commentContainer" {{#notempty parentSeq}}style="margin-left:40px;"{{/notempty}}>
+	<p class="info">{{#if displayId}}{{displayId}}{{else}}익명사용자{{/if}}<small> | {{registerDate}}</small> <small> | </small> <small data-id="replyComment" data-seq="{{seq}}" data-groupid="{{groupId}}" class="textButton">덧글</small></p>
 	<p class="content">{{content}}</p>
 </div>
 {{/each}}
 {{/if}}
+</script>
+
+<script id="commentWriteTemplate" type="text/x-handlebars-template" data-precompile="true">
+<div class="input-group">
+	<input type="hidden" name="boardId" value="#{query.boardId}" />
+	<input type="hidden" name="articleSeq" value="#{query.seq}" />
+	<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+	<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+</div>
 </script>
 
 <div data-bind="article" data-param='{"boardId" : "#{query.boardId}", "seq" : "#{query.seq}"}'>
@@ -14,13 +23,13 @@
 		<div class="page-header">
 			<h3 style="position: relative;">
 				{{subject}}
-				<span style="position: absolute; right:10px; bottom: 5px;">
+				<span style="position: absolute; right:10px; bottom: 0;">
 					{{#if displayId}}
-					<small>{{displayId}}</small>
+					<small style="font-size:12px;">{{displayId}}</small>
 					{{else}}
-					<small>익명사용자</small>
+					<small style="font-size:12px;">익명사용자</small>
 					{{/if}}
-					<small> | {{shortDate registerDate}}</small>
+					<small style="font-size:12px;"> | {{shortDate registerDate}}</small>
 				</span>
 			</h3>
 		</div>

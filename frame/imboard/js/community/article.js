@@ -2,7 +2,7 @@ $(document).ready(function()
 {
 	$("#commentForm").compile(function(data)
 	{
-		var result = $.api.comment.writeComment(data);
+		var result = $.api.comment.insertComment(data);
 		if(result.code == 1000)
 		{
 			refresh();
@@ -12,6 +12,8 @@ $(document).ready(function()
 			console.error(result);
 		}
 	});
+	
+	bindReplyComment();
 });
 
 function refresh()
@@ -23,9 +25,45 @@ function refresh()
 		var template = Handlebars.compile(html);
 		
 		$("#commentList").html(template({commentList : result.data}));
+		bindReplyComment();
 	}
 	else
 	{
 		console.error(result);
 	}
+}
+
+function bindReplyComment()
+{
+	$("*[data-id='replyComment']").on("click", function()
+	{
+		var parent = $(this).parent().parent();
+		if(parent.children("form").length > 0)
+			return;
+		
+		var groupId = $(this).attr("data-groupid");
+		var seq = $(this).attr("data-seq");
+		
+		var form = document.createElement("form");
+		form.setAttribute("data-component", "form");
+		$(form).html($("#commentWriteTemplate").html());
+		
+		parent.append(form);
+		
+		$(form).compile(function(data)
+		{
+			data.groupId = groupId;
+			data.parentSeq = seq;
+			
+			var result = $.api.comment.insertComment(data);
+			if(result.code == 1000)
+			{
+				refresh();
+			}
+			else
+			{
+				console.error(result);
+			}
+		});
+	});
 }
