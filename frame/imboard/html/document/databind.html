@@ -10,7 +10,7 @@
 			<tr><th>##{path.lib}</th><td>프레임의 공통 라이브러리경로입니다. 치환되는 값은 <strong>/content/lib</strong> 입니다.</td></tr>
 			<tr><th>##{query.xxx}</th><td>xxx키에 해당하는 querystring값으로 치환됩니다. ##{query}만 지정할경우 ?를 포함한 querystring 전체가 치환됩니다.</td></tr>
 			<tr><th>##{user.xxx}</th><td>로그인한 사용자의 정보중 xxx키에 해당하는 값으로 치환됩니다.</td></tr>
-			<tr><th>##{lan.xxx}</th><td>Client의 언어에 따라 languages.json에 입력된 xxx키에 해당하는 값으로 치환됩니다.</td></tr>
+			<tr><th>##{lan.xxx}</th><td>querystring에 locale값이 있다면 해당 값으로, 그렇지 않으면 Client의 언어에 따라 languages.json에 입력된 xxx키에 해당하는 값으로 치환됩니다. 국제화방법은 <a href="#doc6">6. 국제화처리</a>를 참조하십시오.</td></tr>
 		</tbody>
 	</table>
 </div>
@@ -44,6 +44,10 @@
 	<div>
 		<h3 id="doc2-2-6">2-2-6. User 모듈</h3>
 		<div data-html="/document/module/userList.html"></div>
+	</div>
+	<div>
+		<h3 id="doc2-2-7">2-2-7. Template 모듈</h3>
+		<div data-html="/document/module/template.html"></div>
 	</div>
 </div>
 <div>
