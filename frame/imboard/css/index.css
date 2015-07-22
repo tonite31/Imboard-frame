@@ -158,6 +158,21 @@
 	padding: 10px 0;
 }
 
+.feature > div dl
+{
+	padding-top: 10px;
+}
+
+.feature > div dl dt
+{
+	font-weight: normal;
+}
+
+.feature > div dl dd
+{
+	padding-top: 5px;
+}
+
 .feature .right
 {
 	text-align: center;
