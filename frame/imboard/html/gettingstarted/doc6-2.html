@@ -1,14 +1,14 @@
 &lt;script id="updateFormTemplate" type="text/x-handlebars-template"&gt;
 &lt;p&gt;
-	&lt;label for="id"&gt;아이디&lt;/label&gt;
+	&lt;label for="id"&gt;{{#equals "#{locale}" "ko-KR"}}아이디{{else}}ID{{/equals}}&lt;/label&gt;
 	&lt;input type="text" id="id" name="id" required="required" style="width: 150px;" value="{{id}}"/&gt;
 &lt;/p&gt;
 &lt;p&gt;
-	&lt;label for="name"&gt;이름&lt;/label&gt;
+	&lt;label for="name"&gt;{{#equals "#{locale}" "ko-KR"}}이름{{else}}Name{{/equals}}&lt;/label&gt;
 	&lt;input type="text" id="name" name="name" style="width: 250px;" value="{{name}}"/&gt;
 &lt;/p&gt;
 &lt;p&gt;
-	&lt;label for="priority"&gt;우선순위&lt;/label&gt;
+	&lt;label for="priority"&gt;{{#equals "#{locale}" "ko-KR"}}우선순위{{else}}Priority{{/equals}}&lt;/label&gt;
 	&lt;input type="number" id="priority" name="priority" style="width: 50px;" value="{{priority}}"/&gt;
 &lt;/p&gt;
 &lt;p&gt;
