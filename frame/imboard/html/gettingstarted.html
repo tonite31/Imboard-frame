@@ -2,11 +2,12 @@
 	<div class="container">
 		<h1>#{lan.gettingstarted}</h1>
 		<p data-bind="locale">
-		{{#equals locale "ko-KR"}}
+		{{#localize}}
+		{{"ko-KR"}}
 			임보드로 웹페이지를 제작하는 방법을 알아봅니다.
-		{{else}}
+		{{"default"}}
 			This page is Hellow World for develop a webpage by Imboard.
-		{{/equals}}
+		{{/localize}}
 		</p>
 	</div>
 </div>
@@ -14,57 +15,62 @@
 <div class="container">
 	<div class="col-xs-9" style="padding:0;" id="documentArea">
 		<div class="doc" data-bind="locale">
-			{{#equals locale "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc1">1. 개요</h2>
 				<p>임보드 어플리케이션은 프레임단위로 실행됩니다. 시작하기에서는 프레임을 개발하는 방법에 대해 간략하게 소개합니다.</p>
 				<p>본 시작하기는 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>이 이미 설치되어있고 초기 세팅이 완료되었다는 가정하에 시작합니다. 개발은 이클립스로 진행하며 간단한 게시판관리 화면을 제작합니다.</p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc1">1. Overview</h2>
 				<p>Imboard application be executed by frame. here is introduce how to develop a frame.</p>
 				<p>Must install <a href="https://nodejs.org" target="_blank">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a> before. develop simple board management by eclipse.</p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals locale "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc2">2. 프레임구조 생성</h2>
 				<p>다음과 같은 구조로 프레임 디렉토리를 구성합니다. index.html은 시작화면으로써 반드시 필요한 파일입니다.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/directory_structure.png" alt="프레임 디렉토리구조 스크린샷"/></p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc2">2. Create frame structure</h2>
 				<p>Create a frame directory like following screenshot. index.html is essential file.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/directory_structure.png" alt="Frame directory structure"/></p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals locale "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc3">3. index.html 작성</h2>
 				<p>index.html은 웹페이지의 시작화면입니다. 따라서 완전한 html구조를 가지고 있어야 합니다. 아래 코드와같이 기본 뼈대를 작성합니다.</p>
 				<p>index.css파일은 미리 작성되어있으므로 다운로드 받아서 사용할 수 있습니다. <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>를 sample 프레임 하위의 css폴더에 다운로드 받아서 사용하십시오.</p>
 				<pre data-html="/gettingstarted/doc3.html"></pre>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc3">3. Write index.html</h2>
 				<p>index.html is a main page. so it must has a complete html document structure. write a code by reference following code.</p>
 				<p>Can download from <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>. move index.css to css directory.</p>
 				<pre data-html="/gettingstarted/doc3.html"></pre>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals locale "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc4">4. 레이아웃 구성</h2>
 				<p>가장먼저 header부분과 body부분으로 나뉘는 레이아웃을 작성합니다.</p>
 				<pre data-html="/gettingstarted/doc4.html"></pre>
 				<p>data-fragment 속성이 지정된 div 태그는 화면 조각들이 보여질 컨테이너 역할을 하게됩니다.</p>
 				<p>예를들어 URL에 <strong>?body=boardList</strong>가 지정되면 html 디렉토리 하위의 boardList.html을 불러와서 해당 div 태그 내부로 보여줍니다.</p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc4">4. Constitute a layout</h2>
 				<p>Write a code by reference following code.</p>
 				<pre data-html="/gettingstarted/doc4.html"></pre>
 				<p>A div tag that has "data-fragment" attribute is a container of page fragment.</p>
 				<p>An example, if browser url has a parameter "<strong>?body=boardList</strong>" then show cotnents of boardList.html in html directory on the div tag.</p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals locale "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc5">5. 데이터조합</h2>
 				<p>조각 컨테이너 div 태그에 기본적으로 보여질 화면은 게시판목록입니다. 서버로부터 게시판 목록 데이터를 불러와서 handlebars문법을 사용해 화면에 보여지게 됩니다.</p>
 				<p>아래 코드와 같이 div 태그에 <strong>data-bind="boardList"</strong> 속성을 지정하면 서버의 boardList모듈을 통해 데이터를 받아옵니다.</p>
@@ -73,7 +79,7 @@
 				<pre data-html="/gettingstarted/doc5-2.html"></pre>
 				<p>여기까지 작성한 후 임보드가 설치된 루트 디렉토리에서 <strong>node app.js</strong> 명령어를 수행해서 어플리케이션을 실행한 뒤 브라우저에서 http://localhost:3000으로 접속합니다.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="게시판 목록 결과 스크린샷" style="width:100%;"/></p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc5">5. Bind a data</h2>
 				<p>It is a list of board that a default fragment on the div tag. bind a list of board to html using handlebars after load it from the server.</p>
 				<p>If set an attribute "<strong>data-bind=boardList</strong>" to the div tag then load a data from module named "boardList" on the server.</p>
@@ -83,10 +89,11 @@
 				<pre data-html="/gettingstarted/doc5-2.html"></pre>
 				<p>Run application by command "<strong>node app.js</strong>" on the CLI. connect to "http://localhost:3000" in the browser.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="list of board" style="width:100%;"/></p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc6">6. 페이지조각 제작</h2>
 				<p>이번에는 게시판을 생성하고 편집할 수 있는 화면을 제작합니다. 게시판생성 및 편집 화면은 페이지 조각으로 제작됩니다. index.html 파일을 아래와 같이 수정합니다. 굵은 글씨 부분이 수정되거나 추가된 코드입니다.</p>
 				<pre data-html="/gettingstarted/doc6-1.html"></pre>
@@ -103,7 +110,7 @@
 				<p>이 기능을 사용하기 위해서는 반드시 index.html파일에 imboard-ui.js파일이 import되어있어야 합니다.</p>
 				<p>여기까지 작성한 후 http://localhost:3000이 입력된 브라우저를 새로고침합니다.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample 프레임 제작 결과 스크린샷" style="width: 100%;"/></p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc6">6. Create a page fragment</h2>
 				<p>In this step, write a fragment that is able to create or edit a board. edit a index.html by reference following code. bold text is edited code.</p>
 				<pre data-html="/gettingstarted/doc6-1.html"></pre>
@@ -120,20 +127,22 @@
 				<p>"imboard-ui.js" must be imported in index.html</p>
 				<p>Refresh browser.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample frame" style="width: 100%;"/></p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 		<div class="doc" data-bind="locale">
-			{{#equals "ko-KR"}}
+			{{#localize}}
+			{{"ko-KR"}}
 				<h2 id="doc7">7. 결과</h2>
 				<p><a href="http://resources.imboard.io/gettingstarted/GettingStarted.zip">GettingStarted.zip</a>를 다운로드 받으면 최종결과물을 이클립스 프로젝트 형태로 확인할 수 있습니다.</p>
-			{{else}}
+			{{"default"}}
 				<h2 id="doc7">7. Result</h2>
 				<p>Check the <a href="http://resources.imboard.io/gettingstarted/GettingStarted.zip">GettingStarted.zip</a>. this is eclipse project including all of code.</p>
-			{{/equals}}
+			{{/localize}}
 		</div>
 	</div>
 	<div class="col-xs-3" data-bind="locale">
-		{{#equals "ko-KR"}}
+		{{#localize}}
+		{{"ko-KR"}}
 		<ul id="contentList" data-component="scrollFollower">
 			<li><a href="#doc1">1. 개요</a></li>
 			<li><a href="#doc2">2. 프레임구조 생성</a></li>
@@ -143,7 +152,7 @@
 			<li><a href="#doc6">6. 페이지조각 제작</a></li>
 			<li><a href="#doc7">7. 결과</a></li>
 		</ul>
-		{{else}}
+		{{"default"}}
 		<ul id="contentList" data-component="scrollFollower">
 			<li><a href="#doc1">1. Overview</a></li>
 			<li><a href="#doc2">2. Create frame structure</a></li>
@@ -153,6 +162,6 @@
 			<li><a href="#doc6">6. Create a page fragment</a></li>
 			<li><a href="#doc7">7. Result</a></li>
 		</ul>
-		{{/equals}}
+		{{/localize}}
 	</div>
 </div>

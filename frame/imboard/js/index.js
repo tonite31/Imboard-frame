@@ -76,5 +76,6 @@ function setSelectedContent()
 	else
 	{
 		$("#contentList li:first").addClass("selected");
+		$("#contentList li:first ul").show();
 	}
 }
