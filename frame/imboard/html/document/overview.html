@@ -1,5 +1,5 @@
 <h2 id="doc1">1. 개요</h2>
-<p data-bind="locale">
+<p>
 {{#localize}}
 {{"ko-KR"}}
 프레임을 개발하는데 필요한 각종 기능들을 소개합니다. 이 모든 기능은 표준을 준수하며 HTML, JS, CSS만으로 개발할 수 있습니다.
@@ -7,7 +7,7 @@
 Introduce each modules for develop a frame. All of modules are following standard, can development by HTML, JS, CSS.
 {{/localize}}
 </p>
-<div data-bind="locale">
+<div>
 	{{#localize}}
 	{{"ko-KR"}}
 	<h3 id="doc1-1">1-1. URL 맵핑</h3>
@@ -45,12 +45,12 @@ Introduce each modules for develop a frame. All of modules are following standar
 </div>
 <div>
 	<h3 id="doc1-2">1-2. data-fragment</h3>
-	<p data-bind="locale">
+	<p>
 	{{#localize}}
 	{{"ko-KR"}}
 		html파일을 다른 html파일 내부에 보여주는 기능입니다. 특정 태그에 data-fragment 속성을 지정하면 사용할 수 있습니다. Querystring에 지정된 값에 따라 다른 페이지 조각이 보여질 수 있습니다.
 	{{"default"}}
-		Render specific html file to another html file. need to set attribute "data-fragment" to specific tag. Can rendering another fragment by specific value of Querystring.
+		Render specific html file to a tag that has a attribute "data-fragment" in another html file. Can rendering another fragment by specific value of Querystring.
 	{{/localize}}	
 	</p>
 	<div class="panel panel-default">
@@ -81,7 +81,14 @@ Introduce each modules for develop a frame. All of modules are following standar
 </div>
 <div>
 	<h3 id="doc1-3">1-3. data-html</h3>
-	<p data-bind="locale">특정 태그에 data-html 속성을 지정하면 사용할 수 있습니다. data-html속성을 지정한 태그 하위로 보여집니다.</p>
+	<p>
+		{{#localize}}
+		{{"ko-KR"}}
+		특정 태그에 data-html 속성을 지정하면 사용할 수 있습니다. data-html속성을 지정한 태그 하위로 보여집니다.
+		{{"default"}}
+		Render specific html file into a tag that has a attribute "data-html" in another html file.
+		{{/localize}}
+	</p>
 	<div class="panel panel-default">
 		<div class="panel panel-body">
 			<div class="content-header">test.html</div>
@@ -102,7 +109,14 @@ Introduce each modules for develop a frame. All of modules are following standar
 </div>
 <div>
 	<h3 id="doc1-4">1-4. data-replace-html</h3>
-	<p>특정 태그에 data-replace-html 속성을 지정하면 사용할 수 있습니다. data-replace-html 속성을 지정한 태그 대신 보여집니다.</p>
+	<p>
+		{{#localize}}
+		{{"ko-KR"}}
+			특정 태그에 data-replace-html 속성을 지정하면 사용할 수 있습니다. data-replace-html 속성을 지정한 태그 대신 보여집니다.
+		{{"default"}}
+			Render specific html file instead a tag that has a attribute "data-replace-html" in another html file.
+		{{/localize}}
+	</p>
 	<div class="panel panel-default">
 		<div class="panel panel-body">
 			<div class="content-header">test.html</div>
