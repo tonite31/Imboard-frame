@@ -109,10 +109,10 @@
 			<div class="container" style="position:relative;">
 				<h1>Imboard</h1>
 				{{#localize}}
-				{{"ko-KR"}}
+				@{ko-KR}
 					<p>임보드는 쉽고 빠르게 웹페이지를 개발할 수 있는 nodejs기반 플랫폼입니다.</p>
 					<p>간편한 방법으로 웹페이지를 개발할 수 있고, 미리 만들어진 프레임을 적용하면 몇 분만에 웹페이지를 개설할수도 있습니다.</p>
-				{{"default"}}
+				@{default}
 					<p>Imboard is a convenient platform for develop a webpage based on nodejs server</p>
 					<p>You can more easily develop a webpage and If you use a frame that already developed then you can open a webpage in a few minutes.</p>
 				{{/localize}}
@@ -123,11 +123,11 @@
 			<div class="feature">
 				<div>
 					{{#localize}}
-					{{"ko-KR"}}
+					@{ko-KR}
 						<p>임보드는 zip과 tar.gz형태로 배포됩니다. 현재 최신버전은 <span data-id="currentVersion"></span>입니다.</p>
 						<p>개발중인버전은 <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a> 에서 다운로드 받을 수 있습니다.</p>
 						<p>만약 npm을 사용할 수 있다면 커맨드라인에서 npm install imboard 명령어를 입력하면 간편하게 설치할 수 있습니다.</p>
-					{{"default"}}
+					@{default}
 						<p>Imboard is provided by .zip and .tar.gz file. Currently version is <span data-id="currentVersion"></span></p>
 						<p>Develop version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a></p>
 						<p>If you can use npm in command-line interface(CLI) then you can install Imboard by <strong>npm install imboard</strong>.</p>
@@ -145,7 +145,7 @@
 			<div class="feature">
 				<div>
 				{{#localize}}
-				{{"ko-KR"}}
+				@{ko-KR}
 					<h3>사전준비</h3>
 					<p>1. 웹서버</p>
 					<p>임보드를 설치할 호스팅 서버 또는 개인 서버가 필요합니다.</p>
@@ -163,7 +163,7 @@
 					<p>임보드 루트 디렉토리에서 <strong>node config.js</strong> 명령어를 수행합니다. 4번 jdbc메뉴를 선택한 후 host, username, password, database 정보를 차례로 입력합니다.</p>
 					<p>5. 초기데이터입력</p>
 					<p>임보드의 루트 디렉토리에서 <strong>node install.js</strong> 명령어를 수행합니다. 4번에서 설정한 데이터베이스로 초기데이터가 입력되고 임보드 설치작업이 끝납니다.</p>
-				{{"default"}}
+				@{default}
 					<h3>Advance preparation</h3>
 					<dl>
 						<dt>1. Web server</dt>
@@ -203,7 +203,7 @@
 			<div class="feature">
 				<div>
 					{{#localize}}
-					{{"ko-KR"}}
+					@{ko-KR}
 						<dl>
 							<dt>1. frame 설정</dt>
 							<dd>임보드 루트 디렉토리에서 <strong>node config.js</strong> 명령어를 수행합니다. 1번 frame메뉴를 선택한 후 프레임 이름을 입력합니다.<br/>프레임 이름은 <strong>/content/frame/</strong> 디렉토리 하위의 폴더 이름입니다. 기본값은 blog입니다.</dd>
@@ -220,7 +220,7 @@
 							<dt>4. 웹페이지 접속</dt>
 							<dd>웹브라우저를 열어서 주소입력부분에 <strong>http://localhost:3000/</strong> 을 입력합니다.</dd>
 						</dl>
-					{{"default"}}
+					@{default}
 						<dl>
 							<dt>1. Set frame</dt>
 							<dd>Command <strong>node config.js</strong> on CLI. select a number 1. enter a frame name.<br/>Frame name is directory name in <strong>/content/frame/</strong> directory. default value is blog.</dd>

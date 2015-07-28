@@ -3,9 +3,9 @@
 		<h1>#{lan.document}</h1>
 		<p data-bind="locale">
 		{{#localize}}
-		{{"ko-KR"}}
+		@{ko-KR}
 			임보드의 프레임을 개발하는데 도움을 주는 가이드 문서 입니다.
-		{{"default"}}
+		@{default}
 			This page is guidence for develop a frame by Imboard.
 		{{/localize}}
 		</p>
@@ -22,10 +22,10 @@
 	</div>
 	<div class="col-xs-3" data-bind="locale">
 		{{#localize}}
-		{{"ko-KR"}}
-			<div data-outer-html="/document/menu/ko_KR.html"></div>
-		{{"default"}}
-			<div data-outer-html="/document/menu/en_US.html"></div>
+		@{ko-KR}
+			<div data-replace-html="/document/menu/ko_KR.html"></div>
+		@{default}
+			<div data-replace-html="/document/menu/en_US.html"></div>
 		{{/localize}}
 	</div>
 </div>

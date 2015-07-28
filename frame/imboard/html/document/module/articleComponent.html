@@ -10,11 +10,20 @@
 	</colgroup>
 	<thead>
 		<tr>
+		{{#localize}}
+		@{ko-KR}
 			<th class="center">번호</th>
 			<th class="center">제목</th>
 			<th class="center">작성자</th>
 			<th class="center">작성날짜</th>
 			<th class="center">조회수</th>
+		@{default}
+			<th class="center">Number</th>
+			<th class="center">Subject</th>
+			<th class="center">Writer</th>
+			<th class="center">Registerd date</th>
+			<th class="center">Views</th>
+		{{/localize}}
 		</tr>
 	</thead>
 {{#each articleList}}
@@ -37,7 +46,7 @@
 <nav style='text-align:center;'>
 	<ul class="pagination">
 		{{#sign pageIndex ">" 1}}
-		<li><a href="#pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+		<li><a href="#pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"><span aria-hidden="true">#{lan.previous}</span></a></li>
 		{{/sign}}
 		{{#each pageList}}
 		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
@@ -46,7 +55,7 @@
 		{{#sign pageIndex "<" maxPage}}
 		<li>
 			<a href="#pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
-				<span aria-hidden="true">다음</span>
+				<span aria-hidden="true">#{lan.next}</span>
 			</a>
 		</li>
 		{{/sign}}
@@ -58,12 +67,14 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4 id="doc2-2-3-2">articleComponent</h4></div>
 	<div class="panel-body">
-		<div class="content-header">예제</div>
+		<div class="content-header">#{lan.example}</div>
 		<div data-bind="articleComponent" data-param='{"boardId" : "Alprensia-1434019788591"}'>
 			<div data-parts="body" data-template-id="articleComponentTemplate"></div>
 			<div data-parts="pagination" data-template-id="articleComponentPagingTemplate"></div>
 		</div>
-		<div class="content-header">파라미터</div>
+		<div class="content-header">#{lan.parameter}</div>
+		{{#localize}}
+		@{ko-KR}
 		<table class="dataTable">
 			<colgroup>
 				<col style="width: 10%;"/>
@@ -210,7 +221,163 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="content-header">데이터</div>
+		@{default}
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 10%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 35%;"/>
+				<col style="width: 15%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+					<th class="center">Compare type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th colspan="2">boardId</th>
+					<td class="center">String</td>
+					<td>Board's id</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th colspan="2">cpp</th>
+					<td class="center">Integer</td>
+					<td>Article's count per page</td>
+					<td class="center"></td>
+				</tr>
+				<tr>
+					<th colspan="2">pgc</th>
+					<td class="center">Integer</td>
+					<td>Page group's count.</td>
+					<td class="center"></td>
+				</tr>
+				<tr>
+					<th rowspan="19">searchData</th>
+					<th>subject</th>
+					<td class="center">String</td>
+					<td>Subject</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>content</th>
+					<td class="center">String</td>
+					<td>Content</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>writerId</th>
+					<td class="center">String</td>
+					<td>Writer's id</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterId</th>
+					<td class="center">String</td>
+					<td>Writer's id</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>writerName</th>
+					<td class="center">String</td>
+					<td>Writer's name</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterName</th>
+					<td class="center">String</td>
+					<td>Writer's name</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>tag</th>
+					<td class="center">String</td>
+					<td>tag</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>status</th>
+					<td class="center">Integer</td>
+					<td>Article's status</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>readStatus</th>
+					<td class="center">Integer</td>
+					<td>A status of article that is written by login user.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>writerDisplayId</th>
+					<td class="center">String</td>
+					<td>Writer's nickname</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterDisplayId</th>
+					<td class="center">String</td>
+					<td>Writer's nickname</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>registerDate</th>
+					<td class="center">String</td>
+					<td>Registered date of article</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>existThumbnailUrl</th>
+					<td class="center">Boolean (true or false)</td>
+					<td><strong>true :</strong> Is searched an article that has a thumbnail url.<br/><strong>false :</strong> Is searched an article that has not a thumbnail url.<br/>empty : Is searched all article.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>withContent</th>
+					<td class="center">Boolean (true or false)</td>
+					<td><strong>true :</strong> Return list of article with content<br/><strong>false or empty :</strong> Return list of article without content</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>isNotice</th>
+					<td class="center">String (Y or N)</td>
+					<td><strong>Y :</strong> Return list of article that is a notice article.<br/><strong>N :</strong> Return list of article that is not a notice article.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByGroupId</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC or empty :</strong> Return ordered list of article by descending power of groupId.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of groupId.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderBySeq</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC or empty :</strong> Return ordered list of article by descending power of seq.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of seq.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByIsNotice</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC :</strong> Return ordered list of article by descending power of isNotice.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of isNotice.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByRegisterDate</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC :</strong> Return ordered list of article by descending power of registerDate.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of registerDate.</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		{{/localize}}
+		<div class="content-header">#{lan.data}</div>
+		{{#localize}}
+		@{ko-KR}
 		<table class="dataTable">
 			<colgroup>
 				<col style="width: 15%;"/>
@@ -252,7 +419,7 @@
 				<tr>
 					<th>content</th>
 					<td class="center">String</td>
-					<td>내용. 검색조건 withContent == true인 경우</td>
+					<td>내용</td>
 				</tr>
 				<tr>
 					<th>registerDate</th>
@@ -336,7 +503,134 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="content-header">코드</div>
+		@{default}
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 15%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 50%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="center">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th rowspan="23">articleList</th>
+				</tr>
+				<tr>
+					<th>boardId</th>
+					<td class="center">String</td>
+					<td>Board's id</td>
+				</tr>
+				<tr>
+					<th>boardName</th>
+					<td class="center">String</td>
+					<td>Board's name</td>
+				</tr>
+				<tr>
+					<th>seq</th>
+					<td class="center">Integer</td>
+					<td>Article's number</td>
+				</tr>
+				<tr>
+					<th>subject</th>
+					<td class="center">String</td>
+					<td>Subject</td>
+				</tr>
+				<tr>
+					<th>content</th>
+					<td class="center">String</td>
+					<td>Content</td>
+				</tr>
+				<tr>
+					<th>registerDate</th>
+					<td class="center">String</td>
+					<td>Registered date of article</td>
+				</tr>
+				<tr>
+					<th>hit</th>
+					<td class="center">Integer</td>
+					<td>View count of article</td>
+				</tr>
+				<tr>
+					<th>good</th>
+					<td class="center">Integer</td>
+					<td>Good count of article</td>
+				</tr>
+				<tr>
+					<th>bad</th>
+					<td class="center">Integer</td>
+					<td>Bad count of article</td>
+				</tr>
+				<tr>
+					<th>writerId</th>
+					<td class="center">String</td>
+					<td>Writer's id</td>
+				</tr>
+				<tr>
+					<th>writerName</th>
+					<td class="center">String</td>
+					<td>Writer's name</td>
+				</tr>
+				<tr>
+					<th>writerDisplayId</th>
+					<td class="center">String</td>
+					<td>Writer's nickname</td>
+				</tr>
+				<tr>
+					<th>profileImgUrl</th>
+					<td class="center">String</td>
+					<td>Writer's profile image url</td>
+				</tr>
+				<tr>
+					<th>groupId</th>
+					<td class="center">Integer</td>
+					<td>Article's group id</td>
+				</tr>
+				<tr>
+					<th>parentArticleWriterId</th>
+					<td class="center">String</td>
+					<td>Writer's id of parent article</td>
+				</tr>
+				<tr>
+					<th>status</th>
+					<td class="center">Integer</td>
+					<td>Article's status</td>
+				</tr>
+				<tr>
+					<th>thumbnailUrl</th>
+					<td class="center">String</td>
+					<td>Article's thumbnail image url</td>
+				</tr>
+				<tr>
+					<th>tag</th>
+					<td class="center">String</td>
+					<td>tag</td>
+				</tr>
+				<tr>
+					<th>commentCount</th>
+					<td class="center">Integer</td>
+					<td>Comment count</td>
+				</tr>
+				<tr>
+					<th>isNotice</th>
+					<td class="center">String (Y or N)</td>
+					<td>If article is a notice article, then true otherwise false.</td>
+				</tr>
+				<tr>
+					<th>readStatus</th>
+					<td class="center">Integer</td>
+					<td>A status of article that is written by login user.</td>
+				</tr>
+			</tbody>
+		</table>
+		{{/localize}}
+		<div class="content-header">#{lan.code}</div>
 		<pre class="content-code">
 &lt;script id="articleComponentTemplate" type="text/x-handlebars-template"&gt;
 {{#if articleList}}
@@ -350,11 +644,20 @@
 	&lt;/colgroup&gt;
 	&lt;thead&gt;
 		&lt;tr&gt;
-			&lt;th class="center"&gt;번호&lt;/th&gt;
-			&lt;th class="center"&gt;제목&lt;/th&gt;
-			&lt;th class="center"&gt;작성자&lt;/th&gt;
-			&lt;th class="center"&gt;작성날짜&lt;/th&gt;
-			&lt;th class="center"&gt;조회수&lt;/th&gt;
+			{{#localize}}
+			@{ko-KR}
+				&lt;th class="center"&gt;번호&lt;/th&gt;
+				&lt;th class="center"&gt;제목&lt;/th&gt;
+				&lt;th class="center"&gt;작성자&lt;/th&gt;
+				&lt;th class="center"&gt;작성날짜&lt;/th&gt;
+				&lt;th class="center"&gt;조회수&lt;/th&gt;
+			@{default}
+				&lt;th class="center"&gt;Number&lt;/th&gt;
+			&lt;th class="center"&gt;Subject&lt;/th&gt;
+			&lt;th class="center"&gt;Writer&lt;/th&gt;
+			&lt;th class="center"&gt;Registerd date&lt;/th&gt;
+			&lt;th class="center"&gt;Views&lt;/th&gt;
+			{{/localize}}
 		&lt;/tr&gt;
 	&lt;/thead&gt;
 {{#each articleList}}
@@ -379,7 +682,7 @@
 		{{#sign pageIndex "&gt;" 1}}
 		&lt;li&gt;
 			&lt;a href="#pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"&gt;
-				&lt;span aria-hidden="true"&gt;이전&lt;/span&gt;
+				&lt;span aria-hidden="true"&gt;#{lan.previous}&lt;/span&gt;
 			&lt;/a&gt;
 		&lt;/li&gt;
 		{{/sign}}
@@ -391,7 +694,7 @@
 		{{#sign pageIndex "&lt;" maxPage}}
 		&lt;li&gt;
 			&lt;a href="#pageIndex={{math pageIndex "+" 1}}" aria-label="Next"&gt;
-				&lt;span aria-hidden="true"&gt;다음&lt;/span&gt;
+				&lt;span aria-hidden="true"&gt;#{lan.next}&lt;/span&gt;
 			&lt;/a&gt;
 		&lt;/li&gt;
 		{{/sign}}
@@ -400,10 +703,18 @@
 {{/if}}
 &lt;/script&gt;
 
-&lt;div data-bind="articleComponent" data-param='{"boardId" : "게시판아이디"}'&gt;
+{{#localize}}
+@{ko-KR}
+&lt;div data-bind="articleComponent" data-param='{"boardId" : "게시판 아이디"}'&gt;
 	&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;
 	&lt;div data-parts="pagination" data-template-id="articleComponentPagingTemplate"&gt;&lt;/div&gt;
 &lt;/div&gt;
+@{default}
+&lt;div data-bind="articleComponent" data-param='{"boardId" : "Board's id"}'&gt;
+	&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;
+	&lt;div data-parts="pagination" data-template-id="articleComponentPagingTemplate"&gt;&lt;/div&gt;
+&lt;/div&gt;
+{{/localize}}
 		</pre>
 	</div>
 </div>
