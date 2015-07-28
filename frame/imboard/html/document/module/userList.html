@@ -11,12 +11,22 @@
 	</colgroup>
 	<thead>
 		<tr>
+		{{#localize}}
+		@{ko-KR}
 			<th class="center">아이디</th>
 			<th class="center">이름</th>
 			<th class="center">별명</th>
 			<th class="center">레벨</th>
 			<th class="center">포인트</th>
 			<th class="center">등록날짜</th>
+		@{default}
+			<th class="center">Id</th>
+			<th class="center">Name</th>
+			<th class="center">Nickname</th>
+			<th class="center">Level</th>
+			<th class="center">Point</th>
+			<th class="center">Registered date</th>
+		{{/localize}}
 		</tr>
 	</thead>
 	{{#each userList}}
@@ -38,9 +48,11 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4 id="doc2-2-6-1">userList</h4></div>
 	<div class="panel-body">
-		<div class="content-header">예제</div>
+		<div class="content-header">#{lan.example}</div>
 		<div data-bind="userList" data-template-id="userListTemplate"></div>
-		<div class="content-header">데이터</div>
+		<div class="content-header">#{lan.data}</div>
+		{{#localize}}
+		@{ko-KR}
 		<table class="dataTable">
 			<colgroup>
 				<col style="width: 15%;"/>
@@ -111,7 +123,79 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="content-header">코드</div>
+		@{default}
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 15%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 50%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th rowspan="11">userList</th>
+				</tr>
+				<tr>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>User's id</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td class="center">String</td>
+					<td>User's name</td>
+				</tr>
+				<tr>
+					<th>displayId</th>
+					<td class="center">String</td>
+					<td>User's nickname</td>
+				</tr>
+				<tr>
+					<th>provider</th>
+					<td class="center">String</td>
+					<td>Provider</td>
+				</tr>
+				<tr>
+					<th>level</th>
+					<td class="center">Integer</td>
+					<td>Level</td>
+				</tr>
+				<tr>
+					<th>point</th>
+					<td class="center">Integer</td>
+					<td>Point</td>
+				</tr>
+				<tr>
+					<th>registerDate</th>
+					<td class="center">String</td>
+					<td>Registered date</td>
+				</tr>
+				<tr>
+					<th>lastAccessDate</th>
+					<td class="center">String</td>
+					<td>Last access date</td>
+				</tr>
+				<tr>
+					<th>profileImgUrl</th>
+					<td class="center">String</td>
+					<td>Url of profile image.</td>
+				</tr>
+				<tr>
+					<th>userStatus</th>
+					<td class="center">String (Y or N)</td>
+					<td>Status of user account.<br/>Y : available<br/>N : none available</td>
+				</tr>
+			</tbody>
+		</table>
+		{{/localize}}
+		<div class="content-header">#{lan.code}</div>
 		<pre class="content-code">
 &lt;script id="userListTemplate" type="text/x-handlebars-template"&gt;
 {{#if userList}}
@@ -126,12 +210,22 @@
 	&lt;/colgroup&gt;
 	&lt;thead&gt;
 		&lt;tr&gt;
+			{{#localize}}
+			@{ko-KR}
 			&lt;th class="center"&gt;아이디&lt;/th&gt;
 			&lt;th class="center"&gt;이름&lt;/th&gt;
 			&lt;th class="center"&gt;별명&lt;/th&gt;
 			&lt;th class="center"&gt;레벨&lt;/th&gt;
 			&lt;th class="center"&gt;포인트&lt;/th&gt;
 			&lt;th class="center"&gt;등록날짜&lt;/th&gt;
+			@{default}
+			&lt;th class="center"&gt;Id&lt;/th&gt;
+			&lt;th class="center"&gt;Name&lt;/th&gt;
+			&lt;th class="center"&gt;Nickname&lt;/th&gt;
+			&lt;th class="center"&gt;Level&lt;/th&gt;
+			&lt;th class="center"&gt;Point&lt;/th&gt;
+			&lt;th class="center"&gt;Registered date&lt;/th&gt;
+			{{/localize}}
 		&lt;/tr&gt;
 	&lt;/thead&gt;
 	{{#each userList}}
