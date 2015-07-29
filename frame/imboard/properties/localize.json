@@ -103,5 +103,45 @@
 	{
 		"ko-KR" : "이전",
 		"default" : "Previous"
+	},
+	"id" :
+	{
+		"ko-KR" : "아이디",
+		"default" : "ID"
+	},
+	"name" :
+	{
+		"ko-KR" : "이름",
+		"default" : "Name"
+	},
+	"male" :
+	{
+		"ko-KR" : "남자",
+		"default" : "Male"
+	},
+	"female" :
+	{
+		"ko-KR" : "여자",
+		"default" : "Female"
+	},
+	"soccer" :
+	{
+		"ko-KR" : "축구",
+		"default" : "Soccer"
+	},
+	"baseball" :
+	{
+		"ko-KR" : "야구",
+		"default" : "Baseball"
+	},
+	"submit" :
+	{
+		"ko-KR" : "제출",
+		"default" : "Submit"
+	},
+	"result" :
+	{
+		"ko-KR" : "결과",
+		"default" : "Result"
 	}
 }

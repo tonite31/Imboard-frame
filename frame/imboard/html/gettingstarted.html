@@ -47,7 +47,7 @@
 				<pre data-html="/gettingstarted/doc3.html"></pre>
 			@{default}
 				<h2 id="doc3">3. Write index.html</h2>
-				<p>index.html is a main page. so it must has a complete html document structure. write a code by reference following code.</p>
+				<p>index.html is a main page. so it must has a complete html document structure. write a code refer to following.</p>
 				<p>Can download from <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>. move index.css to css directory.</p>
 				<pre data-html="/gettingstarted/doc3.html"></pre>
 			{{/localize}}
@@ -62,7 +62,7 @@
 				<p>예를들어 URL에 <strong>?body=boardList</strong>가 지정되면 html 디렉토리 하위의 boardList.html을 불러와서 해당 div 태그 내부로 보여줍니다.</p>
 			@{default}
 				<h2 id="doc4">4. Constitute a layout</h2>
-				<p>Write a code by reference following code.</p>
+				<p>Write a code refer to following.</p>
 				<pre data-html="/gettingstarted/doc4.html"></pre>
 				<p>A div tag that has "data-fragment" attribute is a container of page fragment.</p>
 				<p>An example, if browser url has a parameter "<strong>?body=boardList</strong>" then show cotnents of boardList.html in html directory on the div tag.</p>
@@ -85,7 +85,7 @@
 				<p>If set an attribute "<strong>data-bind=boardList</strong>" to the div tag then load a data from module named "boardList" on the server.</p>
 				<pre data-html="/gettingstarted/doc5-1.html"></pre>
 				<p>A loaded data is combined by the template tag that has a id of "data-template-id" attribute.</p>
-				<p>Write a template script tag in the head tag by reference following code. id attribute is "boardListTemplate". type is "text/x-handlebars-template".</p>
+				<p>Write a template script tag in the head tag refer to following. id attribute is "boardListTemplate". type is "text/x-handlebars-template".</p>
 				<pre data-html="/gettingstarted/doc5-2.html"></pre>
 				<p>Run application by command "<strong>node app.js</strong>" on the CLI. connect to "http://localhost:3000" in the browser.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="list of board" style="width:100%;"/></p>
@@ -112,15 +112,15 @@
 				<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample 프레임 제작 결과 스크린샷" style="width: 100%;"/></p>
 			@{default}
 				<h2 id="doc6">6. Create a page fragment</h2>
-				<p>In this step, write a fragment that is able to create or edit a board. edit a index.html by reference following code. bold text is edited code.</p>
+				<p>In this step, write a fragment that is able to create or edit a board. edit a index.html refer to following. bold text is edited code.</p>
 				<pre data-html="/gettingstarted/doc6-1.html"></pre>
 				<p>If user click a "Create board" button or click board id, then change fragment to updateBoard.html.</p>
 				<p>Create a file "<strong>updateBoard.html</strong>" in html directory. this file is a fragment. so this file need not have a complete html document structure.</p>
-				<p>Write a code by reference following code for enter a information for create board to user. each input tag must has a name attribute. the input tag that has attribute "name=id" must have an attribute "<strong>required=required</strong>" for validation.</p>
+				<p>Write a code refer to following for enter a information for create board to user. each input tag must has a name attribute. the input tag that has attribute "name=id" must have an attribute "<strong>required=required</strong>" for validation.</p>
 				<p>This page will be able to create or edit a board. so set attribute <strong>data-bind=board</strong> and <strong>data-param='{"id" : "##{query.id}"}'</strong> to form tag. if URL has a "id" parameter, then bind board information of id to each input tag.</p>
 				<pre data-html="/gettingstarted/doc6-2.html"></pre>
 				<p>now, we will request to server for create board with value of each input tag. create a file "updateBoard.js" in "js" directory. if the name of javascript file is equals to name of fragment html file, then javascript file(and css file) is imported when loading fragment html. download <a href="http://resources.imboard.io/gettingstarted/updateBoard.css">updateBoard.css</a> in css directory.</p>
-				<p>Write a code by reference following code. If URL have not a parameter "id", then create a board otherwise edit a board.</p>
+				<p>Write a code refer to following. If URL have not a parameter "id", then create a board otherwise edit a board.</p>
 				<p>Easily access to URL parameter using $.query api. "imboard-api.js" must be imported in index.html.</p>
 				<pre data-html="/gettingstarted/doc6-3.html"></pre>
 				<p>It is pass value of input tags in form tag to callback function when form is submitted. of course call a "$(selector of form tag).compile(callback);" before.</p>

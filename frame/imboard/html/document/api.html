@@ -1,11 +1,24 @@
 <h2 id="doc4">4. imboard-api.js</h2>
 <div>
+	{{#localize}}
+	@{ko-KR}
 	<h3 id="doc4-1">4-1. 개요</h3>
-	<p>서버로 요청을 보내고 응답을 받는 함수들과 각종 데이터를 제어할 수 있는 객체로 구성됩니다. 반드시 <strong>/content/module/imboard/js/imboard-api.js</strong> 자바스크립트 파일을 index.html파일에 import해야 사용할 수 있습니다.</p>
+	<p>imboard-api는 서버로 요청을 보내고 응답을 받는 함수들과 각종 데이터를 제어할 수 있는 객체로 구성된 라이브러리입니다. 반드시 <strong>/content/module/imboard/js/imboard-api.js</strong> 자바스크립트 파일을 index.html파일에 import해야 사용할 수 있습니다.</p>
+	@{default}
+	<h3 id="doc4-1">4-1. Overview</h3>
+	<p>imboard-api is a library that has functions that request to server and object that control to client data. for using this library, must be imported <strong>/content/module/imboard/js/imboard-api.js</strong> to index.html.</p>
+	{{/localize}}
 </div>
 <div>
 	<h3 id="doc4-2">4-2. $.query</h3>
-	<p>Querystring을 key-value 형식으로 가져옵니다.</p>
+	<p>
+		{{#localize}}
+		@{ko-KR}
+		Querystring에 접근할 수 있는 객체입니다.
+		@{default}
+		This is a object that can access to querystring.
+		{{/localize}}
+	</p>
 	<div data-html="/document/api/querystring.html"></div>
 </div>
 <div>

@@ -43,63 +43,72 @@ $(document).ready(function()
 </script>
 
 <h3 id="doc3-2">3-2. form</h3>
-<p>form 컴포넌트는 form태그에 data-component="form" 속성을 지정해서 사용합니다.</p>
+<p>
+	{{#localize}}
+	@{ko-KR}
+	form 컴포넌트는 form태그에 data-component="form" 속성을 지정해서 사용합니다.
+	@{default}
+	Form is used by set a attribute "data-component='form'" to form tag.
+	{{/localize}}
+</p>
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div class="content-header">예제</div>
+		<div class="content-header">#{lan.example}</div>
 		<div style="display: inline-block; width: 50%; vertical-align: top;">
 			<form id="testForm" data-component="form">
-				<p><input type="text" name="id" value="아이디" required="required"/></p>
-				<p><input type="text" name="name" value="이름"/></p>
+				<p><input type="text" name="id" value="#{lan.id}" required="required"/></p>
+				<p><input type="text" name="name" value="#{lan.name}"/></p>
 				<p>
-					<label><input type="radio" name="gender" value="male" checked="checked"/> 남</label>
-					<label><input type="radio" name="gender" value="female"/> 여</label>
+					<label><input type="radio" name="gender" value="male" checked="checked"/> #{lan.male}</label>
+					<label><input type="radio" name="gender" value="female"/> #{lan.female}</label>
 				</p>
 				<p>
-					<label><input type="checkbox" name="hobby" value="soccer" checked="checked"/> 축구</label>
-					<label><input type="checkbox" name="hobby" value="baseball"/> 야구</label>
+					<label><input type="checkbox" name="hobby" value="soccer" checked="checked"/> #{lan.soccer}</label>
+					<label><input type="checkbox" name="hobby" value="baseball"/> #{lan.baseball}</label>
 				</p>
 				<p>
-					<textarea name="description">설명</textarea>
+					<textarea name="description">#{lan.description}</textarea>
 				</p>
 				<p>
-					<input type="submit" class="btn btn-default" value="제출"/>
+					<input type="submit" class="btn btn-default" value="#{lan.submit}"/>
 				</p>
 			</form>
 		</div>
 		<div style="display: inline-block; width: 45%; vertical-align: top;">
-			<strong>결과</strong><br/><br/>
+			<strong>#{lan.result}</strong><br/><br/>
 			<div id="result"></div>
 		</div>
-		<div class="content-header" style="clear:both;">코드</div>
+		<div class="content-header" style="clear:both;">#{lan.code}</div>
 		<pre class="content-code">
 &lt;form id="testForm" data-component="form"&gt;
-	&lt;p&gt;&lt;input type="text" name="id" value="아이디"/&gt;&lt;/p&gt;
-	&lt;p&gt;&lt;input type="text" name="name" value="이름"/&gt;&lt;/p&gt;
+	&lt;p&gt;&lt;input type="text" name="id" value="#{lan.id}"/&gt;&lt;/p&gt;
+	&lt;p&gt;&lt;input type="text" name="name" value="#{lan.name}"/&gt;&lt;/p&gt;
 	&lt;p&gt;
-		&lt;label&gt;&lt;input type="radio" name="gender" value="male" checked="checked"/&gt; 남&lt;/label&gt;
-		&lt;label&gt;&lt;input type="radio" name="gender" value="female"/&gt; 여&lt;/label&gt;
+		&lt;label&gt;&lt;input type="radio" name="gender" value="male" checked="checked"/&gt; #{lan.male}&lt;/label&gt;
+		&lt;label&gt;&lt;input type="radio" name="gender" value="female"/&gt; #{lan.female}&lt;/label&gt;
 	&lt;/p&gt;
 	&lt;p&gt;
-		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="soccer" checked="checked"/&gt; 축구&lt;/label&gt;
-		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="baseball"/&gt; 야구&lt;/label&gt;
+		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="soccer" checked="checked"/&gt; #{lan.soccer}&lt;/label&gt;
+		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="baseball"/&gt; #{lan.baseball}&lt;/label&gt;
 	&lt;/p&gt;
 	&lt;p&gt;
-		&lt;textarea name="description"&gt;설명&lt;/textarea&gt;
+		&lt;textarea name="description"&gt;#{lan.description}&lt;/textarea&gt;
 	&lt;/p&gt;
 	&lt;p&gt;
-		&lt;input type="submit" class="btn btn-default" value="제출"/&gt;
+		&lt;input type="submit" class="btn btn-default" value="#{lan.submit}"/&gt;
 	&lt;/p&gt;
 &lt;/form&gt;
 
 &lt;script&gt;
 $("#testForm").compile(function(param)
 {
-	console.log("파라미터", param);
+	console.log("#{lan.parameter}", param);
 });
 &lt;/script&gt;
 		</pre>
 		<div class="content-header">API</div>
+		{{#localize}}
+		@{ko-KR}
 		<table class="dataTable">
 			<tbody>
 				<tr>
@@ -113,19 +122,20 @@ $("#testForm").compile(function(param)
 				</tr>
 			</tbody>
 		</table>
-<!-- 		<div class="content-header">엘리먼트별 정책</div> -->
-<!-- 		<table class="dataTable"> -->
-<!-- 			<colgroup> -->
-<!-- 				<col style="width: 30%;"/> -->
-<!-- 				<col style="width: 20%;"/> -->
-<!-- 				<col style="width: 50%;"/> -->
-<!-- 			</colgroup> -->
-<!-- 			<tbody> -->
-<!-- 				<tr><th rowspan="2">&lt;input type="text"/&gt;</th><th>get</th><td>value 속성의 값을 가져옵니다.</td></tr> -->
-<!-- 				<tr><th>set</th><td>value속성에 값을 설정합니다.</td></tr> -->
-<!-- 				<tr><th rowspan="2">&lt;input type="radio"/&gt;</th><th>get</th><td>선택된 라디오 엘리먼트의 value 속성의 값을 가져옵니다.</td></tr> -->
-<!-- 				<tr><th>set</th><td>일치하는 value속성을 가진 라디오 엘리먼트를 선택된 상태로 설정합니다.</td></tr> -->
-<!-- 			</tbody> -->
-<!-- 		</table> -->
+		@{default}
+		<table class="dataTable">
+			<tbody>
+				<tr>
+					<th>$(form).compile(callback)</th><td>Call a callback function with parameter that is returned from "getData" function when form submit.</td>
+				</tr>
+				<tr>
+					<th>$(form).getData()</th><td>Return a data of JSON type that has a attribute "name" or "data-name" in form.</td>
+				</tr>
+				<tr>
+					<th>$(form).setData(data)</th><td>Parameter "data" is a object of JSON type. set a data to tag that has a attribute "name" or "data-name" and equals value to key of data.</td>
+				</tr>
+			</tbody>
+		</table>
+		{{/localize}}
 	</div>
 </div>

@@ -1,11 +1,11 @@
-<h2 id="doc4-3">4-3. Handlebars Helper</h2>
+<h2 id="doc2-3">2-3. Handlebars Helper</h2>
 <div>
 	<p>
 		{{#localize}}
 		@{ko-KR}
 		data-bind 모듈로 가져온 데이터는 Handlebars 문법으로 화면에 조합됩니다. 여기서는 추가적으로 구현된 Helper 문법을 소개하며 Handlebars의 기본적인 문법은 <a href="http://handlebarsjs.com/" target="_blank">Handlebars 홈페이지</a>를 참고하십시오.
 		@{default}
-		The data from "data-bind" module is composited to screen by Handlebars grammar.
+		The data from "data-bind" module is composited to screen by Handlebars grammar. Following description is additional helper of handlebars. Please refer of basic grammar to <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a> 
 		{{/localize}}
 	</p>
 	<table class="dataTable">
@@ -117,9 +117,9 @@
 				<td>
 					{{#localize}}
 					@{ko-KR}
-					첫번째 파라미터가 yyyy-mm-dd hh:mm:ss형식일때 오늘이면 hh:mm:ss형태로 오늘이 아니면 yyyy-MM-dd 형태로 리턴합니다.
+					첫번째 파라미터가 yyyy-MM-dd hh:mm:ss형식일때 오늘이면 hh:mm:ss형태로 오늘이 아니면 yyyy-MM-dd 형태로 리턴합니다.
 					@{default}
-					if 1st parameter that is type of "yyyy-MM-dd hh:mm:ss" is a today then return value type of "hh:mm:ss" else return value type of "yyyy-MM-dd".
+					if 1st parameter is a type of date "yyyy-MM-dd hh:mm:ss" and is a today, then return value of date type "hh:mm:ss" else return value of date type "yyyy-MM-dd".
 					{{/localize}}
 				</td>
 			</tr>
