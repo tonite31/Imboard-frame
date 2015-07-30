@@ -67,12 +67,32 @@ TypeWriter = {};
 	$t.template += '</div>';
 	
 	$t.controller = {};
-	$t.controller["fontBold"] = $t.controller["fontItalic"] = function(instance)
+	$t.controller["fontweight"] = function(editor)
+	{
+		$(this).on("click", function()
+		{
+			if (window.getSelection)
+			{
+				var selection = window.getSelection();
+				console.log(selection);
+				
+				var range = selection.getRangeAt(0);
+				console.log(range);
+		    }
+			else if (document.selection && document.selection.type != "Control")
+			{
+		        var text = document.selection.createRange().text;
+		        console.log("하이텍스트 : ", text);
+		    }
+		});
+	};
+	
+	$t.controller["fontItalic"] = function(instance)
 	{
 		var type = $(this).attr("data-controller");
 		$(this).on("click", function()
 		{
-			var node = instance.getSelectedNode();
+//			var node = instance.getSelectedNode();
 //			if(node != null)
 //				node = [node];
 //			
@@ -271,7 +291,6 @@ TypeWriter = {};
 				else
 					node.focus();
 				
-				console.log("흠 : ", node.children[0].refreshResizable);
 				if(node.children[0].refreshResizable)
 					node.children[0].refreshResizable();
 			}
@@ -393,6 +412,62 @@ TypeWriter = {};
 //				console.log("얍");
 //			});
 		});
+	};
+	
+	$t.getEditor = function(option)
+	{
+		if(!option)
+			option = {};
+		
+		var editor = {};
+		editor.typewriter = document.createElement("div");
+		editor.typewriter.className = "typewriter";
+		
+		editor.controlPanel = document.createElement("div");
+		editor.controlPanel.className = "typewriter-controlPanel";
+		
+		editor.contentArticle = document.createElement("div");
+		editor.contentArticle.className = "typewriter-content";
+		editor.contentArticle.setAttribute("contenteditable", "true");
+		
+		editor.typewriterProgress = document.createElement("div");
+		editor.typewriterProgress.className = "typewriter-progress";
+		
+		editor.typewriter.appendChild(editor.controlPanel);
+		editor.typewriter.appendChild(editor.contentArticle);
+		editor.typewriter.appendChild(editor.typewriterProgress);
+		
+		if(!option.controller)
+		{
+			option.controller = [[{id : "fontweight", name : "굵기조절"}]];
+		}
+		
+		for(var i=0; i<option.controller.length; i++)
+		{
+			var groupPanel = document.createElement("div");
+			groupPanel.className = "typewriter-controlGroup";
+			
+			var group = option.controller[i];
+			for(var j=0; j<group.length; j++)
+			{
+				var button = document.createElement("button");
+				button.type = "button";
+				button.setAttribute("data-toggle", "tooltip");
+				button.setAttribute("data-placement", "bottom");
+				button.setAttribute("title", "ALT + B");
+				button.setAttribute("tabindex", "-1");
+				
+				button.innerHTML = "<span class='glyphicon glyphicon-bold'></span><span class='typewriter-compdesc'>" + group[i].name + "</span>";
+				
+				groupPanel.appendChild(button);
+				
+				$t.controller[group[i].id].call(button, editor.typewriter.contentArticle);
+			}
+			
+			editor.controlPanel.appendChild(groupPanel);
+		}
+		
+		return editor;
 	};
 	
 	$t.instances = {};
@@ -645,7 +720,9 @@ TypeWriter = {};
 	instance.prototype.init = function()
 	{
 		var that = this;
-		this.target.innerHTML = $t.template;
+		this.editor = $t.getEditor();
+		this.target.innerHTML = "";
+		this.target.appendChild(this.editor.typewriter);
 		
 		$(window).one("blur", function()
 		{
@@ -982,105 +1059,6 @@ TypeWriter = {};
 		{
 			this.resizable.style.left = this.offsetLeft + "px";
 		};
-		
-//		$(this.target).find(".typewriter-focus").removeAttr("class");
-//		$(this.target).find(".typewriter-resizebar").remove();
-//		$(this.target).find(".typewriter-relative").removeClass("typewriter-relative");
-//		
-//		var that = this;
-//		function setResizebar()
-//		{
-//			if(node.resizeBar && node.resizeBar.right)
-//			{
-//				if(node.resizeBar.right.parentElement)
-//					node.resizeBar.right.parentElement.removeChild(node.resizeBar.right);
-//				
-//				node.resizeBar = null;
-//			}
-//			
-//			node.resizeBar = {right : document.createElement("div")};
-//			node.resizeBar.right.className = "typewriter-resizebar";
-//			
-//			var rect = node.getBoundingClientRect();
-//			node.resizeBar.right.style.left =  rect.width - 4 + "px";
-//			node.resizeBar.right.style.top = "0";
-//			node.resizeBar.right.style.width = "5px";
-//			node.resizeBar.right.style.height = rect.height + "px";
-//			node.resizeBar.right.style.cursor = "ew-resize";
-//			node.resizeBar.right.setAttribute("data-toggle", "tooltip");
-//			node.resizeBar.right.setAttribute("data-placement", "left");
-//			node.resizeBar.right.setAttribute("data-title", "ALT + < or >");
-//			node.resizeBar.right.setAttribute("contenteditable", "false");
-//			
-//			node.resizeBar.right.onmousedown = function(e)
-//			{
-//				node.corver = document.createElement("div");
-//				node.corver.className = "typewriter-corver";
-//				node.corver.style.left = node.offsetLeft + "px";
-//				node.corver.style.width = rect.width + "px";
-//				node.corver.style.top = node.offsetTop + "px";
-//				node.corver.style.height = rect.height + "px";
-//				
-//				$(node.parentElement).append(node.corver);
-//				
-//				node.resizeBar.right.prevX = e.pageX;
-//				document.onmousemove = function(e)
-//				{
-//					//마우스의 x좌표에서 rect.left 를 하면 width가 나온다.
-//					var dx = (e.pageX - rect.left);
-////					var dx = (e.pageX - node.resizeBar.right.prevX) / 10;
-//					var width = node.style.width;
-//					if(!width)
-//						width = getComputedStyle(node).width;
-//					
-//					var height = (dx * rect.height) / rect.width;
-//
-//					node.style.width = dx + "px";
-//					node.style.height = height + "px";
-//					node.corver.style.width = dx + "px";
-//					node.corver.style.height = height + "px";
-//					
-//					node.resizeBar.right.style.left = rect.width + "px";
-//					node.resizeBar.right.style.height = rect.height + "px";
-//					
-//					$(node.resizeBar.right).tooltip("hide");
-//				};
-//				
-//				document.onmouseup = function(e)
-//				{
-//					if(node.corver.parentElement)
-//						node.corver.parentElement.removeChild(node.corver);
-//					
-//					document.onmousemove = null;
-//					document.onmouseup = null;
-//				};
-//			};
-//			
-//			node.parentElement.className = "typewriter-relative";
-//			$(node.parentElement).append(node.resizeBar.right);
-//			
-//			$(node.resizeBar.right).tooltip();
-//		};
-//		
-//		$(node).on("click", function(e)
-//		{
-//			$(this).find(".typewriter-focus").removeAttr("class");
-//			$(this).find(".typewriter-resizebar").remove();
-//			$(this).find(".typewriter-relative").removeAttr("class");
-//			that.setResizeController(this);
-//			
-//			that.setCaretPosition(this.nextElementSibling, 0);
-//			
-//			e.stopPropagation();
-//		});
-//		
-//		$(node).attr("class", "typewriter-focus typewriter-image");
-//		setResizebar();
-//		
-//		$(node).on("load", function()
-//		{
-//			setResizebar();
-//		});
 	};
 	
 	instance.prototype.setData = function(data)
@@ -1090,9 +1068,6 @@ TypeWriter = {};
 	
 	instance.prototype.getData = function()
 	{
-//		$(this.target).find(".typewriter-contentplaceholder").remove();
-//		$(this.target).find(".typewriter-resizable").remove();
-		
 		var clone = $(this.target).find(".typewriter-content").clone(true);
 		
 		clone.find(".typewriter-contentplaceholder").remove();
