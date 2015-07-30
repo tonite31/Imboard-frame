@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+
+<meta name="Title" content="하비실용음악학원">
+<meta name="author" content="Alprensia"/>
+<meta name="reply-to" content="tonite32@gmail.com"/>
+<meta name="description" content="하비실용음악학원 홈페이지"/>
+<meta name="robots" content="INDEX, FOLLOW" />
+
+<title>하비실용음악학원</title>
+
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
+
+<script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
+<script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="#{path.lib}/handlebars/handlebars-v1.3.0.js"></script>
+
+<script src="#{path.module}/imboard/js/imboard-api.js"></script>
+<script src="#{path.module}/imboard/js/imboard-ui.js"></script>
+<script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
+
+<script id="signedUserTemplate" type="text/x-handlebars-template">
+{{#if user}}
+	{{#sign user.level "<" 0}}
+	<li><a href="/settings">관리자설정</a></li>
+	{{/sign}}
+	<li><a href="/signout.do">로그아웃</a></li>
+{{else}}
+	<li><a href="/signin">로그인</a></li>
+{{/if}}
+</script>
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+				      	<a class="navbar-brand" href="/"><img src="#{path.root}/images/title_logo.png" alt="하비실용음악학원" style="width: 180px;"/></a>
+				    </div>
+				    <div class="collapse navbar-collapse" id="menuList">
+						<ul class="nav navbar-nav">
+						  	<li><a href=""><img src="#{path.root}/images/menu_teacher.png" alt="강사소개" /></a></li>
+						  	<li><a href=""><img src="#{path.root}/images/menu_curriculum.png" alt="교육과정" /></a></li>
+						  	<li><a href=""><img src="#{path.root}/images/menu_before_after.png" alt="트레이닝 효과" /></a></li>
+						  	<li><a href=""><img src="#{path.root}/images/menu_qna.png" alt="수강문의" /></a></li>
+						  	<li><a href=""><img src="#{path.root}/images/menu_map.png" alt="오시는길" /></a></li>
+						  	<li><a href="">하비 공연&amp;녹음</a></li>
+						  	<li><a href="">하비방문객</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right" data-bind="signedUser" data-template-id="signedUserTemplate"></ul>
+				    </div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<div class="container">
+		<img src="#{path.root}/images/main.png" alt="메인이미지" style="width: 100%;"/>
+	</div>
+	<div class="container" style="margin: 10px auto 20px auto; border-bottom: 1px dotted #dedede; padding-bottom: 15px;">
+		<a class="col-xs-4"><img src="#{path.root}/images/link_curriculumn.png" alt="커리큘럼 링크 이미지" style="width: 100%;"/></a>
+		<a class="col-xs-4"><img src="#{path.root}/images/link_before_after.png" alt="트레이닝효과 링크 이미지" style="width: 100%;"/></a>
+		<a class="col-xs-4"><img src="#{path.root}/images/link_teacher.png" alt="강사소개 링크 이미지" style="width: 100%;"/></a>
+	</div>
+	<div class="container">
+		<div class="col-xs-3">
+			<img src="#{path.root}/images/call.png" alt="문의전화번호 이미지" style="width: 100%;"/>
+		</div>
+		<div class="col-xs-5" style="text-align:center;">
+			<iframe width="360" height="259" src="https://www.youtube.com/embed/tney4R2Tkcs" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div class="col-xs-4">
+			<p class="h4">자주묻는질문</p>
+			<div>
+				<p class="faq"><a href="">연습실을 사용하는데 시간 제한이 있나요?</a></p>
+				<p class="faq"><a href="">어느 정도 기간을 트레이닝 받아야 효과가 있나요?</a></p>
+				<p class="faq"><a href="">수강생이 녹음실을 사용할 수 있나요?</a></p>
+				<p class="faq"><a href="">본인이 원하는 트레이너를 직접 선택할 수 있나요?</a></p>
+				<p class="faq"><a href="">노래를 잘부르는 사람만 수강이 가능한가요?</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="container" style="margin: 30px auto;">
+		<p class="h3">하비 공연&amp;녹음</p>
+		<div class="thumbnailContainer">
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+				<p class="caption">박효신 - 눈의꽃</p>
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+		</div>
+	</div>
+	<div class="container" style="margin: 30px auto;">
+		<p class="h3">하비방문객</p>
+		<div class="thumbnailContainer">
+			<div class="col-xs-3">
+				<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
+				<p class="caption">박효신 - 눈의꽃</p>
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+			<div class="col-xs-3">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
