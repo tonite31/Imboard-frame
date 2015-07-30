@@ -2,69 +2,15 @@ TypeWriter = {};
 
 (function($t)
 {
-	$t.template  = '<div class="typewriter">';
-	$t.template += '<div class="typewriter-controlPanel">';
-	$t.template += '	<div style="text-align: center;">';
-	$t.template += '		<div class="typewriter-controlGroup">';
-	$t.template += '            <button type="button" data-toggle="tooltip" data-placement="bottom" title="ALT + (1-9)" data-controller="textSize" tabindex="-1">';
-	$t.template += '                <span class="glyphicon glyphicon-text-size"></span>';
-	$t.template += '                <span class="typewriter-compdesc">글자크기 조절</span>';
-	$t.template += '            </button>';
-	$t.template += '			<button type="button" data-toggle="tooltip" data-placement="bottom" title="ALT + B" data-controller="fontBold" tabindex="-1">';
-	$t.template += '				<span class="glyphicon glyphicon-bold"></span>';
-	$t.template += '				<span class="typewriter-compdesc">굵게</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" data-toggle="tooltip" data-placement="bottom" title="ALT + I" data-controller="fontItalic" tabindex="-1">';
-	$t.template += '				<span class="glyphicon glyphicon-italic"></span>';
-	$t.template += '				<span class="typewriter-compdesc">기울임</span>';
-	$t.template += '			</button>';
-	$t.template += '		</div>';
-	$t.template += '		<div class="typewriter-vline"></div>';
-	$t.template += '		<div class="typewriter-controlGroup">';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + L" data-controller="alignLeft">';
-	$t.template += '				<span class="glyphicon glyphicon-align-left"></span>';
-	$t.template += '				<span class="typewriter-compdesc">왼쪽정렬</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + C" data-controller="alignCenter">';
-	$t.template += '				<span class="glyphicon glyphicon-align-center"></span>';
-	$t.template += '				<span class="typewriter-compdesc">가운데정렬</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + R" data-controller="alignRight">';
-	$t.template += '				<span class="glyphicon glyphicon-align-right"></span>';
-	$t.template += '				<span class="typewriter-compdesc">오른쪽정렬</span>';
-	$t.template += '			</button>';
-	$t.template += '		</div>';
-	$t.template += '		<div class="typewriter-vline"></div>';
-	$t.template += '		<div class="typewriter-controlGroup">';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + P" data-controller="image">';
-	$t.template += '				<span class="glyphicon glyphicon-picture"></span>';
-	$t.template += '				<span class="typewriter-compdesc">이미지</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + V" data-controller="video">';
-	$t.template += '				<span class="glyphicon glyphicon-film"></span>';
-	$t.template += '				<span class="typewriter-compdesc">동영상</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + F" data-controller="file">';
-	$t.template += '				<span class="glyphicon glyphicon-floppy-disk"></span>';
-	$t.template += '				<span class="typewriter-compdesc">파일</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + Y" data-controller="youtube">';
-	$t.template += '				<span class="glyphicon glyphicon-expand"></span>';
-	$t.template += '				<span class="typewriter-compdesc">유투브</span>';
-	$t.template += '			</button>';
-	$t.template += '			<button type="button" tabindex="-1" data-toggle="tooltip" data-placement="bottom" title="ALT + K" data-controller="link">';
-	$t.template += '				<span class="glyphicon glyphicon-link"></span>';
-	$t.template += '				<span class="typewriter-compdesc">링크</span>';
-	$t.template += '			</button>';
-	$t.template += '		</div>';
-	$t.template += '	</div>';
-	$t.template += '	<hr/>';
-	$t.template += '</div>';
-	$t.template += '<article class="typewriter-content" contenteditable="true" tabindex="2">';
-	$t.template += '	<div class="typewriter-contentplaceholder">내용을 입력하세요...</div>';
-	$t.template += '</article>';
-	$t.template += '<div class="typewriter-progress"><div></div><span class="glyphicon glyphicon-repeat"></span></div>';
-	$t.template += '</div>';
+	$t.setCaretPosition = function(node, index)
+	{
+		var range = document.createRange();
+		var sel = window.getSelection();
+		range.setStart(node, index);
+		range.collapse(true);
+		sel.removeAllRanges();
+		sel.addRange(range);
+	};
 	
 	$t.controller = {};
 	$t.controller["fontweight"] = function(editor)
@@ -74,10 +20,99 @@ TypeWriter = {};
 			if (window.getSelection)
 			{
 				var selection = window.getSelection();
-				console.log(selection);
-				
-				var range = selection.getRangeAt(0);
-				console.log(range);
+				if(selection.rangeCount > 0)
+				{
+					var range = selection.getRangeAt(0);
+					
+					var sc = range.startContainer;
+					var ec = range.endContainer;
+					
+					if($.contains(editor, sc) && $.contains(editor, ec))
+					{
+						var ancestor = range.commonAncestorContainer;
+						if(sc == ec)
+						{
+							var before = sc.nodeValue.substring(0, range.startOffset);
+							var text = sc.nodeValue.substring(range.startOffset, range.endOffset);
+							var after = sc.nodeValue.substring(range.endOffset);
+							
+							var parent = ancestor.parentElement;
+							if(parent == editor)
+							{
+								var div = parent.ownerDocument.createElement("div");
+								div.innerHTML = before + "<span style='font-weight:bold;'>" + text + "</span>" + after;
+								parent.replaceChild(div, parent.firstChild);
+								$t.setCaretPosition(div.children[0].firstChild, div.children[0].innerText.length);
+							}
+							else if(parent.nodeName == "DIV")
+							{
+								
+							}
+							else if(parent.nodeName == "SPAN")
+							{
+								
+							}
+						}
+						else
+						{
+						}
+						
+//						var ancestor = range.commonAncestorContainer; 
+//						if(ancestor.nodeName == "#text")
+//						{
+//							var parent = range.commonAncestorContainer.parentElement;
+//							if(parent.nodeName == "SPAN")
+//							{
+//								//한줄이고 span하위의 텍스트를 선택한경우
+//								var prevStyle = parent.style.fontWeight;
+//								if(prevStyle == "bold")
+//								{
+//									var before = sc.nodeValue.substring(0, range.startOffset);
+//									var text = sc.nodeValue.substring(range.startOffset);
+//									
+//									var target = sc.nextElementSibling;
+//									while(target)
+//										text += target.nodeValue;
+//									
+//									text = ec.nodeValue.substring(range.endOffset)
+//								}
+//							}
+//							else if(parent == editor)
+//							{
+//								//한줄이고 div하위에 span이 아무것도 없는경우
+//								var before = sc.nodeValue.substring(0, range.startOffset);
+//								var text = sc.nodeValue.substring(range.startOffset, range.endOffset);
+//								var after = sc.nodeValue.substring(range.endOffset);
+//								var div = parent.ownerDocument.createElement("div");
+//								div.innerHTML = before + "<span style='font-weight:bold;'>" + text + "</span>" + after;
+//
+//								parent.replaceChild(div, parent.firstChild);
+//								
+//								$t.setCaretPosition(div.children[0].firstChild, div.children[0].innerText.length);
+//							}
+//						}
+//						else if(ancestor.nodeName == "DIV")
+//						{
+//							var text = "";
+//							
+//							var target = sc;
+//							while(target)
+//							{
+//								
+//							}
+//							//한줄이고 div하위에 span과 text가 섞여서 선택된경우
+//							if(sc.nodeName == "#text")
+//							{
+//								//text인경우는 startOffset으로 잘라서 넣으면 된다.
+//								
+//							}
+//							else
+//							{
+//								//span인 경우인데 span을 0, startOffset으로 잘라서 남겨두면 된다.
+//							}
+//						}
+					}
+				}
 		    }
 			else if (document.selection && document.selection.type != "Control")
 			{
@@ -439,7 +474,7 @@ TypeWriter = {};
 		
 		if(!option.controller)
 		{
-			option.controller = [[{id : "fontweight", name : "굵기조절"}]];
+			option.controller = [[{id : "fontweight", name : "B"}]];
 		}
 		
 		for(var i=0; i<option.controller.length; i++)
@@ -457,11 +492,11 @@ TypeWriter = {};
 				button.setAttribute("title", "ALT + B");
 				button.setAttribute("tabindex", "-1");
 				
-				button.innerHTML = "<span class='glyphicon glyphicon-bold'></span><span class='typewriter-compdesc'>" + group[i].name + "</span>";
+				button.innerHTML = "<span>" + group[i].name + "</span>";
 				
 				groupPanel.appendChild(button);
 				
-				$t.controller[group[i].id].call(button, editor.typewriter.contentArticle);
+				$t.controller[group[i].id].call(button, editor.contentArticle);
 			}
 			
 			editor.controlPanel.appendChild(groupPanel);

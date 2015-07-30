@@ -17,7 +17,6 @@
 {
 	position: relative;
 	background-color: white;
-	text-align: center;
 }
 
 .typewriter-controlGroup
@@ -42,9 +41,10 @@
 	cursor: pointer;
 	font-size:20px;
 	padding:0 10px;
+	color:#666;
 }
 
-.typewriter-controlGroup > button:HOVER
+.typewriter-controlGroup > button:HOVER > span
 {
 	color:black;
 }
@@ -52,13 +52,6 @@
 .typewriter-controlGroup > button:FOCUS, .typewriter-controlGroup > button:ACTIVE
 {
 	outline: 0;
-}
-
-.typewriter-controlGroup .typewriter-compdesc
-{
-	display:block;
-	font-size: 11px;
-	text-align: center;
 }
 
 .typewriter-vline
@@ -74,6 +67,8 @@
 {
 	min-height: 400px;
 	position: relative;
+	border: 1px solid #dfdfdf;
+	padding: 5px;
 }
 
 .typewriter-content > div
