@@ -12,6 +12,182 @@ TypeWriter = {};
 		sel.addRange(range);
 	};
 	
+	$t.clearSpan = function(divParent)
+	{
+		$(divParent).find("span").filter(function(){
+			return !$(this).text();
+		}).remove();
+		
+		for(var i=1; i<divParent.children.length; i++)
+		{
+			var prev = divParent.children[i-1];
+			var current = divParent.children[i];
+			
+			var isEquals = false;
+			if(prev.style.length == current.style.length)
+			{
+				for(var j=0; j<prev.style.length; j++)
+				{
+					if(prev.style[prev.style[j]] != current.style[prev.style[j]])
+					{
+						isEquals = false;
+						break;
+					}
+					else
+					{
+						isEquals = true;
+					}
+				}
+			}
+			
+			if(isEquals)
+			{
+				var position = -1;
+				if(prev.hasCaret)
+					position = prev.hasCaret;
+				else if(current.hasCaret)
+					position = prev.innerText.length + current.hasCaret;
+				
+				prev.innerText += current.innerText;
+				current.parentElement.removeChild(current);
+
+				if(position > -1)
+					$t.setCaretPosition(prev.firstChild, position);
+				
+				i--;
+			}
+		}
+		
+		$(divParent).find("span").each(function(){this.hasCaret = null;});
+	};
+	
+	$t.makeSpan = function(target, remainText, selectedText, style, isEnd)
+	{
+		if(target.parentElement.nodeName == "SPAN")
+		{
+			//분리
+			if(!style.value)
+			{
+				if(target.parentElement.style.length > 1)
+				{
+					var span = document.createElement("span");
+					span.style.cssText = target.parentElement.style.cssText;
+					span.style[style.key] = style.value;
+					span.innerText = selectedText;
+					
+					if(!isEnd)
+					{
+						var next = target.parentElement.nextSibling;
+						if(next)
+							target.parentElement.parentElement.insertBefore(span, next);
+						else
+							target.parentElement.parentElement.appendChild(span);
+						
+						target.parentElement.innerText = remainText;	
+					}
+					else
+					{
+						target.parentElement.parentElement.insertBefore(span, target.parentElement);
+						target.parentElement.innerText = remainText;
+						
+						$t.setCaretPosition(span.firstChild, span.firstChild.length);
+						span.hasCaret = span.firstChild.length;
+					}
+				}
+				else
+				{
+					if(!isEnd)
+					{
+						var next = target.parentElement.nextSibling;
+						if(next)
+							target.parentElement.parentElement.insertBefore(document.createTextNode(selectedText), next);
+						else
+							target.parentElement.parentElement.appendChild(document.createTextNode(selectedText));
+						
+						target.parentElement.innerText = remainText;
+					}
+					else
+					{
+						var node = document.createTextNode(selectedText);
+						target.parentElement.parentElement.insertBefore(node, target.parentElement);
+						target.parentElement.innerText = remainText;
+						
+						$t.setCaretPosition(node, node.length);
+					}
+				}
+			}
+			else
+			{
+				var span = document.createElement("span");
+				span.style.cssText = target.parentElement.style.cssText;
+				span.style[style.key] = style.value;
+				span.innerText = selectedText;
+				
+				if(!isEnd)
+				{
+					var next = target.parentElement.nextSibling;
+					if(next)
+						target.parentElement.parentElement.insertBefore(span, next);
+					else
+						target.parentElement.parentElement.appendChild(span);
+					
+					target.parentElement.innerText = remainText;
+				}
+				else
+				{
+					target.parentElement.parentElement.insertBefore(span, target.parentElement);
+					target.parentElement.innerText = remainText;
+					
+					$t.setCaretPosition(span.firstChild, span.firstChild.length);
+					span.hasCaret = span.firstChild.length;
+				}
+			}
+		}
+		else
+		{
+			var span = document.createElement("span");
+			span.style[style.key] = style.value;
+			span.innerText = selectedText;
+			
+			var node = null;
+			
+			if(!style.value)
+				node = document.createTextNode(selectedText);
+			else
+				node = span;
+			
+			if(!isEnd)
+			{
+				var next = target.nextSibling;
+				if(next)
+					target.parentElement.insertBefore(node, next);
+				else
+					target.parentElement.appendChild(node);
+				
+				target.parentElement.insertBefore(document.createTextNode(remainText), node);
+				
+				target.parentElement.removeChild(target);
+			}
+			else
+			{
+				var remainNode = document.createTextNode(remainText);
+				target.parentElement.insertBefore(node, target);
+				target.parentElement.insertBefore(remainNode, target);
+				target.parentElement.removeChild(target);
+				
+				if(node == span)
+				{
+					$t.setCaretPosition(node.firstChild, node.firstChild.length);
+					node.hasCaret = node.firstChild.length;
+				}
+				else
+				{
+					$t.setCaretPosition(node, node.length);
+				}
+			}
+		}
+	};
+	
 	$t.controller = {};
 	$t.controller["fontweight"] = function(editor)
 	{
@@ -20,100 +196,357 @@ TypeWriter = {};
 			if (window.getSelection)
 			{
 				var selection = window.getSelection();
+				var text = selection.toString();
 				if(selection.rangeCount > 0)
 				{
 					var range = selection.getRangeAt(0);
 					
+					var ancestor = range.commonAncestorContainer; 
 					var sc = range.startContainer;
 					var ec = range.endContainer;
 					
-					if($.contains(editor, sc) && $.contains(editor, ec))
+					//가장 먼저 sc ~ ec를 뽑아낸다.
+					
+					if(!$(editor).has(sc) || !$(editor).has(ec))
 					{
-						var ancestor = range.commonAncestorContainer;
+						return;
+					}
+					
+					if(ancestor.nodeName == "DIV" || ancestor.nodeName == "#text")
+					{
+						//한줄인경우
 						if(sc == ec)
 						{
+							//같은경우
 							var before = sc.nodeValue.substring(0, range.startOffset);
-							var text = sc.nodeValue.substring(range.startOffset, range.endOffset);
 							var after = sc.nodeValue.substring(range.endOffset);
 							
-							var parent = ancestor.parentElement;
-							if(parent == editor)
+							if(sc.parentElement.nodeName == "SPAN") // SPAN 하위에 있는경우
 							{
-								var div = parent.ownerDocument.createElement("div");
-								div.innerHTML = before + "<span style='font-weight:bold;'>" + text + "</span>" + after;
-								parent.replaceChild(div, parent.firstChild);
-								$t.setCaretPosition(div.children[0].firstChild, div.children[0].innerText.length);
-							}
-							else if(parent.nodeName == "DIV")
-							{
+								var span = document.createElement("span");
+								span.style.cssText = sc.parentElement.style.cssText;
+								span.innerText = before;
 								
-							}
-							else if(parent.nodeName == "SPAN")
-							{
+								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
 								
+								if(sc.parentElement.style.fontWeight == "bold")
+								{
+									if(sc.parentElement.style.length > 1)
+									{
+										span = document.createElement("span");
+										span.style.cssText = sc.parentElement.style.cssText;
+										span.style.fontWeight = "";
+										span.innerText = text;
+										
+										sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+									}
+									else
+									{
+										sc.parentElement.parentElement.insertBefore(document.createTextNode(text), sc.parentElement);
+									}
+								}
+								else
+								{
+									span = document.createElement("span");
+									span.style.cssText = sc.parentElement.style.cssText;
+									span.style.fontWeight = "bold";
+									span.innerText = text;
+									
+									sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+								}
+								
+								span = document.createElement("span");
+								span.style.cssText = sc.parentElement.style.cssText;
+								span.innerText = after;
+								
+								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+								
+								sc.parentElement.parentElement.removeChild(sc.parentElement);
+							}
+							else
+							{
+								sc.parentElement.insertBefore(document.createTextNode(before), sc);
+								
+								var span = document.createElement("span");
+								span.style.fontWeight = "bold";
+								span.innerText = text;
+								
+								sc.parentElement.insertBefore(span, sc);
+								
+								sc.parentElement.insertBefore(document.createTextNode(after), sc);
+								
+								sc.parentElement.removeChild(sc);
 							}
 						}
 						else
 						{
+							var list = [sc];
+							
+							if(sc != ec)
+							{
+								var target = sc.parentElement != editor ? sc.parentElement.nextSibling : sc.nextSibling;
+								while(target && target != ec && target != ec.parentElement)
+								{
+									list.push(target);
+									target = target.nextSibilng;
+								}
+								
+								list.push(ec);
+							}
+
+							var isBold = true;
+							for(var i=0; i<list.length; i++)
+							{
+								if(list[i].nodeName == "#text" && list[i].parentElement.nodeName == "SPAN")
+								{
+									isBold = isBold && (list[i].parentElement.style.fontWeight == "bold");
+								}
+								else if(list[i].nodeName == "SPAN")
+								{
+									isBold = isBold && (list[i].style.fontWeight == "bold");
+								}
+								else
+								{
+									isBold = false;
+									break;
+								}
+							}
+							
+							for(var i=0; i<list.length; i++)
+							{
+								if(list[i] == sc)
+								{
+									$t.makeSpan(sc, sc.nodeValue.substring(0, range.startOffset), sc.nodeValue.substring(range.startOffset), {key : "font-weight", value : (isBold ? "" : "bold")}, false);
+								}
+								else if(list[i] == ec)
+								{
+									$t.makeSpan(ec, ec.nodeValue.substring(range.endOffset), ec.nodeValue.substring(0, range.endOffset), {key : "font-weight", value : (isBold ? "" : "bold")}, true);
+								}
+								else
+								{
+									if(list[i].nodeName == "SPAN")
+									{
+										if(isBold)
+										{
+											if(list[i].style.length > 1)
+												list[i].style.fontWeight = "";
+											else
+												list[i].parentElement.replaceChild(document.createTextNode(list[i].innerText), list[i]);
+										}
+										else
+										{
+											list[i].style.fontWeight = "bold";
+										}
+									}
+									else
+									{
+										if(!isBold)
+										{
+											var span = document.createElement("span");
+											span.style.fontWeight = "bold";
+											span.innerText = list[i].innerText;
+											
+											list[i].parentElement.replaceChild(span, list[i]);
+										}
+									}
+								}
+							}
 						}
 						
-//						var ancestor = range.commonAncestorContainer; 
-//						if(ancestor.nodeName == "#text")
+						var divParent = ancestor;
+						
+						while(divParent.nodeName != "DIV")
+						{
+							divParent = divParent.parentElement;
+							if(!divParent)
+							{
+								var div = document.createElement("div");
+								div.innerHTML = editor.innerHTML;
+								
+								editor.innerHTML = "";
+								editor.appendChild(div);
+								
+								divParent = div;
+							}
+						}
+						
+						$t.clearSpan(divParent);
+					}
+					else
+					{
+						//여러줄인경우
+					}
+					
+//					
+//					var before = sc.nodeValue.substring(0, range.startOffset);
+//					var after = ec.nodeValue.substring(range.endOffset);
+//					
+//					console.log(ancestor);
+//					if(ancestor.nodeName == "DIV") // 한줄선택 sc != ec sc와 ec사이에 뭔가 있을 수 있음.
+//					{
+//						var target = null;
+//						if(sc.parentElement.nodeName == "SPAN")
 //						{
-//							var parent = range.commonAncestorContainer.parentElement;
-//							if(parent.nodeName == "SPAN")
-//							{
-//								//한줄이고 span하위의 텍스트를 선택한경우
-//								var prevStyle = parent.style.fontWeight;
-//								if(prevStyle == "bold")
-//								{
-//									var before = sc.nodeValue.substring(0, range.startOffset);
-//									var text = sc.nodeValue.substring(range.startOffset);
-//									
-//									var target = sc.nextElementSibling;
-//									while(target)
-//										text += target.nodeValue;
-//									
-//									text = ec.nodeValue.substring(range.endOffset)
-//								}
-//							}
-//							else if(parent == editor)
-//							{
-//								//한줄이고 div하위에 span이 아무것도 없는경우
-//								var before = sc.nodeValue.substring(0, range.startOffset);
-//								var text = sc.nodeValue.substring(range.startOffset, range.endOffset);
-//								var after = sc.nodeValue.substring(range.endOffset);
-//								var div = parent.ownerDocument.createElement("div");
-//								div.innerHTML = before + "<span style='font-weight:bold;'>" + text + "</span>" + after;
-//
-//								parent.replaceChild(div, parent.firstChild);
-//								
-//								$t.setCaretPosition(div.children[0].firstChild, div.children[0].innerText.length);
-//							}
-//						}
-//						else if(ancestor.nodeName == "DIV")
-//						{
-//							var text = "";
+//							target = sc.parentElement.nextSibling;
 //							
-//							var target = sc;
-//							while(target)
+//							if(sc.parentElement.style.fontWeight != "bold")
 //							{
+//								//before를 분리시켜야한다.
 //								
-//							}
-//							//한줄이고 div하위에 span과 text가 섞여서 선택된경우
-//							if(sc.nodeName == "#text")
-//							{
-//								//text인경우는 startOffset으로 잘라서 넣으면 된다.
+//								var span = document.createElement("span");
+//								span.style.cssText = sc.parentElement.style.cssText;
+//								span.style.fontWeight = "bold";
+//								span.innerText = sc.nodeValue.substring(range.startOffset);
 //								
+//								var next = sc.parentElement.nextSibling;
+//								if(next)
+//									sc.parentElement.parentElement.insertBefore(span, next);
+//								else
+//									sc.parentElement.appendChild(span);
+//								
+//								if(before)
+//									sc.parentElement.innerText = before;
+//								else
+//									sc.parentElement.parentElement.removeChild(sc.parentElement);
 //							}
 //							else
 //							{
-//								//span인 경우인데 span을 0, startOffset으로 잘라서 남겨두면 된다.
+//								//선택된 텍스트가 전부 span으로 쌓여있고 전부 볼드인경우 해제가 가능하다.
 //							}
 //						}
-					}
+//						else
+//						{
+//							target = sc.nextSibling;
+//							
+//							var span = document.createElement("span");
+//							span.style.fontWeight = "bold";
+//							span.innerText = sc.nodeValue.substring(range.startOffset);
+//							
+//							sc.parentElement.insertBefore(document.createTextNode(before), sc);
+//							sc.parentElement.insertBefore(span, sc);
+//							sc.parentElement.removeChild(sc);
+//						}
+//						
+//						while(target && target != ec && target != ec.parentElement)
+//						{
+//							if(target.nodeName == "#text")
+//							{
+//								var span = document.createElement("span");
+//								span.style.fontWeight = "bold";
+//								span.innerText = target.nodeValue;
+//								
+//								target.parentElement.insertBefore(span, target);
+//								target.parentElement.removeChild(target);
+//							}
+//							else
+//							{
+//								//span인경우
+//								target.style.fontWeight = "bold";
+//							}
+//							
+//							target = target.nextSibling;
+//						}
+//						
+//						if(ec.parentElement.nodeName == "SPAN")
+//						{
+//							if(ec.parentElement.style.fontWeight != "bold")
+//							{
+//								var span = document.createElement("span");
+//								span.style.cssText = ec.parentElement.style.cssText;
+//								span.style.fontWeight = "bold";
+//								span.innerText = ec.nodeValue.substring(0, range.endOffset);
+//								
+//								var next = ec.parentElement.nextSibling;
+//								if(next)
+//									ec.parentElement.parentElement.insertBefore(span, next);
+//								else
+//									ec.parentElement.appendChild(span);
+//								
+//								if(after)
+//									ec.parentElement.innerText = after;
+//								else
+//									ec.parentElement.parentElement.removeChild(ec.parentElement);
+//							}
+//						}
+//						else
+//						{
+//							var span = document.createElement("span");
+//							span.style.fontWeight = "bold";
+//							span.innerText = ec.nodeValue.substring(0, range.endOffset);
+//							
+//							ec.parentElement.insertBefore(span, ec);
+//							ec.parentElement.insertBefore(document.createTextNode(after), ec);
+//							ec.parentElement.removeChild(ec);
+//						}
+//						
+//						$t.clearSpan(ancestor);
+//					}
+//					else if(ancestor.nodeName == "#text") //텍스트만 선택한경우 sc와 ec가 같다.  한줄선택
+//					{
+//						var divParent = null;
+//						
+//						if(ancestor.parentElement.nodeName == "DIV")
+//						{
+//							divParent = ancestor.parentElement;
+//							//폰트설정이 아무것도 안되어있는경우
+//							//span으로 감싸서 볼드처리 하면 됨.
+//							
+//							if(before)
+//								sc.parentElement.insertBefore(document.createTextNode(before), sc);
+//							
+//							var span = document.createElement("span");
+//							span.style.fontWeight = "bold";
+//							span.innerText = text;
+//							
+//							sc.parentElement.insertBefore(span, sc);
+//							
+//							if(after)
+//								ec.parentElement.insertBefore(document.createTextNode(after), ec);
+//							
+//							if(ec && ec.parentElement)
+//								ec.parentElement.removeChild(ec);
+//							if(sc && sc.parentElement)
+//								sc.parentElement.removeChild(sc);
+//						}
+//						else
+//						{
+//							divParent = ancestor.parentElement.parentElement;
+//							
+//							//무언가 폰트설정이 되어있는경우
+//							var isBold = ancestor.parentElement.style.fontWeight == "bold";
+//							if(before)
+//							{
+//								var span = document.createElement("span");
+//								span.setAttribute("style", ancestor.parentElement.style.cssText);
+//								span.innerText = before;
+//								
+//								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+//							}
+//							
+//							if(after)
+//							{
+//								var span = document.createElement("span");
+//								span.setAttribute("style", ancestor.parentElement.style.cssText);
+//								span.innerText = after;
+//								
+//								if(ancestor.parentElement.nextSibling)
+//									ancestor.parentElement.parentElement.insertBefore(span, ancestor.parentElement.nextSibling);
+//								else
+//									ancestor.parentElement.parentElement.appendChild(span);
+//							}
+//							
+//							ancestor.parentElement.style.fontWeight = isBold ? "" : "bold";
+//							ancestor.parentElement.innerText = text;
+//						}
+//						
+//						$t.clearSpan(divParent);
+//					}
+//					else
+//					{
+//						//여러줄 선택한경우
+//					}
 				}
-		    }
+			}
 			else if (document.selection && document.selection.type != "Control")
 			{
 		        var text = document.selection.createRange().text;
@@ -464,6 +897,7 @@ TypeWriter = {};
 		editor.contentArticle = document.createElement("div");
 		editor.contentArticle.className = "typewriter-content";
 		editor.contentArticle.setAttribute("contenteditable", "true");
+		editor.contentArticle.innerHTML = "가나<span style='font-weight:bold;text-decoration:underline;'>다라마</span>바사";
 		
 		editor.typewriterProgress = document.createElement("div");
 		editor.typewriterProgress.className = "typewriter-progress";
@@ -759,96 +1193,96 @@ TypeWriter = {};
 		this.target.innerHTML = "";
 		this.target.appendChild(this.editor.typewriter);
 		
-		$(window).one("blur", function()
-		{
-			$(that.target).find('[data-toggle="tooltip"]').tooltip("hide");
-		});
-		
-		$(this.target).find('[data-toggle="tooltip"]').tooltip();
-		this.compile();
-		
-		if(this.options.data)
-			$(this.target).find(".typewriter-content").html(this.options.data);
-		
-		$(this.target).find(".typewriter-content").get(0).onkeydown = function(e)
-		{
-			$(this).children(".typewriter-contentplaceholder").remove();
-			this.onkeydown = null;
-		};
-		
-		$(this.target).find(".typewriter-content").on('dragover', function(e)
-		{
-			e.stopPropagation();
-		    e.preventDefault();
-		    e.originalEvent.dataTransfer.dropEffect = 'copy';
-		});
-		
-		$(this.target).find(".typewriter-content").on('drop', function(e)
-		{
-			e.stopPropagation();
-		    e.preventDefault();
-		    
-		    var el = that.target;
-			var options = that.options;
-			var target = $(el).find(".typewriter-content");
-		    
-		    var items = e.originalEvent.dataTransfer.items;
-		    if(items && items.length > 0)
-		    {
-		    	var item = items[0];
-				var div = document.createElement("div");
-				
-				var img = document.createElement("img");
-				img.src = url;
-				img.setAttribute("style", "width:100%;");
-
-				div.appendChild(img);
-				if(div)
-				{
-					div.appendChild(document.createTextNode(""));
-
-					var node = document.getSelection().anchorNode;
-					if(node)
-					{
-						if(node.nodeType == 3)
-						{
-							var parent = node.parentNode.className == "typewriter-content" ? node : node.parentNode;
-							var next = parent.nextElementSibling;
-							if(next)
-								parent.parentElement.insertBefore(div, next);
-							else
-								parent.parentElement.appendChild(div);
-						}
-						else
-						{
-							$(target).append(div);
-						}
-					}
-					else
-					{
-						$(target).append(div);
-					}
-					
-					that.setResizeController(div.children[0]);
-					that.setCaretPosition(div.childNodes[1], 0);
-				}
-		    }
-		    
-		    var files = e.originalEvent.dataTransfer.files; // FileList object.
-
-		    if(files && files.length > 0)
-		    {
-				that.uploadFile(el, options, target, files);
-		    }
-			
-			return false;
-		});
-		
-		$(this.target).find(".typewriter-content").on('paste', function(e)
-		{
-			console.log(e);
-		});
-		
+//		$(window).one("blur", function()
+//		{
+//			$(that.target).find('[data-toggle="tooltip"]').tooltip("hide");
+//		});
+//		
+//		$(this.target).find('[data-toggle="tooltip"]').tooltip();
+//		this.compile();
+//		
+//		if(this.options.data)
+//			$(this.target).find(".typewriter-content").html(this.options.data);
+//		
+//		$(this.target).find(".typewriter-content").get(0).onkeydown = function(e)
+//		{
+//			$(this).children(".typewriter-contentplaceholder").remove();
+//			this.onkeydown = null;
+//		};
+//		
+//		$(this.target).find(".typewriter-content").on('dragover', function(e)
+//		{
+//			e.stopPropagation();
+//		    e.preventDefault();
+//		    e.originalEvent.dataTransfer.dropEffect = 'copy';
+//		});
+//		
+//		$(this.target).find(".typewriter-content").on('drop', function(e)
+//		{
+//			e.stopPropagation();
+//		    e.preventDefault();
+//		    
+//		    var el = that.target;
+//			var options = that.options;
+//			var target = $(el).find(".typewriter-content");
+//		    
+//		    var items = e.originalEvent.dataTransfer.items;
+//		    if(items && items.length > 0)
+//		    {
+//		    	var item = items[0];
+//				var div = document.createElement("div");
+//				
+//				var img = document.createElement("img");
+//				img.src = url;
+//				img.setAttribute("style", "width:100%;");
+//
+//				div.appendChild(img);
+//				if(div)
+//				{
+//					div.appendChild(document.createTextNode(""));
+//
+//					var node = document.getSelection().anchorNode;
+//					if(node)
+//					{
+//						if(node.nodeType == 3)
+//						{
+//							var parent = node.parentNode.className == "typewriter-content" ? node : node.parentNode;
+//							var next = parent.nextElementSibling;
+//							if(next)
+//								parent.parentElement.insertBefore(div, next);
+//							else
+//								parent.parentElement.appendChild(div);
+//						}
+//						else
+//						{
+//							$(target).append(div);
+//						}
+//					}
+//					else
+//					{
+//						$(target).append(div);
+//					}
+//					
+//					that.setResizeController(div.children[0]);
+//					that.setCaretPosition(div.childNodes[1], 0);
+//				}
+//		    }
+//		    
+//		    var files = e.originalEvent.dataTransfer.files; // FileList object.
+//
+//		    if(files && files.length > 0)
+//		    {
+//				that.uploadFile(el, options, target, files);
+//		    }
+//			
+//			return false;
+//		});
+//		
+//		$(this.target).find(".typewriter-content").on('paste', function(e)
+//		{
+//			console.log(e);
+//		});
+//		
 //		$(this.target).find(".typewriter-content").on("click", function(e)
 //		{
 //			$(this).find(".typewriter-focus").removeAttr("class");
@@ -860,171 +1294,171 @@ TypeWriter = {};
 //			if(target != null)
 //				that.setResizeController(target);
 //		});
-		
-		$(this.target).find(".typewriter-content").on("keydown", function(e)
-		{
-			if(e.keyCode == 17)
-			{
-				that.keyState.ctrlPressed = true;
-			}
-			else if(e.keyCode == 16)
-			{
-				that.keyState.shiftPressed = true;
-			}
-			else if(e.keyCode == 18)
-			{
-				if(!that.keyState.altPressed)
-					$(that.target).find('[data-toggle="tooltip"]').tooltip("show");
-				that.keyState.altPressed = true;
-			}
-			else if(e.keyCode == 8 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
-			{
-				$(this).find(".typewriter-focus").removeAttr("class");
-				$(this).find(".typewriter-resizebar").remove();
-				$(this).find(".typewriter-relative").removeClass("typewriter-relative");
-				$(that.target).find('[data-toggle="tooltip"]').tooltip("hide");
-			}
-			else if(e.keyCode == 188 || e.keyCode == 190)
-			{
-				if(that.keyState.altPressed)
-					e.preventDefault();
-			}
-			else
-			{
-				if(that.keyState.altPressed)
-				{
-					e.preventDefault();
-				}
-			}
-		});
-		
-		$(this.target).find(".typewriter-content").on("keyup", function(e)
-		{
-			if(e.keyCode == 17)
-			{
-				that.keyState.ctrlPressed = false;
-			}
-			else if(e.keyCode == 16)
-			{
-				that.keyState.shiftPressed = false;
-			}
-			else if(e.keyCode == 18)
-			{
-				that.keyState.altPressed = false;
-				$("body").find('[data-toggle="tooltip"]').tooltip("hide");
-				e.preventDefault();
-			}
-			else if(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
-			{
-				var node = that.getFocusedElement();
-				var img = $(node).find("img").get(0);
-				if(img)
-					that.setResizeController(img);
-			}
-			else if(e.keyCode == 188 || e.keyCode == 190) // < >
-			{
-				if(that.keyState.altPressed)
-				{
-					var offset = -1;
-					if(e.keyCode == 190)
-						offset = 1;
-					
-					var node = that.getFocusedElement();
-					var img = $(node).find("img").get(0);
-					if(img)
-					{
-						var width = img.style.width;
-						if(!width)
-							width = getComputedStyle(img).width;
-						
-						var postfix = "";
-						if(width.indexOf("%") != -1)
-						{
-							width = new Number(width.replace("%", ""));
-							postfix = "%";
-						}
-						else if(width.indexOf("px") != -1)
-						{
-							width = new Number(width.replace("px", ""));
-							postfix = "px";
-						}
-						
-						if(that.keyState.ctrlPressed)
-							width += offset;
-						else
-							width += offset * 10;
-						
-						img.style.width = width + postfix;
-						
-						var rect = img.getBoundingClientRect();
-						img.resizeBar.right.style.left = rect.width + "px";
-						img.resizeBar.right.style.height = rect.height + "px";
-						
-						$(img.resizeBar.right).tooltip("show");
-					}
-					
-					e.preventDefault();
-				}
-			}
-			else
-			{
-				if(that.keyState.altPressed)
-				{
-					if(e.keyCode == 66)
-					{
-						$("button[data-controller='fontBold']:first").click();
-					}
-					else if(e.keyCode == 73)
-					{
-						$("button[data-controller='fontItalic']:first").click();
-					}
-					else if(e.keyCode == 76)
-					{
-						$("button[data-controller='alignLeft']:first").click();
-					}
-					else if(e.keyCode == 67)
-					{
-						$("button[data-controller='alignCenter']:first").click();
-					}
-					else if(e.keyCode == 82)
-					{
-						$("button[data-controller='alignRight']:first").click();
-					}
-					else if(e.keyCode == 80)
-					{
-						$("button[data-controller='image']:first")._emit("click");
-						that.keyState.altPressed = false;
-						$('[data-toggle="tooltip"]').tooltip("hide");
-					}
-					else if(e.keyCode == 86)
-					{
-						$("button[data-controller='video']:first")._emit("click");
-						that.keyState.altPressed = false;
-						$('[data-toggle="tooltip"]').tooltip("hide");
-					}
-					else if(e.keyCode == 70)
-					{
-						$("button[data-controller='file']:first")._emit("click");
-						that.keyState.altPressed = false;
-						$('[data-toggle="tooltip"]').tooltip("hide");
-					}
-					else if(e.keyCode == 89)
-					{
-						$("button[data-controller='youtube']:first").click();
-						that.keyState.altPressed = false;
-						$('[data-toggle="tooltip"]').tooltip("hide");
-					}
-					else if(e.keyCode == 75)
-					{
-						$("button[data-controller='link']:first").click();
-						that.keyState.altPressed = false;
-						$('[data-toggle="tooltip"]').tooltip("hide");
-					}
-
-					e.preventDefault();
-				}
-			}
-		});
+//		
+//		$(this.target).find(".typewriter-content").on("keydown", function(e)
+//		{
+//			if(e.keyCode == 17)
+//			{
+//				that.keyState.ctrlPressed = true;
+//			}
+//			else if(e.keyCode == 16)
+//			{
+//				that.keyState.shiftPressed = true;
+//			}
+//			else if(e.keyCode == 18)
+//			{
+//				if(!that.keyState.altPressed)
+//					$(that.target).find('[data-toggle="tooltip"]').tooltip("show");
+//				that.keyState.altPressed = true;
+//			}
+//			else if(e.keyCode == 8 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+//			{
+//				$(this).find(".typewriter-focus").removeAttr("class");
+//				$(this).find(".typewriter-resizebar").remove();
+//				$(this).find(".typewriter-relative").removeClass("typewriter-relative");
+//				$(that.target).find('[data-toggle="tooltip"]').tooltip("hide");
+//			}
+//			else if(e.keyCode == 188 || e.keyCode == 190)
+//			{
+//				if(that.keyState.altPressed)
+//					e.preventDefault();
+//			}
+//			else
+//			{
+//				if(that.keyState.altPressed)
+//				{
+//					e.preventDefault();
+//				}
+//			}
+//		});
+//		
+//		$(this.target).find(".typewriter-content").on("keyup", function(e)
+//		{
+//			if(e.keyCode == 17)
+//			{
+//				that.keyState.ctrlPressed = false;
+//			}
+//			else if(e.keyCode == 16)
+//			{
+//				that.keyState.shiftPressed = false;
+//			}
+//			else if(e.keyCode == 18)
+//			{
+//				that.keyState.altPressed = false;
+//				$("body").find('[data-toggle="tooltip"]').tooltip("hide");
+//				e.preventDefault();
+//			}
+//			else if(e.keyCode == 8 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40)
+//			{
+//				var node = that.getFocusedElement();
+//				var img = $(node).find("img").get(0);
+//				if(img)
+//					that.setResizeController(img);
+//			}
+//			else if(e.keyCode == 188 || e.keyCode == 190) // < >
+//			{
+//				if(that.keyState.altPressed)
+//				{
+//					var offset = -1;
+//					if(e.keyCode == 190)
+//						offset = 1;
+//					
+//					var node = that.getFocusedElement();
+//					var img = $(node).find("img").get(0);
+//					if(img)
+//					{
+//						var width = img.style.width;
+//						if(!width)
+//							width = getComputedStyle(img).width;
+//						
+//						var postfix = "";
+//						if(width.indexOf("%") != -1)
+//						{
+//							width = new Number(width.replace("%", ""));
+//							postfix = "%";
+//						}
+//						else if(width.indexOf("px") != -1)
+//						{
+//							width = new Number(width.replace("px", ""));
+//							postfix = "px";
+//						}
+//						
+//						if(that.keyState.ctrlPressed)
+//							width += offset;
+//						else
+//							width += offset * 10;
+//						
+//						img.style.width = width + postfix;
+//						
+//						var rect = img.getBoundingClientRect();
+//						img.resizeBar.right.style.left = rect.width + "px";
+//						img.resizeBar.right.style.height = rect.height + "px";
+//						
+//						$(img.resizeBar.right).tooltip("show");
+//					}
+//					
+//					e.preventDefault();
+//				}
+//			}
+//			else
+//			{
+//				if(that.keyState.altPressed)
+//				{
+//					if(e.keyCode == 66)
+//					{
+//						$("button[data-controller='fontBold']:first").click();
+//					}
+//					else if(e.keyCode == 73)
+//					{
+//						$("button[data-controller='fontItalic']:first").click();
+//					}
+//					else if(e.keyCode == 76)
+//					{
+//						$("button[data-controller='alignLeft']:first").click();
+//					}
+//					else if(e.keyCode == 67)
+//					{
+//						$("button[data-controller='alignCenter']:first").click();
+//					}
+//					else if(e.keyCode == 82)
+//					{
+//						$("button[data-controller='alignRight']:first").click();
+//					}
+//					else if(e.keyCode == 80)
+//					{
+//						$("button[data-controller='image']:first")._emit("click");
+//						that.keyState.altPressed = false;
+//						$('[data-toggle="tooltip"]').tooltip("hide");
+//					}
+//					else if(e.keyCode == 86)
+//					{
+//						$("button[data-controller='video']:first")._emit("click");
+//						that.keyState.altPressed = false;
+//						$('[data-toggle="tooltip"]').tooltip("hide");
+//					}
+//					else if(e.keyCode == 70)
+//					{
+//						$("button[data-controller='file']:first")._emit("click");
+//						that.keyState.altPressed = false;
+//						$('[data-toggle="tooltip"]').tooltip("hide");
+//					}
+//					else if(e.keyCode == 89)
+//					{
+//						$("button[data-controller='youtube']:first").click();
+//						that.keyState.altPressed = false;
+//						$('[data-toggle="tooltip"]').tooltip("hide");
+//					}
+//					else if(e.keyCode == 75)
+//					{
+//						$("button[data-controller='link']:first").click();
+//						that.keyState.altPressed = false;
+//						$('[data-toggle="tooltip"]').tooltip("hide");
+//					}
+//
+//					e.preventDefault();
+//				}
+//			}
+//		});
 	};
 	
 	instance.prototype.setResizeController = function(node)
