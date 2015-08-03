@@ -188,6 +188,67 @@ TypeWriter = {};
 		}
 	};
 	
+	$t.setStyle = function(range, sc, ec, list, key, value)
+	{
+		var isStyled = true;
+		for(var i=0; i<list.length; i++)
+		{
+			if(list[i].nodeName == "#text" && list[i].parentElement.nodeName == "SPAN")
+			{
+				isStyled = isStyled && (list[i].parentElement.style[key] == value);
+			}
+			else if(list[i].nodeName == "SPAN")
+			{
+				isStyled = isStyled && (list[i].style[key] == value);
+			}
+			else
+			{
+				isStyled = false;
+				break;
+			}
+		}
+		
+		for(var i=0; i<list.length; i++)
+		{
+			if(list[i] == sc)
+			{
+				$t.makeSpan(sc, sc.nodeValue.substring(0, range.startOffset), sc.nodeValue.substring(range.startOffset), {key : key, value : (isStyled ? "" : value)}, false);
+			}
+			else if(list[i] == ec)
+			{
+				$t.makeSpan(ec, ec.nodeValue.substring(range.endOffset), ec.nodeValue.substring(0, range.endOffset), {key : key, value : (isStyled ? "" : value)}, true);
+			}
+			else
+			{
+				if(list[i].nodeName == "SPAN")
+				{
+					if(isBold)
+					{
+						if(list[i].style.length > 1)
+							list[i].style.fontWeight = "";
+						else
+							list[i].parentElement.replaceChild(document.createTextNode(list[i].innerText), list[i]);
+					}
+					else
+					{
+						list[i].style[key] = value;
+					}
+				}
+				else
+				{
+					if(!isBold)
+					{
+						var span = document.createElement("span");
+						span.style[key] = value;
+						span.innerText = list[i].innerText;
+						
+						list[i].parentElement.replaceChild(span, list[i]);
+					}
+				}
+			}
+		}
+	};
+	
 	$t.controller = {};
 	$t.controller["fontweight"] = function(editor)
 	{
@@ -212,7 +273,7 @@ TypeWriter = {};
 						return;
 					}
 					
-					if(ancestor.nodeName == "DIV" || ancestor.nodeName == "#text")
+					if(ancestor != editor && (ancestor.nodeName == "DIV" || ancestor.nodeName == "#text"))
 					{
 						//한줄인경우
 						if(sc == ec)
@@ -294,87 +355,75 @@ TypeWriter = {};
 								list.push(ec);
 							}
 
-							var isBold = true;
-							for(var i=0; i<list.length; i++)
-							{
-								if(list[i].nodeName == "#text" && list[i].parentElement.nodeName == "SPAN")
-								{
-									isBold = isBold && (list[i].parentElement.style.fontWeight == "bold");
-								}
-								else if(list[i].nodeName == "SPAN")
-								{
-									isBold = isBold && (list[i].style.fontWeight == "bold");
-								}
-								else
-								{
-									isBold = false;
-									break;
-								}
-							}
-							
-							for(var i=0; i<list.length; i++)
-							{
-								if(list[i] == sc)
-								{
-									$t.makeSpan(sc, sc.nodeValue.substring(0, range.startOffset), sc.nodeValue.substring(range.startOffset), {key : "font-weight", value : (isBold ? "" : "bold")}, false);
-								}
-								else if(list[i] == ec)
-								{
-									$t.makeSpan(ec, ec.nodeValue.substring(range.endOffset), ec.nodeValue.substring(0, range.endOffset), {key : "font-weight", value : (isBold ? "" : "bold")}, true);
-								}
-								else
-								{
-									if(list[i].nodeName == "SPAN")
-									{
-										if(isBold)
-										{
-											if(list[i].style.length > 1)
-												list[i].style.fontWeight = "";
-											else
-												list[i].parentElement.replaceChild(document.createTextNode(list[i].innerText), list[i]);
-										}
-										else
-										{
-											list[i].style.fontWeight = "bold";
-										}
-									}
-									else
-									{
-										if(!isBold)
-										{
-											var span = document.createElement("span");
-											span.style.fontWeight = "bold";
-											span.innerText = list[i].innerText;
-											
-											list[i].parentElement.replaceChild(span, list[i]);
-										}
-									}
-								}
-							}
+							$t.setStyle(range, sc, ec, list, "font-weight", "bold");
 						}
+	
+						var div = ancestor;
+						while(div && div.nodeName != "DIV" || div != editor)
+							div = div.parentElement;
 						
-						var divParent = ancestor;
-						
-						while(divParent.nodeName != "DIV")
-						{
-							divParent = divParent.parentElement;
-							if(!divParent)
-							{
-								var div = document.createElement("div");
-								div.innerHTML = editor.innerHTML;
-								
-								editor.innerHTML = "";
-								editor.appendChild(div);
-								
-								divParent = div;
-							}
-						}
-						
-						$t.clearSpan(divParent);
+						$t.clearSpan(div);
 					}
 					else
 					{
 						//여러줄인경우
+						//sc와 ec는 그대로 하면 될거같고
+						//중간것들을 찾아야 한다.
+						var list = [sc];
+					
+						//sc의 parentElement가 div인 경우.. sc가 #text인경우
+						
+						var target = sc.parentElement.nodeName == "SPAN" ? sc.parentElement.nextSibling : sc.nextSibling;
+						//sc가 div하위의 마지막 text인경우 next가 안나온다.
+						if(!target)
+						{
+							if(sc.parentElement.nodeName == "SPAN")
+								target = sc.parentElement.parentElement.nextSibling;
+							else
+								target = sc.parentElement.nextSibilng;
+							
+							if(target)
+								target = target.childNodes[0];
+						}
+						
+						while(target != ec && target != ec.parentElement)
+						{
+							if(target)
+							{
+								if(target.nodeName == "DIV")
+									target = target.childNodes[0];
+								list.push(target);
+								
+								if(target.nextSibling)
+								{
+									target = target.nextSibling;
+									if(target.nodeName == "DIV")
+										target = target.childNodes[0];
+								}
+								else
+								{
+									target = target.parentElement.nextSibling;
+									if(target.childNodes)
+										target = target.childNodes[0];
+								}
+							}
+						}
+						
+						list.push(ec);
+						
+						$t.setStyle(range, sc, ec, list, "font-weight", "bold");
+						
+						for(var i=0; i<list.length; i++)
+						{
+							var div = list[i].parentElement;
+							while(div && div.nodeName != "DIV")
+								div = div.parentElement;
+							
+							if(div)
+							{
+								$t.clearSpan(div);
+							}
+						}
 					}
 					
 //					
@@ -897,7 +946,7 @@ TypeWriter = {};
 		editor.contentArticle = document.createElement("div");
 		editor.contentArticle.className = "typewriter-content";
 		editor.contentArticle.setAttribute("contenteditable", "true");
-		editor.contentArticle.innerHTML = "가나<span style='font-weight:bold;text-decoration:underline;'>다라마</span>바사";
+		editor.contentArticle.innerHTML = "가나<span style='font-weight:bold;text-decoration:underline;'>다라마</span>바사<div>아자차카</div><div>타파하</div>";
 		
 		editor.typewriterProgress = document.createElement("div");
 		editor.typewriterProgress.className = "typewriter-progress";
