@@ -222,7 +222,7 @@ TypeWriter = {};
 			{
 				if(list[i].nodeName == "SPAN")
 				{
-					if(isBold)
+					if(isStyled)
 					{
 						if(list[i].style.length > 1)
 							list[i].style.fontWeight = "";
@@ -236,11 +236,11 @@ TypeWriter = {};
 				}
 				else
 				{
-					if(!isBold)
+					if(!isStyled)
 					{
 						var span = document.createElement("span");
 						span.style[key] = value;
-						span.innerText = list[i].innerText;
+						span.innerText = list[i].innerText ? list[i].innerText : list[i].nodeValue;
 						
 						list[i].parentElement.replaceChild(span, list[i]);
 					}
@@ -249,358 +249,197 @@ TypeWriter = {};
 		}
 	};
 	
+	$t.applyStyle = function(key, value)
+	{
+		if(window.getSelection)
+		{
+			var selection = window.getSelection();
+			var text = selection.toString();
+			if(selection.rangeCount > 0)
+			{
+				var range = selection.getRangeAt(0);
+				
+				var ancestor = range.commonAncestorContainer; 
+				var sc = range.startContainer;
+				var ec = range.endContainer;
+				
+				//가장 먼저 sc ~ ec를 뽑아낸다.
+				
+				if(!$(editor).has(sc) || !$(editor).has(ec))
+				{
+					return;
+				}
+				
+				if(ancestor != editor && (ancestor.nodeName == "DIV" || ancestor.nodeName == "#text"))
+				{
+					//한줄인경우
+					if(sc == ec)
+					{
+						//같은경우
+						var before = sc.nodeValue.substring(0, range.startOffset);
+						var after = sc.nodeValue.substring(range.endOffset);
+						
+						if(sc.parentElement.nodeName == "SPAN") // SPAN 하위에 있는경우
+						{
+							var span = document.createElement("span");
+							span.style.cssText = sc.parentElement.style.cssText;
+							span.innerText = before;
+							
+							sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+							
+							if(sc.parentElement.style[key] == value)
+							{
+								if(sc.parentElement.style.length > 1)
+								{
+									span = document.createElement("span");
+									span.style.cssText = sc.parentElement.style.cssText;
+									span.style[key] = "";
+									span.innerText = text;
+									
+									sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+								}
+								else
+								{
+									sc.parentElement.parentElement.insertBefore(document.createTextNode(text), sc.parentElement);
+								}
+							}
+							else
+							{
+								span = document.createElement("span");
+								span.style.cssText = sc.parentElement.style.cssText;
+								span.style[key] = value;
+								span.innerText = text;
+								
+								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+							}
+							
+							span = document.createElement("span");
+							span.style.cssText = sc.parentElement.style.cssText;
+							span.innerText = after;
+							
+							sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
+							
+							sc.parentElement.parentElement.removeChild(sc.parentElement);
+						}
+						else
+						{
+							sc.parentElement.insertBefore(document.createTextNode(before), sc);
+							
+							var span = document.createElement("span");
+							span.style[key] = value;
+							span.innerText = text;
+							
+							sc.parentElement.insertBefore(span, sc);
+							
+							sc.parentElement.insertBefore(document.createTextNode(after), sc);
+							
+							sc.parentElement.removeChild(sc);
+						}
+					}
+					else
+					{
+						var list = [sc];
+						
+						if(sc != ec)
+						{
+							var target = sc.parentElement != editor ? sc.parentElement.nextSibling : sc.nextSibling;
+							while(target && target != ec && target != ec.parentElement)
+							{
+								list.push(target);
+								target = target.nextSibilng;
+							}
+							
+							list.push(ec);
+						}
+
+						$t.setStyle(range, sc, ec, list, key, value);
+					}
+
+					var div = ancestor;
+					while(div && div.nodeName != "DIV" || div != editor)
+						div = div.parentElement;
+					
+					$t.clearSpan(div);
+				}
+				else
+				{
+					//여러줄인경우
+					//sc와 ec는 그대로 하면 될거같고
+					//중간것들을 찾아야 한다.
+					var list = [sc];
+				
+					//sc의 parentElement가 div인 경우.. sc가 #text인경우
+					
+					var target = sc.parentElement.nodeName == "SPAN" ? sc.parentElement.nextSibling : sc.nextSibling;
+					//sc가 div하위의 마지막 text인경우 next가 안나온다.
+					if(!target)
+					{
+						if(sc.parentElement.nodeName == "SPAN")
+							target = sc.parentElement.parentElement.nextSibling;
+						else
+							target = sc.parentElement.nextSibilng;
+						
+						if(target)
+							target = target.childNodes[0];
+					}
+					
+					while(target != ec && target != ec.parentElement)
+					{
+						if(target)
+						{
+							if(target.nodeName == "DIV")
+								target = target.childNodes[0];
+							list.push(target);
+							
+							if(target.nextSibling)
+							{
+								target = target.nextSibling;
+								if(target.nodeName == "DIV")
+									target = target.childNodes[0];
+							}
+							else
+							{
+								target = target.parentElement.nextSibling;
+								if(target.childNodes)
+									target = target.childNodes[0];
+							}
+						}
+					}
+					
+					list.push(ec);
+					
+					$t.setStyle(range, sc, ec, list, key, value);
+					
+					for(var i=0; i<list.length; i++)
+					{
+						var div = list[i].parentElement;
+						while(div && div.nodeName != "DIV")
+							div = div.parentElement;
+						
+						if(div)
+						{
+							$t.clearSpan(div);
+						}
+					}
+				}
+			}
+		}
+		else if (document.selection && document.selection.type != "Control")
+		{
+	        var text = document.selection.createRange().text;
+	        console.log("하이텍스트 : ", text);
+	    }
+	};
+	
 	$t.controller = {};
 	$t.controller["fontweight"] = function(editor)
 	{
 		$(this).on("click", function()
 		{
-			if (window.getSelection)
-			{
-				var selection = window.getSelection();
-				var text = selection.toString();
-				if(selection.rangeCount > 0)
-				{
-					var range = selection.getRangeAt(0);
-					
-					var ancestor = range.commonAncestorContainer; 
-					var sc = range.startContainer;
-					var ec = range.endContainer;
-					
-					//가장 먼저 sc ~ ec를 뽑아낸다.
-					
-					if(!$(editor).has(sc) || !$(editor).has(ec))
-					{
-						return;
-					}
-					
-					if(ancestor != editor && (ancestor.nodeName == "DIV" || ancestor.nodeName == "#text"))
-					{
-						//한줄인경우
-						if(sc == ec)
-						{
-							//같은경우
-							var before = sc.nodeValue.substring(0, range.startOffset);
-							var after = sc.nodeValue.substring(range.endOffset);
-							
-							if(sc.parentElement.nodeName == "SPAN") // SPAN 하위에 있는경우
-							{
-								var span = document.createElement("span");
-								span.style.cssText = sc.parentElement.style.cssText;
-								span.innerText = before;
-								
-								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
-								
-								if(sc.parentElement.style.fontWeight == "bold")
-								{
-									if(sc.parentElement.style.length > 1)
-									{
-										span = document.createElement("span");
-										span.style.cssText = sc.parentElement.style.cssText;
-										span.style.fontWeight = "";
-										span.innerText = text;
-										
-										sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
-									}
-									else
-									{
-										sc.parentElement.parentElement.insertBefore(document.createTextNode(text), sc.parentElement);
-									}
-								}
-								else
-								{
-									span = document.createElement("span");
-									span.style.cssText = sc.parentElement.style.cssText;
-									span.style.fontWeight = "bold";
-									span.innerText = text;
-									
-									sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
-								}
-								
-								span = document.createElement("span");
-								span.style.cssText = sc.parentElement.style.cssText;
-								span.innerText = after;
-								
-								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
-								
-								sc.parentElement.parentElement.removeChild(sc.parentElement);
-							}
-							else
-							{
-								sc.parentElement.insertBefore(document.createTextNode(before), sc);
-								
-								var span = document.createElement("span");
-								span.style.fontWeight = "bold";
-								span.innerText = text;
-								
-								sc.parentElement.insertBefore(span, sc);
-								
-								sc.parentElement.insertBefore(document.createTextNode(after), sc);
-								
-								sc.parentElement.removeChild(sc);
-							}
-						}
-						else
-						{
-							var list = [sc];
-							
-							if(sc != ec)
-							{
-								var target = sc.parentElement != editor ? sc.parentElement.nextSibling : sc.nextSibling;
-								while(target && target != ec && target != ec.parentElement)
-								{
-									list.push(target);
-									target = target.nextSibilng;
-								}
-								
-								list.push(ec);
-							}
-
-							$t.setStyle(range, sc, ec, list, "font-weight", "bold");
-						}
-	
-						var div = ancestor;
-						while(div && div.nodeName != "DIV" || div != editor)
-							div = div.parentElement;
-						
-						$t.clearSpan(div);
-					}
-					else
-					{
-						//여러줄인경우
-						//sc와 ec는 그대로 하면 될거같고
-						//중간것들을 찾아야 한다.
-						var list = [sc];
-					
-						//sc의 parentElement가 div인 경우.. sc가 #text인경우
-						
-						var target = sc.parentElement.nodeName == "SPAN" ? sc.parentElement.nextSibling : sc.nextSibling;
-						//sc가 div하위의 마지막 text인경우 next가 안나온다.
-						if(!target)
-						{
-							if(sc.parentElement.nodeName == "SPAN")
-								target = sc.parentElement.parentElement.nextSibling;
-							else
-								target = sc.parentElement.nextSibilng;
-							
-							if(target)
-								target = target.childNodes[0];
-						}
-						
-						while(target != ec && target != ec.parentElement)
-						{
-							if(target)
-							{
-								if(target.nodeName == "DIV")
-									target = target.childNodes[0];
-								list.push(target);
-								
-								if(target.nextSibling)
-								{
-									target = target.nextSibling;
-									if(target.nodeName == "DIV")
-										target = target.childNodes[0];
-								}
-								else
-								{
-									target = target.parentElement.nextSibling;
-									if(target.childNodes)
-										target = target.childNodes[0];
-								}
-							}
-						}
-						
-						list.push(ec);
-						
-						$t.setStyle(range, sc, ec, list, "font-weight", "bold");
-						
-						for(var i=0; i<list.length; i++)
-						{
-							var div = list[i].parentElement;
-							while(div && div.nodeName != "DIV")
-								div = div.parentElement;
-							
-							if(div)
-							{
-								$t.clearSpan(div);
-							}
-						}
-					}
-					
-//					
-//					var before = sc.nodeValue.substring(0, range.startOffset);
-//					var after = ec.nodeValue.substring(range.endOffset);
-//					
-//					console.log(ancestor);
-//					if(ancestor.nodeName == "DIV") // 한줄선택 sc != ec sc와 ec사이에 뭔가 있을 수 있음.
-//					{
-//						var target = null;
-//						if(sc.parentElement.nodeName == "SPAN")
-//						{
-//							target = sc.parentElement.nextSibling;
-//							
-//							if(sc.parentElement.style.fontWeight != "bold")
-//							{
-//								//before를 분리시켜야한다.
-//								
-//								var span = document.createElement("span");
-//								span.style.cssText = sc.parentElement.style.cssText;
-//								span.style.fontWeight = "bold";
-//								span.innerText = sc.nodeValue.substring(range.startOffset);
-//								
-//								var next = sc.parentElement.nextSibling;
-//								if(next)
-//									sc.parentElement.parentElement.insertBefore(span, next);
-//								else
-//									sc.parentElement.appendChild(span);
-//								
-//								if(before)
-//									sc.parentElement.innerText = before;
-//								else
-//									sc.parentElement.parentElement.removeChild(sc.parentElement);
-//							}
-//							else
-//							{
-//								//선택된 텍스트가 전부 span으로 쌓여있고 전부 볼드인경우 해제가 가능하다.
-//							}
-//						}
-//						else
-//						{
-//							target = sc.nextSibling;
-//							
-//							var span = document.createElement("span");
-//							span.style.fontWeight = "bold";
-//							span.innerText = sc.nodeValue.substring(range.startOffset);
-//							
-//							sc.parentElement.insertBefore(document.createTextNode(before), sc);
-//							sc.parentElement.insertBefore(span, sc);
-//							sc.parentElement.removeChild(sc);
-//						}
-//						
-//						while(target && target != ec && target != ec.parentElement)
-//						{
-//							if(target.nodeName == "#text")
-//							{
-//								var span = document.createElement("span");
-//								span.style.fontWeight = "bold";
-//								span.innerText = target.nodeValue;
-//								
-//								target.parentElement.insertBefore(span, target);
-//								target.parentElement.removeChild(target);
-//							}
-//							else
-//							{
-//								//span인경우
-//								target.style.fontWeight = "bold";
-//							}
-//							
-//							target = target.nextSibling;
-//						}
-//						
-//						if(ec.parentElement.nodeName == "SPAN")
-//						{
-//							if(ec.parentElement.style.fontWeight != "bold")
-//							{
-//								var span = document.createElement("span");
-//								span.style.cssText = ec.parentElement.style.cssText;
-//								span.style.fontWeight = "bold";
-//								span.innerText = ec.nodeValue.substring(0, range.endOffset);
-//								
-//								var next = ec.parentElement.nextSibling;
-//								if(next)
-//									ec.parentElement.parentElement.insertBefore(span, next);
-//								else
-//									ec.parentElement.appendChild(span);
-//								
-//								if(after)
-//									ec.parentElement.innerText = after;
-//								else
-//									ec.parentElement.parentElement.removeChild(ec.parentElement);
-//							}
-//						}
-//						else
-//						{
-//							var span = document.createElement("span");
-//							span.style.fontWeight = "bold";
-//							span.innerText = ec.nodeValue.substring(0, range.endOffset);
-//							
-//							ec.parentElement.insertBefore(span, ec);
-//							ec.parentElement.insertBefore(document.createTextNode(after), ec);
-//							ec.parentElement.removeChild(ec);
-//						}
-//						
-//						$t.clearSpan(ancestor);
-//					}
-//					else if(ancestor.nodeName == "#text") //텍스트만 선택한경우 sc와 ec가 같다.  한줄선택
-//					{
-//						var divParent = null;
-//						
-//						if(ancestor.parentElement.nodeName == "DIV")
-//						{
-//							divParent = ancestor.parentElement;
-//							//폰트설정이 아무것도 안되어있는경우
-//							//span으로 감싸서 볼드처리 하면 됨.
-//							
-//							if(before)
-//								sc.parentElement.insertBefore(document.createTextNode(before), sc);
-//							
-//							var span = document.createElement("span");
-//							span.style.fontWeight = "bold";
-//							span.innerText = text;
-//							
-//							sc.parentElement.insertBefore(span, sc);
-//							
-//							if(after)
-//								ec.parentElement.insertBefore(document.createTextNode(after), ec);
-//							
-//							if(ec && ec.parentElement)
-//								ec.parentElement.removeChild(ec);
-//							if(sc && sc.parentElement)
-//								sc.parentElement.removeChild(sc);
-//						}
-//						else
-//						{
-//							divParent = ancestor.parentElement.parentElement;
-//							
-//							//무언가 폰트설정이 되어있는경우
-//							var isBold = ancestor.parentElement.style.fontWeight == "bold";
-//							if(before)
-//							{
-//								var span = document.createElement("span");
-//								span.setAttribute("style", ancestor.parentElement.style.cssText);
-//								span.innerText = before;
-//								
-//								sc.parentElement.parentElement.insertBefore(span, sc.parentElement);
-//							}
-//							
-//							if(after)
-//							{
-//								var span = document.createElement("span");
-//								span.setAttribute("style", ancestor.parentElement.style.cssText);
-//								span.innerText = after;
-//								
-//								if(ancestor.parentElement.nextSibling)
-//									ancestor.parentElement.parentElement.insertBefore(span, ancestor.parentElement.nextSibling);
-//								else
-//									ancestor.parentElement.parentElement.appendChild(span);
-//							}
-//							
-//							ancestor.parentElement.style.fontWeight = isBold ? "" : "bold";
-//							ancestor.parentElement.innerText = text;
-//						}
-//						
-//						$t.clearSpan(divParent);
-//					}
-//					else
-//					{
-//						//여러줄 선택한경우
-//					}
-				}
-			}
-			else if (document.selection && document.selection.type != "Control")
-			{
-		        var text = document.selection.createRange().text;
-		        console.log("하이텍스트 : ", text);
-		    }
+			var key = "font-weight";
+			var value = "bold";
+			
+			$t.applyStyle(key, value);
 		});
 	};
 	
@@ -609,168 +448,6 @@ TypeWriter = {};
 		var type = $(this).attr("data-controller");
 		$(this).on("click", function()
 		{
-//			var node = instance.getSelectedNode();
-//			if(node != null)
-//				node = [node];
-//			
-//			var sel = window.getSelection();
-//			if(sel.rangeCount > 0)
-//			{
-//				node = [];
-//				var originText = sel.baseNode.nodeValue;
-//				var range = sel.getRangeAt(0);
-//				
-//				var startContainer = range.startContainer;
-//				var endContainer = range.endContainer;
-//				
-//				if(startContainer == endContainer)
-//				{
-//					//selection이 한줄인경우
-//					var startIndex = sel.baseOffset;
-//					var endIndex = sel.focusOffset;
-//					if(startIndex > endIndex)
-//					{
-//						var t = endIndex;
-//						endIndex = startIndex;
-//						startIndex = t;
-//					}
-//					
-//					var selectedText = originText.substring(startIndex, endIndex);
-//					if(originText == selectedText)
-//					{
-//						node = [sel.baseNode];
-//					}
-//					else
-//					{
-//						var s = originText.substring(0, startIndex);
-//						var e = originText.substring(endIndex);
-//						
-//						node = sel.baseNode.parentElement;
-//						if(node.className == "typewriter-content")
-//						{
-//							s = "<div>" + s;
-//							e = e + "</div>";
-//						}
-//						
-//						node.innerHTML = s + "<span>" + selectedText + "</span>" + e;
-//
-//						node = [node.querySelector("span")];
-//					}
-//				}
-//				else
-//				{
-//					var makeSpan = function(node, value, offset, dir)
-//					{
-//						var originText = value;
-//						var selectedText = dir ? originText.substring(offset) : originText.substring(0, offset);
-//						var s = dir ? originText.substring(0, offset) : originText.substring(offset);
-//						var span = "<span>" + selectedText + "</span>";
-//						
-//						var parent = node.parentElement;
-//						if(parent.className == "typewriter-content")
-//						{
-//							parent.removeChild(parent.firstChild);
-//							var div = document.createElement("div");
-//							div.innerHTML = dir ? s + span : span + s;
-//							parent.insertBefore(div, parent.children[0]);
-//						}
-//						else
-//						{
-//							var parent = node.parentElement;
-//							parent.innerHTML = dir ? s + span : span + s;
-//						}
-//					};
-//					
-//					var getSelectedNode = function(sel, dir)
-//					{
-//						var firstNode = dir ? sel.focusNode.parentElement : sel.baseNode.parentElement;
-//						makeSpan(sel.baseNode, sel.baseNode.nodeValue, sel.baseOffset, dir);
-//						makeSpan(sel.focusNode, sel.focusNode.nodeValue, sel.focusOffset, dir);
-//						
-//						var nodeList = [firstNode];
-//						
-//						var next = firstNode.previousElementSibling;
-//						
-//						while(next)
-//						{
-////							if(next == sel.focusNode.parentElement) // 마지막 노드
-////							{
-////								selectedText = dir ? sel.focusNode.nodeValue.substring(0, sel.focusOffset) : sel.focusNode.nodeValue.substring(sel.focusOffset);
-////								
-////								if(sel.focusNode.parentElement.innerText == selectedText)
-////								{
-////									nodeList.push(next);
-////								}
-////								else
-////								{
-////									var span = "<span>" + selectedText + "</span>";
-////									var parent = sel.focusNode.parentElement;
-////									parent.innerHTML = dir ? span + sel.focusNode.nodeValue.substring(sel.focusOffset) : sel.focusNode.nodeValue.substring(sel.focusOffset) + span;
-////									nodeList.push(parent.querySelector("span"));
-////								}
-////								console.log("마지막 선택된 텍스트 : ", selectedText);
-////								break;
-////							}
-////							else
-////							{
-////								nodeList.push(next);
-////								console.log("중간 텍스트 : ", next.innerText);
-////							}
-//							
-//							next = next.previousElementSibling;
-//						}
-//						
-//						return nodeList;
-//					};
-//					//base가 시작이고 focus가 커서가 있는 노드임
-//					if(sel.baseNode == startContainer)
-//					{
-//						//위에서 아래로 블럭지정
-//						node = getSelectedNode(sel, true);
-//					}
-//					else if(sel.focusNode == startContainer)
-//					{
-//						//아래서 위로 블럭지정
-//						node = getSelectedNode(sel, false);
-//					}
-//				}
-//			}
-//			
-//			if(node && node.length > 0)
-//			{
-//				for(var i=0; i<node.length; i++)
-//				{
-//					if(node[i].className == "typewriter-contentplaceholder")
-//						continue;
-//					
-//					if(node[i].className == "typewriter-content")
-//					{
-//						var text = node[i].firstChild.textContent;
-//						node[i].innerHTML = "<div>" + text + "</div>";
-//						node[i] = node[i].firstChild;
-//					}
-//					
-//					if(type == "fontBold")
-//					{
-//						if(node[i].style.fontWeight)
-//							node[i].style.fontWeight = "";
-//						else
-//							node[i].style.fontWeight = "bold";
-//					}
-//					else if(type == "fontItalic")
-//					{
-//						if(node[i].style.fontStyle)
-//							node[i].style.fontStyle = "";
-//						else
-//							node[i].style.fontStyle = "italic";
-//					}
-//					
-//					if(node[i].firstChild.nodeType == 3)
-//						instance.setCaretPosition(node[i].firstChild, node[i].firstChild.length);
-//					else
-//						node[i].focus();
-//				}
-//			}
 		});
 	};
 	
