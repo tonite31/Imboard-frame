@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h4 id="doc4-4-5">$.api.article.updateArticle</h4></div>
+	<div class="panel panel-body">
+		<div class="content-header">#{lan.example}</div>
+		<pre>$.api.article.updateArticle({boardId : "test", seq : 0, subject : "Edited subject", content : "Edited content");</pre>
+		<div class="content-header">#{lan.parameter}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>boardId <span class="label label-primary">Required</span></th>
+					<td class="center">String</td>
+					<td>Board's id</td>
+				</tr>
+				<tr>
+					<th>seq <span class="label label-primary">Required</span></th>
+					<td class="center">Integer</td>
+					<td>Number of article.</td>
+				</tr>
+				<tr>
+					<th>subject</th>
+					<td class="center">String</td>
+					<td>Subject</td>
+				</tr>
+				<tr>
+					<th>content</th>
+					<td class="center">String</td>
+					<td>Content</td>
+				</tr>
+				<tr>
+					<th>groupId</th>
+					<td class="center">Integer</td>
+					<td>Article's group id</td>
+				</tr>
+				<tr>
+					<th>parentSeq</th>
+					<td class="center">Integer</td>
+					<td>Writer's id of parent article</td>
+				</tr>
+				<tr>
+					<th>thumbnailUrl</th>
+					<td class="center">String</td>
+					<td>Article's thumbnail image url</td>
+				</tr>
+				<tr>
+					<th>tag</th>
+					<td class="center">String</td>
+					<td>Tag</td>
+				</tr>
+				<tr>
+					<th>password</th>
+					<td class="center">String</td>
+					<td>Password for article.</td>
+				</tr>
+				<tr>
+					<th>isNotice</th>
+					<td class="center">String(Y or N)</td>
+					<td><strong>Y : </strong>is a notice.<br/><strong>N : </strong>is a normal article.</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">#{lan.data}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>code</th>
+					<td class="center">Integer</td>
+					<td>Response code</td>
+				</tr>
+				<tr>
+					<th>message</th>
+					<td class="center">Integer</td>
+					<td>Response message</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

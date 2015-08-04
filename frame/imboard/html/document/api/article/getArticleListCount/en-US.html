@@ -1,0 +1,180 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h4 id="doc4-4-1">$.api.article.getArticleListCount</h4></div>
+	<div class="panel panel-body">
+		<div class="content-header">#{lan.example}</div>
+		<pre>$.api.article.getArticleListCount({boardId : "test", searchData : {subject : "Subject for search."}});</pre>
+		<div class="content-header">#{lan.parameter}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 10%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 35%;"/>
+				<col style="width: 15%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+					<th class="center">Compare type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th colspan="2">boardId</th>
+					<td class="center">String</td>
+					<td>Board's id</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th rowspan="19">searchData</th>
+					<th>subject</th>
+					<td class="center">String</td>
+					<td>Subject</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>content</th>
+					<td class="center">String</td>
+					<td>Content</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>writerId</th>
+					<td class="center">String</td>
+					<td>Writer's id</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterId</th>
+					<td class="center">String</td>
+					<td>Writer's id</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>writerName</th>
+					<td class="center">String</td>
+					<td>Writer's name</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterName</th>
+					<td class="center">String</td>
+					<td>Writer's name</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>tag</th>
+					<td class="center">String</td>
+					<td>tag</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>status</th>
+					<td class="center">Integer</td>
+					<td>Article's status</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>readStatus</th>
+					<td class="center">Integer</td>
+					<td>A status of article that is written by login user.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>writerDisplayId</th>
+					<td class="center">String</td>
+					<td>Writer's nickname</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>likeWriterDisplayId</th>
+					<td class="center">String</td>
+					<td>Writer's nickname</td>
+					<td class="center">LIKE</td>
+				</tr>
+				<tr>
+					<th>registerDate</th>
+					<td class="center">String</td>
+					<td>Registered date of article</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>existThumbnailUrl</th>
+					<td class="center">Boolean (true or false)</td>
+					<td><strong>true :</strong> Is searched an article that has a thumbnail url.<br/><strong>false :</strong> Is searched an article that has not a thumbnail url.<br/>empty : Is searched all article.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>withContent</th>
+					<td class="center">Boolean (true or false)</td>
+					<td><strong>true :</strong> Return list of article with content<br/><strong>false or empty :</strong> Return list of article without content</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>isNotice</th>
+					<td class="center">String (Y or N)</td>
+					<td><strong>Y :</strong> Return list of article that is a notice article.<br/><strong>N :</strong> Return list of article that is not a notice article.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByGroupId</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC or empty :</strong> Return ordered list of article by descending power of groupId.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of groupId.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderBySeq</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC or empty :</strong> Return ordered list of article by descending power of seq.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of seq.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByIsNotice</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC :</strong> Return ordered list of article by descending power of isNotice.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of isNotice.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByRegisterDate</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC :</strong> Return ordered list of article by descending power of registerDate.<br/><strong>ASC :</strong> Return ordered list of article by ascending power of registerDate.</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">#{lan.data}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="center">code</th>
+					<td class="center">Integer</td>
+					<td>Response code</td>
+				</tr>
+				<tr>
+					<th class="center">message</th>
+					<td class="center">Integer</td>
+					<td>Response message</td>
+				</tr>
+				<tr>
+					<th class="center">data</th>
+					<td class="center">Integer</td>
+					<td>Count of articles.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

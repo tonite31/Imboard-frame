@@ -1,0 +1,116 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h4 id="doc4-3-2">$.api.board.getBoard</h4></div>
+	<div class="panel panel-body">
+		<div class="content-header">#{lan.example}</div>
+		<pre>var result = $.api.board.getBoard({id : "test"});
+if(result.code == 1000)
+	console.log(result.data);
+else
+	console.error(result);</pre>
+		<div class="content-header">#{lan.parameter}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 10%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 40%;"/>
+				<col style="width: 10%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2" class="center">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+					<th class="center">검색방법</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th colspan="2">id</th>
+					<td class="center">String</td>
+					<td>게시판 아이디</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">#{lan.data}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 40%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center" colspan="2">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th colspan="2" class="center">code</th>
+					<td class="center">Integer</td>
+					<td>통신결과코드</td>
+				</tr>
+				<tr>
+					<th colspan="2" class="center">message</th>
+					<td class="center">Integer</td>
+					<td>통신결과메시지</td>
+				</tr>
+				<tr>
+					<th rowspan="10" class="center">data</th>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>게시판 아이디</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td class="center">String</td>
+					<td>게시판 이름</td>
+				</tr>
+				<tr>
+					<th>priority</th>
+					<td class="center">Integer</td>
+					<td>우선순위</td>
+				</tr>
+				<tr>
+					<th>description</th>
+					<td class="center">String</td>
+					<td>설명</td>
+				</tr>
+				<tr>
+					<th>useYn</th>
+					<td class="center">String</td>
+					<td>사용여부</td>
+				</tr>
+				<tr>
+					<th>viewListLevel</th>
+					<td class="center">Integer</td>
+					<td>게시판 글 목록 보기 권한레벨</td>
+				</tr>
+				<tr>
+					<th>viewDetailLevel</th>
+					<td class="center">Integer</td>
+					<td>게시글 보기 권한레벨</td>
+				</tr>
+				<tr>
+					<th>writeLevel</th>
+					<td class="center">Integer</td>
+					<td>게시글 작성 권한레벨</td>
+				</tr>
+				<tr>
+					<th>writeCommentLevel</th>
+					<td class="center">Integer</td>
+					<td>덧글 작성 권한레벨</td>
+				</tr>
+				<tr>
+					<th>creator</th>
+					<td class="center">String</td>
+					<td>게시판 생성 사용자 아이디</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

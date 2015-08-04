@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h4 id="doc4-3-5">$.api.board.deleteBoard</h4></div>
+	<div class="panel panel-body">
+		<p style="margin-top:20px;">만약 삭제하려는 게시판의 creator값이 null이 아니라면 현재 로그인한 사용자가 관리자이거나 아이디가 creator값과 일치해야만 삭제가 가능합니다.</p>
+		<div class="content-header">#{lan.example}</div>
+		<pre>$.api.board.deleteBoard({id : "test"});</pre>
+		<div class="content-header">#{lan.parameter}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>id <span class="label label-primary">필수</span></th>
+					<td class="center">String</td>
+					<td>게시판 아이디</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">#{lan.data}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>code</th>
+					<td class="center">Integer</td>
+					<td>통신결과코드</td>
+				</tr>
+				<tr>
+					<th>message</th>
+					<td class="center">Integer</td>
+					<td>통신결과메시지</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
