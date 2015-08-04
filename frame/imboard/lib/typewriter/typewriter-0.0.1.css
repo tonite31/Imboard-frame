@@ -17,14 +17,21 @@
 {
 	position: relative;
 	background-color: white;
+	text-align: center;
 }
 
 .typewriter-controlGroup
 {
-	height: 40px;
 	display: inline-block;
-	margin:5px;
 	vertical-align: middle;
+	border-left: 1px solid #ccc;
+	padding: 0 10px;
+	margin:5px 0;
+}
+
+.typewriter-controlGroup:FIRST-CHILD
+{
+	border:0;
 }
 
 .typewriter-controlGroup > button
@@ -39,9 +46,15 @@
 	display:inline-block;
 	text-align: center;
 	cursor: pointer;
-	font-size:20px;
+	font-size: 15px;
+	font-weight: bold;
 	padding:0 10px;
 	color:#666;
+}
+
+.typewriter-controlGroup > button:HOVER
+{
+	outline: 1px solid #dfdfdf;
 }
 
 .typewriter-controlGroup > button:HOVER > span

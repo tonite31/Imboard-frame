@@ -249,7 +249,7 @@ TypeWriter = {};
 		}
 	};
 	
-	$t.applyStyle = function(key, value)
+	$t.applyStyle = function(editor, key, value)
 	{
 		if(window.getSelection)
 		{
@@ -265,13 +265,17 @@ TypeWriter = {};
 				
 				//가장 먼저 sc ~ ec를 뽑아낸다.
 				
-				if(!$(editor).has(sc) || !$(editor).has(ec))
+				if($(editor).has(sc).length <= 0 || $(editor).has(ec).length <= 0)
 				{
 					return;
 				}
 				
 				if(ancestor != editor && (ancestor.nodeName == "DIV" || ancestor.nodeName == "#text"))
 				{
+					var div = ancestor;
+					while(div && div.nodeName != "DIV" && div != editor)
+						div = div.parentElement;
+					
 					//한줄인경우
 					if(sc == ec)
 					{
@@ -355,10 +359,6 @@ TypeWriter = {};
 						$t.setStyle(range, sc, ec, list, key, value);
 					}
 
-					var div = ancestor;
-					while(div && div.nodeName != "DIV" || div != editor)
-						div = div.parentElement;
-					
 					$t.clearSpan(div);
 				}
 				else
@@ -432,22 +432,25 @@ TypeWriter = {};
 	};
 	
 	$t.controller = {};
-	$t.controller["fontweight"] = function(editor)
+	$t.controller["fontWeight"] = function(editor)
 	{
 		$(this).on("click", function()
 		{
 			var key = "font-weight";
 			var value = "bold";
 			
-			$t.applyStyle(key, value);
+			$t.applyStyle(editor, key, value);
 		});
 	};
 	
-	$t.controller["fontItalic"] = function(instance)
+	$t.controller["fontItalic"] = function(editor)
 	{
-		var type = $(this).attr("data-controller");
 		$(this).on("click", function()
 		{
+			var key = "font-style";
+			var value = "italic";
+			
+			$t.applyStyle(editor, key, value);
 		});
 	};
 	
@@ -634,7 +637,13 @@ TypeWriter = {};
 		
 		if(!option.controller)
 		{
-			option.controller = [[{id : "fontweight", name : "B"}]];
+			option.controller =
+			[
+			 	[{id : "fontWeight", name : "B"}, {id : "fontItalic", name : "I"}, {id : "textUnderline", name : "U"}],
+			 	[{id : "alignLeft", name : "AL"}, {id : "alignCenter", name : "AC"}, {id : "alignRight", name : "AR"}],
+			 	[{id : "h1", name : "H1"}, {id : "h2", name : "H2"}, {id : "h3", name : "H3"}],
+			 	[{id : "imageUpload", name : "Image"}, {id : "youtubeUpload", name : "Youtube"}, {id : "fileUpload", name : "File"}]
+			];
 		}
 		
 		for(var i=0; i<option.controller.length; i++)
@@ -647,16 +656,15 @@ TypeWriter = {};
 			{
 				var button = document.createElement("button");
 				button.type = "button";
-				button.setAttribute("data-toggle", "tooltip");
-				button.setAttribute("data-placement", "bottom");
 				button.setAttribute("title", "ALT + B");
 				button.setAttribute("tabindex", "-1");
 				
-				button.innerHTML = "<span>" + group[i].name + "</span>";
+				button.innerHTML = "<span class='" + (group[j].className ? group[j].className : "") + "'>" + (group[j].name ? group[j].name : "") + "</span>";
 				
 				groupPanel.appendChild(button);
 				
-				$t.controller[group[i].id].call(button, editor.contentArticle);
+				if($t.controller[group[j].id])
+					$t.controller[group[j].id].call(button, editor.contentArticle);
 			}
 			
 			editor.controlPanel.appendChild(groupPanel);
