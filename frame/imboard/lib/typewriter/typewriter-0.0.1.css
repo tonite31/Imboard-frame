@@ -47,19 +47,18 @@
 	text-align: center;
 	cursor: pointer;
 	font-size: 15px;
-	font-weight: bold;
+	font-weight: 500;
 	padding:0 10px;
 	color:#666;
 }
 
 .typewriter-controlGroup > button:HOVER
 {
-	outline: 1px solid #dfdfdf;
 }
 
 .typewriter-controlGroup > button:HOVER > span
 {
-	color:black;
+	color: #337ab7;
 }
 
 .typewriter-controlGroup > button:FOCUS, .typewriter-controlGroup > button:ACTIVE
