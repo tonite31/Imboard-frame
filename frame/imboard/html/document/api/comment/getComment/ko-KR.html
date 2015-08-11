@@ -2,8 +2,8 @@
 	<div class="panel-heading"><h4 id="doc4-5-3">$.api.comment.getComment</h4></div>
 	<div class="panel panel-body">
 		<div class="content-header">예제</div>
-		<p style="margin-top:20px;">게시글을 볼 수 있는 권한이 있어야만 게시글 데이터를 가져올 수 있습니다.</p>
-		<pre>$.api.comment.getComment({boardId : "test", seq : 3});</pre>
+		<p style="margin-top:20px;">게시글을 볼 수 있는 권한이 있어야만 덧글 데이터를 가져올 수 있습니다.</p>
+		<pre>$.api.comment.getComment({boardId : "test", articleSeq : 0, seq : 3});</pre>
 		<div class="content-header">파라미터</div>
 		<table class="dataTable">
 			<colgroup>
@@ -35,70 +35,9 @@
 					<td class="center">=</td>
 				</tr>
 				<tr>
-					<th rowspan="18">searchData</th>
-					<th>content</th>
-					<td class="center">String</td>
-					<td>게시글 내용</td>
-					<td class="center">LIKE</td>
-				</tr>
-				<tr>
-					<th>writerId</th>
-					<td class="center">String</td>
-					<td>작성자 아이디</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>likeWriterId</th>
-					<td class="center">String</td>
-					<td>작성자 아이디</td>
-					<td class="center">LIKE</td>
-				</tr>
-				<tr>
-					<th>writerName</th>
-					<td class="center">String</td>
-					<td>작성자 이름</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>likeWriterName</th>
-					<td class="center">String</td>
-					<td>작성자 이름</td>
-					<td class="center">LIKE</td>
-				</tr>
-				<tr>
-					<th>writerDisplayId</th>
-					<td class="center">String</td>
-					<td>작성자 별명</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>likeWriterDisplayId</th>
-					<td class="center">String</td>
-					<td>작성자 별명</td>
-					<td class="center">LIKE</td>
-				</tr>
-				<tr>
-					<th>useOrderByGroupId</th>
-					<td class="center">Boolean</td>
-					<td>그룹아이디 정렬방법 사용여부</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>orderByGroupId</th>
-					<td class="center">String (DESC or ASC)</td>
-					<td>그룹아이디 정렬방법</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>useOrderBySeq</th>
-					<td class="center">Boolean</td>
-					<td>게시글 번호 정렬방법 사용여부</td>
-					<td class="center">=</td>
-				</tr>
-				<tr>
-					<th>orderBySeq</th>
-					<td class="center">String (DESC or ASC)</td>
-					<td>게시글 번호 정렬방법</td>
+					<th colspan="2">seq<span class="label label-primary">필수</span></th>
+					<td class="center">Integer</td>
+					<td>덧글 번호</td>
 					<td class="center">=</td>
 				</tr>
 			</tbody>
@@ -198,7 +137,7 @@
 					<td>상위 덧글 작성자 별명</td>
 				</tr>
 				<tr>
-					<th>profileImgUrl</th>
+					<th>writerProfileImgUrl</th>
 					<td class="center">String</td>
 					<td>작성자 프로필 이미지 주소</td>
 				</tr>

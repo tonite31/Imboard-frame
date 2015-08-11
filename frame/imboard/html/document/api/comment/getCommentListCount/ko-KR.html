@@ -79,13 +79,19 @@
 				<tr>
 					<th>orderByGroupId</th>
 					<td class="center">String (DESC or ASC)</td>
-					<td>그룹아이디 정렬방법</td>
+					<td><strong>DESC or empty :</strong> 덧글을 groupId 값으로 내림차순 정렬합니다.<br/><strong>ASC :</strong> 덧글을 groupId 값으로 오름차순 정렬합니다.</td>
 					<td class="center">=</td>
 				</tr>
 				<tr>
 					<th>orderBySeq</th>
 					<td class="center">String (DESC or ASC)</td>
-					<td>덧글 번호 정렬방법</td>
+					<td><strong>DESC or empty :</strong> 덧글을 seq 값으로 내림차순 정렬합니다.<br/><strong>ASC :</strong> 덧글을 seq 값으로 오름차순 정렬합니다.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>orderByRegisterDate</th>
+					<td class="center">String (DESC or ASC)</td>
+					<td><strong>DESC :</strong> 덧글을 registerDate 값으로 내림차순 정렬합니다.<br/><strong>ASC :</strong> 덧글을 registerDate 값으로 오름차순 정렬합니다.</td>
 					<td class="center">=</td>
 				</tr>
 			</tbody>
@@ -118,7 +124,7 @@
 				<tr>
 					<th class="center">data</th>
 					<td class="center">Integer</td>
-					<td>게시글 숫자</td>
+					<td>덧글 숫자</td>
 				</tr>
 			</tbody>
 		</table>

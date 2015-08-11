@@ -32,19 +32,11 @@
 	&lt;/colgroup&gt;
 	&lt;thead&gt;
 		&lt;tr&gt;
-			{{#equals "#{locale}" "ko-KR"}}
-			&lt;th&gt;아이디&lt;/th&gt;
-			&lt;th&gt;이름&lt;/th&gt;
-			&lt;th&gt;우선순위&lt;/th&gt;
-			&lt;th&gt;설명&lt;/th&gt;
-			&lt;th&gt;사용여부&lt;/th&gt;
-			{{else}}
 			&lt;th&gt;ID&lt;/th&gt;
 			&lt;th&gt;Name&lt;/th&gt;
 			&lt;th&gt;Priority&lt;/th&gt;
 			&lt;th&gt;Description&lt;/th&gt;
 			&lt;th&gt;UseYn&lt;/th&gt;
-			{{/equals}}
 		&lt;/tr&gt;
 	&lt;/tehad&gt;
 	&lt;tbody&gt;
@@ -60,7 +52,7 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;
 {{else}}
-&lt;span&gt;{{#equals "#{locale}" "ko-KR"}}게시판이 없습니다.{{else}}Board is empty{{/equals}}&lt;/span&gt;
+&lt;span&gt;empty&lt;/span&gt;
 {{/if}}
 &lt;/script&gt;
 
@@ -71,7 +63,7 @@
 &lt;/header&gt;
 &lt;div data-fragment="body" class="container"&gt;
 	<strong>&lt;p style="text-align: right;"&gt;</strong>
-		<strong>&lt;a href="?body=updateBoard"&gt;{{#equals "#{locale}" "ko-KR"}}게시판생성{{else}}Create board{{/equals}}&lt;/a&gt;</strong>
+		<strong>&lt;a href="?body=updateBoard"&gt;Create board&lt;/a&gt;</strong>
 	<strong>&lt;/p&gt;</strong>
 	&lt;div data-bind="boardList" data-template-id="boardListTemplate"&gt;&lt;/div&gt;
 &lt;/div&gt;

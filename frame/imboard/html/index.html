@@ -38,7 +38,7 @@
 		{{#sign pageIndex ">" 1}}
 		<li>
 			<a href="#{query}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
-				<span aria-hidden="true">이전</span>
+				<span aria-hidden="true">#{lan.previous}</span>
 			</a>
 		</li>
 		{{/sign}}
@@ -50,7 +50,7 @@
 		{{#sign pageIndex "<" maxPage}}
 		<li>
 			<a href="#{query}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
-				<span aria-hidden="true">다음</span>
+				<span aria-hidden="true">#{lan.next}</span>
 			</a>
 		</li>
 		{{/sign}}
@@ -126,11 +126,13 @@
 					@{ko-KR}
 						<p>임보드는 zip과 tar.gz형태로 배포됩니다. 현재 최신버전은 <span data-id="currentVersion"></span>입니다.</p>
 						<p>개발중인버전은 <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a> 에서 다운로드 받을 수 있습니다.</p>
-						<p>만약 npm을 사용할 수 있다면 커맨드라인에서 npm install imboard 명령어를 입력하면 간편하게 설치할 수 있습니다.</p>
+						<h3>npm으로 설치하는방법</h3>
+						<pre>npm install imboard</pre>
 					@{default}
 						<p>Imboard is provided by .zip and .tar.gz file. Currently version is <span data-id="currentVersion"></span></p>
 						<p>Develop version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a></p>
-						<p>If you can use npm in command-line interface(CLI) then you can install Imboard by <strong>npm install imboard</strong>.</p>
+						<h3>Install using npm.</h3>
+						<pre>npm install imboard</pre>
 					{{/localize}}
 				</div>
 				<div class="right" data-bind="template">
@@ -147,22 +149,41 @@
 				{{#localize}}
 				@{ko-KR}
 					<h3>사전준비</h3>
-					<p>1. 웹서버</p>
-					<p>임보드를 설치할 호스팅 서버 또는 개인 서버가 필요합니다.</p>
-					<p>2. nodejs &amp; MySQL</p>
-					<p>임보드는 nodejs기반 플랫폼이며 데이터베이스는 MySQL을 사용합니다. 최신버전의 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>을 다운로드하여 설치해주시기 바랍니다.</p>
-					<br/><br/>
-					<h3>다운로드 및 설치</h3>
-					<p>1. 임보드 다운로드</p>
-					<p>홈페이지에서 임보드를 다운로드 하거나 커맨드라인에서 npm install imboard를 입력해서 설치합니다.</p>
-					<p>2. 필요한 nodejs 모듈 설치</p>
-					<p>임보드의 루트 디렉토리에서 <strong>npm install</strong> 명령어를 수행합니다.</p>
-					<p>3. 데이터베이스 및 사용자 생성</p>
-					<p>설치한 MySQL에 접속한 뒤, 사용자와 데이터베이스를 생성합니다.</p>
-					<p>4. 데이터베이스 접속정보 설정</p>
-					<p>임보드 루트 디렉토리에서 <strong>node config.js</strong> 명령어를 수행합니다. 4번 jdbc메뉴를 선택한 후 host, username, password, database 정보를 차례로 입력합니다.</p>
-					<p>5. 초기데이터입력</p>
-					<p>임보드의 루트 디렉토리에서 <strong>node install.js</strong> 명령어를 수행합니다. 4번에서 설정한 데이터베이스로 초기데이터가 입력되고 임보드 설치작업이 끝납니다.</p>
+					<dl>
+						<dt>1. 웹서버</dt>
+						<dd>임보드를 설치할 호스팅 서버 또는 개인 서버가 필요합니다.</dd>
+					</dl>
+					<dl>
+						<dt>2. nodejs &amp; MySQL</dt>
+						<dd>임보드는 nodejs기반 플랫폼이며 데이터베이스는 MySQL을 사용합니다. 최신버전의 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>을 설치해주시기 바랍니다.</dd>
+					</dl>
+					<dl>
+						<dt>3. 데이터베이스 및 사용자 생성</dt>
+						<dd>설치한 MySQL에 접속한 뒤, 사용자와 데이터베이스를 생성합니다.</dd>
+					</dl>
+					<br/>
+					<h3>설치</h3>
+					<dl>
+						<dd>아래의 설치과정은 모두 커맨드라인에서 진행됩니다. cmd, terminal, shell등을 사용하여 임보드가 설치된 디렉토리로 이동해서 명령어를 수행합니다.</dd>
+					</dl>
+					<dl>
+						<dt>1. nodejs 모듈 설치</dt>
+						<dd><pre>npm install</pre></dd>
+					</dl>
+					<dl>
+						<dt>2. 데이터베이스 접속정보 설정</dt>
+						<dd>
+							<pre>node config.js</pre>
+							jdbc메뉴를 선택한 후 host, username, password, database 정보를 차례로 입력합니다.
+						</dd>
+					</dl>
+					<dl>
+						<dt>3. 초기데이터입력</dt>
+						<dd>
+							<pre>node install.js</pre>
+							설정한 데이터베이스로 초기데이터가 입력되고 임보드 설치작업이 끝납니다.
+						</dd>
+					</dl>
 				@{default}
 					<h3>Advance preparation</h3>
 					<dl>
@@ -173,69 +194,83 @@
 						<dt>2. nodejs &amp; MySQL</dt>
 						<dd>Imboard use nodejs and MySQL database. Install recent version <a href="https://nodejs.org" target="_blank">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>.</dd>
 					</dl>
-					<br/>
-					<h3>Download and setup.</h3>
-					<dl>
-						<dt>1. Download Imboard</dt>
-						<dd>Download Imboard from homepage or command <strong>npm install imboard</strong> on CLI</dd>
-					</dl>
-					<dl>
-						<dt>2. Install dependency nodejs module.</dt>
-						<dd>Command <strong>npm install</strong> on CLI.</dd>
-					</dl>
 					<dl>
 						<dt>3. Create database and user on MySQL</dt>
 						<dd>Create database and user after connect to installed MySQL.</dd>
 					</dl>
+					<br/>
+					<h3>Download and setup.</h3>
 					<dl>
-						<dt>4. Configuration</dt>
-						<dd>Command <strong>node config.js</strong> on CLI. select a number 4. enter the host, username, password, database name.</dd>
+						<dd>Installation step is progressed on command-line. execute command on the directory that was installed imboard using cmd or terminal or shell.</dd>
 					</dl>
 					<dl>
-						<dt>5. Insert initial datas.</dt>
-						<dd>Command <strong>node install.js</strong> on CLI.</dd>
+						<dt>1. Install dependency nodejs module.</dt>
+						<dd><pre>npm install</pre></dd>
+					</dl>
+					<dl>
+						<dt>2. Configuration</dt>
+						<dd>
+							<pre>node config.js</pre>
+							select a number 4. enter the host, username, password, database name.
+						</dd>
+					</dl>
+					<dl>
+						<dt>3. Insert initial datas.</dt>
+						<dd><pre>node install.js</pre></dd>
 					</dl>
 				{{/localize}}
 				</div>
 			</div>
 			<br/><br/>
-			<h2>Run application</h2>
+			<h2>#{lan.runapplication}</h2>
 			<div class="feature">
 				<div>
 					{{#localize}}
 					@{ko-KR}
 						<dl>
-							<dt>1. frame 설정</dt>
-							<dd>임보드 루트 디렉토리에서 <strong>node config.js</strong> 명령어를 수행합니다. 1번 frame메뉴를 선택한 후 프레임 이름을 입력합니다.<br/>프레임 이름은 <strong>/content/frame/</strong> 디렉토리 하위의 폴더 이름입니다. 기본값은 blog입니다.</dd>
+							<dd>
+								<pre>node config.js</pre>
+								어플리케이션을 실행하기 위한 설정값을 입력합니다. 변경사항이 없다면 최초에 한번만 입력하면 됩니다.
+							</dd>
 						</dl>
 						<dl>
-							<dt>2. server 정보 설정</dt>
+							<dt>1. frame 설정</dt>
+							<dd>frame메뉴를 선택한 후 프레임 이름을 입력합니다.<br/>프레임 이름은 <strong>/content/frame/</strong> 디렉토리 하위의 폴더 이름입니다. 기본값은 blog입니다.</dd>
+						</dl>
+						<dl>
+							<dt>2. host, port 설정</dt>
 							<dd>1번에 이어서 2번 server메뉴를 선택한 후 port와 host정보를 입력합니다.<br/>host는 임보드 어플리케이션으로 접속하는 웹 URL입니다. ex)port=3000, host=http://localhost:3000</dd>
 						</dl>
 						<dl>
-							<dt>3. 임보드 어플리케이션 실행</dt>
-							<dd>임보드의 루트 디렉토리에서 <strong>node app.js</strong> 명령어를 수행합니다.</dd>
+							<dt>3. 어플리케이션 실행</dt>
+							<dd><pre>node app.js</pre></dd>
 						</dl>
 						<dl>
 							<dt>4. 웹페이지 접속</dt>
-							<dd>웹브라우저를 열어서 주소입력부분에 <strong>http://localhost:3000/</strong> 을 입력합니다.</dd>
+							<dd><pre>http://localhost:3000/</pre></dd>
 						</dl>
 					@{default}
 						<dl>
-							<dt>1. Set frame</dt>
-							<dd>Command <strong>node config.js</strong> on CLI. select a number 1. enter a frame name.<br/>Frame name is directory name in <strong>/content/frame/</strong> directory. default value is blog.</dd>
+							<dd>
+								<pre>node config.js</pre>
+								Enter a value for a application. if you has not change, enter a value only once in a first time.
+							</dd>
 						</dl>
 						<dl>
-							<dt>2. Set server information</dt>
-							<dd>Select a number 2. enter a port and host.<br/>host is web url for application. ex)port=3000, host=http://localhost:3000<br/>Quit a configuration by enter a letter "q"</dd>
+							<dt>1. Set a frame's name</dt>
+							<dd>Select a number 1. enter a frame's name.<br/>Frame name is directory name in <strong>/content/frame/</strong> directory. default value is blog.</dd>
+						</dl>
+						<dl>
+							<dt>2. Set a host and a port.</dt>
+							<dd>Select a number 2. enter a port and host.<br/>host is web url for application. ex)port=3000, host=http://localhost:3000</dd>
 						</dl>
 						<dl>
 							<dt>3. Run application</dt>
-							<dd>Command <strong>node app.js</strong> on CLI</dd>
+							<dd><pre>node app.js</pre></dd>
 						</dl>
 						<dl>
 							<dt>4. Connect webpage</dt>
-							<dd>Open your web browser. acess in <strong>http://localhost:3000/</strong></dd>
+							<dd><pre>http://localhost:3000/</pre></dd>
 						</dl>
 					{{/localize}}
 				</div>

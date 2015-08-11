@@ -10,19 +10,11 @@
 	&lt;/colgroup&gt;
 	&lt;thead&gt;
 		&lt;tr&gt;
-			{{#equals "#{locale}" "ko-KR"}}
-			&lt;th&gt;아이디&lt;/th&gt;
-			&lt;th&gt;이름&lt;/th&gt;
-			&lt;th&gt;우선순위&lt;/th&gt;
-			&lt;th&gt;설명&lt;/th&gt;
-			&lt;th&gt;사용여부&lt;/th&gt;
-			{{else}}
 			&lt;th&gt;ID&lt;/th&gt;
 			&lt;th&gt;Name&lt;/th&gt;
 			&lt;th&gt;Priority&lt;/th&gt;
 			&lt;th&gt;Description&lt;/th&gt;
 			&lt;th&gt;UseYn&lt;/th&gt;
-			{{/equals}}
 		&lt;/tr&gt;
 	&lt;/tehad&gt;
 	&lt;tbody&gt;
@@ -38,6 +30,6 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;
 {{else}}
-&lt;span&gt;{{#equals "#{locale}" "ko-KR"}}게시판이 없습니다.{{else}}Board is empty{{/equals}}&lt;/span&gt;
+&lt;span&gt;empty&lt;/span&gt;
 {{/if}}
 &lt;/script&gt;

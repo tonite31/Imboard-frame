@@ -1,10 +1,10 @@
 <div class="panel panel-default">
 	<div class="panel-heading"><h4 id="doc4-6-4">$.api.menu.updateMenu</h4></div>
 	<div class="panel panel-body">
-		<p style="margin-top:20px;">파라미터로 입력된 id에 해당하는 메뉴를 생성한 사용자이거나 관리자이상의 레벨을 가지고 있는 사용자만 정상적으로 수정할 수 있습니다.</p>
-		<div class="content-header">예제</div>
+		<p style="margin-top:20px;">If a value "creator" of menu for update is not null, then can update by current logined user who is a administrator or id of logined user is equals to a value "creator".</p>
+		<div class="content-header">#{lan.example}</div>
 		<pre>$.api.menu.updateMenu({id : "test", name : "테스트용 메뉴 수정", type : 1, priority : 0});</pre>
-		<div class="content-header">파라미터</div>
+		<div class="content-header">#{lan.parameter}</div>
 		<table class="dataTable">
 			<colgroup>
 				<col style="width: 20%;"/>
@@ -13,45 +13,50 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="center">변수명</th>
-					<th class="center">변수타입</th>
-					<th class="center">설명</th>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th>id <span class="label label-primary">필수</span></th>
+					<th>id <span class="label label-primary">Required</span></th>
 					<td class="center">String</td>
-					<td>게시판 아이디</td>
+					<td>id</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td class="center">String</td>
+					<td>name</td>
 				</tr>
 				<tr>
 					<th>type</th>
 					<td class="center">Integer</td>
-					<td>유형</td>
+					<td>type</td>
 				</tr>
 				<tr>
 					<th>parameter</th>
 					<td class="center">String</td>
-					<td>파라미터</td>
+					<td>Url querystring. use this, if you connect menu to board. ex)?boardId=test</td>
 				</tr>
 				<tr>
 					<th>priority</th>
 					<td class="center">Integer</td>
-					<td>우선순위</td>
+					<td>Priority</td>
 				</tr>
 				<tr>
 					<th>parentMenuId</th>
 					<td class="center">String</td>
-					<td>상위메뉴 아이디</td>
+					<td>Id of parent menu.</td>
 				</tr>
 				<tr>
 					<th>viewLevel</th>
 					<td class="center">Integer</td>
-					<td>메뉴보기 권한레벨</td>
+					<td>User's level of viewing a menu.</td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="content-header">데이터</div>
+		<div class="content-header">#{lan.data}</div>
 		<table class="dataTable">
 			<colgroup>
 				<col style="width: 20%;"/>
@@ -60,21 +65,21 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="center">변수명</th>
-					<th class="center">변수타입</th>
-					<th class="center">설명</th>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th>code</th>
 					<td class="center">Integer</td>
-					<td>통신결과코드</td>
+					<td>Response code</td>
 				</tr>
 				<tr>
 					<th>message</th>
 					<td class="center">Integer</td>
-					<td>통신결과메시지</td>
+					<td>Response message</td>
 				</tr>
 			</tbody>
 		</table>

@@ -4,12 +4,10 @@ $(document).ready(function()
 	{
 		if($.query.id)
 		{
-			//편집화면
 			$.api.board.updateBoard(data);
 		}
 		else
 		{
-			//생성화면
 			$.api.board.insertBoard(data);
 		}
 		

@@ -2,7 +2,7 @@
 	<div class="panel-heading"><h4 id="doc4-6-1">$.api.menu.getMenuList</h4></div>
 	<div class="panel panel-body">
 		<div class="content-header">예제</div>
-		<pre>var result = $.api.menu.getMenuList({parentMenuId : "parentMenu"});
+		<pre>var result = $.api.menu.getMenuList();
 if(result.code == 1000)
 	console.log(result.data);
 else
@@ -79,7 +79,7 @@ else
 				<tr>
 					<th>parameter</th>
 					<td class="center">String</td>
-					<td>파라미터</td>
+					<td>URL의 파라미터. 메뉴와 게시판을 연결하고자 할경우 사용합니다. ex)?boardId=test</td>
 				</tr>
 				<tr>
 					<th>priority</th>

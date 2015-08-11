@@ -34,6 +34,11 @@
 		"ko-KR" : "시작하기",
 		"default" : "GettingStarted"
 	},
+	"runapplication" :
+	{
+		"ko-KR" : "어플리케이션 실행하기",
+		"default" : "Run application"
+	},
 	"document" :
 	{
 		"ko-KR" : "문서",
