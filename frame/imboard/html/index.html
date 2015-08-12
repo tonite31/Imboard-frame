@@ -114,8 +114,19 @@
 					<p>간편한 방법으로 웹페이지를 개발할 수 있고, 미리 만들어진 프레임을 적용하면 몇 분만에 웹페이지를 개설할수도 있습니다.</p>
 				@{default}
 					<p>Imboard is a convenient platform for develop a webpage based on nodejs server</p>
-					<p>You can more easily develop a webpage and If you use a frame that already developed then you can open a webpage in a few minutes.</p>
+					<p>You can more easily develop a webpage and If you use a frame that already developed, you can establish a webpage in a few minutes.</p>
 				{{/localize}}
+			</div>
+		</div>
+		<div class="container doc">
+			<div class="col-xs-4">
+				<h2>Familiar</h2>
+				<p>임보드는 nodejs기반으로 구축된 서버를 제공하며 HTML, JS, CSS만으로 웹페이지를 제작할 수 있습니다.</p>
+			</div>
+			<div class="col-xs-4">
+				<h2>Easy</h2>
+				<p>몇 줄의 HTML코드 만으로 게시판을 구축하거나 데이터베이스의 데이터를 화면에 조합할 수 있습니다.</p>
+				<p>웹페이지에 필요한 각종 데이터는 관리자 콘솔을 통해 언제든지 제어할 수 있습니다.</p>
 			</div>
 		</div>
 		<div class="container doc">
@@ -124,20 +135,29 @@
 				<div>
 					{{#localize}}
 					@{ko-KR}
-						<p>임보드는 zip과 tar.gz형태로 배포됩니다. 현재 최신버전은 <span data-id="currentVersion"></span>입니다.</p>
+						<p>임보드는 zip과 tar.gz형태로 배포됩니다. 최신버전은 <strong data-id="currentVersion"></strong>입니다.</p>
 						<p>개발중인버전은 <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a> 에서 다운로드 받을 수 있습니다.</p>
-						<h3>npm으로 설치하는방법</h3>
-						<pre>npm install imboard</pre>
 					@{default}
 						<p>Imboard is provided by .zip and .tar.gz file. Currently version is <span data-id="currentVersion"></span></p>
 						<p>Develop version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a></p>
-						<h3>Install using npm.</h3>
-						<pre>npm install imboard</pre>
 					{{/localize}}
 				</div>
-				<div class="right" data-bind="template">
+				<div class="right">
 					<p><a href="http://resources.imboard.io/imboard/imboard.zip" class="btn btn-outline black" style="width: 150px;">imboard.zip<br/>#{lan.download}</a></p>
 					<p><a href="http://resources.imboard.io/imboard/imboard.tar.gz" class="btn btn-outline black" style="width: 150px;">imboard.tar.gz<br/>#{lan.download}</a></p>
+				</div>
+			</div>
+		</div>
+		<div class="container doc">
+			{{#localize}}
+			@{ko-KR}
+				<h2>npm으로 다운로드</h2>
+			@{default}
+				<h2>Download with npm</h2>
+			{{/localize}}
+			<div class="feature">
+				<div>
+					<pre>npm install imboard</pre>
 				</div>
 			</div>
 		</div>
@@ -164,7 +184,7 @@
 					<br/>
 					<h3>설치</h3>
 					<dl>
-						<dd>아래의 설치과정은 모두 커맨드라인에서 진행됩니다. cmd, terminal, shell등을 사용하여 임보드가 설치된 디렉토리로 이동해서 명령어를 수행합니다.</dd>
+						<dd>웹서버에 임보드를 다운로드 받고 설치합니다.</dd>
 					</dl>
 					<dl>
 						<dt>1. nodejs 모듈 설치</dt>
