@@ -4,6 +4,18 @@
 	font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
 }
 
+dt
+{
+	font-weight: 500;
+}
+
+pre
+{
+    -moz-tab-size: 4;
+    -o-tab-size:   4;
+    tab-size:      4;
+}
+
 .container, .container-fluid
 {
 	padding:0;

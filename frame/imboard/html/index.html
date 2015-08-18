@@ -119,181 +119,24 @@
 			</div>
 		</div>
 		<div class="container doc">
+			<div style="text-align: center; color: #666;">
+				<p><a class="btn btn-default" style="padding:15px 30px; font-size:14px;" href="?fragment=gettingstarted&locale=#{locale}#doc_download">Download Imboard</a></p>
+				<p style="font-size: 12px;">Currently <span data-id="currentVersion"></span></p>
+			</div>
+		</div>
+		<div class="container doc" style="margin-bottom: 30px;">
 			<div class="col-xs-4">
 				<h2>Familiar</h2>
-				<p>임보드는 nodejs기반으로 구축된 서버를 제공하며 HTML, JS, CSS만으로 웹페이지를 제작할 수 있습니다.</p>
+				<p>임보드는 친숙한 언어와 오픈소스를 사용합니다. 서버와 데이터베이스는 nodejs와 MySQL을 사용하며 웹페이지는 HTML, JS, CSS만으로 개발이 가능합니다!</p>
 			</div>
 			<div class="col-xs-4">
 				<h2>Easy</h2>
 				<p>몇 줄의 HTML코드 만으로 게시판을 구축하거나 데이터베이스의 데이터를 화면에 조합할 수 있습니다.</p>
 				<p>웹페이지에 필요한 각종 데이터는 관리자 콘솔을 통해 언제든지 제어할 수 있습니다.</p>
 			</div>
-		</div>
-		<div class="container doc">
-			<h2>#{lan.download}</h2>
-			<div class="feature">
-				<div>
-					{{#localize}}
-					@{ko-KR}
-						<p>임보드는 zip과 tar.gz형태로 배포됩니다. 최신버전은 <strong data-id="currentVersion"></strong>입니다.</p>
-						<p>개발중인버전은 <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a> 에서 다운로드 받을 수 있습니다.</p>
-					@{default}
-						<p>Imboard is provided by .zip and .tar.gz file. Currently version is <span data-id="currentVersion"></span></p>
-						<p>Develop version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a></p>
-					{{/localize}}
-				</div>
-				<div class="right">
-					<p><a href="http://resources.imboard.io/imboard/imboard.zip" class="btn btn-outline black" style="width: 150px;">imboard.zip<br/>#{lan.download}</a></p>
-					<p><a href="http://resources.imboard.io/imboard/imboard.tar.gz" class="btn btn-outline black" style="width: 150px;">imboard.tar.gz<br/>#{lan.download}</a></p>
-				</div>
-			</div>
-		</div>
-		<div class="container doc">
-			{{#localize}}
-			@{ko-KR}
-				<h2>npm으로 다운로드</h2>
-			@{default}
-				<h2>Download with npm</h2>
-			{{/localize}}
-			<div class="feature">
-				<div>
-					<pre>npm install imboard</pre>
-				</div>
-			</div>
-		</div>
-		<hr class="container"/>
-		<div class="container doc">
-			<h2>#{lan.installation}</h2>
-			<div class="feature">
-				<div>
-				{{#localize}}
-				@{ko-KR}
-					<h3>사전준비</h3>
-					<dl>
-						<dt>1. 웹서버</dt>
-						<dd>임보드를 설치할 호스팅 서버 또는 개인 서버가 필요합니다.</dd>
-					</dl>
-					<dl>
-						<dt>2. nodejs &amp; MySQL</dt>
-						<dd>임보드는 nodejs기반 플랫폼이며 데이터베이스는 MySQL을 사용합니다. 최신버전의 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>을 설치해주시기 바랍니다.</dd>
-					</dl>
-					<dl>
-						<dt>3. 데이터베이스 및 사용자 생성</dt>
-						<dd>설치한 MySQL에 접속한 뒤, 사용자와 데이터베이스를 생성합니다.</dd>
-					</dl>
-					<br/>
-					<h3>설치</h3>
-					<dl>
-						<dd>웹서버에 임보드를 다운로드 받고 설치합니다.</dd>
-					</dl>
-					<dl>
-						<dt>1. nodejs 모듈 설치</dt>
-						<dd><pre>npm install</pre></dd>
-					</dl>
-					<dl>
-						<dt>2. 데이터베이스 접속정보 설정</dt>
-						<dd>
-							<pre>node config.js</pre>
-							jdbc메뉴를 선택한 후 host, username, password, database 정보를 차례로 입력합니다.
-						</dd>
-					</dl>
-					<dl>
-						<dt>3. 초기데이터입력</dt>
-						<dd>
-							<pre>node install.js</pre>
-							설정한 데이터베이스로 초기데이터가 입력되고 임보드 설치작업이 끝납니다.
-						</dd>
-					</dl>
-				@{default}
-					<h3>Advance preparation</h3>
-					<dl>
-						<dt>1. Web server</dt>
-						<dd>You need a server for install imboard.</dd>
-					</dl>
-					<dl>
-						<dt>2. nodejs &amp; MySQL</dt>
-						<dd>Imboard use nodejs and MySQL database. Install recent version <a href="https://nodejs.org" target="_blank">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>.</dd>
-					</dl>
-					<dl>
-						<dt>3. Create database and user on MySQL</dt>
-						<dd>Create database and user after connect to installed MySQL.</dd>
-					</dl>
-					<br/>
-					<h3>Download and setup.</h3>
-					<dl>
-						<dd>Installation step is progressed on command-line. execute command on the directory that was installed imboard using cmd or terminal or shell.</dd>
-					</dl>
-					<dl>
-						<dt>1. Install dependency nodejs module.</dt>
-						<dd><pre>npm install</pre></dd>
-					</dl>
-					<dl>
-						<dt>2. Configuration</dt>
-						<dd>
-							<pre>node config.js</pre>
-							select a number 4. enter the host, username, password, database name.
-						</dd>
-					</dl>
-					<dl>
-						<dt>3. Insert initial datas.</dt>
-						<dd><pre>node install.js</pre></dd>
-					</dl>
-				{{/localize}}
-				</div>
-			</div>
-			<br/><br/>
-			<h2>#{lan.runapplication}</h2>
-			<div class="feature">
-				<div>
-					{{#localize}}
-					@{ko-KR}
-						<dl>
-							<dd>
-								<pre>node config.js</pre>
-								어플리케이션을 실행하기 위한 설정값을 입력합니다. 변경사항이 없다면 최초에 한번만 입력하면 됩니다.
-							</dd>
-						</dl>
-						<dl>
-							<dt>1. frame 설정</dt>
-							<dd>frame메뉴를 선택한 후 프레임 이름을 입력합니다.<br/>프레임 이름은 <strong>/content/frame/</strong> 디렉토리 하위의 폴더 이름입니다. 기본값은 blog입니다.</dd>
-						</dl>
-						<dl>
-							<dt>2. host, port 설정</dt>
-							<dd>1번에 이어서 2번 server메뉴를 선택한 후 port와 host정보를 입력합니다.<br/>host는 임보드 어플리케이션으로 접속하는 웹 URL입니다. ex)port=3000, host=http://localhost:3000</dd>
-						</dl>
-						<dl>
-							<dt>3. 어플리케이션 실행</dt>
-							<dd><pre>node app.js</pre></dd>
-						</dl>
-						<dl>
-							<dt>4. 웹페이지 접속</dt>
-							<dd><pre>http://localhost:3000/</pre></dd>
-						</dl>
-					@{default}
-						<dl>
-							<dd>
-								<pre>node config.js</pre>
-								Enter a value for a application. if you has not change, enter a value only once in a first time.
-							</dd>
-						</dl>
-						<dl>
-							<dt>1. Set a frame's name</dt>
-							<dd>Select a number 1. enter a frame's name.<br/>Frame name is directory name in <strong>/content/frame/</strong> directory. default value is blog.</dd>
-						</dl>
-						<dl>
-							<dt>2. Set a host and a port.</dt>
-							<dd>Select a number 2. enter a port and host.<br/>host is web url for application. ex)port=3000, host=http://localhost:3000</dd>
-						</dl>
-						<dl>
-							<dt>3. Run application</dt>
-							<dd><pre>node app.js</pre></dd>
-						</dl>
-						<dl>
-							<dt>4. Connect webpage</dt>
-							<dd><pre>http://localhost:3000/</pre></dd>
-						</dl>
-					{{/localize}}
-				</div>
+			<div class="col-xs-4">
+				<h2>Share</h2>
+				<p>제작한 웹페이지 프레임을 공유하거나 다운로드 받아서 적용할 수 있습니다. 프레임뿐만아니라 필요한 모듈도 개발하거나 설치해서 사용할 수 있습니다.</p>
 			</div>
 		</div>
 	</div>

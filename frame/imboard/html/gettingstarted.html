@@ -1,167 +1,352 @@
 <div class="jumbotron">
 	<div class="container">
 		<h1>#{lan.gettingstarted}</h1>
-		<p data-bind="locale">
+		<p>
 		{{#localize}}
 		@{ko-KR}
-			임보드로 웹페이지를 제작하는 방법을 알아봅니다.
+			전반적인 임보드에 대해 알아보고 다운로드 및 어플리케이션 실행, 프레임 개발방법에 대해 소개합니다.
 		@{default}
-			This page is Hellow World for develop a webpage by Imboard.
+			An overview of imboard, how to download and run an application, how to develop frame.<br/>
+			Sorry, this page is translating to english...
 		{{/localize}}
 		</p>
 	</div>
 </div>
 
 <div class="container">
+	{{#localize}}
+	@{ko-KR}
 	<div class="col-xs-9" style="padding:0;" id="documentArea">
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc1">1. 개요</h2>
-				<p>임보드 어플리케이션은 프레임단위로 실행됩니다. 시작하기에서는 프레임을 개발하는 방법에 대해 간략하게 소개합니다.</p>
-				<p>본 시작하기는 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>이 이미 설치되어있고 초기 세팅이 완료되었다는 가정하에 시작합니다. 개발은 이클립스로 진행하며 간단한 게시판관리 화면을 제작합니다.</p>
-			@{default}
-				<h2 id="doc1">1. Overview</h2>
-				<p>Imboard application be executed by frame. here is introduce how to develop a frame.</p>
-				<p>Must install <a href="https://nodejs.org" target="_blank">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a> before. develop simple board management by eclipse.</p>
-			{{/localize}}
+		<div class="doc" id="doc_download">
+			<h2 class="page-header">1. 다운로드</h2>
+			<div class="subdoc first" id="1-1">
+				<h3>1-1. 사전준비</h3>
+				<dl>
+					<dt>웹서버</dt>
+					<dd>임보드를 설치할 호스팅 서버 또는 개인 서버가 필요합니다.</dd>
+				</dl>
+				<dl>
+					<dt>nodejs &amp; MySQL</dt>
+					<dd>임보드는 nodejs기반 플랫폼이며 데이터베이스는 MySQL을 사용합니다. 최신버전의 <a href="https://nodejs.org" target="_blank">nodejs</a>와 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>을 설치해주시기 바랍니다.</dd>
+				</dl>
+				<dl>
+					<dt>데이터베이스 및 사용자 생성</dt>
+					<dd>설치한 MySQL에 접속한 뒤, 사용자와 데이터베이스를 생성합니다.</dd>
+				</dl>
+			</div>
+			<div class="subdoc" id="1-2">
+				<h3>1-2. 다운로드</h3>
+				<p>임보드는 zip과 tar.gz형태로 배포됩니다. 최신버전은 <strong data-id="currentVersion"></strong>입니다.</p>
+				<p>개발중인버전은 <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a> 에서 다운로드 받을 수 있습니다.</p>
+				<p>
+					<a href="http://resources.imboard.io/imboard/imboard.zip" class="btn btn-outline black" style="width: 150px;">imboard.zip<br/>#{lan.download}</a>
+					<a href="http://resources.imboard.io/imboard/imboard.tar.gz" class="btn btn-outline black" style="width: 150px;">imboard.tar.gz<br/>#{lan.download}</a>
+				</p>
+			</div>
+			<div class="subdoc" id="1-3">
+				<h3>1-3. NPM으로 설치하기</h3>
+				<p>npm을 이용하면 손쉽게 임보드를 설치할 수 있습니다.</p>
+				<pre>$ npm install imboard</pre>
+			</div>
 		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc2">2. 프레임구조 생성</h2>
-				<p>다음과 같은 구조로 프레임 디렉토리를 구성합니다. index.html은 시작화면으로써 반드시 필요한 파일입니다.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/directory_structure.png" alt="프레임 디렉토리구조 스크린샷"/></p>
-			@{default}
-				<h2 id="doc2">2. Create frame structure</h2>
-				<p>Create a frame directory like following screenshot. index.html is essential file.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/directory_structure.png" alt="Frame directory structure"/></p>
-			{{/localize}}
+		<div class="doc" id="doc_configuration">
+			<h2 class="page-header">2. 설정 및 실행</h2>
+			<p>임보드를 구동하기 위해 필요한 nodejs 모듈을 설치하고 설정값을 입력합니다. 이 작업은 임보드가 설치된 디렉토리에서 진행합니다.</p>
+			<dl>
+				<dt>nodejs 모듈 설치</dt>
+				<dd><pre>$ npm install</pre></dd>
+			</dl>
+			<dl>
+				<dt>데이터베이스 접속정보 설정</dt>
+				<dd>
+					<pre>$ node config.js</pre>
+					<p>jdbc메뉴를 선택한 후 host, username, password, database 정보를 차례로 입력합니다.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>프레임 이름 설정</dt>
+				<dd>
+					<pre>$ node config.js</pre>
+					<p>frame메뉴를 선택한 후 적용할 프레임 이름을 입력합니다. 입력하지 않으면 기본값인 blog로 설정됩니다.</p>
+					<p>이 예제에서는 기본값인 blog로 입력합니다.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>초기데이터입력</dt>
+				<dd>
+					<pre>$ node install.js</pre>
+					<p>위에서 설정한 데이터베이스로 임보드를 위한 초기데이터와 프레임을 위한 초기데이터가 입력되고 임보드 설치작업이 끝납니다.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>어플리케이션 실행</dt>
+				<dd>
+					<pre>$ node app.js</pre>
+					<p>브라우저에 <code>http://localhost:3000/</code>을 입력하면 blog프레임으로 구동된 어플리케이션을 확인할 수 있습니다.</p>
+				</dd>
+			</dl>
 		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc3">3. index.html 작성</h2>
-				<p>index.html은 웹페이지의 시작화면입니다. 따라서 완전한 html구조를 가지고 있어야 합니다. 아래 코드와같이 기본 뼈대를 작성합니다.</p>
-				<p>index.css파일은 미리 작성되어있으므로 다운로드 받아서 사용할 수 있습니다. <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>를 sample 프레임 하위의 css폴더에 다운로드 받아서 사용하십시오.</p>
-				<pre data-html="/gettingstarted/doc3.html"></pre>
-			@{default}
-				<h2 id="doc3">3. Write index.html</h2>
-				<p>index.html is a main page. so it must has a complete html document structure. write a code refer to following.</p>
-				<p>Can download from <a href="http://resources.imboard.io/gettingstarted/index.css">index.css</a>. move index.css to css directory.</p>
-				<pre data-html="/gettingstarted/doc3.html"></pre>
-			{{/localize}}
+		<div class="doc" id="doc_frame_structure">
+			<h2 class="page-header">3. 프레임구조</h2>
+			<p>프레임은 웹페이지 단위입니다. 디렉토리로 구성되며 <code>/content/frame/</code> 경로 하위에 위치합니다.</p>
+			<p>다음 이미지는 기본 프레임 "blog"의 디렉토리 구조 입니다.</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/blog_structure.png" alt="blog 프레임 디렉토리 구조" style="width:200px;"/></p>
+			<dl>
+				<dt>css</dt>
+				<dd>.css 파일들이 들어있는 디렉토리 입니다.</dd>
+			</dl>
+			<dl>
+				<dt>html</dt>
+				<dd>.html 파일들이 들어있는 디렉토리 입니다. index.html파일은 시작화면으로써 반드시 존재해야 합니다.</dd>
+			</dl>
+			<dl>
+				<dt>js</dt>
+				<dd>.js 파일들이 들어있는 디렉토리입니다.</dd>
+			</dl>
+			<dl>
+				<dt>lib</dt>
+				<dd>프레임에서 사용할 라이브러리들이 들어있는 디렉토리입니다.</dd>
+			</dl>
+			<dl>
+				<dt>properties</dt>
+				<dd>프레임에 필요한 초기데이터를 위한 데이터베이스 스크립트나 핸들바 헬퍼 스크립트, 국제화 데이터가 들어있는 디렉토리입니다. 하위의 handlebars와 setup디렉토리 이름은 변경되면 안됩니다.</dd>
+			</dl>
 		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc4">4. 레이아웃 구성</h2>
-				<p>가장먼저 header부분과 body부분으로 나뉘는 레이아웃을 작성합니다.</p>
-				<pre data-html="/gettingstarted/doc4.html"></pre>
-				<p>data-fragment 속성이 지정된 div 태그는 화면 조각들이 보여질 컨테이너 역할을 하게됩니다.</p>
-				<p>예를들어 URL에 <strong>?body=boardList</strong>가 지정되면 html 디렉토리 하위의 boardList.html을 불러와서 해당 div 태그 내부로 보여줍니다.</p>
-			@{default}
-				<h2 id="doc4">4. Constitute a layout</h2>
-				<p>Write a code refer to following.</p>
-				<pre data-html="/gettingstarted/doc4.html"></pre>
-				<p>A div tag that has "data-fragment" attribute is a container of page fragment.</p>
-				<p>An example, if browser url has a parameter "<strong>?body=boardList</strong>" then show cotnents of boardList.html in html directory on the div tag.</p>
-			{{/localize}}
+		<div class="doc" id="doc_index">
+			<h2 class="page-header">4. index.html</h2>
+			<p>index.html 파일은 시작화면이고 다음과 같은 구조를 가져야합니다. 프레임에 필요한 최소한의 자바스크립트 라이브러리와 css파일이 import되어 있습니다.</p>
+			<pre data-html="/gettingstarted/index.html"></pre>
+			<p>##{path.xxx}형태로 입력된 부분은 치환변수로 각각의 xxx키에 해당하는 경로로 치환됩니다. 자세한 내용은 문서의 <a href="?fragment=document&locale=#{locale}#doc2-1">치환변수</a>를 참조하십시오.</p>
 		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc5">5. 데이터조합</h2>
-				<p>조각 컨테이너 div 태그에 기본적으로 보여질 화면은 게시판목록입니다. 서버로부터 게시판 목록 데이터를 불러와서 handlebars문법을 사용해 화면에 보여지게 됩니다.</p>
-				<p>아래 코드와 같이 div 태그에 <strong>data-bind="boardList"</strong> 속성을 지정하면 서버의 boardList모듈을 통해 데이터를 받아옵니다.</p>
-				<pre data-html="/gettingstarted/doc5-1.html"></pre>
-				<p>받아온 데이터는 data-template-id속성에 지정된 아이디에 해당하는 템플릿을 통해 화면에 조합됩니다. 템플릿은 아래와 같이 head 태그 사이에 script 태그로 작성합니다. id는 boardListTemplate로 지정하고 type은 반드시 text/x-handlebars-template로 지정합니다.</p>
-				<pre data-html="/gettingstarted/doc5-2.html"></pre>
-				<p>여기까지 작성한 후 임보드가 설치된 루트 디렉토리에서 <strong>node app.js</strong> 명령어를 수행해서 어플리케이션을 실행한 뒤 브라우저에서 http://localhost:3000으로 접속합니다.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="게시판 목록 결과 스크린샷" style="width:100%;"/></p>
-			@{default}
-				<h2 id="doc5">5. Bind a data</h2>
-				<p>It is a list of board that a default fragment on the div tag. bind a list of board to html using handlebars after load it from the server.</p>
-				<p>If set an attribute "<strong>data-bind=boardList</strong>" to the div tag then load a data from module named "boardList" on the server.</p>
-				<pre data-html="/gettingstarted/doc5-1.html"></pre>
-				<p>A loaded data is combined by the template tag that has a id of "data-template-id" attribute.</p>
-				<p>Write a template script tag in the head tag refer to following. id attribute is "boardListTemplate". type is "text/x-handlebars-template".</p>
-				<pre data-html="/gettingstarted/doc5-2.html"></pre>
-				<p>Run application by command "<strong>node app.js</strong>" on the CLI. connect to "http://localhost:3000" in the browser.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/boardList.png" alt="list of board" style="width:100%;"/></p>
-			{{/localize}}
+		<div class="doc" id="doc_import_uiframework">
+			<h2 class="page-header">5. UI프레임워크 임포트</h2>
+			<p>Bootstrap과 같은 UI프레임워크를 사용할때는 프레임의 lib디렉토리에 복사하고 script와 css를 index.html 파일에 import합니다.</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/uiframework.png" alt="프레임의 UI프레임워크 구조" style="width: 200px;"/></p>
+			<pre>&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap-theme.min.css"/&gt;
+&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap.min.css"/&gt;
+&lt;script src="##{path.root}/lib/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;</pre>
 		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc6">6. 페이지조각 제작</h2>
-				<p>이번에는 게시판을 생성하고 편집할 수 있는 화면을 제작합니다. 게시판생성 및 편집 화면은 페이지 조각으로 제작됩니다. index.html 파일을 아래와 같이 수정합니다. 굵은 글씨 부분이 수정되거나 추가된 코드입니다.</p>
-				<pre data-html="/gettingstarted/doc6-1.html"></pre>
-				<p>게시판 생성 버튼을 클릭하거나 테이블의 게시판 아이디부분을 클릭하면 게시판생성 및 편집 화면조각을 불러와서 화면에 보여줄 수 있도록 해야합니다.</p>
-				<p>html폴더에 <strong>updateBoard.html</strong> 파일을 생성합니다. 이 파일은 조각파일로 완전한 html구조를 갖추지 않아도 됩니다.</p>
-				<p>게시판생성에 필요한 정보를 입력받기 위해 아래와 같은 코드를 작성합니다. 각 input태그에는 적절한 name속성을 지정하고 id와 같이 반드시 필요한 값은 <strong>required="required"</strong> 속성을 지정해서 validation 체크도 될 수 있게 합니다.</p>
-				<p>이 화면조각은 게시판을 생성함과 동시에 편집도 가능하게 하기 위해 <strong>data-bind="board"</strong>속성과 <strong>data-param='{"id" : "##{query.id}"}'</strong>속성을 지정합니다. 만약 URL querystring에 id값이 있다면 해당하는 게시판 데이터를 보여줍니다. </p>
-				<pre data-html="/gettingstarted/doc6-2.html"></pre>
-				<p>이제 각 input 태그에 입력된 정보를 가져와서 서버로 게시판 생성을 위한 요청을 보내야합니다. js폴더에 updateBoard.js파일을 생성합니다. 화면조각 html파일과 동일한 이름으로 js파일을 생성하면 해당 html이 보여질때 js파일도 함께 import가 됩니다. 마찬가지로 css파일도 함께 import가 되므로 <a href="http://resources.imboard.io/gettingstarted/updateBoard.css">updateBoard.css</a> 파일을 sample 프레임 하위의 css폴더에 다운로드 받아서 사용하십시오.</p>
-				<p>아래 코드는 URL querystring에 id값이 없다면 게시판을 생성하는 로직을 수행하고 id값이 있다면 게시판을 편집하는 로직을 수행하는 코드입니다.</p>
-				<p>URL querystring의 값은 $.query 객체를 통해 손쉽게 접근할 수 있습니다. 이 객체를 사용하거나 $.api 함수를 사용하기 위해서는 index.html파일에 imboard-api.js파일이 import되어있어야 합니다.</p>
-				<pre data-html="/gettingstarted/doc6-3.html"></pre>
-				<p>form태그의 id를 활용해 위와같이 compile함수를 호출하면 form태그에 submit이 일어났을때 callback함수의 파라미터로 input태그에 입력된 값들을 json 형식으로 전달해줍니다. 이를 위해서는 반드시 각 input태그에 name속성이 지정되어있어야 합니다.</p>
-				<p>이 기능을 사용하기 위해서는 반드시 index.html파일에 imboard-ui.js파일이 import되어있어야 합니다.</p>
-				<p>여기까지 작성한 후 http://localhost:3000이 입력된 브라우저를 새로고침합니다.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample 프레임 제작 결과 스크린샷" style="width: 100%;"/></p>
-			@{default}
-				<h2 id="doc6">6. Create a page fragment</h2>
-				<p>In this step, write a fragment that is able to create or edit a board. edit a index.html refer to following. bold text is edited code.</p>
-				<pre data-html="/gettingstarted/doc6-1.html"></pre>
-				<p>If user click a "Create board" button or click board id, then change fragment to updateBoard.html.</p>
-				<p>Create a file "<strong>updateBoard.html</strong>" in html directory. this file is a fragment. so this file need not have a complete html document structure.</p>
-				<p>Write a code refer to following for enter a information for create board to user. each input tag must has a name attribute. the input tag that has attribute "name=id" must have an attribute "<strong>required=required</strong>" for validation.</p>
-				<p>This page will be able to create or edit a board. so set attribute <strong>data-bind=board</strong> and <strong>data-param='{"id" : "##{query.id}"}'</strong> to form tag. if URL has a "id" parameter, then bind board information of id to each input tag.</p>
-				<pre data-html="/gettingstarted/doc6-2.html"></pre>
-				<p>now, we will request to server for create board with value of each input tag. create a file "updateBoard.js" in "js" directory. if the name of javascript file is equals to name of fragment html file, then javascript file(and css file) is imported when loading fragment html. download <a href="http://resources.imboard.io/gettingstarted/updateBoard.css">updateBoard.css</a> in css directory.</p>
-				<p>Write a code refer to following. If URL have not a parameter "id", then create a board otherwise edit a board.</p>
-				<p>Easily access to URL parameter using $.query api. "imboard-api.js" must be imported in index.html.</p>
-				<pre data-html="/gettingstarted/doc6-3.html"></pre>
-				<p>It is pass value of input tags in form tag to callback function when form is submitted. of course call a "$(selector of form tag).compile(callback);" before.</p>
-				<p>"imboard-ui.js" must be imported in index.html</p>
-				<p>Refresh browser.</p>
-				<p><img src="http://resources.imboard.io/gettingstarted/result.png" alt="Sample frame" style="width: 100%;"/></p>
-			{{/localize}}
-		</div>
-		<div class="doc" data-bind="locale">
-			{{#localize}}
-			@{ko-KR}
-				<h2 id="doc7">7. 결과</h2>
-				<p><a href="http://resources.imboard.io/gettingstarted/GettingStarted.zip">GettingStarted.zip</a>를 다운로드 받으면 최종결과물을 이클립스 프로젝트 형태로 확인할 수 있습니다.</p>
-			@{default}
-				<h2 id="doc7">7. Result</h2>
-				<p>Check the <a href="http://resources.imboard.io/gettingstarted/GettingStarted.zip">GettingStarted.zip</a>. this is eclipse project including all of code.</p>
-			{{/localize}}
+		<div class="doc" id="doc_example">
+			<h2 class="page-header">6. 예제</h2>
+			<p>이 예제에서는 간단한 게시판을 구축하는 방법을 소개합니다. 예제에서 제작한 프레임은 <a href="http://resources.imboard.io/gettingstarted/sample.zip">Sample</a>을 통해 다운로드 받을 수 있습니다.</p>
+			<div class="subdoc first">
+				<h3>6-1. 프레임 디렉토리 생성</h3>
+				<p>다음 이미지와 같이 sample 프레임 디렉토리를 생성합니다. sample 디렉토리는 /content/frame/ 디렉토리 하위에 위치해야합니다.</p>
+				<p><img src="http://resources.imboard.io/gettingstarted/sample_structure.png" alt="sample 프레임 구조" style="width: 200px;"/></p>
+			</div>
+			<div class="subdoc">
+				<h3>6-2. index.html</h3>
+				<p>index.html 파일은 게시판 목록을 보여주고 글쓰기 버튼을 클릭하면 게시글을 작성할 수 있는 화면으로 전환됩니다.</p>
+				<pre data-html="/gettingstarted/sample/html/index.html"></pre>
+				<p><code>#{lan.boardName}</code> : 치환변수를 활용하여 다국어를 처리합니다. localize.json에 입력된 boardName값이 클라이언트의 언어에따라 치환됩니다.</p>
+				<p><code>&lt;div data-fragment="body"&gt;</code> : 화면 조각이 보여지는 태그입니다. 글쓰기 버튼을 클릭하면 파라미터에 <code>body=write</code>가 입력되며 write.html의 내용이 이 태그 내부에 보여지게 됩니다.</p>
+				<p><code>data-bind="articleComponent" data-param='{"boardId" : "sample"}'</code> : articleComponent모듈을 호출하며 data-param에 설정한 파라미터가 전달됩니다. sample이라는 boardId를 가지고 있는 게시글목록을 불러옵니다.</p>
+				<p>불러온 게시글 목록은 <code>&lt;script id="articleComponentTemplate" type="text/x-handlebars-template"&gt;&lt;/code&gt;</code> 핸들바 템플릿 스크립트 활용하여 <code>&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;</code> 태그 내부로 보여줍니다.</p>
+				<p>자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc2">데이터조합</a>을 참고하십시오.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-3. index.js</h3>
+				<p>게시글 목록의 삭제 버튼을 클릭하면 해당 게시글을 삭제하는 기능을 구현합니다.</p>
+				<pre data-html="/gettingstarted/sample/js/index.js"></pre>
+				<p>$.api.article.deleteArticle 함수에 대한 자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc4-4-6">deleteArticle</a>을 참고하십시오.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-4. index.css</h3>
+				<pre data-html="/gettingstarted/sample/css/index.css"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>6-5. write.html</h3>
+				<p>제목과 내용을 입력받아 게시글을 저장하는 화면입니다.</p>
+				<pre data-html="/gettingstarted/sample/html/write.html"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>6-6. write.js</h3>
+				<pre data-html="/gettingstarted/sample/js/write.js"></pre>
+				<p>form submit이 발생하면 compile함수의 파라미터로 전달된 함수를 실행하며 data에 사용자가 입력한 값을 담아줍니다. 그 data를 사용해서 게시글 작성화면인경우 insertArticle을 호출하고 편집화면일경우 updateArticle을 호출합니다.</p>
+				<p>form 컴포넌트에 대한 자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc3-2">form 컴포넌트</a>를 참고하십시오.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-7. localize.json</h3>
+				<pre data-html="/gettingstarted/sample/properties/localize.json"></pre>
+			</div>
 		</div>
 	</div>
-	<div class="col-xs-3" data-bind="locale">
-		{{#localize}}
-		@{ko-KR}
+	<div class="col-xs-3">
 		<ul id="contentList" data-component="scrollFollower">
-			<li><a href="#doc1">1. 개요</a></li>
-			<li><a href="#doc2">2. 프레임구조 생성</a></li>
-			<li><a href="#doc3">3. index.html 작성</a></li>
-			<li><a href="#doc4">4. 레이아웃 구성</a></li>
-			<li><a href="#doc5">5. 데이터조합</a></li>
-			<li><a href="#doc6">6. 페이지조각 제작</a></li>
-			<li><a href="#doc7">7. 결과</a></li>
+			<li><a href="#doc_download">1. 다운로드</a></li>
+			<li><a href="#doc_configuration">2. 설정 및 실행</a></li>
+			<li><a href="#doc_frame_structure">3. 프레임구조</a></li>
+			<li><a href="#doc_index">4. index.html</a></li>
+			<li><a href="#doc_import_uiframework">5. UI프레임워크 임포트</a></li>
+			<li><a href="#doc_example">6. 예제</a></li>
 		</ul>
-		@{default}
-		<ul id="contentList" data-component="scrollFollower">
-			<li><a href="#doc1">1. Overview</a></li>
-			<li><a href="#doc2">2. Create frame structure</a></li>
-			<li><a href="#doc3">3. Write index.html</a></li>
-			<li><a href="#doc4">4. Constitute a layout</a></li>
-			<li><a href="#doc5">5. Bind a data</a></li>
-			<li><a href="#doc6">6. Create a page fragment</a></li>
-			<li><a href="#doc7">7. Result</a></li>
-		</ul>
-		{{/localize}}
 	</div>
+	@{default}
+	<div class="col-xs-9" style="padding:0;" id="documentArea">
+		<div class="doc" id="doc_download">
+			<h2 class="page-header">1. Download</h2>
+			<div class="subdoc first">
+				<h3>1-1. Prerequisites</h3>
+				<dl>
+					<dt>Web server</dt>
+					<dd>You need a server for install imboard.</dd>
+				</dl>
+				<dl>
+					<dt>nodejs &amp; MySQL</dt>
+					<dd>Imboard use nodejs and MySQL. Install a recent version of <a href="https://nodejs.org" target="_blank">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>.</dd>
+				</dl>
+				<dl>
+					<dt>Create database and user on MySQL</dt>
+					<dd>Create database and user after connect to installed MySQL.</dd>
+				</dl>
+			</div>
+			<div class="subdoc">
+				<h3>1-2. Download</h3>
+				<p>Imboard is provided by .zip and .tar.gz file. Currently version is <span data-id="currentVersion"></span></p>
+				<p>Develop version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a></p>
+				<p>
+					<a href="http://resources.imboard.io/imboard/imboard.zip" class="btn btn-outline black" style="width: 150px;">imboard.zip<br/>#{lan.download}</a>
+					<a href="http://resources.imboard.io/imboard/imboard.tar.gz" class="btn btn-outline black" style="width: 150px;">imboard.tar.gz<br/>#{lan.download}</a>
+				</p>
+			</div>
+			<div class="subdoc">
+				<h3>1-3. Install with npm</h3>
+				<p>Easy installation using npm.</p>
+				<pre>$ npm install imboard</pre>
+			</div>
+		</div>
+		<div class="doc" id="doc_configuration">
+			<h2 class="page-header">2. Configuration and run</h2>
+			<p>Install a nodejs module and configure a specific value for run a imboard application. this work is processed on a root directory of installed imboard.</p>
+			<dl>
+				<dt>Install a nodejs module</dt>
+				<dd><pre>$ npm install</pre></dd>
+			</dl>
+			<dl>
+				<dt>Configure information of database</dt>
+				<dd>
+					<pre>$ node config.js</pre>
+					<p>Select a jdbc menu. enter the information of host, username, password, database.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Configure a name of frame</dt>
+				<dd>
+					<pre>$ node config.js</pre>
+					<p>Select a frame menu. enter the name of frame. If you don't a name, setted "blog".</p>
+					<p>For this tutorial we will enter a "blog".</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Install initial data</dt>
+				<dd>
+					<pre>$ node install.js</pre>
+					<p>Insert initial data for a imboard application and a frame to database of previous configuration.</p>
+					<p>Now, installation is done.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Run application</dt>
+				<dd>
+					<pre>$ node app.js</pre>
+					<p>Enter <code>http://localhost:3000/</code> in a web browser. you can see application running by frame "blog".</p>
+				</dd>
+			</dl>
+		</div>
+		<div class="doc" id="doc_frame_structure">
+			<h2 class="page-header">3. Structure of frame</h2>
+			<p>Frame is unit of webpage. it is composited by directory and it is placed under <code>/content/frame/</code></p>
+			<p>Following image is a structure of default frame "blog".</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/blog_structure.png" alt='Directory structure of frame "blog"' style="width: 200px;"/></p>
+			<dl>
+				<dt>css</dt>
+				<dd>This is a directory include .css files.</dd>
+			</dl>
+			<dl>
+				<dt>html</dt>
+				<dd>This is a directory include .html files. index.html file is a start page and essential.</dd>
+			</dl>
+			<dl>
+				<dt>js</dt>
+				<dd>This is a directory include .js fiels.</dd>
+			</dl>
+			<dl>
+				<dt>lib</dt>
+				<dd>This is a directory include a library for frame.</dd>
+			</dl>
+			<dl>
+				<dt>properties</dt>
+				<dd>This is a directory include a script of database for initial data for frame and a script of handlebars helper and a data of localization. do not change both directory name "handlebars" and "setup"</dd>
+			</dl>
+		</div>
+		<div class="doc" id="doc_index">
+			<h2 class="page-header">4. index.html</h2>
+			<p>index.html file is a start page and has a following structure. it has a essential css files and javascript library for the frame.</p>
+			<pre data-html="/gettingstarted/index.html"></pre>
+			<p>##{path.xxx} is a replace variables that is replaced by specific path of xxx key. For more information about replace variables, see <a href="?fragment=document&locale=#{locale}#doc2-1">Replace variables</a>.</p>
+		</div>
+		<div class="doc" id="doc_import_uiframework">
+			<h2 class="page-header">5. Import UI-Framework</h2>
+			<p>If you want to use UI-Framework like the "Bootstrap", copy the library into a directory "lib" of the frame and import script and css into "index.html".</p>
+			<p><img src="http://resources.imboard.io/gettingstarted/uiframework.png" alt="Structure of UI-Framework of the frame" style="width: 200px;"/></p>
+			<pre>&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap-theme.min.css"/&gt;
+&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap.min.css"/&gt;
+&lt;script src="##{path.root}/lib/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;</pre>
+		</div>
+		<div class="doc" id="doc_example">
+			<h2 class="page-header">6. Example</h2>
+			<p>This example describe how to develop a simple board. a frame which is developed in this example can download from <a href="http://resources.imboard.io/gettingstarted/sample.zip">Sample</a>.</p>
+			<div class="subdoc first">
+				<h3>6-1. Create frame directory</h3>
+				<p>Create a directory of frame "sample" refer to following image. "sample" directory is in "/content/frame/" directory.</p>
+				<p><img src="http://resources.imboard.io/gettingstarted/sample_structure.png" alt='Structure of frame "sample"' style="width: 200px;"/></p>
+			</div>
+			<div class="subdoc">
+				<h3>6-2. index.html</h3>
+				<p>index.html show a list of article. if you click a button "Write", change to a page which an write a article.</p>
+				<pre data-html="/gettingstarted/sample/html/index.html"></pre>
+				<p><code>#{lan.boardName}</code> : localization using replace variables. this is replaced to value of "boardName" in lcoalize.json</p>
+				<p><code>&lt;div data-fragment="body"&gt;</code> : this tag show fragment. if you click a button "write", shown a content of "write.html" in this tag after url parameter is changed to <code>body=write</code>.</p>
+				<p><code>data-bind="articleComponent" data-param='{"boardId" : "sample"}'</code> : call a module "articleComponent" with a parameter which set in data-param attribute. load a list of article which has a boardId "sample".</p>
+				<p>The list of article that is loaded previous step is binded into <code>&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;</code> by <code>&lt;script id="articleComponentTemplate" type="text/x-handlebars-template"&gt;&lt;/code&gt;</code> handlebars template script.</p>
+				<p>For more information about that, see <a href="?fragment=document&locale=#{locale}#doc2">Data composition</a>.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-3. index.js</h3>
+				<p>This script is developed to delete function, if you click a button "delete" in list of article.</p>
+				<pre data-html="/gettingstarted/sample/js/index.js"></pre>
+				<p>For more information about $.api.article.deleteArticle, see <a href="?fragment=document&locale=#{locale}#doc4-4-6">deleteArticle</a>.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-4. index.css</h3>
+				<pre data-html="/gettingstarted/sample/css/index.css"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>6-5. write.html</h3>
+				<p>This page save a article with a subject and a content by user input.</p>
+				<pre data-html="/gettingstarted/sample/html/write.html"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>6-6. write.js</h3>
+				<pre data-html="/gettingstarted/sample/js/write.js"></pre>
+				<p>If submit event occured in a form element, call a function which is passed in function "compile". it has a data which is entered by user. if this page is write mode, call a function "insertArticle", otherwhise call a function "updateArticle" using the data.</p>
+				<p>For more informatin about form component, see <a href="?fragment=document&locale=#{locale}#doc3-2">form component</a>.</p>
+			</div>
+			<div class="subdoc">
+				<h3>6-7. localize.json</h3>
+				<pre data-html="/gettingstarted/sample/properties/localize.json"></pre>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-3">
+		<ul id="contentList" data-component="scrollFollower">
+			<li><a href="#doc_download">1. Download</a></li>
+			<li><a href="#doc_configuration">2. Configuration and run</a></li>
+			<li><a href="#doc_frame_structure">3. Structure of frame</a></li>
+			<li><a href="#doc_index">4. index.html</a></li>
+			<li><a href="#doc_import_uiframework">5. Import UI-Framework</a></li>
+			<li><a href="#doc_example">6. Example</a></li>
+		</ul>
+	</div>
+	{{/localize}}
 </div>

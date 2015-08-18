@@ -1,9 +1,19 @@
-.doc > div
+.subdoc
 {
 	padding: 10px 0;
 }
 
+.subdoc.first
+{
+	padding-top:0;
+}
+
 pre
 {
-	margin: 30px 0;
+	margin: 5px 0;
+}
+
+dt
+{
+	margin-top: 25px;
 }

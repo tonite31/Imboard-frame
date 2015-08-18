@@ -1,0 +1,104 @@
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+&lt;meta http-equiv="X-UA-Compatible" content="IE=EDGE"/&gt;
+
+&lt;title&gt;Title&lt;/title&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="##{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="##{path.root}/lib/bootstrap/css/bootstrap.min.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="##{path.module}/imboard/css/imboard-ui.css" /&gt;
+
+&lt;link rel="stylesheet" type="text/css" href="##{path.root}/css/index.css"/&gt;
+
+&lt;script src="##{path.lib}/jquery/jquery-1.10.2.js"&gt;&lt;/script&gt;
+&lt;script src="##{path.root}/lib/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="##{path.lib}/handlebars/handlebars-v1.3.0.js"&gt;&lt;/script&gt;
+
+&lt;script src="##{path.root}/js/index.js"&gt;&lt;/script&gt;
+
+&lt;script src="##{path.module}/imboard/js/imboard-api.js"&gt;&lt;/script&gt;
+&lt;script src="##{path.module}/imboard/js/imboard-ui.js"&gt;&lt;/script&gt;
+&lt;script src="##{path.module}/imboard/js/handlebars-helper.js"&gt;&lt;/script&gt;
+
+&lt;script id="articleComponentTemplate" type="text/x-handlebars-template"&gt;
+{{#if articleList}}
+&lt;table class="dataTable"&gt;
+	&lt;colgroup&gt;
+		&lt;col style="width: 10%;"/&gt;
+		&lt;col style="width: 30%;"/&gt;
+		&lt;col style="width: 20%;"/&gt;
+		&lt;col style="width: 20%;"/&gt;
+		&lt;col style="width: 10%;"/&gt;
+		&lt;col style="width: 10%;"/&gt;
+	&lt;/colgroup&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th class="center"&gt;Seq&lt;/th&gt;
+			&lt;th class="center"&gt;Subject&lt;/th&gt;
+			&lt;th class="center"&gt;Writer&lt;/th&gt;
+			&lt;th class="center"&gt;Date&lt;/th&gt;
+			&lt;th class="center"&gt;Hit&lt;/th&gt;
+			&lt;th class="center"&gt;Delete&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+{{#each articleList}}
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td class="center"&gt;{{seq}}&lt;/td&gt;
+			&lt;td&gt;&lt;a href="?body=write&seq={{seq}}"&gt;{{subject}}&lt;/a&gt;&lt;/td&gt;
+			&lt;td&gt;{{writerName}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{registerDate}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{hit}}&lt;/td&gt;
+			&lt;td class="center"&gt;&lt;button type="button" class="btn btn-default" data-id="{{seq}}"&gt;Delete&lt;/button&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+{{/each}}
+&lt;/table&gt;
+{{/if}}
+&lt;/script&gt;
+
+&lt;script id="articleComponentPagingTemplate" type="text/x-handlebars-template"&gt;
+{{#if pageList}}
+&lt;nav style='text-align:center;'&gt;
+	&lt;ul class="pagination"&gt;
+		{{#sign pageIndex "&gt;" 1}}
+		&lt;li&gt;
+			&lt;a href="#pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"&gt;
+				&lt;span aria-hidden="true"&gt;Previous&lt;/span&gt;
+			&lt;/a&gt;
+		&lt;/li&gt;
+		{{/sign}}
+		{{#each pageList}}
+		&lt;li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}&gt;
+			&lt;a href="#pageIndex={{pageNumber}}"&gt;{{pageNumber}} {{#equals ../pageIndex pageNumber}}&lt;span class="sr-only"&gt;(current)&lt;/span&gt;{{/equals}}&lt;/a&gt;
+		&lt;/li&gt;
+		{{/each}}
+		{{#sign pageIndex "&lt;" maxPage}}
+		&lt;li&gt;
+			&lt;a href="#pageIndex={{math pageIndex "+" 1}}" aria-label="Next"&gt;
+				&lt;span aria-hidden="true"&gt;Next&lt;/span&gt;
+			&lt;/a&gt;
+		&lt;/li&gt;
+		{{/sign}}
+	&lt;/ul&gt;
+&lt;/nav&gt;
+{{/if}}
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;div class="container"&gt;
+		&lt;h1 class="page-header"&gt;##{lan.boardName}&lt;/h1&gt;
+		&lt;div data-fragment="body"&gt;
+			&lt;p style="float: right;"&gt;&lt;a href="?body=write" class="btn btn-default"&gt;##{lan.write}&lt;/a&gt;&lt;/p&gt;
+			&lt;div style="clear: both;" data-bind="articleComponent" data-param='{"boardId" : "sample"}'&gt;
+				&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;
+				&lt;div data-parts="pagination" data-template-id="articleComponentPagingTemplate"&gt;&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
