@@ -118,24 +118,16 @@
 			<pre data-html="/gettingstarted/index.html"></pre>
 			<p>##{path.xxx}형태로 입력된 부분은 치환변수로 각각의 xxx키에 해당하는 경로로 치환됩니다. 자세한 내용은 문서의 <a href="?fragment=document&locale=#{locale}#doc2-1">치환변수</a>를 참조하십시오.</p>
 		</div>
-		<div class="doc" id="doc_import_uiframework">
-			<h2 class="page-header">5. UI프레임워크 임포트</h2>
-			<p>Bootstrap과 같은 UI프레임워크를 사용할때는 프레임의 lib디렉토리에 복사하고 script와 css를 index.html 파일에 import합니다.</p>
-			<p><img src="http://resources.imboard.io/gettingstarted/uiframework.png" alt="프레임의 UI프레임워크 구조" style="width: 200px;"/></p>
-			<pre>&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap-theme.min.css"/&gt;
-&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap.min.css"/&gt;
-&lt;script src="##{path.root}/lib/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;</pre>
-		</div>
 		<div class="doc" id="doc_example">
-			<h2 class="page-header">6. 예제</h2>
+			<h2 class="page-header">5. 예제</h2>
 			<p>이 예제에서는 간단한 게시판을 구축하는 방법을 소개합니다. 예제에서 제작한 프레임은 <a href="http://resources.imboard.io/gettingstarted/sample.zip">Sample</a>을 통해 다운로드 받을 수 있습니다.</p>
 			<div class="subdoc first">
-				<h3>6-1. 프레임 디렉토리 생성</h3>
+				<h3>5-1. 프레임 디렉토리 생성</h3>
 				<p>다음 이미지와 같이 sample 프레임 디렉토리를 생성합니다. sample 디렉토리는 /content/frame/ 디렉토리 하위에 위치해야합니다.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/sample_structure.png" alt="sample 프레임 구조" style="width: 200px;"/></p>
 			</div>
 			<div class="subdoc">
-				<h3>6-2. index.html</h3>
+				<h3>5-2. index.html</h3>
 				<p>index.html 파일은 게시판 목록을 보여주고 글쓰기 버튼을 클릭하면 게시글을 작성할 수 있는 화면으로 전환됩니다.</p>
 				<pre data-html="/gettingstarted/sample/html/index.html"></pre>
 				<p><code>#{lan.boardName}</code> : 치환변수를 활용하여 다국어를 처리합니다. localize.json에 입력된 boardName값이 클라이언트의 언어에따라 치환됩니다.</p>
@@ -145,28 +137,28 @@
 				<p>자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc2">데이터조합</a>을 참고하십시오.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-3. index.js</h3>
+				<h3>5-3. index.js</h3>
 				<p>게시글 목록의 삭제 버튼을 클릭하면 해당 게시글을 삭제하는 기능을 구현합니다.</p>
 				<pre data-html="/gettingstarted/sample/js/index.js"></pre>
 				<p>$.api.article.deleteArticle 함수에 대한 자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc4-4-6">deleteArticle</a>을 참고하십시오.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-4. index.css</h3>
+				<h3>5-4. index.css</h3>
 				<pre data-html="/gettingstarted/sample/css/index.css"></pre>
 			</div>
 			<div class="subdoc">
-				<h3>6-5. write.html</h3>
+				<h3>5-5. write.html</h3>
 				<p>제목과 내용을 입력받아 게시글을 저장하는 화면입니다.</p>
 				<pre data-html="/gettingstarted/sample/html/write.html"></pre>
 			</div>
 			<div class="subdoc">
-				<h3>6-6. write.js</h3>
+				<h3>5-6. write.js</h3>
 				<pre data-html="/gettingstarted/sample/js/write.js"></pre>
 				<p>form submit이 발생하면 compile함수의 파라미터로 전달된 함수를 실행하며 data에 사용자가 입력한 값을 담아줍니다. 그 data를 사용해서 게시글 작성화면인경우 insertArticle을 호출하고 편집화면일경우 updateArticle을 호출합니다.</p>
 				<p>form 컴포넌트에 대한 자세한 정보는 문서의 <a href="?fragment=document&locale=#{locale}#doc3-2">form 컴포넌트</a>를 참고하십시오.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-7. localize.json</h3>
+				<h3>5-7. localize.json</h3>
 				<pre data-html="/gettingstarted/sample/properties/localize.json"></pre>
 			</div>
 		</div>
@@ -177,8 +169,7 @@
 			<li><a href="#doc_configuration">2. 설정 및 실행</a></li>
 			<li><a href="#doc_frame_structure">3. 프레임구조</a></li>
 			<li><a href="#doc_index">4. index.html</a></li>
-			<li><a href="#doc_import_uiframework">5. UI프레임워크 임포트</a></li>
-			<li><a href="#doc_example">6. 예제</a></li>
+			<li><a href="#doc_example">5. 예제</a></li>
 		</ul>
 	</div>
 	@{default}
@@ -285,24 +276,16 @@
 			<pre data-html="/gettingstarted/index.html"></pre>
 			<p>##{path.xxx} is a replace variables that is replaced by specific path of xxx key. For more information about replace variables, see <a href="?fragment=document&locale=#{locale}#doc2-1">Replace variables</a>.</p>
 		</div>
-		<div class="doc" id="doc_import_uiframework">
-			<h2 class="page-header">5. Import UI-Framework</h2>
-			<p>If you want to use UI-Framework like the "Bootstrap", copy the library into a directory "lib" of the frame and import script and css into "index.html".</p>
-			<p><img src="http://resources.imboard.io/gettingstarted/uiframework.png" alt="Structure of UI-Framework of the frame" style="width: 200px;"/></p>
-			<pre>&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap-theme.min.css"/&gt;
-&lt;link rel="stylesheet" href="##{path.root}/lib/bootstrap/css/bootstrap.min.css"/&gt;
-&lt;script src="##{path.root}/lib/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;</pre>
-		</div>
 		<div class="doc" id="doc_example">
-			<h2 class="page-header">6. Example</h2>
+			<h2 class="page-header">5. Example</h2>
 			<p>This example describe how to develop a simple board. a frame which is developed in this example can download from <a href="http://resources.imboard.io/gettingstarted/sample.zip">Sample</a>.</p>
 			<div class="subdoc first">
-				<h3>6-1. Create frame directory</h3>
+				<h3>5-1. Create frame directory</h3>
 				<p>Create a directory of frame "sample" refer to following image. "sample" directory is in "/content/frame/" directory.</p>
 				<p><img src="http://resources.imboard.io/gettingstarted/sample_structure.png" alt='Structure of frame "sample"' style="width: 200px;"/></p>
 			</div>
 			<div class="subdoc">
-				<h3>6-2. index.html</h3>
+				<h3>5-2. index.html</h3>
 				<p>index.html show a list of article. if you click a button "Write", change to a page which an write a article.</p>
 				<pre data-html="/gettingstarted/sample/html/index.html"></pre>
 				<p><code>#{lan.boardName}</code> : localization using replace variables. this is replaced to value of "boardName" in lcoalize.json</p>
@@ -312,28 +295,28 @@
 				<p>For more information about that, see <a href="?fragment=document&locale=#{locale}#doc2">Data composition</a>.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-3. index.js</h3>
+				<h3>5-3. index.js</h3>
 				<p>This script is developed to delete function, if you click a button "delete" in list of article.</p>
 				<pre data-html="/gettingstarted/sample/js/index.js"></pre>
 				<p>For more information about $.api.article.deleteArticle, see <a href="?fragment=document&locale=#{locale}#doc4-4-6">deleteArticle</a>.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-4. index.css</h3>
+				<h3>5-4. index.css</h3>
 				<pre data-html="/gettingstarted/sample/css/index.css"></pre>
 			</div>
 			<div class="subdoc">
-				<h3>6-5. write.html</h3>
+				<h3>5-5. write.html</h3>
 				<p>This page save a article with a subject and a content by user input.</p>
 				<pre data-html="/gettingstarted/sample/html/write.html"></pre>
 			</div>
 			<div class="subdoc">
-				<h3>6-6. write.js</h3>
+				<h3>5-6. write.js</h3>
 				<pre data-html="/gettingstarted/sample/js/write.js"></pre>
 				<p>If submit event occured in a form element, call a function which is passed in function "compile". it has a data which is entered by user. if this page is write mode, call a function "insertArticle", otherwhise call a function "updateArticle" using the data.</p>
 				<p>For more informatin about form component, see <a href="?fragment=document&locale=#{locale}#doc3-2">form component</a>.</p>
 			</div>
 			<div class="subdoc">
-				<h3>6-7. localize.json</h3>
+				<h3>5-7. localize.json</h3>
 				<pre data-html="/gettingstarted/sample/properties/localize.json"></pre>
 			</div>
 		</div>
@@ -344,8 +327,7 @@
 			<li><a href="#doc_configuration">2. Configuration and run</a></li>
 			<li><a href="#doc_frame_structure">3. Structure of frame</a></li>
 			<li><a href="#doc_index">4. index.html</a></li>
-			<li><a href="#doc_import_uiframework">5. Import UI-Framework</a></li>
-			<li><a href="#doc_example">6. Example</a></li>
+			<li><a href="#doc_example">5. Example</a></li>
 		</ul>
 	</div>
 	{{/localize}}
