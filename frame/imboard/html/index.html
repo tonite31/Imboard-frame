@@ -44,6 +44,23 @@
 	<li><a href="?locale=en-US">#{lan.english}</a></li>
 </script>
 
+<script id="pagingTemplate" type="text/x-handlebars-template">
+{{#if pageList}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li><a href="?fragment=#{query.fragment}&locale=#{query.locale}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}><a href="?piece=book&username=#{query.username}&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a></li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li><a href="?fragment=#{query.fragment}&locale=#{query.locale}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next"><span aria-hidden="true">다음</span></a></li>
+		{{/sign}}
+	</ul>
+</nav>
+{{/if}}
+</script>
 </head>
 
 <body>
