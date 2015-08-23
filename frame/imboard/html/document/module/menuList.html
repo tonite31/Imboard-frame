@@ -1,55 +1,6 @@
-<script id="menuListTemplate" type="text/x-handlebars-template">
-{{#if menuList}}
-<table class="dataTable">
-	<colgroup>
-		<col style="width: 10%;"/>
-		<col style="width: 30%;"/>
-		<col style="width: 15%;"/>
-		<col style="width: 25%;"/>
-		<col style="width: 10%;"/>
-		<col style="width: 10%;"/>
-	</colgroup>
-	<thead>
-		<tr>
-		{{#localize}}
-		@{ko-KR}
-			<th class="center">아이디</th>
-			<th class="center">이름</th>
-			<th class="center">유형</th>
-			<th class="center">파라미터</th>
-			<th class="center">우선순위</th>
-			<th class="center">뷰레벨</th>
-		@{default}
-			<th class="center">ID</th>
-			<th class="center">Name</th>
-			<th class="center">Type</th>
-			<th class="center">Parameter</th>
-			<th class="center">Priority</th>
-			<th class="center">Level of menu viewing</th>
-		{{/localize}}
-		</tr>
-	</thead>
-{{#each menuList}}
-	<tbody>
-		<tr>
-			<td>{{id}}</td>
-			<td>{{name}}</td>
-			<td>{{type}}</td>
-			<td>{{parameter}}</td>
-			<td class="center">{{priority}}</td>
-			<td class="center">{{viewLevel}}</td>
-		</tr>
-	</tbody>
-{{/each}}
-</table>
-{{/if}}
-</script>
-
-<div class="panel panel-default">
-	<div class="panel-heading"><h4 id="doc2-2-5-1">menuList</h4></div>
+<div class="panel panel-default" id="doc_menuList">
+	<div class="panel-heading"><h4>1-5-1. menuList</h4></div>
 	<div class="panel-body">
-		<div class="content-header">#{lan.example}</div>
-		<div data-bind="menuList" data-param='{"parentMenuId" : ""}' data-template-id="menuListTemplate"></div>
 		<div class="content-header">#{lan.parameter}</div>
 		{{#localize}}
 		@{ko-KR}
@@ -240,7 +191,7 @@
 			</tbody>
 		</table>
 		{{/localize}}
-		<div class="content-header">#{lan.code}</div>
+		<div class="content-header">#{lan.example}</div>
 		<pre class="content-code">
 &lt;script id="menuListTemplate" type="text/x-handlebars-template"&gt;
 {{#if menuList}}

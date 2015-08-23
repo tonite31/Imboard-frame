@@ -1,12 +1,10 @@
-{{#localize}}
-@{ko-KR}
-<h2 id="doc6">6. 국제화처리</h2>
-<p>치환변수 또는 {{##localize}} 문법을 활용하여 국제화처리를 할 수 있습니다.</p>
-<div>
-	<h3 id="doc6-1">6-1. 치환변수를 이용하는 방법</h3>
-	<p>프레임 폴더 하위에 properties폴더를 생성합니다. properties폴더 하위에 localize.json파일을 생성합니다.</p>
-	<p>아래와 같은 구조로 localize.json 파일을 작성합니다.</p>
-	<pre>
+	<h2 class="page-header">6. 다국어 처리방법</h2>
+	<p>치환변수 또는 {{##localize}} 문법을 활용하여 국제화처리를 할 수 있습니다.</p>
+	<div>
+		<h3 id="doc_localize_replace_variables">6-1. 치환변수를 이용하는 방법</h3>
+		<p>프레임 폴더 하위에 properties폴더를 생성합니다. properties폴더 하위에 localize.json파일을 생성합니다.</p>
+		<p>아래와 같은 구조로 localize.json 파일을 작성합니다.</p>
+		<pre>
 {
 	"signin" :
 	{
@@ -19,11 +17,11 @@
 		"default" : "Sign out"
 	}
 }</pre>
-	<p>localize.json을 위와 같이 작성하면 ##{lan.signin}, ##{lan.signout} 변수가 client의 언어에 따라 해당 값으로 치환됩니다. 만약 작성되지 않은 언어일경우 default에 입력한 값으로 치환됩니다.</p>
-</div>
-<div>
-	<h3 id="doc6-2">6-2. {{##localize}} 문법을 이용하는 방법</h3>
-	<pre>{{##localize}}
+		<p>localize.json을 위와 같이 작성하면 ##{lan.signin}, ##{lan.signout} 변수가 client의 언어에 따라 해당 값으로 치환됩니다. 만약 작성되지 않은 언어일경우 default에 입력한 값으로 치환됩니다.</p>
+	</div>
+	<div>
+		<h3 id="doc_localize_localize">6-2. {{##localize}} 문법을 이용하는 방법</h3>
+		<pre>{{##localize}}
 	@#{ko-KR}
 	한국어
 	@#{en-US}
@@ -31,40 +29,5 @@
 	@#{default}
 	Korean
 {{//localize}}</pre>
-	<p>{{##localize}} ~ {{//localize}}문법으로 감싼 부분에 각 언어에 해당하는 컨텐츠를 입력합니다.</p>
-</div>
-@{default}
-<h2 id="doc6">6. Localize usage</h2>
-<p>Can localize by replace variable or {{##localize}} grammar.</p>
-<div>
-	<h3 id="doc6-1">6-1. Replace variable usage</h3>
-	<p>Create a "properties" directory in a "frame" directory. create a "localize.json" file in a "properties" directory.</p>
-	<p>Write a "localize.json" file refer to following structure.</p>
-	<pre>
-{
-	"signin" :
-	{
-		"ko-KR" : "로그인",
-		"default" : "Sign in"
-	},
-	"signout" :
-	{
-		"ko-KR" : "로그아웃",
-		"default" : "Sign out"
-	}
-}</pre>
-	<p>##{lan.signin}, ##{lan.signout} is replaced to a value by locale of clinet. if locale is not writed in "localize.json" file, then replaced to a value of "default".</p>
-</div>
-<div>
-	<h3 id="doc6-2">6-2. {{##localize}} usage</h3>
-	<pre>{{##localize}}
-	@#{ko-KR}
-	한국어
-	@#{en-US}
-	Korean
-	@#{default}
-	Korean
-{{//localize}}</pre>
-	<p>Write a content into "{{##localize}} ~ {{//localize}}". locale area that is equals to a locale of client is seen.</p>
-</div>
-{{/localize}}
+		<p>{{##localize}} ~ {{//localize}}문법으로 감싼 부분에 각 언어에 해당하는 컨텐츠를 입력합니다.</p>
+	</div>

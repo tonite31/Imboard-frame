@@ -1,93 +1,31 @@
-{{#localize}}
-@{ko-KR}
-<h2 id="doc2">2. 데이터조합</h2>
-<p>미리 정의된 치환변수를 사용하거나 HTML 엘리먼트에 data-bind속성을 지정하면 간편하게 서버로부터 데이터를 불러와서 화면에 조합할 수 있습니다.</p>
-<div>
-	<h3 id="doc2-1">2-1. 치환변수</h3>
-	<p>치환변수는 #{} 형태로 사용하며 서버의 특정 변수로 치환됩니다. 치환변수를 문자 그대로 사용하려면 #을 하나 더 붙인 ###{path.key} 형태로 입력합니다.</p>
-	<table class="dataTable">
-		<colgroup>
-			<col style="width:15%;"/>
-			<col style="width:75%;"/>
-		</colgroup>
-		<tbody>
-			<tr><th>##{path.root}</th><td>프레임의 루트경로입니다. 프레임의 이름이 sample이라면 치환되는 값은 <strong>/content/frame/sample</strong> 입니다.</td>	</tr>
-			<tr><th>##{path.module}</th><td>프레임의 공통 모듈경로입니다. 치환되는 값은 <strong>/content/module</strong> 입니다.</td></tr>
-			<tr><th>##{path.lib}</th><td>프레임의 공통 라이브러리경로입니다. 치환되는 값은 <strong>/content/lib</strong> 입니다.</td></tr>
-			<tr><th>##{query.xxx}</th><td>xxx키에 해당하는 querystring값으로 치환됩니다. ##{query}만 지정할경우 ?를 포함한 querystring 전체가 치환됩니다.</td></tr>
-			<tr><th>##{user.xxx}</th><td>로그인한 사용자의 정보중 xxx키에 해당하는 값으로 치환됩니다.</td></tr>
-			<tr><th>##{locale}</th><td>접속한 클라이언트의 언어 코드 값으로 치환됩니다. 만약 querystring에 locale값이 있을경우 그 값으로 치환됩니다. ex)ko-KR, en-US</td></tr>
-			<tr><th>##{lan.xxx}</th><td>querystring에 locale값이 있다면 해당 값으로, 그렇지 않으면 접속한 클라이언트의 언어에 따라 localize.json에 입력된 xxx키에 해당하는 값으로 치환됩니다. 국제화방법은 <a href="#doc6">6. 국제화</a>를 참조하십시오.</td></tr>
-		</tbody>
-	</table>
+<h2 class="page-header">1. data-bind 모듈</h2>
+<div id="doc_data_bind_overview">
+	<h2 class="page-header">1-1. 개요</h2>
+	<p>data-bind 모듈은 HTML 코드만으로 서버 혹은 데이터베이스로부터 데이터를 불러와서 화면에 조합하는 기능입니다. 사용법은 다음과 같습니다.</p>
+	<p><code>&lt;div data-bind="<strong>모듈명</strong>" data-param='<strong>{"key" : "value"}</strong>' data-template-id="<strong>템플릿 아이디</strong>"&gt;&lt;/div&gt;</code></p>
+	<p>위와 같은 HTML태그를 작성하면 화면이 렌더링될때 모듈명에 해당하는 모듈을 실행하고 결과 데이터를 템플릿으로 넘겨줍니다. data-param 속성값은 json유형으로 설정해야합니다.</p>
+	<p>템플릿은 <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a> 문법을 사용하여 작성합니다.</p>
 </div>
-@{default}
-<h2 id="doc2">2. Data composition</h2>
-<p>Can composite a data to screen by a replace variables or a attribute "data-bind" to specific html tag.</p>
-<div>
-	<h3 id="doc2-1">2-1. Replace variables</h3>
-	<p>Replace variable is used by grammar of "#{}", and changed to specific variable of server. if want to use a original word "##{path.key}", then use a "###{path.key}".</p>
-	<table class="dataTable">
-		<colgroup>
-			<col style="width:15%;"/>
-			<col style="width:75%;"/>
-		</colgroup>
-		<tbody>
-			<tr><th>##{path.root}</th><td>Root path of a frame. if frame's name is the "sample", then replace value is "<strong>/content/frame/sample</strong>".</td>	</tr>
-			<tr><th>##{path.module}</th><td>The path of common module of a frame. replace value is "<strong>/content/module</strong>".</td></tr>
-			<tr><th>##{path.lib}</th><td>The path of common library of a frame. replace value is "<strong>/content/lib</strong>"</td></tr>
-			<tr><th>##{query.xxx}</th><td>Is replaced to value of specific querystring that equals a key "xxx". if use a "##{query}", then replaced by all querystring.</td></tr>
-			<tr><th>##{user.xxx}</th><td>Is replaced to value of specific signined user infomation that equals a key "xxx".</td></tr>
-			<tr><th>##{locale}</th><td>Is replaced to value of language code of connected client. if querystring has a key "locale", then replaced by it. ex)ko-KR, en-US</td></tr>
-			<tr><th>##{lan.xxx}</th><td>Is replaced to value of language of connected client. if querystring has a key "locale", then replaced by use it. Usage refer to <a href="#doc6">6. Localize</a></td></tr>
-		</tbody>
-	</table>
+<div id="doc_board">
+	<h2 class="page-header">1-2. Board</h2>
+	<div class="doc" data-html="/document/module/boardList.html"></div>
+	<div class="doc" data-html="/document/module/board.html"></div>
 </div>
-{{/localize}}
-<div>
-	<h2 id="doc2-2">2-2. data-bind</h2>
-	{{#localize}}
-	@{ko-KR}
-	<div>
-		<h3 id="doc2-2-1">2-2-1. 개요</h3>
-		<p>data-bind 모듈은 HTML 태그에 data-bind, data-param, data-template-id 속성을 지정해서 서버의 모듈을 통해 얻어온 데이터를 화면에 조합할 때 사용합니다.</p>
-		<p>data-bind 속성값에 해당하는 모듈을 실행하고, 그 결과 데이터를 <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a> 문법을 통해 화면에 조합합니다.</p>
-		<p>ex) &lt;div data-bind="<strong>모듈명</strong>" data-param='{"key" : "value"}' data-template-id="<strong>템플릿 아이디</strong>"&gt;&lt;/div&gt;</p>
-	</div>
-	@{default}
-	<div>
-		<h3 id="doc2-2-1">2-2-1. Overview</h3>
-		<p>data-bind module is used to composite a data from the server module by set a attribute "data-bind", "data-param", "data-template-id" to specific tag.</p>
-		<p>Composite a data from the server module by <a href="http://handlebarsjs.com/" target="_blank">Handlebars</a>.</p>
-		<p>ex) &lt;div data-bind="<strong>module's name</strong>" data-param='{"key" : "value"}' data-template-id="<strong>template's id</strong>"&gt;&lt;/div&gt;</p>
-	</div>
-	{{/localize}}
-	<div>
-		<h3 id="doc2-2-2">2-2-2. Board</h3>
-		<div data-html="/document/module/boardList.html"></div>
-		<div data-html="/document/module/board.html"></div>
-	</div>
-	<div>
-		<h3 id="doc2-2-3">2-2-3. Article</h3>
-		<div data-html="/document/module/articleList.html"></div>
-		<div data-html="/document/module/articleComponent.html"></div>
-		<div data-html="/document/module/article.html"></div>
-	</div>
-	<div>
-		<h3 id="doc2-2-4">2-2-4. Comment</h3>
-		<div data-html="/document/module/commentList.html"></div>
-	</div>
-	<div>
-		<h3 id="doc2-2-5">2-2-5. Menu</h3>
-		<div data-html="/document/module/menuList.html"></div>
-	</div>
-	<div>
-		<h3 id="doc2-2-6">2-2-6. User</h3>
-		<div data-html="/document/module/userList.html"></div>
-	</div>
-	<div>
-		<h3 id="doc2-2-7">2-2-7. Template</h3>
-		<div data-html="/document/module/template.html"></div>
-	</div>
+<div id="doc_article">
+	<h2  class="page-header">1-3. Article</h2>
+	<div class="doc" data-html="/document/module/articleList.html"></div>
+	<div class="doc" data-html="/document/module/articleComponent.html"></div>
+	<div class="doc" data-html="/document/module/article.html"></div>
 </div>
-<div data-replace-html="/document/handlebars.html"></div>
+<div id="doc_comment">
+	<h2  class="page-header">1-4. Comment</h2>
+	<div class="doc" data-html="/document/module/commentList.html"></div>
+</div>
+<div id="doc_menu">
+	<h2  class="page-header">1-5. Menu</h2>
+	<div class="doc" data-html="/document/module/menuList.html"></div>
+</div>
+<div id="doc_user">
+	<h2  class="page-header">1-6. User</h2>
+	<div class="doc" data-html="/document/module/userList.html"></div>
+</div>

@@ -1,0 +1,124 @@
+<div class="jumbotron">
+	<div class="container">
+		<h1>API</h1>
+		<p>data-bind모듈과 imboard-api.js 함수등 각종 기능에 대한 API입니다.</p>
+	</div>
+</div>
+
+<div class="container">
+	<div class="col-xs-9" style="padding:0;" id="documentArea">
+		<div id="doc_data_bind" data-html="/document/databind.html"></div>
+		<div id="doc_handlebars" data-html="/document/handlebars.html"></div>
+		<div id="doc_imboard_api" data-html="/document/api.html"></div>
+	</div>
+	<div class="col-xs-3">
+		<ul id="contentList" data-component="scrollFollower">	
+			<li>
+				<a href="#doc_data_bind">1. data-bind 모듈</a>
+				<ul>
+					<li><a href="#doc_data_bind_overview">1-1. 개요</a><li>
+						<a href="#doc_board">1-2. Board</a>
+						<ul>
+							<li><a href="#doc_boardList">1-2-1. boardList</a></li>
+							<li><a href="#doc_get_board">1-2-2. board</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#doc_article">1-3. Article</a>
+						<ul>
+							<li><a href="#doc_articleList">1-3-1. articleList</a></li>
+							<li><a href="#doc_articleComponent">1-3-2. articleComponent</a></li>
+							<li><a href="#doc_get_article">1-3-3. article</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#doc_comment">1-4. Comment</a>
+						<ul>
+							<li><a href="#doc_commentList">1-4-1. commentList</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#doc_menu">1-5. Menu</a>
+						<ul>
+							<li><a href="#doc_menuList">1-5-1. menuList</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#doc_user">1-6. User</a>
+						<ul>
+							<li><a href="#doc_userList">1-6-1. userList</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#doc_handlebars">2. Handlebars Helper</a>
+			</li>
+			<li>
+				<a href="#doc_imboard_api">3. imboard-api.js 함수</a>
+				<ul>
+					<li><a href="#doc_imboard_api_overview">3-1. 개요</a><li>
+					<li><a href="#doc_imboard_api_query">3-2. $.query</a><li>
+					<li>
+						<a href="#doc_imboard_api_board">3-3. $.api.board</a>
+						<ul>
+							<li><a href="#doc_imboard_api_getBoardList">3-3-1. $.api.board.getBoardList</a></li>
+							<li><a href="#doc_imboard_api_getBoard">3-3-2. $.api.board.getBoardList</a></li>
+							<li><a href="#doc_imboard_api_insertBoard">3-3-3. $.api.board.insertBoard</a></li>
+							<li><a href="#doc_imboard_api_updateBoard">3-3-4. $.api.board.updateBoard</a></li>
+							<li><a href="#doc_imboard_api_deleteBoard">3-3-5. $.api.board.deleteBoard</a></li>
+						</ul>
+					<li>
+					<li>
+						<a href="#doc_imboard_api_article">3-4. $.api.article</a>
+						<ul>
+							<li><a href="#doc_imboard_api_getArticleListCount">3-4-1. $.api.article.getArticleListCount</a></li>
+							<li><a href="#doc_imboard_api_getArticleList">3-4-2. $.api.article.getArticleList</a></li>
+							<li><a href="#doc_imboard_api_getArticle">3-4-3. $.api.article.getArticle</a></li>
+							<li><a href="#doc_imboard_api_insertArticle">3-4-4. $.api.article.insertArticle</a></li>
+							<li><a href="#doc_imboard_api_updateArticle">3-4-5. $.api.article.updateArticle</a></li>
+							<li><a href="#doc_imboard_api_deleteArticle">3-4-6. $.api.article.deleteArticle</a></li>
+							<li><a href="#doc_imboard_api_updateArticleReaderStatus">3-4-7. $.api.article.updateArticleReaderStatus</a></li>
+							<li><a href="#doc_imboard_api_updateArticleStatus">3-4-8. $.api.article.updateArticleStatus</a></li>
+							<li><a href="#doc_imboard_api_updateBad">3-4-9. $.api.article.updateBad</a></li>
+							<li><a href="#doc_imboard_api_updateGood">3-4-10. $.api.article.updateGood</a></li>
+							<li><a href="#doc_imboard_api_uploadFile">3-4-11. $.api.article.uploadFile</a></li>
+						</ul>
+					<li>
+					<li>
+						<a href="#doc_imboard_api_comment">3-5. $.api.comment</a>
+						<ul>
+							<li><a href="#doc_imboard_api_getCommentListCount">3-5-1. $.api.comment.getCommentListCount</a></li>
+							<li><a href="#doc_imboard_api_getCommentList">3-5-2. $.api.comment.getCommentList</a></li>
+							<li><a href="#doc_imboard_api_getComment">3-5-3. $.api.comment.getComment</a></li>
+							<li><a href="#doc_imboard_api_insertComment">3-5-4. $.api.comment.insertComment</a></li>
+							<li><a href="#doc_imboard_api_updateComment">3-5-5. $.api.comment.updateComment</a></li>
+							<li><a href="#doc_imboard_api_deleteComment">3-5-6. $.api.comment.deleteComment</a></li>
+						</ul>
+					<li>
+					<li>
+						<a href="#doc_imboard_api_menu">3-6. $.api.menu</a>
+						<ul>
+							<li><a href="#doc_imboard_api_getMenuList">3-6-1. $.api.menu.getMenuList</a></li>
+							<li><a href="#doc_imboard_api_getMenu">3-6-2. $.api.menu.getMenu</a></li>
+							<li><a href="#doc_imboard_api_insertMenu">3-6-3. $.api.menu.insertMenu</a></li>
+							<li><a href="#doc_imboard_api_updateMenu">3-6-4. $.api.menu.updateMenu</a></li>
+							<li><a href="#doc_imboard_api_deleteMenu">3-6-5. $.api.menu.deleteMenu</a></li>
+						</ul>
+					<li>
+					<li>
+						<a href="#doc_imboard_api_user">3-7. $.api.user</a>
+						<ul>
+							<li><a href="#doc_imboard_api_getUserList">3-7-1. $.api.user.getUserList</a></li>
+							<li><a href="#doc_imboard_api_getUser">3-7-2. $.api.user.getUser</a></li>
+							<li><a href="#doc_imboard_api_getSignedUser">3-7-3. $.api.user.getSignedUser</a></li>
+							<li><a href="#doc_imboard_api_insertUser">3-7-4. $.api.user.insertUser</a></li>
+							<li><a href="#doc_imboard_api_updateUser">3-7-5. $.api.user.updateUser</a></li>
+							<li><a href="#doc_imboard_api_updateUserPassword">3-7-6. $.api.user.updateUserPassword</a></li>
+						</ul>
+					<li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

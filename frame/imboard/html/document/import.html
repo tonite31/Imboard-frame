@@ -1,0 +1,28 @@
+<h2 class="page-header">3. 다른 html파일을 가져오는 방법</h2>
+<p>A.html 파일에서 B.html파일의 내용을 보여주는 방법입니다.</p>
+<div>
+	<h3 id="doc_data_html">3-1. data-html</h3>
+	<p>특정 태그에 data-html속성을 지정하면 속성값에 해당하는 파일의 내용을 보여줍니다.</p>
+	<div class="example">
+		<h4>예제</h4>
+		<pre>&lt;div data-html="import.html"&gt;&lt;/div&gt;</pre>
+		<p>위와같은 태그를 작성하면 렌더링 후 아래처럼 보여집니다.</p>
+		<pre>&lt;div&gt;import.html파일이 이곳에 보여집니다.&lt;/div&gt;</pre>
+	</div>
+</div>
+<div>
+	<h3 id="doc_data_replace_html">3-2. data-replace-html</h3>
+	<p>특정 태그에 data-replace-html속성을 지정하면 속성값에 해당하는 파일의 내용으로 교체합니다.</p>
+	<div class="example">
+		<h4>예제</h4>
+		<pre>&lt;p&gt;html교체&lt;/p&gt;
+&lt;div data-replace-html="import.html"&gt;&lt;/div&gt;
+&lt;p&gt;위 태그 자리에 import.html파일의 내용이 보여집니다.&lt;/p&gt;
+</pre>
+			<p>위와같은 태그를 작성하면 실제 화면은 아래처럼 보여집니다.</p>
+			<pre>&lt;p&gt;html교체&lt;/p&gt;
+import.html파일이 이곳에 보여집니다.
+&lt;p&gt;위 태그 자리에 import.html파일의 내용이 보여집니다.&lt;/p&gt;
+</pre>
+	</div>
+</div>

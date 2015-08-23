@@ -1,51 +1,6 @@
-<script id="articleListTemplate" type="text/x-handlebars-template">
-{{#if articleList}}
-<table class="dataTable">
-	<colgroup>
-		<col style="width: 10%;"/>
-		<col style="width: 40%;"/>
-		<col style="width: 20%;"/>
-		<col style="width: 20%;"/>
-		<col style="width: 10%;"/>
-	</colgroup>
-	<thead>
-		<tr>
-		{{#localize}}
-		@{ko-KR}
-			<th class="center">번호</th>
-			<th class="center">제목</th>
-			<th class="center">작성자</th>
-			<th class="center">작성날짜</th>
-			<th class="center">조회수</th>
-		@{default}
-			<th class="center">Number</th>
-			<th class="center">Subject</th>
-			<th class="center">Writer</th>
-			<th class="center">Registerd date</th>
-			<th class="center">Views</th>
-		{{/localize}}
-		</tr>
-	</thead>
-{{#each articleList}}
-	<tbody>
-		<tr>
-			<td class="center">{{seq}}</td>
-			<td>{{subject}}</td>
-			<td>{{writerName}}</td>
-			<td class="center">{{registerDate}}</td>
-			<td class="center">{{hit}}</td>
-		</tr>
-	</tbody>
-{{/each}}
-</table>
-{{/if}}
-</script>
-
-<div class="panel panel-default">
-	<div class="panel-heading"><h4 id="doc2-2-3-1">articleList</h4></div>
+<div class="panel panel-default" id="doc_articleList">
+	<div class="panel-heading"><h4>1-3-1. articleList</h4></div>
 	<div class="panel-body">
-		<div class="content-header">#{lan.example}</div>
-		<div data-bind="articleList" data-param='{"boardId" : "document-article"}' data-template-id="articleListTemplate"></div>
 		<div class="content-header">#{lan.parameter}</div>
 		{{#localize}}
 		@{ko-KR}
@@ -580,7 +535,7 @@
 			</tbody>
 		</table>
 		{{/localize}}
-		<div class="content-header">#{lan.code}</div>
+		<div class="content-header">#{lan.example}</div>
 		<pre class="content-code">
 &lt;script id="articleListTemplate" type="text/x-handlebars-template"&gt;
 {{#if articleList}}

@@ -17,3 +17,14 @@ dt
 {
 	margin-top: 25px;
 }
+
+figure
+{
+	text-align: center;
+}
+
+figcaption
+{
+	font-size: 11px;
+	color:#777;
+}

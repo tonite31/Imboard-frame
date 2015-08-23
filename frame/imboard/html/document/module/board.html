@@ -1,55 +1,8 @@
-<script id="boardTemplate" type="text/x-handlebars-template">
-<table class="dataTable">
-	<colgroup>
-		<col style="width: 20%;"/>
-		<col style="width: 80%;"/>
-	</colgroup>
-	<tbody>
-		{{#localize}}
-		@{ko-KR}
-		<tr>
-			<th>아이디</th><td>{{id}}</td>
-		</tr>
-		<tr>
-			<th>이름</th><td>{{name}}</td>
-		</tr>
-		<tr>
-			<th>설명</th><td>{{description}}</td>
-		</tr>
-		<tr>
-			<th>우선순위</th><td>{{priority}}</td>
-		</tr>
-		<tr>
-			<th>사용여부</th><td>{{useYn}}</td>
-		</tr>
-		@{default}
-		<tr>
-			<th>ID</th><td>{{id}}</td>
-		</tr>
-		<tr>
-			<th>Name</th><td>{{name}}</td>
-		</tr>
-		<tr>
-			<th>Description</th><td>{{description}}</td>
-		</tr>
-		<tr>
-			<th>Priority</th><td>{{priority}}</td>
-		</tr>
-		<tr>
-			<th>Use Yn</th><td>{{useYn}}</td>
-		</tr>
-		{{/localize}}
-	</tbody>
-</table>
-</script>
-
-<div class="panel panel-default">
+<div class="panel panel-default" id="doc_get_board">
 	<div class="panel-heading">
-		<h4 id="doc2-2-2-2">board</h4>
+		<h4>1-2-2. board</h4>
 	</div>
 	<div class="panel-body">
-		<div class="content-header">#{lan.example}</div>
-		<div data-bind="board" data-param='{"id" : "free"}' data-template-id="boardTemplate"></div>
 		<div class="content-header">#{lan.parameter}</div>
 		{{#localize}}
 		@{ko-KR}
@@ -235,7 +188,7 @@
 			</tbody>
 		</table>
 		{{/localize}}
-		<div class="content-header">#{lan.code}</div>
+		<div class="content-header">#{lan.example}</div>
 		<pre class="content-code">
 &lt;script id="boardTemplate" type="text/x-handlebars-template"&gt;
 &lt;table class="dataTable"&gt;

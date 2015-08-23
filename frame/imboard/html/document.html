@@ -4,10 +4,9 @@
 		<p>
 		{{#localize}}
 		@{ko-KR}
-			임보드의 프레임을 개발하는데 도움을 주는 가이드 문서 입니다.
+			프레임 개발방법에 대해 설명하는 문서입니다.
 		@{default}
-			This page is guidence for develop a frame by Imboard.<br/>
-			Sorry, this page is translating to english...
+			This page is guidence for develop a frame.<br/>
 		{{/localize}}
 		</p>
 	</div>
@@ -15,19 +14,48 @@
 
 <div class="container">
 	<div class="col-xs-9" style="padding:0;" id="documentArea">
-		<div class="doc" data-html="/document/overview.html"></div>
-		<div class="doc" data-html="/document/databind.html"></div>
-		<div class="doc" data-html="/document/uicomponent.html"></div>
-		<div class="doc" data-html="/document/api.html"></div>
-		<div class="doc" data-html="/document/oAuth.html"></div>
-		<div class="doc" data-html="/document/localize.html"></div>
+		<div id="doc_overview" class="doc" data-html="/document/overview.html"></div>
+		<div id="doc_screen_change" class="doc" data-html="/document/screenChange.html"></div>
+		<div id="doc_import" class="doc" data-html="/document/import.html"></div>
+		<div id="doc_data_composition" class="doc" data-html="/document/composition.html"></div>
+		<div id="doc_oauth" class="doc" data-html="/document/oAuth.html"></div>
+		<div id="doc_localize" class="doc" data-html="/document/localize.html"></div>
 	</div>
 	<div class="col-xs-3">
-		{{#localize}}
-		@{ko-KR}
-			<div data-replace-html="/document/menu/ko_KR.html"></div>
-		@{default}
-			<div data-replace-html="/document/menu/en_US.html"></div>
-		{{/localize}}
+		<ul id="contentList" data-component="scrollFollower">	
+			<li>
+				<a href="#overview">1. 개요</a>
+			</li>
+			<li>
+				<a href="#doc_screen_change">2. 화면을 전환하는 방법</a>
+				<ul>
+					<li><a href="#doc_full_screen_chagne">2-1. 전체화면전환</a></li>
+					<li><a href="#doc_fragment_screen_change">2-2. 부분화면전환</a>	</li>
+				</ul>
+			</li>
+			<li>
+				<a href="#doc_import">3. 다른 html파일을 가져오는 방법</a>
+				<ul>
+					<li><a href="#doc_data_html">3-1. data-html</a></li>
+					<li><a href="#doc_data_replace_html">3-2. data-replace-html</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#doc_data_composition">4. 데이터를 화면에 조합하는 방법</a>
+				<ul>
+					<li><a href="#doc_replace_variables">4-1. 치환변수</a></li>
+					<li><a href="#doc_custom_replace_variables">4-2. 사용자정의 치환변수</a></li>
+					<li><a href="#doc_data_bind">4-3. data-bind모듈 사용</a></li>
+				</ul>
+			</li>
+			<li><a href="#doc_oauth">5. 페이스북 로그인 사용방법</a></li>
+			<li>
+				<a href="#doc_localize">6. 다국어 처리방법</a>
+				<ul>
+					<li><a href="#doc_localize_replace_varibale">6-1. 치환변수를 이용하는 방법</a></li>
+					<li><a href="#doc_localize_localize">6-2. ##{localize}문법을 이용하는 방법</a></li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 </div>

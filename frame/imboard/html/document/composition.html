@@ -1,0 +1,88 @@
+<h2 class="page-header">4. 데이터를 화면에 조합하는 방법</h2>
+<p>서버의 데이터 혹은 데이터베이스의 데이터를 화면으로 가져오는 몇가지 방법을 소개합니다.</p>
+<div>
+	<h3 id="doc_replace_variables">4-1. 치환변수</h3>
+	<p>치환변수는 #{type.key}형태로 html파일에 입력하며 렌더링시에 미리정해져있는 값으로 바뀌어 보여지는 기능입니다. 만약 치환변수형태 그대로 보여지길 원한다면 #을 하나 더 붙이면 됩니다. ##{type.key}</p>
+	<table class="dataTable">
+		<colgroup>
+			<col style="width:15%;"/>
+			<col style="width:75%;"/>
+		</colgroup>
+		<tbody>
+			<tr><th>##{path.root}</th><td>프레임의 루트경로입니다. 프레임의 이름이 sample이라면 치환되는 값은 <strong>/content/frame/sample</strong> 입니다.</td>	</tr>
+			<tr><th>##{path.module}</th><td>프레임의 공통 모듈경로입니다. 치환되는 값은 <strong>/content/module</strong> 입니다.</td></tr>
+			<tr><th>##{path.lib}</th><td>프레임의 공통 라이브러리경로입니다. 치환되는 값은 <strong>/content/lib</strong> 입니다.</td></tr>
+			<tr><th>##{query.xxx}</th><td>xxx키에 해당하는 querystring값으로 치환됩니다. ##{query}만 지정할경우 ?를 포함한 querystring 전체가 치환됩니다.</td></tr>
+			<tr><th>##{user.xxx}</th><td>로그인한 사용자의 정보중 xxx키에 해당하는 값으로 치환됩니다.</td></tr>
+			<tr><th>##{locale}</th><td>접속한 클라이언트의 언어 코드 값으로 치환됩니다. 만약 querystring에 locale값이 있을경우 그 값으로 치환됩니다. ex)ko-KR, en-US</td></tr>
+			<tr><th>##{lan.xxx}</th><td>querystring에 locale값이 있다면 해당 값으로, 그렇지 않으면 접속한 클라이언트의 언어에 따라 localize.json에 입력된 xxx키에 해당하는 값으로 치환됩니다. 자세한 내용은 <a href="#doc_localize">6. 다국어 처리방법</a>을 참조하십시오.</td></tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3 id="doc_custom_replace_variables">4-2. 사용자정의 치환변수</h3>
+	<p>사용자가 원하는 값을 미리 지정하고 치환변수로 사용할 수 있는 방법입니다.</p>
+	<p>프레임의 properties디렉토리에 variables.json파일을 생성하고 json문법으로 key, value를 작성합니다. 그리고 html파일에서 #{var.xxx}형태로 사용합니다.</p>
+	<div class="example">
+		<h4>예제</h4>
+		<pre>varibales.json<br/><br/>{
+	"customValue" : "사용자정의 치환변수",
+	"test" : "테스트"
+}</pre>
+	<p>variables.json파일을 위와같이 작성했다면 html파일에서 아래와같이 사용할 수 있습니다.</p>
+	<pre>&lt;span&gt;#{var.customValue}&lt;/span&gt; &lt;span&gt;#{var.test}&lt;/span&gt;</pre>
+	</div>
+</div>
+<div>
+	<h3 id="doc_data_bind">4-3. data-bind모듈 사용</h3>
+	<p>특정태그에 data-bind속성을 지정하면 미리 구현된 모듈이 실행되어 데이터를 화면에 조합할 수 있습니다. 데이터를 화면에 조합할때는 Handlebars를 사용합니다.</p>
+	<div class="example">
+		<h4>예제</h4>
+		<pre>&lt;div data-bind="articleList" data-param='{"boardId" : "test"}' data-template-id="articleListTemplate"&gt;&lt/div&gt;</pre>
+		<p>위 태그는 articleList모듈을 실행하며 파라미터는 boardId에 test라는 값을 넘겨줍니다. 모듈 실행 후 articleListTemplate라는 아이디를 가진 템플릿을 사용하여 위 div태그 내부에 결과를 보여줍니다.</p>
+		<p>아래 스크립트는 articleList모듈 실행 후 데이터를 조합하는 Handlebars 템플릿입니다. {{}}로 감싸진 부분은 핸들바 문법을 사용하는 부분입니다.</p>
+		<pre>&lt;script id="articleListTemplate" type="text/x-handlebars-template"&gt;
+{{#if articleList}}
+&lt;table class="dataTable"&gt;
+	&lt;colgroup&gt;
+		&lt;col style="width: 10%;"/&gt;
+		&lt;col style="width: 40%;"/&gt;
+		&lt;col style="width: 20%;"/&gt;
+		&lt;col style="width: 20%;"/&gt;
+		&lt;col style="width: 10%;"/&gt;
+	&lt;/colgroup&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			{{#localize}}
+			@{ko-KR}
+				&lt;th class="center"&gt;번호&lt;/th&gt;
+				&lt;th class="center"&gt;제목&lt;/th&gt;
+				&lt;th class="center"&gt;작성자&lt;/th&gt;
+				&lt;th class="center"&gt;작성날짜&lt;/th&gt;
+				&lt;th class="center"&gt;조회수&lt;/th&gt;
+			@{default}
+				&lt;th class="center"&gt;Number&lt;/th&gt;
+			&lt;th class="center"&gt;Subject&lt;/th&gt;
+			&lt;th class="center"&gt;Writer&lt;/th&gt;
+			&lt;th class="center"&gt;Registerd date&lt;/th&gt;
+			&lt;th class="center"&gt;Views&lt;/th&gt;
+			{{/localize}}
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	{{#each articleList}}
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td class="center"&gt;{{seq}}&lt;/td&gt;
+			&lt;td&gt;{{subject}}&lt;/td&gt;
+			&lt;td&gt;{{writerName}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{registerDate}}&lt;/td&gt;
+			&lt;td class="center"&gt;{{hit}}&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+	{{/each}}
+&lt;/table&gt;
+{{/if}}
+&lt;/script&gt;</pre>
+		<p>articleList모듈 및 다른 data-bind모듈에 대한 API는 API메뉴를 참고하십시오. Handlebars의 기본적인 문법은 <a href="http://www.handlebarsjs.com">www.handlebarsjs.com</a>를 참고하십시오.</p>
+	</div>
+</div>

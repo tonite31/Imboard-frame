@@ -1,0 +1,58 @@
+{{#localize}}
+@{ko-KR}
+<h2 class="page-header">2. 화면을 전환하는 방법</h2>
+<div>
+	<h3 id="doc_full_screen_chagne">2-1. 전체화면전환</h3>
+	<p>URL에 지정된 html파일을 화면에 보여줍니다.</p>
+	<table class="dataTable">
+		<colgroup>
+			<col style="width: 15%;"/>
+			<col style="width: 85%;"/>
+		</colgroup>
+		<tbody>
+			<tr><th>http://localhost:3000/</th><td>/content/frame/<strong>프레임명</strong>/html/ 디렉토리의 index.html 파일을 화면에 보여줍니다.</td></tr>
+			<tr><th>http://localhost:3000/test/test.html</th><td>/content/frame/<strong>프레임명</strong>/html/test/ 디렉토리의 test.html 파일을 화면에 보여줍니다.</td></tr>
+			<tr><th>http://localhost:3000/signin</th><td>로그인화면으로 이동</td></tr>
+			<tr><th>http://localhost:3000/signout.do</th><td>로그아웃</td></tr>
+			<tr><th>http://localhost:3000/settings</th><td>관리자 대쉬보드 화면으로 이동</td></tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<h3 id="doc_fragment_screen_change">2-2. 부분화면전환</h3>
+	<p>URL의 특정 파라미터에 지정된 html파일로 화면 일부를 전환합니다. 이 기능을 사용하기 위해서는 화면조각영역으로 사용할 태그에 data-fragment속성을 지정해야 합니다. 속성값은 다른 URL파라미터와 중복되지않는 값으로 지정하면 됩니다.</p>
+	<p>만약 특정 태그에 <code>data-fragment="body"</code> 속성이 지정되어있을때 URL파라미터에 <code>body=test</code>가 지정되면 각 프레임의 html디렉토리 하위의 test.html의 내용이 태그에 보여지고 js디렉토리 하위의 test.js파일과 css디렉토리 하위의 test.css파일이 자동으로 import됩니다.</p>
+	<p>아래 예제는 div태그에 data-fragment="body" 속성을 지정하고 각 버튼에 body파라미터를 변경하도록 href속성을 지정하였습니다. .html확장자는 생략할 수 있습니다.</p>
+	<div class="example">
+		<h4>예제</h4>
+		<iframe class="example-frame" src="/document/screenChange/fragment/fragment.html"></iframe>
+	</div>
+	<div class="example">
+		<h4>코드</h4>
+		<pre data-html="/document/screenChange/fragment/code.html"></pre>
+		<p>첫번째 버튼을 누르면 first.html파일이 &lt;div data-fragment="body"&gt; 태그 하위로 보여지고 두번째 버튼을 누르면 second.html파일이 보여집니다.</p>
+	</div>
+</div>
+@{default}
+<h2 id="doc_screen_change">2. Change a screen</h2>
+<div>
+	<h3 id="doc_full_screen_chagne">2-1. Change a screen</h3>
+	<p>Change screen to the html file which is set on URL. this is used for change to a full screen.</p>
+	<table class="dataTable">
+		<colgroup>
+			<col style="width: 15%;"/>
+			<col style="width: 85%;"/>
+		</colgroup>
+		<tbody>
+			<tr><th>/</th><td>Render index.html in /content/frame/<strong>Frame's name</strong>/html/ directory</td></tr>
+			<tr><th>/test/test.html</th><td>Render test.html in /content/frame/<strong>Frame's name</strong>/html/test/ directory</td></tr>
+			<tr><th>/signin</th><td>Move to Login page</td></tr>
+			<tr><th>/signout.do</th><td>Logout</td></tr>
+			<tr><th>/settings</th><td>Move to admin dashboard</td></tr>
+		</tbody>
+	</table>
+	<div>
+		--- 예제 스크린샷
+	</div>
+</div>
+{{/localize}}
