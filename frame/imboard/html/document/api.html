@@ -1,16 +1,16 @@
-<h2 id="doc4">4. imboard-api.js</h2>
+<h2 class="page-header">3. imboard-api.js 함수</h2>
 <div>
 	{{#localize}}
 	@{ko-KR}
-	<h3 id="doc4-1">4-1. 개요</h3>
+	<h3 id="doc_imboard_api_overview">3-1. 개요</h3>
 	<p>imboard-api는 서버로 요청을 보내고 응답을 받는 함수들과 각종 데이터를 제어할 수 있는 객체로 구성된 라이브러리입니다. 반드시 <strong>/content/module/imboard/js/imboard-api.js</strong> 자바스크립트 파일을 index.html파일에 import해야 사용할 수 있습니다.</p>
 	@{default}
-	<h3 id="doc4-1">4-1. Overview</h3>
+	<h3 id="doc_imboard_api_overview">3-1. Overview</h3>
 	<p>imboard-api is a library that has functions that request to server and object that control to client data. for using this library, must be imported <strong>/content/module/imboard/js/imboard-api.js</strong> to index.html.</p>
 	{{/localize}}
 </div>
-<div>
-	<h3 id="doc4-2">4-2. $.query</h3>
+<div class="doc" id="doc_imboard_api_query">
+	<h3>3-2. $.query</h3>
 	<p>
 		{{#localize}}
 		@{ko-KR}
@@ -21,30 +21,30 @@
 	</p>
 	<div data-html="/document/api/querystring.html"></div>
 </div>
-<div>
-	<h3 id="doc4-3">4-3. $.api.board</h3>
+<div class="doc" id="doc_imboard_api_board">
+	<h3>3-3. $.api.board</h3>
 	<div data-html="/document/api/board/getBoardList/#{locale}.html"></div>
 	<div data-html="/document/api/board/getBoard/#{locale}.html"></div>
 	<div data-html="/document/api/board/insertBoard/#{locale}.html"></div>
 	<div data-html="/document/api/board/updateBoard/#{locale}.html"></div>
 	<div data-html="/document/api/board/deleteBoard/#{locale}.html"></div>
 </div>
-<div>
-	<h3 id="doc4-4">4-4. $.api.article</h3>
+<div class="doc" id="doc_imboard_api_article">
+	<h3>3-4. $.api.article</h3>
 	<div data-html="/document/api/article/getArticleListCount/#{locale}.html"></div>
 	<div data-html="/document/api/article/getArticleList/#{locale}.html"></div>
 	<div data-html="/document/api/article/getArticle/#{locale}.html"></div>
 	<div data-html="/document/api/article/insertArticle/#{locale}.html"></div>
 	<div data-html="/document/api/article/updateArticle/#{locale}.html"></div>
 	<div data-html="/document/api/article/deleteArticle/#{locale}.html"></div>
-	<div data-html="/document/api/article/updateArticleStatus/#{locale}.html"></div>
 	<div data-html="/document/api/article/updateArticleReaderStatus/#{locale}.html"></div>
+	<div data-html="/document/api/article/updateArticleStatus/#{locale}.html"></div>
 	<div data-html="/document/api/article/updateGood/#{locale}.html"></div>
 	<div data-html="/document/api/article/updateBad/#{locale}.html"></div>
 	<div data-html="/document/api/article/uploadFile/#{locale}.html"></div>
 </div>
-<div>
-	<h3 id="doc4-5">4-5. $.api.comment</h3>
+<div class="doc" id="doc_imboard_api_comment">
+	<h3>3-5. $.api.comment</h3>
 	<div data-html="/document/api/comment/getCommentListCount/#{locale}.html"></div>
 	<div data-html="/document/api/comment/getCommentList/#{locale}.html"></div>
 	<div data-html="/document/api/comment/getComment/#{locale}.html"></div>
@@ -52,21 +52,20 @@
 	<div data-html="/document/api/comment/updateComment/#{locale}.html"></div>
 	<div data-html="/document/api/comment/deleteComment/#{locale}.html"></div>
 </div>
-<div>
-	<h3 id="doc4-6">4-6. $.api.menu</h3>
+<div class="doc" id="doc_imboard_api_menu">
+	<h3>3-6. $.api.menu</h3>
 	<div data-html="/document/api/menu/getMenuList/#{locale}.html"></div>
 	<div data-html="/document/api/menu/getMenu/#{locale}.html"></div>
 	<div data-html="/document/api/menu/insertMenu/#{locale}.html"></div>
 	<div data-html="/document/api/menu/updateMenu/#{locale}.html"></div>
 	<div data-html="/document/api/menu/deleteMenu/#{locale}.html"></div>
 </div>
-<div>
-	<h3 id="doc4-7">4-7. $.api.user</h3>
+<div class="doc" id="doc_imboard_api_user">
+	<h3>3-7. $.api.user</h3>
 	<div data-html="/document/api/user/getUserList/#{locale}.html"></div>
 	<div data-html="/document/api/user/getUser/#{locale}.html"></div>
 	<div data-html="/document/api/user/getSignedUser/#{locale}.html"></div>
 	<div data-html="/document/api/user/insertUser/#{locale}.html"></div>
 	<div data-html="/document/api/user/updateUser/#{locale}.html"></div>
 	<div data-html="/document/api/user/updateUserPassword/#{locale}.html"></div>
-	<div data-html="/document/api/user/dropOut/#{locale}.html"></div>
 </div>

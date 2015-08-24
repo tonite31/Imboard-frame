@@ -1,55 +1,6 @@
-<script id="userListTemplate" type="text/x-handlebars-template">
-{{#if userList}}
-<table class="dataTable">
-	<colgroup>
-		<col style="width: 10%;"/>
-		<col style="width: 25%;"/>
-		<col style="width: 25%;"/>
-		<col style="width: 10%;"/>
-		<col style="width: 10%;"/>
-		<col style="width: 20%;"/>
-	</colgroup>
-	<thead>
-		<tr>
-		{{#localize}}
-		@{ko-KR}
-			<th class="center">아이디</th>
-			<th class="center">이름</th>
-			<th class="center">별명</th>
-			<th class="center">레벨</th>
-			<th class="center">포인트</th>
-			<th class="center">등록날짜</th>
-		@{default}
-			<th class="center">Id</th>
-			<th class="center">Name</th>
-			<th class="center">Nickname</th>
-			<th class="center">Level</th>
-			<th class="center">Point</th>
-			<th class="center">Registered date</th>
-		{{/localize}}
-		</tr>
-	</thead>
-	{{#each userList}}
-	<tbody>
-		<tr>
-			<td>{{id}}</td>
-			<td>{{name}}</td>
-			<td>{{displayId}}</td>
-			<td class="center">{{level}}</td>
-			<td class="right">{{point}}</td>
-			<td>{{registerDate}}</td>
-		</tr>
-	</tbody>
-	{{/each}}
-</table>
-{{/if}}
-</script>
-
-<div class="panel panel-default">
-	<div class="panel-heading"><h4 id="doc2-2-6-1">userList</h4></div>
+<div class="panel panel-default" id="doc_userList">
+	<div class="panel-heading"><h4>1-6-1. userList</h4></div>
 	<div class="panel-body">
-		<div class="content-header">#{lan.example}</div>
-		<div data-bind="userList" data-template-id="userListTemplate"></div>
 		<div class="content-header">#{lan.data}</div>
 		{{#localize}}
 		@{ko-KR}
@@ -195,7 +146,7 @@
 			</tbody>
 		</table>
 		{{/localize}}
-		<div class="content-header">#{lan.code}</div>
+		<div class="content-header">#{lan.example}</div>
 		<pre class="content-code">
 &lt;script id="userListTemplate" type="text/x-handlebars-template"&gt;
 {{#if userList}}

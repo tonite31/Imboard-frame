@@ -28,12 +28,14 @@
 	</div>
 </div>
 
-<div class="container" data-bind="signedUser" style="margin: 50px auto;" data-fragment="sub">
-	{{#sign user.level \"lt\" 0}}
-	<p style="text-align: center; margin-bottom: 40px;">
-		<a href="?fragment=patchnote&sub=patchnote/write" class="btn btn-default">패치노트 작성하기</a>
-	</p>
-	{{/sign}}
+<div class="container" style="margin: 50px auto;" data-fragment="sub">
+	<div data-bind="signedUser">
+		{{#sign user.level "lt" 0}}
+		<p style="text-align: center; margin-bottom: 40px;">
+			<a href="?fragment=patchnote&sub=patchnote/write" class="btn btn-default">패치노트 작성하기</a>
+		</p>
+		{{/sign}}
+	</div>
 	<div style="clear:both;" data-bind="articleComponent" data-param='{"boardId" : "patchnote", "searchData" : {"withContent" : "true"}}'>
 		<div data-parts="body" data-template-id="articleComponentTemplate" id="articleBody"></div>
 		<div data-parts="pagination" data-template-id="pagingTemplate"></div>

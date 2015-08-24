@@ -31,34 +31,6 @@
 
 <script src="#{path.root}/lib/typewriter/typewriter-0.0.1.js"></script>
 
-<script id="pagingTemplate" type="text/x-handlebars-template">
-{{#if pageList}}
-<nav style='text-align:center;'>
-	<ul class="pagination">
-		{{#sign pageIndex ">" 1}}
-		<li>
-			<a href="#{query}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
-				<span aria-hidden="true">#{lan.previous}</span>
-			</a>
-		</li>
-		{{/sign}}
-		{{#each pageList}}
-		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
-			<a href="#{query}&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a>
-		</li>
-		{{/each}}
-		{{#sign pageIndex "<" maxPage}}
-		<li>
-			<a href="#{query}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
-				<span aria-hidden="true">#{lan.next}</span>
-			</a>
-		</li>
-		{{/sign}}
-	</ul>
-</nav>
-{{/if}}
-</script>
-
 <script id="signedUserTemplate" type="text/x-handlebars-template">
 {{#if user}}
 	{{#sign user.level "<" 0}}
@@ -67,11 +39,28 @@
 	<li><a href="/signout.do">#{lan.signout}</a></li>
 {{else}}
 	<li><a href="/signin">#{lan.signin}</a></li>
+{{/if}}
 	<li><a href="?locale=ko-KR">#{lan.korean}</a></li>
 	<li><a href="?locale=en-US">#{lan.english}</a></li>
-{{/if}}
 </script>
 
+<script id="pagingTemplate" type="text/x-handlebars-template">
+{{#if pageList}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li><a href="?fragment=#{query.fragment}&locale=#{query.locale}&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous"><span aria-hidden="true">이전</span></a></li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}><a href="?piece=book&username=#{query.username}&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a></li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li><a href="?fragment=#{query.fragment}&locale=#{query.locale}&pageIndex={{math pageIndex "+" 1}}" aria-label="Next"><span aria-hidden="true">다음</span></a></li>
+		{{/sign}}
+	</ul>
+</nav>
+{{/if}}
+</script>
 </head>
 
 <body>
@@ -81,12 +70,6 @@
 				<div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuList">
-							<span class="sr-only">Toggle navigation</span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-				      	</button>
 				      	<a class="navbar-brand" href="/?locale=#{locale}">Imboard</a>
 				    </div>
 				
@@ -95,6 +78,7 @@
 						<ul class="nav navbar-nav">
 						  	<li><a href="?fragment=gettingstarted&locale=#{locale}">#{lan.gettingstarted}</a></li>
 						  	<li><a href="?fragment=document&locale=#{locale}">#{lan.document}</a></li>
+						  	<li><a href="?fragment=api&locale=#{locale}">API</a></li>
 						  	<li><a href="?fragment=patchnote&locale=#{locale}">#{lan.patchnote}</a></li>
 						  	<li><a href="?fragment=community&boardId=forum&locale=#{locale}">#{lan.community}</a></li>
 						</ul>
@@ -108,14 +92,15 @@
 		<div class="jumbotron">
 			<div class="container" style="position:relative;">
 				<h1>Imboard</h1>
+				<p>임보드는 쉽고 빠르게 웹페이지를 개발할 수 있는 nodejs기반 플랫폼입니다.</p>
+				<p>간편한 방법으로 웹페이지를 개발할 수 있고, 미리 만들어진 프레임을 적용하면 몇 분만에 웹페이지를 개설할수도 있습니다.</p>
+				<p>
 				{{#localize}}
 				@{ko-KR}
-					<p>임보드는 쉽고 빠르게 웹페이지를 개발할 수 있는 nodejs기반 플랫폼입니다.</p>
-					<p>간편한 방법으로 웹페이지를 개발할 수 있고, 미리 만들어진 프레임을 적용하면 몇 분만에 웹페이지를 개설할수도 있습니다.</p>
 				@{default}
-					<p>Imboard is a convenient platform for develop a webpage based on nodejs server</p>
-					<p>You can more easily develop a webpage and If you use a frame that already developed, you can establish a webpage in a few minutes.</p>
+				Sorry, this page is translating to english...
 				{{/localize}}
+				</p>
 			</div>
 		</div>
 		<div class="container doc">

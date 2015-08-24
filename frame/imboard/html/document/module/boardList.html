@@ -1,53 +1,6 @@
-<script id="boardListTemplate" type="text/x-handlebars-template">
-{{#if boardList}}
-<table class="dataTable">
-	<colgroup>
-		<col style="width: 20%;"/>
-		<col style="width: 30%;"/>
-		<col style="width: 30%;"/>
-		<col style="width: 10%;"/>
-		<col style="width: 10%;"/>
-	</colgroup>
-	<thead>
-		<tr>
-		{{#localize}}
-		@{default}
-			<th class="center">ID</th>
-			<th class="center">Name</th>
-			<th class="center">Description</th>
-			<th class="center">Priority</th>
-			<th class="center">Use Yn</th>
-		@{ko-KR}
-			<th class="center">아이디</th>
-			<th class="center">이름</th>
-			<th class="center">설명</th>
-			<th class="center">우선순위</th>
-			<th class="center">사용여부</th>
-		{{/localize}}
-		</tr>
-	</thead>
-{{#each boardList}}
-	<tbody>
-		<tr>
-			<td>{{id}}</td>
-			<td>{{name}}</td>
-			<td>{{description}}</td>
-			<td class="center">{{priority}}</td>
-			<td class="center">{{useYn}}</td>
-		</tr>
-	</tbody>
-{{/each}}
-</table>
-{{/if}}
-</script>
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 id="doc2-2-2-1">boardList</h4>
-	</div>
+<div class="panel panel-default" id="doc_boardList">
+	<div class="panel-heading"><h4>1-2-1. boardList</h4></div>
 	<div class="panel-body">
-		<div class="content-header">#{lan.example}</div>
-		<div data-bind="boardList" data-template-id="boardListTemplate" data-param='{"orderBySeq" : "ASC"}' style="max-height: 400px; overflow: auto;"></div>
 		<div class="content-header">#{lan.data}</div>
 		{{#localize}}
 		@{ko-KR}
@@ -193,7 +146,7 @@
 			</tbody>
 		</table>
 		{{/localize}}
-		<div class="content-header">#{lan.code}</div>
+		<div class="content-header">#{lan.example}</div>
 		<pre class="content-code">
 &lt;script id="boardListTemplate" type="text/x-handlebars-template"&gt;
 {{#if boardList}}
