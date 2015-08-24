@@ -1,34 +1,46 @@
-<div class="container background">
-	<img src="#{path.root}/images/teacher_main.png"/>
-	<img src="#{path.root}/images/teacher_about.png"/>
-</div>
-<p style="text-align: center; margin: 15px 0;">
-	<a href="?body=registerTeacher" class="btn btn-default">강사등록</a>
-</p>
-<div class="container background">
-	<div class="teacherBackground">
-		<p style="text-align: right;">
-			<a class="btn btn-default">수정</a>
-			<button type="button" class="btn btn-default">삭제</button>
+<script id="teacherTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="teacherBackground">
+	<div class="col-xs-4">
+		<img src="{{thumbnailUrl}}"/>
+	</div>
+	<div class="col-xs-8">
+		<p class="teacherName">
+			{{subject}}
+			{{#sign "#{user.level}" "<" 0}}
+			<span style="float: right;">
+				<a href="?body=registerTeacher&seq={{seq}}">수정</a>
+				<a data-seq="{{seq}}">삭제</a>
+			<span>
+			{{/sign}}
 		</p>
-		<div class="col-xs-4">
-			<img src="http://page.cafe24app.com/datas/havyvocal/KakaoTalk_20150206_061344337.jpg"/>
-		</div>
-		<div class="col-xs-8">
-			<p class="teacherName">ㅊㅎㅎㅎ</p>
-			<div class="teacherProfile"></div>
-			<div class="thumbnailContainer">
-				<div class="col-xs-4">
-					<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
-					<p class="caption">박효신 - 눈의꽃</p>
-				</div>
-				<div class="col-xs-4">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
-				<div class="col-xs-4">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
+		<div class="teacherProfile">{{{content}}}</div>
+		<div class="thumbnailContainer">
+			<div class="col-xs-4">
+				<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
+				<p class="caption">박효신 - 눈의꽃</p>
+			</div>
+			<div class="col-xs-4">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
+			</div>
+			<div class="col-xs-4">
+				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
 			</div>
 		</div>
 	</div>
 </div>
+{{/each}}
+{{/if}}
+</script>
+
+<div class="container background" style="text-align: center;">
+	<img src="#{path.root}/images/teacher_main.png"/>
+	<img src="#{path.root}/images/teacher_about.png"/>
+</div>
+<p style="text-align: center; margin:0;" data-bind="signedUser">
+	{{#sign user.level "lt" 0}}
+	<a style="margin: 15px 0;" href="?body=registerTeacher" class="btn btn-default">강사등록</a>
+	{{/sign}}
+</p>
+<div class="container background" data-bind="articleList" data-param='{"boardId" : "teacher", "searchData" : {"withContent" : "true"}}' data-template-id="teacherTemplate"></div>

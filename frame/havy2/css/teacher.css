@@ -5,6 +5,15 @@
 	padding: 20px 51px;
 }
 
+.teacherBackground
+{
+	clear: both;
+	display: table;
+	margin-bottom: 40px;
+	background-color: white;
+	padding: 20px 0;
+}
+
 .teacherBackground img
 {
 	width: 100%;
@@ -17,4 +26,12 @@
     padding: 10px;
     background-color: black;
     margin-bottom: 15px;
+    width:50%;
+}
+
+.teacherName a
+{
+	color:white;
+	cursor: pointer;
+	margin:0 5px;
 }
