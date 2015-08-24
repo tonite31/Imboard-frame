@@ -11,6 +11,18 @@ $(document).ready(function()
 	{
 		$("*[data-id='currentVersion']").text(result.data[0].subject);
 	}
+	
+	result = $.api.data.getData({id : "downloadCount"});
+	if(result.code == 1000)
+	{
+		var count = 0;
+		if(!result.data || isNaN(result.data.data))
+			count = 0;
+		else
+			count = result.data.data;
+		
+		$("#downloadCount").text(count + " times downloaded");
+	}
 });
 
 function anchorScroll(href)
