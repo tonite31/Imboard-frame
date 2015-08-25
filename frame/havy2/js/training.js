@@ -19,7 +19,7 @@ $(document).ready(function()
 	{
 		if(confirm("정말 삭제하시겠습니까?"))
 		{
-			var result = $.api.article.deleteArticle({boardId : "trainEffect", seq : $(this).attr("data-delete"), isRemove : "Y"});
+			var result = $.api.article.deleteArticle({boardId : "training", seq : $(this).attr("data-delete"), isRemove : "Y"});
 			if(result.code == 1000)
 			{
 				$(this).parent().parent().parent().remove();

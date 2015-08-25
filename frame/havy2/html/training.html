@@ -11,33 +11,45 @@
 {{#each articleList}}
 <div>
 <div class="subject-area">
-	<h3>{{subject}} <small>| {{shortDate registerDate}}</small></h3>
+	<h3>{{subject}} <small>{{shortDate registerDate}}</small></h3>
 	<div style="position: absolute; right:0; bottom:5px;">
-		{{#sign user.level "<" 0}}
-		<a href="?body=writeArticle&boardId=training&seq={{seq}}" class="btn btn-default">수정</a>
+		{{#sign "#{user.level}" "<" 0}}
+		<a href="?body=writeArticle&boardId=training&seq={{seq}}&prevBody=training" class="btn btn-default">수정</a>
 		<button type="button" class="btn btn-default" data-delete="{{seq}}">삭제</button>
 		{{/sign}}
 	</div>
 </div>
-<div style="padding: 20px 5px; position:relative; max-height: 430px; overflow:hidden; margin-bottom:100px;">{{{content}}}<button type="button" class="btn btn-default" style="position: absolute; right:0; bottom:0;" data-id="expandButton" data-state="collapsed">펼치기</button></div>
+<div class="article" style="max-height: 430px;">{{{content}}}<button type="button" class="btn btn-default" style="position: absolute; right:5px; bottom:5px;" data-id="expandButton" data-state="collapsed">펼치기</button></div>
 </div>
 {{/each}}
 {{/if}}
 </script>
 
 <script id="trainingPagination" type="text/x-handlebars-template">
-{{#sign pageIndex ">" "1"}}
-<a style="font-size:12px;" href="?body=training&pageIndex={{math pageIndex "-" 1}}">이전</a>
-{{/sign}}
 {{#if pageList}}
-{{#each pageList}}
-<a class="number {{#equals ../pageIndex pageNumber}}selected{{/equals}}" href="?body=training&pageIndex={{pageNumber}}">{{pageNumber}}</a>
-{{/each}}
-{{/if}}
-{{#if maxPage}}
-{{#notequals pageIndex maxPage}}
-<a href="?body=training&pageIndex={{math pageIndex "+" 1}}">다음</a>
-{{/notequals}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li>
+			<a href="?body=training&pageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
+				<span aria-hidden="true">Previous</span>
+			</a>
+		</li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
+			<a href="?body=training&pageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a>
+		</li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li>
+			<a href="?body=training&pageIndex={{math pageIndex "+" 1}}" aria-label="Next">
+				<span aria-hidden="true">Next</span>
+			</a>
+		</li>
+		{{/sign}}
+	</ul>
+</nav>
 {{/if}}
 </script>
 
