@@ -30,9 +30,8 @@
 <script id="signedUserTemplate" type="text/x-handlebars-template">
 {{#if user}}
 	{{#sign user.level "<" 0}}
-	<li><a href="/settings">관리자설정</a></li>
+	<li><a href="/settings">관리자</a></li>
 	{{/sign}}
-	<li><a href="/signout.do">로그아웃</a></li>
 {{else}}
 	<li><a href="/signin">로그인</a></li>
 {{/if}}
@@ -50,12 +49,12 @@
 				    <div class="collapse navbar-collapse" id="menuList">
 						<ul class="nav navbar-nav">
 						  	<li><a href="?body=teacher"><img src="#{path.root}/images/menu_teacher.png" alt="강사소개" /></a></li>
-						  	<li><a href=""><img src="#{path.root}/images/menu_curriculum.png" alt="교육과정" /></a></li>
-						  	<li><a href=""><img src="#{path.root}/images/menu_before_after.png" alt="트레이닝 효과" /></a></li>
+						  	<li><a href="?body=curriculum"><img src="#{path.root}/images/menu_curriculum.png" alt="교육과정" /></a></li>
+						  	<li><a href="?body=training"><img src="#{path.root}/images/menu_before_after.png" alt="트레이닝 효과" /></a></li>
 						  	<li><a href=""><img src="#{path.root}/images/menu_qna.png" alt="수강문의" /></a></li>
 						  	<li><a href=""><img src="#{path.root}/images/menu_map.png" alt="오시는길" /></a></li>
-						  	<li><a href="">하비 공연&amp;녹음</a></li>
-						  	<li><a href="">하비방문객</a></li>
+						  	<li><a href="">공연&amp;녹음</a></li>
+						  	<li><a href="">방문객</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right" data-bind="signedUser" data-template-id="signedUserTemplate"></ul>
 				    </div>
@@ -91,7 +90,7 @@
 			</div>
 		</div>
 		<div class="container" style="margin: 15px auto;">
-			<p class="h3">하비 공연&amp;녹음</p>
+			<p class="h3">공연&amp;녹음</p>
 			<div class="thumbnailContainer">
 				<div class="col-xs-3">
 					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
@@ -109,7 +108,7 @@
 			</div>
 		</div>
 		<div class="container" style="margin: 30px auto;">
-			<p class="h3">하비방문객</p>
+			<p class="h3">방문객</p>
 			<div class="thumbnailContainer">
 				<div class="col-xs-3">
 					<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
@@ -127,8 +126,8 @@
 			</div>
 		</div>
 	</div>
-	<footer style="text-align: center;">
-		<img src="#{path.root}/images/footer.png" style="width: 1080px;"/>
+	<footer class="container">
+		<img src="#{path.root}/images/footer.png" style="width: 100%;"/>
 	</footer>
 </body>
 
