@@ -1,0 +1,55 @@
+<script id="galleryListTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+<div class="colgroup">
+{{#each articleList}}
+<div class="col col-1-4" style="padding: 0 5px; position:relative;">
+	<a class="thumbnail" href="?body=viewArticle&prevBody=gallery&boardId={{boardId}}&seq={{seq}}">
+		<img src="{{thumbnailUrl}}" alt="..." />
+		<div class="info">
+			<p style="margin:0;">{{subject}}</p>
+			<p style="margin:0;">{{hit}}</p>
+		</div>
+	</a>
+</div>
+{{/each}}
+</div>
+{{else}}
+<div style="text-align: center; padding: 10px 0;">등록된 게시물이 없습니다.</div>
+{{/if}}
+</script>
+
+<script id="galleryPaginationTemplate" type="text/x-handlebars-template">
+{{#sign pageIndex ">" "1"}}
+<a style="font-size:12px;" href="?body=gallery&boardId=#{query.boardId}&pageIndex={{math pageIndex "-" 1}}">이전</a>
+{{/sign}}
+{{#if pageList}}
+{{#each pageList}}
+<a class="number {{#equals ../pageIndex pageNumber}}selected{{/equals}}" href="?body=gallery&boardId=#{query.boardId}&pageIndex={{pageNumber}}">{{pageNumber}}</a>
+{{/each}}
+{{/if}}
+{{#if maxPage}}
+{{#notequals pageIndex maxPage}}
+<a href="?body=gallery&boardId=#{query.boardId}&pageIndex={{math pageIndex "+" 1}}">다음</a>
+{{/notequals}}
+{{/if}}
+</script>
+
+<script id="writeTemplate" type="text/x-handlebars-template">
+{{#sign user.level "<" 0}}
+<a href="?body=writeArticle&prevBody=gallery&boardId=#{query.boardId}" class="btn btn-default">글쓰기</a>
+{{/sign}}
+</script>
+
+<div class="container">
+	<div style="position:relative;">
+		<div style="text-align: right; position:absolute; right:0;" data-bind="signedUser" data-template-id="writeTemplate"></div>
+	</div>
+	<div data-bind="template">
+		{{#test "'#{query.boardId}' == 'live' || '#{query.boardId}' == 'photo'"}}
+		<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}"}' style="margin-bottom: 20px;">
+			<div data-parts="body" data-template-id="galleryListTemplate"></div>
+			<div data-parts="pagination" data-template-id="galleryPaginationTemplate" style="text-align: center;"></div>
+		</div>
+		{{/test}}
+	</div>
+</div>

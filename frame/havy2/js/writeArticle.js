@@ -65,7 +65,7 @@ $(document).ready(function()
 				}
 				else
 				{
-					location.href = "?body=" + $.query.prevBody;
+					location.href = "?body=" + $.query.prevBody + ($.query.boardId ? "&boardId=" + $.query.boardId);
 				}
 			}
 		}
