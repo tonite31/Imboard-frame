@@ -65,7 +65,7 @@ $(document).ready(function()
 				}
 				else
 				{
-					location.href = "?body=" + $.query.prevBody + ($.query.boardId ? "&boardId=" + $.query.boardId);
+					location.href = "?body=" + $.query.prevBody + ($.query.boardId ? "&boardId=" + $.query.boardId : "") + ($.query.seq ? "&seq=" + $.query.seq : "");
 				}
 			}
 		}
@@ -99,8 +99,12 @@ $(document).ready(function()
 						var src = result[i];
 						
 						var img = document.createElement("img");
-						img.src = src;
+						img.src = src.replace(".gif", ".png");
 						CKEDITOR.instances.ckeditor.document.$.body.appendChild(img);
+						
+						var range = CKEDITOR.instances.ckeditor.createRange();
+						range.moveToElementEditEnd( range.root );
+						CKEDITOR.instances.ckeditor.getSelection().selectRanges( [ range ] );
 					}
 					
 //					for(var i=0; i<result.length; i++)

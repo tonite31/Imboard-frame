@@ -1,29 +1,3 @@
-.subject-area
-{
-	position: relative;
-}
-
-.subject-area h3
-{
-	border-bottom: 1px dashed #ccc;
-    padding-bottom: 10px;
-}
-
-.subject-area h3 small
-{
-	color: #333;
-    font-size: 12px;
-    font-weight: normal;
-    border-left: 1px dotted #ccc;
-    padding-left: 10px;
-}
-
-.subject-area span
-{
-	color: #666;
-	font-size: 12px;
-}
-
 .answer-area
 {
     border-top: 1px dotted #bfbfbf;

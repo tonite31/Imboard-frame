@@ -1,7 +1,7 @@
 <script id="viewQna" type="text/x-handlebars-template">
 {{#if user}}
-	{{#sign user.level "<" 0}}
 	<div data-bind="article" data-param='{"boardId" : "qna", "seq" : #{query.seq}}' data-template-id="qnaArticle"></div>
+	{{#sign user.level "<" 0}}
 	<div id="writeCommentArea" style="font-size:0;">
 		<textarea class="commentConent" placeholder="답변을 입력하세요" id="commentContent"></textarea>
 		<button type="button" class="btn btn-default writeCommentBtn" id="writeComment">작성</button>

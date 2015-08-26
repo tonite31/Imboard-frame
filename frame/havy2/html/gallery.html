@@ -1,15 +1,11 @@
 <script id="galleryListTemplate" type="text/x-handlebars-template">
 {{#if articleList}}
-<div class="colgroup">
+<div class="thumbnailContainer">
 {{#each articleList}}
-<div class="col col-1-4" style="padding: 0 5px; position:relative;">
-	<a class="thumbnail" href="?body=viewArticle&prevBody=gallery&boardId={{boardId}}&seq={{seq}}">
-		<img src="{{thumbnailUrl}}" alt="..." />
-		<div class="info">
-			<p style="margin:0;">{{subject}}</p>
-			<p style="margin:0;">{{hit}}</p>
-		</div>
-	</a>
+<div class="col-xs-3">
+	<img src="{{thumbnailUrl}}">
+	<p class="caption" style="bottom:25px; height: 20px; line-height:20px;">{{subject}}</p>
+	<p class="caption" style="height: 20px; line-height:20px; font-size:10px;">조회 {{hit}}</p>
 </div>
 {{/each}}
 </div>
@@ -41,14 +37,14 @@
 </script>
 
 <div class="container">
-	<div style="position:relative;">
+	<div style="position:relative; height: 40px;">
 		<div style="text-align: right; position:absolute; right:0;" data-bind="signedUser" data-template-id="writeTemplate"></div>
 	</div>
 	<div data-bind="template">
 		{{#test "'#{query.boardId}' == 'live' || '#{query.boardId}' == 'photo'"}}
-		<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}"}' style="margin-bottom: 20px;">
-			<div data-parts="body" data-template-id="galleryListTemplate"></div>
-			<div data-parts="pagination" data-template-id="galleryPaginationTemplate" style="text-align: center;"></div>
+		<div data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}", "cpp" : 16}' style="margin-bottom: 40px;">
+			<div data-parts="body" data-template-id="galleryListTemplate" style="display:table; width: 100%;"></div>
+			<div class="pagination" data-parts="pagination" data-template-id="galleryPaginationTemplate" style="text-align: center; clear:both; margin-top: 20px;"></div>
 		</div>
 		{{/test}}
 	</div>

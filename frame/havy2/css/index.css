@@ -1,3 +1,15 @@
+.nav a
+{
+	font-size: 15px;
+}
+
+.nav > li > a
+{
+	padding-left: 12px;
+	padding-right: 12px;
+	color: #333 !important;
+}
+
 .navbar-default
 {
 	height: 80px;
@@ -20,11 +32,6 @@
 {
 	padding-top: 18px;
 	padding-bottom: 18px;
-}
-
-.navbar-right a
-{
-	font-weight: bold;
 }
 
 header img
@@ -114,4 +121,98 @@ header img:HOVER
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+.pagination
+{
+	display: block;
+	text-align: center;
+}
+
+.pagination a
+{
+	font-size:13px;
+	padding: 5px;
+	color: #666;
+}
+
+.pagination .number
+{
+	font-size:14px;
+}
+
+.pagination a.selected
+{
+	color: red;
+	text-decoration: underline;
+}
+
+.faqArea .h4
+{
+	margin-top:0;
+	position: relative;
+}
+
+.faqArea .h4 a
+{
+	color: #444;
+}
+
+.faqArea .faq
+{
+	padding: 12.5px 0;
+    border-bottom: 1px dotted #dedede;
+    margin:0;
+}
+
+.faqArea .faq:FIRST-CHILD
+{
+    border-top: 1px dotted #dedede;
+}
+
+.faqArea .faq a
+{
+	color: #676767;
+    font-size: 12px;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    padding: 2px 2px 2px 0;
+}
+
+.faqArea .more
+{
+	position: absolute;
+    right: 10px;
+    bottom: 0;
+    font-size: 12px;
+    color: #676767 !important;
+    cursor: pointer;
+}
+
+.subject-area
+{
+	position: relative;
+}
+
+.subject-area h3
+{
+	border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+}
+
+.subject-area h3 small
+{
+	color: #333;
+    font-size: 12px;
+    font-weight: normal;
+    border-left: 1px dotted #ccc;
+    padding-left: 10px;
+}
+
+.subject-area span
+{
+	color: #666;
+	font-size: 12px;
 }

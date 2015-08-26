@@ -30,10 +30,11 @@
 <script id="signedUserTemplate" type="text/x-handlebars-template">
 {{#if user}}
 	{{#sign user.level "<" 0}}
-	<li><a href="/settings">관리자</a></li>
+	<li><a href="/settings"><img src="#{path.root}/images/menu_admin.png" style="width: 43px;" alt="관리자"/></a></li>
+	<li><a href="/signout.do"><img src="#{path.root}/images/menu_logout.png" style="width: 55px;" alt="로그아웃"/></a></li>
 	{{/sign}}
 {{else}}
-	<li><a href="/signin">로그인</a></li>
+	<li><a href="/signin"><img src="#{path.root}/images/menu_login.png" style="width: 45px;" alt="로그인"/></a></li>
 {{/if}}
 </script>
 </head>
@@ -48,13 +49,13 @@
 				    </div>
 				    <div class="collapse navbar-collapse" id="menuList">
 						<ul class="nav navbar-nav">
-						  	<li><a href="?body=teacher"><img src="#{path.root}/images/menu_teacher.png" alt="강사소개" /></a></li>
-						  	<li><a href="?body=curriculum"><img src="#{path.root}/images/menu_curriculum.png" alt="교육과정" /></a></li>
-						  	<li><a href="?body=training"><img src="#{path.root}/images/menu_before_after.png" alt="트레이닝 효과" /></a></li>
-						  	<li><a href="?body=qna"><img src="#{path.root}/images/menu_qna.png" alt="수강문의" /></a></li>
-						  	<li><a href="http://map.naver.com/?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EB%85%BC%ED%98%84%EB%A1%9C102%EA%B8%B8%2012"><img src="#{path.root}/images/menu_map.png" alt="오시는길" /></a></li>
-						  	<li><a href="?body=gallery&boardId=live">공연&amp;녹음</a></li>
-						  	<li><a href="?body=gallery&boardId=photo">방문객</a></li>
+						  	<li><a href="?body=teacher"><img src="#{path.root}/images/menu_teacher.png" style="width: 55px;" alt="강사소개"/></a></li>
+						  	<li><a href="?body=curriculum"><img src="#{path.root}/images/menu_curriculumn.png" style="width: 57px;" alt="교육과정"/></a></li>
+						  	<li><a href="?body=training"><img src="#{path.root}/images/menu_training.png" style="width: 85px;" alt="트레이닝 효과"/></a></li>
+						  	<li><a href="?body=qna"><img src="#{path.root}/images/menu_qna.png" style="width: 55px;" alt="수강문의"/></a></li>
+						  	<li><a target="_blank" href="http://map.naver.com/?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EB%85%BC%ED%98%84%EB%A1%9C102%EA%B8%B8%2012"><img src="#{path.root}/images/menu_map.png" style="width: 55px;" alt="오시는길"/></a></li>
+						  	<li><a href="?body=gallery&boardId=live"><img src="#{path.root}/images/menu_live.png" style="width: 65px;" alt="공연&녹음"/></a></li>
+						  	<li><a href="?body=gallery&boardId=photo"><img src="#{path.root}/images/menu_photo.png" style="width: 43px;" alt="방문객"/></a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right" data-bind="signedUser" data-template-id="signedUserTemplate"></ul>
 				    </div>
@@ -78,51 +79,41 @@
 			<div class="col-xs-5" style="text-align:center;">
 				<iframe width="360" height="259" src="https://www.youtube.com/embed/tney4R2Tkcs" frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="col-xs-4">
-				<p class="h4">자주묻는질문</p>
-				<div>
-					<p class="faq"><a href="">연습실을 사용하는데 시간 제한이 있나요?</a></p>
-					<p class="faq"><a href="">어느 정도 기간을 트레이닝 받아야 효과가 있나요?</a></p>
-					<p class="faq"><a href="">수강생이 녹음실을 사용할 수 있나요?</a></p>
-					<p class="faq"><a href="">본인이 원하는 트레이너를 직접 선택할 수 있나요?</a></p>
-					<p class="faq"><a href="">노래를 잘부르는 사람만 수강이 가능한가요?</a></p>
+			<div class="col-xs-4 faqArea">
+				<p class="h4"><a href="?body=qna">자주묻는질문</a><a class="more">더보기</a></p>
+				<div data-bind="articleList" data-param='{"boardId" : "qna", "searchData" : {"isNotice" : "Y"}}'>
+					{{#if articleList}}
+					{{#each articleList}}
+						<p class="faq"><a href="">{{subject}}</a></p>
+					{{/each}}
+					{{/if}}
 				</div>
 			</div>
 		</div>
 		<div class="container" style="margin: 15px auto;">
-			<p class="h3">공연&amp;녹음</p>
-			<div class="thumbnailContainer">
+			<p class="h3"><a href="?body=live" style="color:#444;">공연&amp;녹음</a></p>
+			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "live", "searchData" : {"startIndex" : 1, "endIndex" : 8}}'>
+			{{#if articleList}}
+			{{#each articleList}}
 				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-					<p class="caption">박효신 - 눈의꽃</p>
+					<img src="{{thumbnailUrl}}">
+					<p class="caption">{{subject}}</p>
 				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
+			{{/each}}
+			{{/if}}
 			</div>
 		</div>
 		<div class="container" style="margin: 30px auto;">
-			<p class="h3">방문객</p>
-			<div class="thumbnailContainer">
-				<div class="col-xs-3">
-					<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
-					<p class="caption">박효신 - 눈의꽃</p>
-				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
-				<div class="col-xs-3">
-					<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-				</div>
+			<p class="h3"><a href="?body=photo" style="color:#444;">방문객</a></p>
+			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "photo", "searchData" : {"startIndex" : 1, "endIndex" : 8}}'>
+				{{#if articleList}}
+				{{#each articleList}}
+					<div class="col-xs-3">
+						<img src="{{thumbnailUrl}}">
+						<p class="caption">{{subject}}</p>
+					</div>
+				{{/each}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

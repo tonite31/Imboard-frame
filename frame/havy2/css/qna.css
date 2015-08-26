@@ -49,29 +49,6 @@
 	color:#0064ff;
 }
 
-.pagination
-{
-	display: block;
-	text-align: center;
-}
-
-.pagination a
-{
-	font-size:13px;
-	padding: 5px;
-}
-
-.pagination .number
-{
-	font-size:14px;
-}
-
-.pagination a.selected
-{
-	color: red;
-	text-decoration: underline;
-}
-
 .notice
 {
 	background-color: #f5f5f5;
