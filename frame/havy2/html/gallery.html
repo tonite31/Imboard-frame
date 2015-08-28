@@ -3,7 +3,7 @@
 <div class="thumbnailContainer">
 {{#each articleList}}
 <div class="col-xs-3">
-	<img src="{{thumbnailUrl}}">
+	<a href="?body=viewArticle&boardId=live&seq={{seq}}"><img src="{{thumbnailUrl}}"></a>
 	<p class="caption" style="bottom:25px; height: 20px; line-height:20px;">{{subject}}</p>
 	<p class="caption" style="height: 20px; line-height:20px; font-size:10px;">조회 {{hit}}</p>
 </div>

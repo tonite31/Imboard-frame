@@ -5,7 +5,7 @@ $(document).ready(function()
 	if($.query.boardId == "qna")
 		$("#isNotice").get(0).checked = true;
 	
-	CKEDITOR.replace("ckeditor", { height: 500 });
+	CKEDITOR.replace("ckeditor", { height: 500, allowedContent : "iframe[*];img[*]" });
 	
 	savedSeq = $.query.seq;
 	
@@ -65,7 +65,15 @@ $(document).ready(function()
 				}
 				else
 				{
-					location.href = "?body=" + $.query.prevBody + ($.query.boardId ? "&boardId=" + $.query.boardId : "") + ($.query.seq ? "&seq=" + $.query.seq : "");
+					var body = "";
+					if($.query.boardId == "live" || $.query.boardId == "photo")
+						body = "gallery";
+					else if($.query.boardId == "training")
+						body = "training";
+					else if($.query.boardId == "qna")
+						body = "qna";
+					
+					location.href = "?body=" + body + ($.query.boardId ? "&boardId=" + $.query.boardId : "") + ($.query.seq ? "&seq=" + $.query.seq : "");
 				}
 			}
 		}
@@ -100,75 +108,8 @@ $(document).ready(function()
 						
 						var img = document.createElement("img");
 						img.src = src.replace(".gif", ".png");
-						CKEDITOR.instances.ckeditor.document.$.body.appendChild(img);
-						
-						var range = CKEDITOR.instances.ckeditor.createRange();
-						range.moveToElementEditEnd( range.root );
-						CKEDITOR.instances.ckeditor.getSelection().selectRanges( [ range ] );
+						CKEDITOR.instances.ckeditor.insertHtml(img.outerHTML);
 					}
-					
-//					for(var i=0; i<result.length; i++)
-//					{
-//						var src = result[i];
-//						
-//						var type = typeList[i];
-//						if(type.indexOf("image") != -1)
-//							type = "image";
-//						else if(type.indexOf("video") != -1)
-//							type = "video";
-//						else
-//							type = "file";
-//						
-//						var div = document.createElement("div");
-//						if(type == "image")
-//						{
-//							var html = "<img data-thumbnail-url='" + src.replace(".gif", ".png") + "' src='" + src + "'/>";
-//							
-//							var img = document.createElement("img");
-//							img.src = src;
-//							img.onload = function(evt)
-//							{
-//					            var width = this.width;
-//					            var rect = $(that.target).find(".typewriter-content").getRect();
-//					            if(rect.width < width)
-//					            	this.style.width = "100%";
-//					            else
-//					            	this.style.width = width + "px";
-//					        };
-//
-//							div.appendChild(img);
-//						}
-//						else if(type == "video")
-//						{
-//							var html = "<video width='320' height='240' controls><source src='" + src + "' type='video/mp4'>";
-//						}
-//						else if(type == "file")
-//						{
-//							var fileName = src.split("/");
-//							fileName = fileName[fileName.length-1];
-//							var html = "<a href='" + src + "' style='cursor:pointer;'>" + fileName + "</a>";
-//							div.innerHTML = html;
-//						}
-//
-//						if(div)
-//						{
-//							div.appendChild(document.createTextNode(""));
-//
-//							if(focusedNode)
-//								$(div).insertAfter(focusedNode);
-//							else
-//								$(that.target).find(".typewriter-content").append(div);
-//								
-//							targetNode = div;
-//							
-//							if(type != "file")
-//								that.setResizeController(div.children[0]);
-//							
-//							that.setCaretPosition(div.childNodes[1], 0);
-//						}
-//					}
-//					
-//					$(target).find(".typewriter-contentplaceholder").remove();
 				}
 			},
 			error : function(result)
@@ -179,5 +120,16 @@ $(document).ready(function()
 
 		var result = $.api.article.uploadFile(param);
 		console.log(result);
+	});
+	
+	$("#uploadYoutube").on("click", function()
+	{
+		var text = prompt("URL을 입력해주세요");
+		if(text)
+		{
+			var v = text.replace(/http[s]?:\/\/youtu.be\//gi, "").replace(/http[s]?:\/\/www.youtube.com\/watch\?v=/gi, "");
+			var html = "<iframe data-focus='true' style='width:640px; height:360px;' data-thumbnail-url='http://img.youtube.com/vi/" + v + "/mqdefault.jpg' src='//www.youtube.com/embed/" + v + "' frameborder='0' allowfullscreen></iframe><br/>";
+			CKEDITOR.instances.ckeditor.insertHtml(html);
+		}
 	});
 });

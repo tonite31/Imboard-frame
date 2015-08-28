@@ -1,3 +1,14 @@
+<script id="teacherMovieTemplate" type="text/x-handlebars-template" data-precompile="true">
+{{#if articleList}}
+{{#each articleList}}
+	<div class="col-xs-4">
+		<img src="{{thumbnailUrl}}" alt="...">
+		<p class="caption">{{subject}}</p>
+	</div>
+{{/each}}
+{{/if}}
+</script>
+
 <script id="teacherTemplate" type="text/x-handlebars-template">
 {{#if articleList}}
 {{#each articleList}}
@@ -16,17 +27,7 @@
 			{{/sign}}
 		</p>
 		<div class="teacherProfile">{{{content}}}</div>
-		<div class="thumbnailContainer">
-			<div class="col-xs-4">
-				<img src="http://page.cafe24app.com/datas/havyvocal/22.jpg" alt="...">
-				<p class="caption">박효신 - 눈의꽃</p>
-			</div>
-			<div class="col-xs-4">
-				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-			</div>
-			<div class="col-xs-4">
-				<img src="#{path.root}/images/mqdefault.jpg" alt="...">
-			</div>
+		<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "live", "searchData" : {"tag" : "(강사) {{subject}}", "startIndex" : 0, "endIndex" : 3}}' data-template-id="teacherMovieTemplate">
 		</div>
 	</div>
 </div>

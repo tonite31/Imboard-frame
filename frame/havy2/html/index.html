@@ -21,11 +21,11 @@
 <script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="#{path.lib}/handlebars/handlebars-v1.3.0.js"></script>
 
-<script src="#{path.module}/imboard/js/imboard-api.js"></script>
 <script src="#{path.module}/imboard/js/imboard-ui.js"></script>
+<script src="#{path.module}/imboard/js/imboard-api.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
 
-<script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
+<script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
 
 <script id="signedUserTemplate" type="text/x-handlebars-template">
 {{#if user}}
@@ -92,7 +92,7 @@
 		</div>
 		<div class="container" style="margin: 15px auto;">
 			<p class="h3"><a href="?body=live" style="color:#444;">공연&amp;녹음</a></p>
-			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "live", "searchData" : {"startIndex" : 1, "endIndex" : 8}}'>
+			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "live", "searchData" : {"startIndex" : 0, "endIndex" : 8}}'>
 			{{#if articleList}}
 			{{#each articleList}}
 				<div class="col-xs-3">
@@ -105,14 +105,14 @@
 		</div>
 		<div class="container" style="margin: 30px auto;">
 			<p class="h3"><a href="?body=photo" style="color:#444;">방문객</a></p>
-			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "photo", "searchData" : {"startIndex" : 1, "endIndex" : 8}}'>
-				{{#if articleList}}
-				{{#each articleList}}
-					<div class="col-xs-3">
-						<img src="{{thumbnailUrl}}">
-						<p class="caption">{{subject}}</p>
-					</div>
-				{{/each}}
+			<div class="thumbnailContainer" data-bind="articleList" data-param='{"boardId" : "photo", "searchData" : {"startIndex" : 0, "endIndex" : 8}}'>
+			{{#if articleList}}
+			{{#each articleList}}
+				<div class="col-xs-3">
+					<img src="{{thumbnailUrl}}">
+					<p class="caption">{{subject}}</p>
+				</div>
+			{{/each}}
 				{{/if}}
 			</div>
 		</div>
