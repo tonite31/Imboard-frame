@@ -51,7 +51,7 @@ $(document).ready(function()
 		var result = $.api.comment.insertComment({boardId : "qna", articleSeq : $.query.seq, content : content});
 		if(result.code == 1000)
 		{
-			var commentList = $.api.comment.getCommentList({boardId : "qna", articleSeq : $.query.seq});
+			var commentList = $.api.comment.getCommentList({boardId : "qna", articleSeq : $.query.seq, searchData : {orderByGroupId : "ASC"}});
 			if(commentList.code == 1000)
 			{
 				var template = Handlebars.compile($("#qnaComment").html());
@@ -83,6 +83,23 @@ $(document).ready(function()
 				alert("오류가 발생했습니다.");
 				console.error(result);
 			}
+		}
+	});
+	
+	$(".deleteComment").on("click", function()
+	{
+		var articleSeq = $(this).attr("data-article-seq");
+		var seq = $(this).attr("data-seq");
+		
+		var result = $.api.comment.deleteComment({boardId : "qna", articleSeq : articleSeq, seq : seq, isRemove : "Y"});
+		if(result.code == 1000)
+		{
+			$(this).parent().remove();
+		}
+		else
+		{
+			alert("삭제 오류가 발생했습니다");
+			console.error(result);
 		}
 	});
 });

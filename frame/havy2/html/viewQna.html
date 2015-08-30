@@ -21,13 +21,13 @@
 	<button id="deleteQna" type="button" class="btn btn-default">삭제</button>
 	<a href="?body=qna" class="btn btn-default">목록</a>
 </div>
-<div class="answer-area" data-bind="commentList" data-param='{"boardId" : "qna", "articleSeq" : #{query.seq}}' data-template-id="qnaComment"></div>
+<div class="answer-area" data-bind="commentList" data-param='{"boardId" : "qna", "articleSeq" : #{query.seq}, "searchData" : {"orderByGroupId" : "ASC"}}' data-template-id="qnaComment"></div>
 </script>
 
 <script id="qnaComment" type="text/x-handlebars-template" data-precompile="true">
 {{#if commentList}}
 {{#each commentList}}
-	<p>{{{content}}}</p>
+	<p style="position: relative;">{{{content}}}<span data-seq="{{seq}}" data-article-seq="{{articleSeq}}" class="deleteComment">삭제</span></p>
 {{/each}}
 {{/if}}
 </script>

@@ -2,7 +2,7 @@
 {
     border-top: 1px dotted #bfbfbf;
     border-bottom: 1px dotted #bfbfbf;
-    padding: 10px;
+    padding: 0 10px;
     background-color: #f8f8f8;
     margin-bottom: 5px;
 }
@@ -10,7 +10,14 @@
 .answer-area p
 {
 	margin:0;
-	padding: 5px;
+	padding: 10px 5px;
+	padding-right: 40px;
+	border-top: 1px dotted #dfdfdf;
+}
+
+.answer-area p:FIRST-CHILD
+{
+	border-top:0;
 }
 
 .answer-area p:FIRST-CHILD
@@ -36,4 +43,19 @@
 	vertical-align:top;
 	border-top-left-radius:0;
 	border-bottom-left-radius:0;
+}
+
+.deleteComment
+{
+	position: absolute;
+	right: 5px;
+	top: 13px;
+	font-size:12px;
+	color: #666;
+	cursor: pointer;
+}
+
+.deleteComment:HOVER
+{
+	text-decoration: underline;	
 }
