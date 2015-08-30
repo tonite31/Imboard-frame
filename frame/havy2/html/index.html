@@ -86,7 +86,7 @@
 				<div data-bind="articleList" data-param='{"boardId" : "qna", "searchData" : {"isNotice" : "Y"}}'>
 					{{#if articleList}}
 					{{#each articleList}}
-						<p class="faq"><a href="">{{subject}}</a></p>
+						<p class="faq"><a href="?body=viewArticle&boardId=qna&seq={{seq}}">{{subject}}</a></p>
 					{{/each}}
 					{{/if}}
 				</div>
@@ -98,7 +98,7 @@
 			{{#if articleList}}
 			{{#each articleList}}
 				<div class="col-xs-3">
-					<img src="{{thumbnailUrl}}">
+					<a href="?body=viewArticle&boardId={{boardId}}&seq={{seq}}"><img src="{{thumbnailUrl}}"></a>
 					<p class="caption">{{subject}}</p>
 				</div>
 			{{/each}}
@@ -111,7 +111,7 @@
 			{{#if articleList}}
 			{{#each articleList}}
 				<div class="col-xs-3">
-					<img src="{{thumbnailUrl}}">
+					<a href="?body=viewArticle&boardId={{boardId}}&seq={{seq}}"><img src="{{thumbnailUrl}}"></a>
 					<p class="caption">{{subject}}</p>
 				</div>
 			{{/each}}

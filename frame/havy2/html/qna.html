@@ -12,10 +12,10 @@
 	</td>
 	<td>
 		{{#equals isNotice "Y"}}
-			<a href="?body=viewArticle&boardId=qna&seq={{seq}}&prevBody=qna" {{#equals isNotice "Y"}}style="font-weight:bold;"{{/equals}}>{{subject}}</a>
+			<a href="?body=viewArticle&boardId=qna&seq={{seq}}" {{#equals isNotice "Y"}}style="font-weight:bold;"{{/equals}}>{{subject}}</a>
 		{{/equals}}
 		{{#notequals isNotice "Y"}}
-			<a href="?body=viewQna&seq={{seq}}&prevBody=qna" {{#equals isNotice "Y"}}style="font-weight:bold;"{{/equals}}>{{subject}}</a>
+			<a href="?body=viewQna&seq={{seq}}" {{#equals isNotice "Y"}}style="font-weight:bold;"{{/equals}}>{{subject}}</a>
 		{{/notequals}}
 		{{#notequals isNotice "Y"}}
 		{{#sign commentCount ">" 0}}

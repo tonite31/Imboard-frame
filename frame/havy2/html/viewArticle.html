@@ -5,10 +5,12 @@
 </div>
 <div style="padding: 20px 5px;">{{{content}}}</div>
 <div style="text-align:right; padding: 10px 0; border-bottom: 1px solid #dfdfdf">
+{{#if '#{user.id}'}}
 {{#test "'#{user.id}' && ('#{user.id}' == '" writerId "' || '#{user.level}' < 0)"}}
 <a href="?body=writeArticle&prevBody=viewArticle&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
 <button type="button" id="deleteArticle" class="btn btn-default">삭제</button>
 {{/test}}
+{{/if}}
 <button type="button" id="viewList" class="btn btn-default">목록</button>
 </div>
 </script>
