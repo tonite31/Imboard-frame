@@ -25,6 +25,8 @@
 <script src="#{path.module}/imboard/js/imboard-api.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
 
+<script src="#{path.root}/js/index.js"></script>
+
 <script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
 
 <script id="signedUserTemplate" type="text/x-handlebars-template">
@@ -45,7 +47,7 @@
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-				      	<a class="navbar-brand" href="/"><img src="#{path.root}/images/title_logo.png" alt="하비실용음악학원" style="width: 180px;"/></a>
+				      	<a class="navbar-brand" href="/"><img src="#{path.root}/images/title_logo.png" alt="하비실용음악학원" style="width: 180px; opacity:1;"/></a>
 				    </div>
 				    <div class="collapse navbar-collapse" id="menuList">
 						<ul class="nav navbar-nav">
@@ -53,9 +55,9 @@
 						  	<li><a href="?body=curriculum"><img src="#{path.root}/images/menu_curriculumn.png" style="width: 57px;" alt="교육과정"/></a></li>
 						  	<li><a href="?body=training"><img src="#{path.root}/images/menu_training.png" style="width: 85px;" alt="트레이닝 효과"/></a></li>
 						  	<li><a href="?body=qna"><img src="#{path.root}/images/menu_qna.png" style="width: 55px;" alt="수강문의"/></a></li>
-						  	<li><a target="_blank" href="http://map.naver.com/?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EB%85%BC%ED%98%84%EB%A1%9C102%EA%B8%B8%2012"><img src="#{path.root}/images/menu_map.png" style="width: 55px;" alt="오시는길"/></a></li>
 						  	<li><a href="?body=gallery&boardId=live"><img src="#{path.root}/images/menu_live.png" style="width: 65px;" alt="공연&녹음"/></a></li>
 						  	<li><a href="?body=gallery&boardId=photo"><img src="#{path.root}/images/menu_photo.png" style="width: 43px;" alt="방문객"/></a></li>
+						  	<li><a target="_blank" href="http://map.naver.com/?query=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EB%85%BC%ED%98%84%EB%A1%9C102%EA%B8%B8%2012"><img src="#{path.root}/images/menu_map.png" style="width: 55px;" alt="오시는길"/></a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right" data-bind="signedUser" data-template-id="signedUserTemplate"></ul>
 				    </div>
@@ -80,7 +82,7 @@
 				<iframe width="360" height="259" src="https://www.youtube.com/embed/tney4R2Tkcs" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<div class="col-xs-4 faqArea">
-				<p class="h4"><a href="?body=qna">자주묻는질문</a><a class="more">더보기</a></p>
+				<p class="h4"><a href="?body=qna">자주묻는질문</a><a href="?body=qna" class="more">더보기</a></p>
 				<div data-bind="articleList" data-param='{"boardId" : "qna", "searchData" : {"isNotice" : "Y"}}'>
 					{{#if articleList}}
 					{{#each articleList}}

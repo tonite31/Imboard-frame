@@ -5,7 +5,7 @@ $(document).ready(function()
 	if($.query.boardId == "qna")
 		$("#isNotice").get(0).checked = true;
 	
-	CKEDITOR.replace("ckeditor", { height: 500, allowedContent : "iframe[*];img[*]" });
+	CKEDITOR.replace("ckeditor", { height: 500 });
 	
 	savedSeq = $.query.seq;
 	
@@ -43,13 +43,15 @@ $(document).ready(function()
 				param.thumbnailUrl = urls;
 			}
 			
+			if(!param.thumbnailUrl)
+				param.thumbnailUrl = $(body).find("iframe[data-thumbnail-url]:first").attr("data-thumbnail-url");
+			
 			param.boardId = $.query.boardId;
 			param.content = CKEDITOR.instances.ckeditor.getData();
 			
 			if(savedSeq != null)
 			{
 				param.seq = savedSeq;
-				param.status = 0;
 				result = $.api.article.updateArticle(param);
 			}
 			else
@@ -128,7 +130,7 @@ $(document).ready(function()
 		if(text)
 		{
 			var v = text.replace(/http[s]?:\/\/youtu.be\//gi, "").replace(/http[s]?:\/\/www.youtube.com\/watch\?v=/gi, "");
-			var html = "<iframe data-focus='true' style='width:640px; height:360px;' data-thumbnail-url='http://img.youtube.com/vi/" + v + "/mqdefault.jpg' src='//www.youtube.com/embed/" + v + "' frameborder='0' allowfullscreen></iframe><br/>";
+			var html = "<iframe data-focus='true' style='width:640px; height:360px;' data-thumbnail-url='http://img.youtube.com/vi/" + v + "/mqdefault.jpg' src='//www.youtube.com/embed/" + v + "' frameborder='0' allowfullscreen></iframe>";
 			CKEDITOR.instances.ckeditor.insertHtml(html);
 		}
 	});

@@ -1,7 +1,7 @@
 <div class="container">
 	<form id="form" data-component="form" data-bind="article" data-param='{"boardId" : "#{query.boardId}", "seq" : "#{query.seq}"}'>
 		<p>
-			<input type="text" id="subject" class="textinput" name="subject" placeholder="제목을 입력해주세요" style="width:100%;" required="required" value="{{subject}}" />
+			<input type="text" id="subject" class="textinput" name="subject" placeholder="제목을 입력해주세요" style="width:100%;" required="required" value="{{subject}}" autofocus="autofocus" />
 		</p>
 		<p>
 			{{#equals isNotice "Y"}}
