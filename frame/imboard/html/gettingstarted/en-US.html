@@ -1,0 +1,182 @@
+<div class="container">
+	<div class="col-xs-9" style="padding:0;" id="documentArea">
+		<div class="doc" id="doc_download">
+			<h2 class="page-header">1. Download and installation</h2>
+			<div class="subdoc first" id="1-1">
+				<h3>1-1. Preparation</h3>
+				<dl>
+					<dt>Web server</dt>
+					<dd>You need a hosting server or private server for installing Imboard.</dd>
+				</dl>
+				<dl>
+					<dt>nodejs &amp; MySQL</dt>
+					<dd>Imboard use the nodejs and MySQL database. Please Install recent version <a href="https://nodejs.org/">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>.</dd>
+				</dl>
+				<dl>
+					<dt>데이터베이스 및 사용자 생성</dt>
+					<dd>Create database and user after connect to installed MySQL.</dd>
+				</dl>
+			</div>
+			<div class="subdoc" id="1-2">
+				<h3>1-2. Download</h3>
+				<p>Imboard is provided by .zip , .tar and .gz file formats. Currently version is <strong data-id="currentVersion"></strong>.</p>
+				<p>Development version is provided from <a href="https://github.com/tonite31/Imboard/tree/development" target="_blank">https://github.com/tonite31/Imboard/tree/development</a>.</p>
+				<p>
+					<a data-download-url="#{var.resourcesUrl}/imboard/imboard.zip" class="btn btn-outline black" style="width: 150px;">imboard.zip<br/>#{lan.download}</a>
+					<a data-download-url="#{var.resourcesUrl}/imboard/imboard.tar.gz" class="btn btn-outline black" style="width: 150px;">imboard.tar.gz<br/>#{lan.download}</a>
+				</p>
+			</div>
+			<div class="subdoc" id="1-3">
+				<h3>1-3. Install with npm</h3>
+				<p>If you use "npm", you can install imboard easily.</p>
+				<pre>$ npm install imboard</pre>
+			</div>
+		</div>
+		<div class="doc" id="doc_configuration">
+			<h2 class="page-header">2. Configuraion and run</h2>
+			<p>Install nodejs modules, configure imboard application. Following step is processed on root directory.</p>
+			<figure>
+				<img alt="Root directory of imboard" src="#{var.resourcesUrl}/gettingstarted/root_director_of_imboard.png" style="width: 500px;">
+				<figcaption>Root directory</figcaption>
+			</figure>
+			<dl>
+				<dt>Install nodejs modules</dt>
+				<dd>
+					<p>You must to install nodejs modules for imboard server. Run following command, created a directory "node_modules" in root directory.</p>
+					<pre>$ npm install</pre>
+					<figure>
+						<img alt="Root directory after execute a command 'npm install'" src="#{var.resourcesUrl}/gettingstarted/after_npm_install.png" style="width: 500px;">
+						<figcaption>The result that installed nodejs modules after executed install command.</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Configure database connection</dt>
+				<dd>
+					<pre>$ node config.js</pre>
+					<p>Select a menu "jdbc", enter a information host, username, password, database.</p>
+					<figure>
+						<img alt="Configure database connection" src="#{var.resourcesUrl}/gettingstarted/configuration_jdbc.png" style="width: 500px;">
+						<figcaption>Enter a information of database connection after execute a command "node config.js"</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Set a frame's name</dt>
+				<dd>
+					<p>Select a menu "frame", enter a frame's name after configure database connection. If you not enter a specific value, setted a default value "sample".</p>
+					<p>If you change a frame's name to someting, ran application by a "someting" frame in <code>/content/frame/</code> directory.</p>
+					<p>This example is entered "sample".</p>
+					<figure>
+						<img alt="set frame's name" src="#{var.resourcesUrl}/gettingstarted/configuration_frame.png" style="width: 500px;">
+						<figcaption>Enter a frame's name</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Enter a initial value</dt>
+				<dd>
+					<pre>$ node install.js</pre>
+					<p>Inserted a initial data for imboard and frame to database that you set a information in previous step. Now imboard installation work is done.</p>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Run a application</dt>
+				<dd>
+					<pre>$ node app.js</pre>
+					<p>Visit a url <code>http://localhost:3000/</code> in a web browser. You can see a application that ran by frame "sample".</p>
+					<p>If you click a button "Write a article", moved to "write" page that can enter a subject and a content, a writer's name. That data is shown on the list.</p>
+					<figure>
+						<img alt="Web page that ran by a frame 'sample'" src="#{var.resourcesUrl}/gettingstarted/sample_site.png" style="width: 100%;">
+						<figcaption>Web page that ran by a frame "sample"</figcaption>
+					</figure>
+				</dd>
+			</dl>
+		</div>
+		<div class="doc" id="doc_frame_structure">
+			<h2 class="page-header">3. Structure of frame</h2>
+			<p>This step is introduce a structure of frame. All frame's directory must placed under the <code>/content/frame/</code> directory and it muse have a following structure.</p>
+			<p>Following image is structure of frame "sample".</p>
+			<p><img src="#{var.resourcesUrl}/gettingstarted/sample_frame_structure.png" alt="structure of frame 'sample'" style="width:200px;"/></p>
+			<dl>
+				<dt>css</dt>
+				<dd>This directory include .css files.</dd>
+			</dl>
+			<dl>
+				<dt>html</dt>
+				<dd>This directory include .html files. index.html is main page, so it must be created.</dd>
+			</dl>
+			<dl>
+				<dt>js</dt>
+				<dd>This directory include .js files.</dd>
+			</dl>
+			<dl>
+				<dt>lib</dt>
+				<dd>This directory include libraries that used for the frame.</dd>
+			</dl>
+			<dl>
+				<dt>properties</dt>
+				<dd>This directory include database script for initial data that is needed for frame, handlebars helper script, localization data.</dd>
+			</dl>
+		</div>
+		<div class="doc" id="doc_index">
+			<h2 class="page-header">4. index.html</h2>
+			<p>index.html is main page. It is import a minimum javascript and css file that needed for frame.</p>
+			<pre data-html="/gettingstarted/index.html"></pre>
+			<p>The value that typed like ##{path.xxx} is a replace variable changed current path of frame. For more information, see <a href="?fragment=document&locale=en-US#doc_replace_variables">4-1. Replace variable</a>.</p>
+		</div>
+		<div class="doc" id="doc_example">
+			<h2 class="page-header">5. Sample</h2>
+			<p>This example explain a frame "sample" with a code. Frame "sample" is installed with imboard.</p>
+			<div class="subdoc first">
+				<h3>5-1. Frame directory</h3>
+				<p>Following image is a directory of the frame "sample".</p>
+				<p><img src="#{var.resourcesUrl}/gettingstarted/sample_structure.png" alt="structure of the frame 'sample'" style="width: 200px;"/></p>
+			</div>
+			<div class="subdoc">
+				<h3>5-2. index.html</h3>
+				<p>This is a main page of web page that is ran by frame "sample". This page is show a list of board and has a button that can move to "write" page.</p>
+				<pre data-html="/gettingstarted/sample/html/index.html"></pre>
+				<p><code>#{lan.boardName}</code> : is process a localization using replace variable. This is replaced by boardName that is set in "localize.json" by language of client. For more information, see <a href="?fragment=document&locale=en-US#doc_localize">6. Localization</a></p>
+				<p><code>&lt;div data-fragment="body"&gt;</code> : is a tag that shown page fragment. If you click a button "Write a article", show a content for "write.html" in this tag and imported a "write.js" in js directory and a "write.css" in css directory.</p>
+				<p><code>data-bind="articleComponent" data-param='{"boardId" : "sample"}'</code> :  call "articleComponent" module, load a list of article that has a boardId "sample".</p>
+				<p>Loaded a list of article is shown into <code>&lt;div data-parts="body" data-template-id="articleComponentTemplate"&gt;&lt;/div&gt;</code> tag using Handlebars template script "<code>&lt;script id="articleComponentTemplate" type="text/x-handlebars-template"&gt;&lt;/code&gt;</code>"</p>
+				<p>articleComponent module load a list of article that is proccessed paging from the server. For more information of databind moduels, see <a href="http://imboard.io/?fragment=api&locale=en-US#doc_data_bind">data-bind modules</a>.</p>
+			</div>
+			<div class="subdoc">
+				<h3>5-3. index.js</h3>
+				<p>This page is implemented a function that remove a article when clicked a button "delete" on the list of article.</p>
+				<pre data-html="/gettingstarted/sample/js/index.js"></pre>
+				<p>For more information of $.api.article.deleteArticle, see <a href="?fragment=api&locale=en-US#doc_imboard_api_deleteArticle">3-4-6. $.api.article.deleteArticle</a>.</p>
+			</div>
+			<div class="subdoc">
+				<h3>5-4. index.css</h3>
+				<pre data-html="/gettingstarted/sample/css/index.css"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>5-5. write.html</h3>
+				<p>This page save a article with subject and content that is entered by user.</p>
+				<pre data-html="/gettingstarted/sample/html/write.html"></pre>
+			</div>
+			<div class="subdoc">
+				<h3>5-6. write.js</h3>
+				<pre data-html="/gettingstarted/sample/js/write.js"></pre>
+				<p>If you click a button "save", the submit event occured of form, call a anonymous function that is passed on function "compile", produce a data that is entered by user.</p>
+				<p>For more information of form component, see <a href="#">form 컴포넌트</a>. (this page is writing...)</p>
+			</div>
+			<div class="subdoc">
+				<h3>5-7. localize.json</h3>
+				<pre data-html="/gettingstarted/sample/properties/localize.json"></pre>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-3">
+		<ul id="contentList" data-component="scrollFollower">
+			<li><a href="#doc_download">1. Download and installation</a></li>
+			<li><a href="#doc_configuration">2. Configuraion and run</a></li>
+			<li><a href="#doc_frame_structure">3. Structure of frame</a></li>
+			<li><a href="#doc_index">4. index.html</a></li>
+			<li><a href="#doc_example">5. Sample</a></li>
+		</ul>
+	</div>
+</div>
