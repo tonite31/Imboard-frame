@@ -309,3 +309,13 @@ footer p a
 	display:inline-block;
 	font-size: 12px;
 }
+
+.showcase
+{
+	text-align: center;
+}
+
+.showcase .caption a
+{
+	color: #666;
+}

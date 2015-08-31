@@ -5,24 +5,6 @@ $(document).ready(function()
 		$(".navbar-nav li").removeAttr("active");
 		$(".navbar-nav li a[href^='?fragment=" + $.query.fragment + "']").parent().addClass("active");
 	}
-
-	var result = $.api.article.getArticleList({boardId : "patchnote", searchData : {startIndex:0, endIndex:1}});
-	if(result.code == 1000 && result.data.length > 0)
-	{
-		$("*[data-id='currentVersion']").text(result.data[0].subject);
-	}
-	
-	result = $.api.data.getData({id : "downloadCount"});
-	if(result.code == 1000)
-	{
-		var count = 0;
-		if(!result.data || isNaN(result.data.data))
-			count = 0;
-		else
-			count = result.data.data;
-		
-		$("#downloadCount").text(count + " times downloaded");
-	}
 });
 
 function anchorScroll(href)

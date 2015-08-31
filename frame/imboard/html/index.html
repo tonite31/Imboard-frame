@@ -106,8 +106,8 @@
 		<div class="container doc">
 			<div style="text-align: center; color: #666;">
 				<p><a class="btn btn-default" style="padding:15px 30px; font-size:14px;" href="?fragment=gettingstarted&locale=#{locale}#doc_download">Download Imboard</a></p>
-				<p style="font-size: 12px;">Currently <span data-id="currentVersion"></span></p>
-				<p style="font-weight:bold;" id="downloadCount"></p>
+				<p style="font-size: 12px;">Currently <span data-bind="articleList" data-param='{"boardId" : "patchnote", "searchData" : {"startIndex":0, "endIndex":1}}'>{{#each articleList}}{{subject}}{{/each}}</span></p>
+				<p style="font-weight:bold;" data-bind="data" data-param='{"id" : "downloadCount"}'>{{data}} times downloaded</p>
 			</div>
 		</div>
 		<div class="container doc" style="margin-bottom: 30px; text-align: center;">
@@ -122,10 +122,28 @@
 			<p>You can share your beautiful web page frame.</p>
 			{{/localize}}
 		</div>
+		<div class="container doc showcase">
+			{{#localize}}
+			@{ko-KR}
+			<h2>쇼케이스</h2>
+			<p>임보드로 제작된 웹페이지입니다. 사이트 등록은 하단의 Contact를 통해 메일을 보내주십시오.</p>
+			@{default}
+			<h2>Showcase</h2>
+			<p>Webpage list that made by imboard. If you want to register your site, please send email to Contact below.</p>
+			{{/localize}}
+			<div class="row">
+				<div class="col-xs-6 col-md-3">
+					<a href="http://havyvocal.net" class="thumbnail" target="_blank"><img src="#{var.resourcesUrl}/showcase/havy.png" alt="하비실용음악학원 홈페이지"></a>
+					<div class="caption">
+        				<p class="h4"><a href="http://havyvocal.net" target="_blank">하비실용음악학원</a></p>
+        			</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<footer>
 		<p>Code licensed under <a rel="license" href="https://github.com/tonite31/imboard/blob/master/LICENSE" target="_blank">MIT</a>, documentation under <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a></p>
-		<p>Currently v<span data-id="currentVersion"></span>, <a href="https://github.com/tonite31/Imboard" target="_blank">GitHub</a>, <a href="mailto:tonite32@gmail.com">Contact</a></p>
+		<p><a href="https://github.com/tonite31/Imboard" target="_blank">GitHub</a>, <a href="https://github.com/tonite31/Imboard/issues">Issues</a>, <a href="https://github.com/tonite31/Imboard/releases">Releases</a>, <a href="mailto:tonite32@gmail.com">Contact</a></p>
 	</footer>
 	
 	<script>
