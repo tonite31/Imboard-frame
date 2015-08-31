@@ -2,7 +2,7 @@
 	<div class="panel-heading"><h4>3-5-6. $.api.comment.deleteComment</h4></div>
 	<div class="panel panel-body">
 		<div class="content-header">예제</div>
-		<pre>$.api.comment.deleteComment({boardId : "test", articleSeq : 0, seq : 0});</pre>
+		<pre>$.api.comment.deleteComment({boardId : "test", articleSeq : 0, seq : 0, isRemove : "Y"});</pre>
 		<div class="content-header">파라미터</div>
 		<table class="dataTable">
 			<colgroup>
@@ -32,6 +32,11 @@
 					<th>seq <span class="label label-primary">필수</span></th>
 					<td class="center">Integer</td>
 					<td>덧글 번호</td>
+				</tr>
+				<tr>
+					<th>isRemove</th>
+					<td class="center">String(Y or N)</td>
+					<td>완전 삭제 여부, N일경우 status가 -1으로 설정됩니다.</td>
 				</tr>
 			</tbody>
 		</table>

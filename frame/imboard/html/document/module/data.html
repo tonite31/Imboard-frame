@@ -1,0 +1,120 @@
+<div class="panel panel-default" id="doc_data">
+	<div class="panel-heading">
+		<h4>1-7-1. data</h4>
+	</div>
+	<div class="panel-body">
+		<div class="content-header">#{lan.parameter}</div>
+		{{#localize}}
+		@{ko-KR}
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 10%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 35%;"/>
+				<col style="width: 15%;"/>
+			</colgroup>
+			<tr>
+				<th colspan="2" class="center">변수명</th>
+				<th class="center">변수타입</th>
+				<th class="center">설명</th>
+				<th class="center">검색방법</th>
+			</tr>
+			<tbody>
+				<tr>
+					<th colspan="2">id <span class="label label-primary">필수</span></th>
+					<td class="center">String</td>
+					<td>데이터 아이디</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">데이터</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">변수명</th>
+					<th class="center">변수타입</th>
+					<th class="center">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>데이터 아이디</td>
+				</tr>
+				<tr>
+					<th>data</th>
+					<td class="center">Blob</td>
+					<td>데이터</td>
+				</tr>
+			</tbody>
+		</table>
+		@{default}
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 10%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 35%;"/>
+				<col style="width: 15%;"/>
+			</colgroup>
+			<tr>
+				<th colspan="2" class="center">Variable's name</th>
+				<th class="center">Variable's type</th>
+				<th class="center">Description</th>
+				<th class="center">Compare type</th>
+			</tr>
+			<tbody>
+				<tr>
+					<th colspan="2">id <span class="label label-primary">Required</span></th>
+					<td class="center">String</td>
+					<td>Data's id</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">Data</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 60%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>Data's id</td>
+				</tr>
+				<tr>
+					<th>data</th>
+					<td class="center">Blob</td>
+					<td>data</td>
+				</tr>
+			</tbody>
+		</table>
+		{{/localize}}
+		<div class="content-header">#{lan.example}</div>
+		<pre class="content-code">{{#localize}}
+@{ko-KR}
+&lt;div data-bind="data" data-param='{"id" : "데이터 아이디"}'&gt;저장된 데이터는 {{data}} 입니다.&lt;/div&gt;
+@{default}
+&lt;div data-bind="data" data-param='{"id" : "Data's id"}'&gt;Data is {{data}}.&lt;/div&gt;
+{{/localize}}
+		</pre>
+	</div>
+</div>

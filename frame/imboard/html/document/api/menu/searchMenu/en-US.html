@@ -1,0 +1,140 @@
+<div class="panel panel-default" id="doc_imboard_api_getMenu">
+	<div class="panel-heading"><h4>3-6-6. $.api.menu.getMenu</h4></div>
+	<div class="panel panel-body">
+		<div class="content-header">#{lan.example}</div>
+		<pre>var result = $.api.menu.getMenu({id : "test"});
+if(result.code == 1000)
+	console.log(result.data);
+else
+	console.error(result);</pre>
+		<div class="content-header">#{lan.parameter}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 30%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 40%;"/>
+				<col style="width: 10%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+					<th class="center">Compare type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>id</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td class="center">String</td>
+					<td>name</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>type</th>
+					<td class="center">Integer</td>
+					<td>type</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>parameter</th>
+					<td class="center">String</td>
+					<td>Url querystring. use this, if you connect menu to board. ex)?boardId=test</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>parentMenuId</th>
+					<td class="center">String</td>
+					<td>Menu's id of parent menu.</td>
+					<td class="center">=</td>
+				</tr>
+				<tr>
+					<th>creator</th>
+					<td class="center">String</td>
+					<td>User's id that was created a menu.</td>
+					<td class="center">=</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="content-header">#{lan.data}</div>
+		<table class="dataTable">
+			<colgroup>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 20%;"/>
+				<col style="width: 40%;"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center" colspan="2">Variable's name</th>
+					<th class="center">Variable's type</th>
+					<th class="center">Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th colspan="2" class="center">code</th>
+					<td class="center">Integer</td>
+					<td>Response code</td>
+				</tr>
+				<tr>
+					<th colspan="2" class="center">message</th>
+					<td class="center">Integer</td>
+					<td>Response message</td>
+				</tr>
+				<tr>
+					<th rowspan="9" class="center">data</th>
+					<th>id</th>
+					<td class="center">String</td>
+					<td>id</td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td class="center">String</td>
+					<td>name</td>
+				</tr>
+				<tr>
+					<th>type</th>
+					<td class="center">Integer</td>
+					<td>type</td>
+				</tr>
+				<tr>
+					<th>parameter</th>
+					<td class="center">String</td>
+					<td>Url querystring. use this, if you connect menu to board. ex)?boardId=test</td>
+				</tr>
+				<tr>
+					<th>priority</th>
+					<td class="center">Integer</td>
+					<td>Priority</td>
+				</tr>
+				<tr>
+					<th>parentMenuId</th>
+					<td class="center">String</td>
+					<td>Id of parent menu.</td>
+				</tr>
+				<tr>
+					<th>viewLevel</th>
+					<td class="center">Integer</td>
+					<td>User's level of viewing a menu.</td>
+				</tr>
+				<tr>
+					<th>childMenuCount</th>
+					<td class="center">Integer</td>
+					<td>count of child menus.</td>
+				</tr>
+				<tr>
+					<th>creator</th>
+					<td class="center">String</td>
+					<td>User's id that was created a menu.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
