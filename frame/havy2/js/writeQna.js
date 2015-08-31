@@ -14,7 +14,6 @@ $(document).ready(function()
 		if(savedSeq != null)
 		{
 			param.seq = savedSeq;
-			param.status = 0;
 			result = $.api.article.updateArticle(param);
 		}
 		else
