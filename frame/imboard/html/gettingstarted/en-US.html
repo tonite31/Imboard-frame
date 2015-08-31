@@ -13,7 +13,7 @@
 					<dd>Imboard use the nodejs and MySQL database. Please Install recent version <a href="https://nodejs.org/">nodejs</a> and <a href="http://dev.mysql.com/downloads/mysql/" target="_blank">MySQL</a>.</dd>
 				</dl>
 				<dl>
-					<dt>데이터베이스 및 사용자 생성</dt>
+					<dt>Create a database and a user</dt>
 					<dd>Create database and user after connect to installed MySQL.</dd>
 				</dl>
 			</div>
@@ -84,6 +84,8 @@
 				<dt>Run a application</dt>
 				<dd>
 					<pre>$ node app.js</pre>
+					<pre>$ node app.js -deploy</pre>
+					<p>If you set a option "-deploy", all console.log is not printed on shell, all log is stacked in logs directory.</p>
 					<p>Visit a url <code>http://localhost:3000/</code> in a web browser. You can see a application that ran by frame "sample".</p>
 					<p>If you click a button "Write a article", moved to "write" page that can enter a subject and a content, a writer's name. That data is shown on the list.</p>
 					<figure>
