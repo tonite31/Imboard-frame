@@ -37,7 +37,7 @@
 		<p style="text-align: right;">
 			{{#equals writerId "#{user.id}"}}
 			<a href="?fragment=community&sub=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
-			<button type="button" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
+			<button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
 			{{/equals}}
 		</p>
 	</div>

@@ -13,6 +13,15 @@ $(document).ready(function()
 		}
 	});
 
+	$("#deleteArticle").on("click", function()
+	{
+		var result = $.api.article.deleteArticle({boardId : $.query.boardId, seq : $.query.seq, isRemove : "Y"});
+		if(result.code == 1000)
+		{
+			location.href = "?fragment=qna&boardId=" + $.query.boardId;
+		}
+	});
+
 	bindReplyComment();
 });
 
