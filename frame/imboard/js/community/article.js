@@ -12,7 +12,7 @@ $(document).ready(function()
 			console.error(result);
 		}
 	});
-	
+
 	bindReplyComment();
 });
 
@@ -23,7 +23,7 @@ function refresh()
 	{
 		var html = $("#communityCommentTemplate").html();
 		var template = Handlebars.compile(html);
-		
+
 		$("#commentList").html(template({commentList : result.data}));
 		bindReplyComment();
 	}
@@ -40,21 +40,21 @@ function bindReplyComment()
 		var parent = $(this).parent().parent();
 		if(parent.children("form").length > 0)
 			return;
-		
+
 		var groupId = $(this).attr("data-groupid");
 		var seq = $(this).attr("data-seq");
-		
+
 		var form = document.createElement("form");
 		form.setAttribute("data-component", "form");
 		$(form).html($("#commentWriteTemplate").html());
-		
+
 		parent.append(form);
-		
+
 		$(form).compile(function(data)
 		{
 			data.groupId = groupId;
 			data.parentSeq = seq;
-			
+
 			var result = $.api.comment.insertComment(data);
 			if(result.code == 1000)
 			{
@@ -65,7 +65,7 @@ function bindReplyComment()
 				console.error(result);
 			}
 		});
-		
+
 		$(form).find("textarea").focus();
 	});
 }
