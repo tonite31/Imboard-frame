@@ -148,5 +148,30 @@
 	{
 		"ko-KR" : "결과",
 		"default" : "Result"
+	},
+	"anonymous" :
+	{
+		"ko-KR" : "익명사용자",
+		"default" : "Anonymous"
+	},
+	"writeAComment":
+	{
+		"ko-KR" : "덧글을 입력하세요",
+		"default" : "Write a comment"
+	},
+	"reply":
+	{
+		"ko-KR" : "덧글",
+		"default" : "reply"
+	},
+	"subject":
+	{
+		"ko-KR" : "제목",
+		"default" : "Subject"
+	},
+	"writerName":
+	{
+		"ko-KR" : "이름",
+		"default" : "Name"
 	}
 }

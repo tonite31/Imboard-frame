@@ -28,13 +28,14 @@
 			</div>
 			<div class="subdoc" id="1-3">
 				<h3>1-3. Install with npm</h3>
-				<p>If you use "npm", you can install imboard easily.</p>
+				<p>If you use "npm", you can install imboard easily. Choose a installation directory you want.</p>
 				<pre>$ npm install imboard</pre>
 			</div>
 		</div>
 		<div class="doc" id="doc_configuration">
 			<h2 class="page-header">2. Configuraion and run</h2>
 			<p>Install nodejs modules, configure imboard application. Following step is processed on root directory.</p>
+			<p>If you using windows, then typing "dir" instead "ls -al"</p>
 			<figure>
 				<img alt="Root directory of imboard" src="#{var.resourcesUrl}/gettingstarted/root_director_of_imboard.png" style="width: 500px;">
 				<figcaption>Root directory</figcaption>
@@ -54,7 +55,7 @@
 				<dt>Configure database connection</dt>
 				<dd>
 					<pre>$ node config.js</pre>
-					<p>Select a menu "jdbc", enter a information host, username, password, database.</p>
+					<p>Select a menu "jdbc", enter a information host, username, password, database, port.</p>
 					<figure>
 						<img alt="Configure database connection" src="#{var.resourcesUrl}/gettingstarted/configuration_jdbc.png" style="width: 500px;">
 						<figcaption>Enter a information of database connection after execute a command "node config.js"</figcaption>

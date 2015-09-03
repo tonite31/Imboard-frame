@@ -1,14 +1,14 @@
 $(document).ready(function()
 {
-	TypeWriter.compile({selector:"#content"});
-	
+	CKEDITOR.replace("ckeditor", {height: 400});
+
 	$("#patchnoteWriteForm").compile(function(data)
 	{
-		var content = TypeWriter.instances.content.getData().content;
+		var content = CKEDITOR.instances.ckeditor.getData();
 		data.content = content;
 		data.boardId = "patchnote";
-		data.status = 1;
-		
+		data.seq = $.query.seq;
+
 		var result = $.api.article.writeArticle(data);
 		if(result.code == 1000)
 		{
@@ -19,16 +19,4 @@ $(document).ready(function()
 			console.error("작성 실패", result);
 		}
 	});
-	
-	var boardId = $.query.boardId;
-	var seq = $.query.seq;
-	if(boardId && seq)
-	{
-		var result = $.api.article.getArticle({boardId : boardId, seq : seq});
-		if(result.code == 1000)
-		{
-			$("#patchnoteWriteForm").setData(result.data);
-			TypeWriter.instances.content.setData(result.data.content);
-		}
-	}
 });

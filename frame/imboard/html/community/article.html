@@ -2,8 +2,8 @@
 {{#if commentList}}
 {{#each commentList}}
 <div class="commentContainer" {{#notempty parentSeq}}style="margin-left:40px;"{{/notempty}}>
-	<p class="info">{{#if displayId}}{{displayId}}{{else}}익명사용자{{/if}}<small> | {{registerDate}}</small> <small> | </small> <small data-id="replyComment" data-seq="{{seq}}" data-groupid="{{groupId}}" class="textButton">덧글</small></p>
-	<p class="content">{{content}}</p>
+	<p class="info">{{#if writerName}}{{writerName}}{{else}}#{lan.anonymous}{{/if}}<small> | {{registerDate}}</small> <small> | </small> <small data-id="replyComment" data-seq="{{seq}}" data-groupid="{{groupId}}" style="cursor: pointer;">#{lan.reply}</small></p>
+	<p class="content well">{{content}}</p>
 </div>
 {{/each}}
 {{/if}}
@@ -13,7 +13,7 @@
 <div class="input-group">
 	<input type="hidden" name="boardId" value="#{query.boardId}" />
 	<input type="hidden" name="articleSeq" value="#{query.seq}" />
-	<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+	<textarea class="form-control" placeholder="Write a comment" name="content"></textarea>
 	<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
 </div>
 </script>
@@ -24,20 +24,20 @@
 			<h3 style="position: relative;">
 				{{subject}}
 				<span style="position: absolute; right:10px; bottom: 0;">
-					{{#if displayId}}
-					<small style="font-size:12px;">{{displayId}}</small>
+					{{#if writerName}}
+					<small style="font-size:12px;">{{writerName}}</small>
 					{{else}}
-					<small style="font-size:12px;">익명사용자</small>
+					<small style="font-size:12px;">#{lan.anonymous}</small>
 					{{/if}}
 					<small style="font-size:12px;"> | {{shortDate registerDate}}</small>
 				</span>
 			</h3>
 		</div>
-		<article>{{{content}}}</article>
+		<article style="margin: 30px 0;">{{{content}}}</article>
 		<p style="text-align: right;">
 			{{#equals writerId "#{user.id}"}}
 			<a href="?fragment=community&sub=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
-			<button type="button" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
+			<button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
 			{{/equals}}
 		</p>
 	</div>
@@ -45,12 +45,9 @@
 	<div class="input-group">
 		<input type="hidden" name="boardId" value="#{query.boardId}" />
 		<input type="hidden" name="articleSeq" value="#{query.seq}" />
-		<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
-		<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+		<textarea class="form-control" placeholder="Write a comment" name="content"></textarea>
+		<span class="input-group-addon" style="cursor: pointer;" data-role="submit">Write</span>
 	</div>
 	</form>
-	<p style="margin:10px 0;">
-		<span class="label label-default">덧글 수 {{commentCount}}</span>
-	</p>
-	<div id="commentList" style="margin-bottom: 30px;" data-bind="commentList" data-param='{"boardId" : "#{query.boardId}", "articleSeq" : "#{query.seq}"}' data-template-id="communityCommentTemplate"></div>
+	<div id="commentList" style="margin: 30px 0;" data-bind="commentList" data-param='{"boardId" : "#{query.boardId}", "articleSeq" : "#{query.seq}", "searchData" : {"orderBySeq" : "ASC"}}' data-template-id="communityCommentTemplate"></div>
 </div>

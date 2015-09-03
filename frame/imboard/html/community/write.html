@@ -1,10 +1,17 @@
-<form data-component="form" id="writeForm">
-	<p>
-		<input type="hidden" name="seq" value="{{seq}}"/>
-		<input type="text" name="subject" class="textinput" style="width: 100%; padding: 10px; font-size:17px;" placeholder="제목" value="{{subject}}" autofocus="autofocus"/>
-	</p>
-	<div id="typewriter"></div>
-	<p style="text-align: center;">
-		<input type="submit" class="btn btn-default" style="padding: 10px 15px; font-size:15px;" value="저장"/>
-	</p>
-</form>
+<div class="col-xs-6" style="margin:0 auto; float: none;">
+	<form data-component="form" id="writeForm" data-bind="article" data-param='{"boardId" : "#{query.boardId}", "seq" : "#{query.seq}"}'>
+		<p>
+			<input type="hidden" name="seq" value="{{seq}}"/>
+			<input type="text" name="subject" class="textinput" style="width: 100%; padding: 10px; font-size:17px;" placeholder="#{lan.subject}" value="{{subject}}" autofocus="autofocus"/>
+		</p>
+		<p>
+			<input type="text" name="writerName" class="textinput" style="width: 100%; padding: 10px; font-size:17px;" placeholder="#{lan.writerName}" value="{{writerName}}"/>
+		</p
+		<p>
+			<textarea id="ckeditor" style="margin-top:10px; height: 400px;">{{{content}}}</textarea>
+		</p>
+		<p style="text-align: center; margin-top: 10px;">
+			<input type="submit" class="btn btn-default" style="padding: 10px 15px; font-size:15px;" value="저장"/>
+		</p>
+	</form>
+</div>
