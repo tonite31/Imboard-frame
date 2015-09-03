@@ -1,0 +1,48 @@
+<script id="communityCommentTemplate" type="text/x-handlebars-template" data-precompile="true">
+{{#if commentList}}
+{{#each commentList}}
+<div class="commentContainer" {{#notempty parentSeq}}style="margin-left:40px;"{{/notempty}}>
+	<p class="info">{{#if writerName}}{{writerName}}{{else}}익명사용자{{/if}}<small> | {{registerDate}}</small> <small> | </small> <small data-id="replyComment" data-seq="{{seq}}" data-groupid="{{groupId}}" style="cursor: pointer;">덧글</small></p>
+	<p class="content well">{{content}}</p>
+</div>
+{{/each}}
+{{/if}}
+</script>
+
+<script id="commentWriteTemplate" type="text/x-handlebars-template" data-precompile="true">
+<div class="input-group">
+	<input type="hidden" name="boardId" value="#{query.boardId}" />
+	<input type="hidden" name="articleSeq" value="#{query.seq}" />
+	<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+	<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+</div>
+</script>
+
+<div class="content" data-bind="article" data-param='{"boardId" : "#{query.boardId}", "seq" : "#{query.seq}"}'>
+    <div style="position: relative;">
+        <h2 class="page-header">{{subject}}</h2>
+        <span class="date">{{shortDate registerDate}}</span>
+    </div>
+    <div>
+        {{{content}}}
+    </div>
+    <div class="page-header" style="clear: both; display:table; width: 100%;">
+		<div class="col-xs-6" style="padding-left: 0;"><span class="label label-default">태그</span> {{{tag tag}}}</div>
+		<div class="col-xs-6" style="padding-right: 0;text-align: right;">
+	        {{#equals writerId "#{user.id}"}}
+	        <a href="?fragment=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
+	        <button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
+	        {{/equals}}
+	        <a class="btn btn-default" href="/?pageIndex=#{query.pageIndex}&tag=#{query.tag}">목록보기</a>
+		</div>
+    </div>
+	<div id="commentList" style="margin: 30px 0;" data-bind="commentList" data-param='{"boardId" : "#{query.boardId}", "articleSeq" : "#{query.seq}"}' data-template-id="communityCommentTemplate"></div>
+    <form data-component="form" id="commentForm">
+	<div class="input-group">
+		<input type="hidden" name="boardId" value="#{query.boardId}" />
+		<input type="hidden" name="articleSeq" value="#{query.seq}" />
+		<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+		<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+	</div>
+	</form>
+</div>

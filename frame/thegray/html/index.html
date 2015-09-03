@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+
+<title>The gray</title>
+
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
+
+<link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css"/>
+
+<script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
+<script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="#{path.lib}/handlebars/handlebars-v1.3.0.js"></script>
+
+<script src="#{path.root}/js/index.js"></script>
+
+<script src="#{path.module}/imboard/js/imboard-api.js"></script>
+<script src="#{path.module}/imboard/js/imboard-ui.js"></script>
+<script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
+
+<script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
+
+<script id="articleComponentTemplate" type="text/x-handlebars-template">
+{{#if articleList}}
+{{#each articleList}}
+<div class="content">
+    <div style="position: relative;">
+        <h2 class="page-header">{{subject}}</h2>
+        <span class="date">{{shortDate registerDate}}</span>
+    </div>
+    <div>
+        {{{textThumbnail content "<p>" 10}}}
+    </div>
+    <a class="corver" href="?fragment=article&boardId={{boardId}}&seq={{seq}}"></a>
+</div>
+{{/each}}
+{{/if}}
+</script>
+
+<script id="articleComponentPagingTemplate" type="text/x-handlebars-template">
+{{#if pageList}}
+<nav style='text-align:center;'>
+	<ul class="pagination">
+		{{#sign pageIndex ">" 1}}
+		<li>
+			<a href="?articlepageIndex={{math pageIndex "-" 1}}" aria-label="Previous">
+				<span aria-hidden="true">이전</span>
+			</a>
+		</li>
+		{{/sign}}
+		{{#each pageList}}
+		<li {{#equals ../pageIndex pageNumber}}class="active"{{/equals}}>
+			<a href="?articlepageIndex={{pageNumber}}">{{pageNumber}} {{#equals ../pageIndex pageNumber}}<span class="sr-only">(current)</span>{{/equals}}</a>
+		</li>
+		{{/each}}
+		{{#sign pageIndex "<" maxPage}}
+		<li>
+			<a href="?articlepageIndex={{math pageIndex "+" 1}}" aria-label="Next">
+				<span aria-hidden="true">다음</span>
+			</a>
+		</li>
+		{{/sign}}
+	</ul>
+</nav>
+{{/if}}
+</script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="text-align: center; margin-top: 80px;"><a href="/">The gray</a></h1>
+        </header>
+        <div class="col-xs-3">
+            <div data-component="scrollFollower" id="profile-container">
+                <p><a href="#" class="thumbnail"><img src="http://cfile23.uf.tistory.com/image/202BDD4850FCCFE022938D"></a></p>
+                <p data-bind="signedUser" style="text-align: center;">
+                    {{#test user " && " user.level " &lt; 0"}}
+                    <a class="textButton" href="?fragment=write">글쓰기<a/>
+                    <a class="textButton" href="/settings">관리자</a>
+                    <a class="textButton" href="/signout.do">로그아웃</a>
+                    {{else}}
+                    <a href="/signin">로그인</a>
+                    {{/test}}
+                </p>
+            </div>
+        </div>
+        <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "article", "tag" : "#{query.tag}", "searchData" : {"withContent" : "true"}}'>
+            <div data-parts="body" data-template-id="articleComponentTemplate"></div>
+            <div style="clear:both;" data-parts="pagination" data-template-id="articleComponentPagingTemplate"></div>
+        </div>
+    </div>
+</body>
+</html>

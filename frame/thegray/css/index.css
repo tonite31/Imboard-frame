@@ -1,0 +1,63 @@
+*, a
+{
+    color: #666;
+}
+
+header
+{
+    height: 100px;
+}
+
+.textButton
+{
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.textButton:hover
+{
+    text-decoration: underline;
+}
+
+.date
+{
+    position: absolute;
+    right:0;
+    top: 15px;
+}
+
+.content
+{
+    position: relative;
+    margin-top: 100px;
+}
+
+.content:first-child
+{
+    margin-top:0;
+}
+
+.corver
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.commentContainer .content
+{
+    background: #fefefe;
+}
+
+.textinput
+{
+    width: 100%; padding: 10px; font-size:17px;
+}
+
+.tag
+{
+    margin-left: 10px;
+    cursor: pointer;
+}
