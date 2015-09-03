@@ -78,14 +78,21 @@
             <div data-component="scrollFollower" id="profile-container">
                 <p><a href="#" class="thumbnail"><img src="http://cfile23.uf.tistory.com/image/202BDD4850FCCFE022938D"></a></p>
                 <p data-bind="signedUser" style="text-align: center;">
-                    {{#test user " && " user.level " &lt; 0"}}
-                    <a class="textButton" href="?fragment=write">글쓰기<a/>
+                    {{#test user " &amp;&amp; " user.level " &lt; 0"}}
+                    <a class="textButton" href="?fragment=write">글쓰기</a>
                     <a class="textButton" href="/settings">관리자</a>
                     <a class="textButton" href="/signout.do">로그아웃</a>
                     {{else}}
                     <a href="/signin">로그인</a>
                     {{/test}}
                 </p>
+                <ul data-bind="articleTagList" data-param='{"boardId" : "article"}'>
+                {{#if tagList}}
+                {{#each tagList}}
+                	<li>{{tag}} {{count}}</li>
+                {{/each}}
+                {{/if}}
+                </ul>
             </div>
         </div>
         <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "article", "tag" : "#{query.tag}", "searchData" : {"withContent" : "true"}}'>

@@ -25,7 +25,7 @@ Handlebars.registerHelper("textThumbnail", function(content, token, count)
 	return html;
 });
 
-Handlebars.registerHelper("tag", function(tag)
+Handlebars.registerHelper("parseTag", function(tag)
 {
 	if(tag)
 	{
