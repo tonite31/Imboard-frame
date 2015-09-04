@@ -34,6 +34,22 @@ $(document).ready(function()
 			}
 			
 			$("#passwordConfirmArea").remove();
+			$("#deleteQna").on("click", function()
+			{
+				if(confirm("정말 삭제하시겠습니까?"))
+				{
+					var result = $.api.article.deleteArticle({boardId : "qna", seq : $.query.seq, isRemove : "Y"});
+					if(result.code == 1000)
+					{
+						location.href = "?body=qna";
+					}
+					else
+					{
+						alert("오류가 발생했습니다.");
+						console.error(result);
+					}
+				}
+			});
 		}
 		else if(result.code == -9998)
 		{
