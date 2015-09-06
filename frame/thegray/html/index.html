@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
-
+<link rel="stylesheet" type="text/css" href="#{path.root}/lib/typewriter/typewriter.css"/>
 <link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css"/>
 
 <script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
@@ -22,7 +22,7 @@
 <script src="#{path.module}/imboard/js/imboard-ui.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
 
-<script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
+<script src="#{path.root}/lib/typewriter/typewriter.js"></script>
 
 <script id="articleComponentTemplate" type="text/x-handlebars-template">
 {{#if articleList}}
@@ -30,7 +30,11 @@
 <div class="content">
     <div style="position: relative;">
         <h2 class="page-header">{{subject}}</h2>
-        <span class="date">{{shortDate registerDate}}</span>
+		<p class="articleInfo">
+			<span class="label label-default">{{shortDate registerDate}}</span>
+			<span class="label label-default">조회 {{hit}}</span>
+			<span class="label label-default">덧글 {{commentCount}}</span>
+		</p>
     </div>
     <div>
         {{{textThumbnail content "<p>" 10}}}
@@ -86,16 +90,17 @@
                     <a href="/signin">로그인</a>
                     {{/test}}
                 </p>
-                <ul data-bind="articleTagList" data-param='{"boardId" : "article"}'>
+                <ul class="tagList list-group" data-bind="articleTagList" data-param='{"boardId" : "article"}'>
+                	<li class="list-group-item active"><a href="/">모든글</a><span class="badge" data-bind="articleListCount" data-param='{"boardId" : "article"}'>{{count}}</span></li>
                 {{#if tagList}}
                 {{#each tagList}}
-                	<li>{{tag}} {{count}}</li>
+                	<li class="list-group-item"><a href="?tag={{tag}}">#{{tag}}</a><span class="badge">{{count}}</span></li>
                 {{/each}}
                 {{/if}}
                 </ul>
             </div>
         </div>
-        <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "article", "tag" : "#{query.tag}", "searchData" : {"withContent" : "true"}}'>
+        <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "article", "searchData" : {"withContent" : "true", "tag" : "#{query.tag}"}}'>
             <div data-parts="body" data-template-id="articleComponentTemplate"></div>
             <div style="clear:both;" data-parts="pagination" data-template-id="articleComponentPagingTemplate"></div>
         </div>

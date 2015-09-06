@@ -19,7 +19,7 @@ header
     text-decoration: underline;
 }
 
-.date
+.articleInfo
 {
     position: absolute;
     right:0;
@@ -35,6 +35,11 @@ header
 .content:first-child
 {
     margin-top:0;
+}
+
+.content:first-child .page-header
+{
+	margin-top:0;
 }
 
 .corver
@@ -60,4 +65,29 @@ header
 {
     margin-left: 10px;
     cursor: pointer;
+}
+
+.tagList
+{
+	margin-top: 20px;
+}
+
+.list-group .active a
+{
+	color: white;
+}
+
+.well
+{
+	background: white;
+}
+
+.function
+{
+	cursor: pointer;
+}
+
+.function:HOVER
+{
+	text-decoration: underline;
 }

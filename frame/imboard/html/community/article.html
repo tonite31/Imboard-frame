@@ -35,10 +35,12 @@
 		</div>
 		<article style="margin: 30px 0;">{{{content}}}</article>
 		<p style="text-align: right;">
-			{{#equals writerId "#{user.id}"}}
+			{{#if "#{user.id}"}}
+			{{#test "#{user.level} &lt; 0 &amp;&amp; #{user.id} == " writerId}}
 			<a href="?fragment=community&sub=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
 			<button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
-			{{/equals}}
+			{{/test}}
+			{{/if}}
 		</p>
 	</div>
 	<form data-component="form" id="commentForm">

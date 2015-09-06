@@ -1,17 +1,117 @@
-<h2 id="doc3">3. imboard-ui.js</h2>
+<script id="resultFormTemplate" type="text/x-handlebars-template">
+<table class="dataTable">
+	<colgroup>
+		<col style="width:30%;"/>
+		<col style="width:70%;"/>
+	</colgroup>
+	<tbody>
+		<tr>
+			<th>id</th>
+			<td>{{id}}</td>
+		</tr>
+		<tr>
+			<th>name</th>
+			<td>{{name}}</td>
+		</tr>
+		<tr>
+			<th>gender</th>
+			<td>{{gender}}</td>
+		</tr>
+		<tr>
+			<th>hobby</th>
+			<td>{{hobby}}</td>
+		</tr>
+		<tr>
+			<th>description</th>
+			<td>{{description}}</td>
+		</tr>
+	</tbody>
+</table>
+</script>
+<script>
+$(document).ready(function()
+{
+	$("#testForm").compile(function(param)
+	{
+		console.log(param.hobby);
+// 		param.hobby = param.hobby.join(", ");
+		
+		var html = $("#resultFormTemplate").html();
+		var template = Handlebars.compile(html);
+		$("#result").html(template(param)).show();
+	});
+});
+</script>
+<h2 class="page-header">7. UI컴포넌트 사용하기</h2>
 <div>
-	{{#localize}}
-	@{ko-KR}
-	<h3 id="doc3-1">3-1. 개요</h3>
-	<p>화면개발에 필요하지만 복잡하거나 개발에 시간이 소요되는 기능을 간편하게 사용할 수 있게 라이브러리 형태로 제공합니다.</p>
-	<p>반드시 <strong>/content/module/imboard/js/imboard-ui.js</strong> 자바스크립트 파일과 <strong>/content/module/imboard/css/imboard-ui.css</strong> css파일을 index.html파일에 import해야 사용할 수 있습니다.</p>
-	@{default}
-	<h3 id="doc3-1">3-1. Overview</h3>
-	<p>imboard-ui.js is a library that can easily use a complex component.</p>
-	<p>For using this library, must be imported <strong>/content/module/imboard/js/imboard-ui.js</strong> and <strong>/content/module/imboard/css/imboard-ui.css</strong> to index.html.</p>
-	{{/localize}}
+	<h3 id="doc_form_component">7-1. form 컴포넌트</h3>
+	<p>사용자가 입력한 데이터를 JSON object로 가져오거나 데이터를 입력폼에 설정할 수 있습니다.</p>
+	<p>예제코드입니다.</p>
+	<pre data-html="/document/component/form.code"></pre>
+	<p>폼 태그 내부의 사용자가 입려한 데이터를 자바스크립트 함수로 간단하게 가져올 수 있습니다.</p>
+	<div class="col-xs-6" style="padding-left:0; border-top: 1px solid #dfdfdf; padding-top: 10px; margin-top: 10px;">
+		<form id="testForm" data-component="form">
+			<p><input type="text" name="id" value="#{lan.id}" required="required"/></p>
+			<p><input type="text" name="name" value="#{lan.name}"/></p>
+			<p>
+				<label><input type="radio" name="gender" value="male" checked="checked"/> #{lan.male}</label>
+				<label><input type="radio" name="gender" value="female"/> #{lan.female}</label>
+			</p>
+			<p>
+				<label><input type="checkbox" name="hobby" value="soccer" checked="checked"/> #{lan.soccer}</label>
+				<label><input type="checkbox" name="hobby" value="baseball"/> #{lan.baseball}</label>
+			</p>
+			<p>
+				<textarea name="description">#{lan.description}</textarea>
+			</p>
+			<p>
+				<input type="submit" class="btn btn-default" value="#{lan.submit}"/>
+			</p>
+		</form>
+	</div>
+	<div class="col-xs-6" style="padding-right:0; border-top: 1px solid #dfdfdf; padding-top: 10px; margin-top: 10px;">
+		<p>제출 버튼을 클릭하면 이곳에 결과가 나타납니다.</p>
+		<div id="result"></div>
+	</div>
+	<p>form 컴포넌트의 API 입니다.</p>
+	<table class="dataTable">
+		<tbody>
+			<tr>
+				<th>$(form).compile(callback)</th><td>form에 submit이벤트가 발생했을떄 callback이 호출되며 getData함수의 결과값을 인자로 넘겨줍니다.</td>
+			</tr>
+			<tr>
+				<th>$(form).getData()</th><td>form 엘리먼트 하위의 name속성 또는 data-name속성을 가지고 있는 엘리먼트의 특정값을 JSON형태로 return합니다.</td>
+			</tr>
+			<tr>
+				<th>$(form).setData(data)</th><td>JSON형태의 데이터를 인자로 받아들이며 key값과 일치하는 name속성 또는 data-name속성을 가진 엘리먼트에 value값을 세팅해줍니다.</td>
+			</tr>
+			<tr>
+				<th>$(form).submit(roleType)</th><td>form의 submit을 직접 호출 할 수 있습니다. roleType을 지정하지 않으면 getData함수의 결과값에 __roleType변수가 기본값인 submit으로 세팅됩니다.</td>
+			</tr>
+			<tr>
+				<th>$(form).validation</th><td>form의 validation을 직접 수행할 수 있습니다.</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <div>
-	<div data-html="/document/component/form.html"></div>
-	<div data-html="/document/component/scrollFollower.html"></div>
+	<h3 id="">7-2. fileUploader 컴포넌트</h3>
+	<p>특정 엘리먼트를 파일업로드를 할 수 있도록 만들어줍니다. 엘리먼트에 <code>data-component="fileUploader"</code>속성을 지정하고 자바스크립트 함수 <code>$(selector).compile(function(e){});</code>를 호출합니다.</p>
+	<p>사용자가 해당 엘리먼트를 클릭하고 파일을 선택하면 compile함수로 전달한 Anonymous함수의 파라미터로 파일에 대한 이벤트가 전달됩니다.</p>
+	<p>예제코드</p>
+	<pre>&lt;button type="button" data-component="fileUploader" id="uploadFile"&gt;파일업로드&lt;/button&gt;
+$("#uploadFile").compile(function(e)
+{
+	var formData = new FormData();
+		
+	var typeList = [];
+	var length = files.length;
+	for(var i=0; i&lt;length; i++)
+	{
+		typeList.push(files[i].type);
+		formData.append("file-" + new Date().getTime() + "-" + i, files[i]);
+	}
+	
+	$.api.article.uploadFile(formData);
+});</pre>
 </div>

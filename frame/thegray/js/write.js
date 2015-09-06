@@ -1,6 +1,8 @@
 $(document).ready(function()
 {
-	CKEDITOR.replace("ckeditor", {height: 400});
+//	CKEDITOR.replace("ckeditor", {height: 400});
+	
+	TypeWriter.compile({selector : "#typewriter"});
 
 	$("#writeForm").compile(function(data)
 	{

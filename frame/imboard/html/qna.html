@@ -1,48 +1,3 @@
-<script id="articleListTemplate" type="text/x-handlebars-template">
-<table class="dataTable">
-<colgroup>
-	<col style="width: 7%;"/>
-	<col style="width: 61%;"/>
-	<col style="width: 15%;"/>
-	<col style="width: 10%;"/>
-	<col style="width: 7%;"/>
-</colgroup>
-<thead>
-	<tr>
-		{{#localize}}
-		@{ko-KR}
-		<th class="center">번호</th>
-		<th class="center">제목</th>
-		<th class="center">작성자</th>
-		<th class="center">작성일</th>
-		<th class="center">조회</th>
-		@{default}
-		<th class="center">Number</th>
-		<th class="center">Subject</th>
-		<th class="center">Writer</th>
-		<th class="center">Date</th>
-		<th class="center">Views</th>
-		{{/localize}}
-	</tr>
-</thead>
-<tbody>
-{{#if articleList}}
-{{#each articleList}}
-	<tr>
-		<td class="center">{{seq}}</td>
-		<td class="subject"><a href="?fragment=qna&sub=community/article&boardId=qna&seq={{seq}}&locale=#{locale}">{{subject}} {{#sign commentCount ">" 0}}[{{commentCount}}]{{/sign}}</a></td>
-		<td class="center displayId">{{#if writerName}}{{writerName}}{{else}}#{lan.anonymous}{{/if}}</td>
-		<td class="center">{{shortDate registerDate}}</td>
-		<td class="center">{{hit}}</td>
-	</tr>
-{{/each}}
-{{else}}
-<tr><td colspan="6" class="center">작성된 글이 없습니다.</td></tr>
-{{/if}}
-</tbody>
-</table>
-</script>
-
 <div class="jumbotron">
 	<div class="container">
 		<h1>Q&amp;A</h1>
@@ -55,10 +10,11 @@
 	</div>
 </div>
 
-<div class="container" data-fragment="sub">
-	<p style="text-align: right;"><a href="?fragment=qna&sub=community/write&boardId=qna" class="btn btn-default">Write a question</a></p>
-	<div data-bind="articleComponent" data-param='{"boardId" : "qna"}'>
-		<div data-parts="body" data-template-id="articleListTemplate"></div>
-		<div data-parts="pagination" data-template-id="pagingTemplate"></div>
-	</div>
-</div>
+<p style="text-align:center;">
+	{{#localize}}
+	@{ko-KR}
+    임시로 페이스북 페이지를 사용합니다. <a href="https://www.facebook.com/pages/Imboard/128014764008125" target="_blank">Imboard</a>에 방문해보세요.
+    @{default}
+    We use a facebook page temporary. please visit <a href="https://www.facebook.com/pages/Imboard/128014764008125" target="_blank">Imboard</a>.
+    {{/localize}}
+</p>

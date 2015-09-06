@@ -1,0 +1,34 @@
+&lt;!-- 스크립트 --&gt;
+$(document).ready(function()
+{
+	$("#testForm").compile(function(param)
+	{
+		param.hobby = param.hobby.join(", ");
+		
+		var html = $("#resultFormTemplate").html();
+		var template = Handlebars.compile(html);
+		$("#result").html(template(param)).show();
+	});
+});
+&lt;!-- 스크립트 끝 --&gt;
+
+&lt;!-- HTML 마크업 --&gt;
+&lt;form id="testForm" data-component="form"&gt;
+	&lt;p&gt;&lt;input type="text" name="id" value="#{lan.id}" required="required"/&gt;&lt;/p&gt;
+	&lt;p&gt;&lt;input type="text" name="name" value="#{lan.name}"/&gt;&lt;/p&gt;
+	&lt;p&gt;
+		&lt;label&gt;&lt;input type="radio" name="gender" value="male" checked="checked"/&gt; #{lan.male}&lt;/label&gt;
+		&lt;label&gt;&lt;input type="radio" name="gender" value="female"/&gt; #{lan.female}&lt;/label&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="soccer" checked="checked"/&gt; #{lan.soccer}&lt;/label&gt;
+		&lt;label&gt;&lt;input type="checkbox" name="hobby" value="baseball"/&gt; #{lan.baseball}&lt;/label&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;textarea name="description"&gt;#{lan.description}&lt;/textarea&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;input type="submit" class="btn btn-default" value="#{lan.submit}"/&gt;
+	&lt;/p&gt;
+&lt;/form&gt;
+&lt;!-- HTML 마크업 끝--&gt;
