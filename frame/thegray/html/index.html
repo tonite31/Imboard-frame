@@ -80,7 +80,7 @@
         </header>
         <div class="col-xs-3">
             <div data-component="scrollFollower" id="profile-container">
-                <p><a href="#" class="thumbnail"><img src="http://cfile23.uf.tistory.com/image/202BDD4850FCCFE022938D"></a></p>
+                <p><a href="#" class="thumbnail" data-bind="user" data-param='{"id" : "admin"}'><img src="{{profileImgUrl}}"></a></p>
                 <p data-bind="signedUser" style="text-align: center;">
                     {{#test user " &amp;&amp; " user.level " &lt; 0"}}
                     <a class="textButton" href="?fragment=write">글쓰기</a>
