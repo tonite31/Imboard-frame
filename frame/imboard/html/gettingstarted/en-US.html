@@ -75,6 +75,17 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>Set a port</dt>
+				<dd>
+					<p>Set a port of server run a application. default value is 3000. if you change a port, select a menu "server", enter a specific port.</p>
+					<p>This example use default value 3000.</p>
+					<figure>
+						<img alt="set a port" src="#{var.resourcesUrl}/gettingstarted/configuration_port.png" style="width: 500px;">
+						<figcaption>Enter a port</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
 				<dt>Enter a initial value</dt>
 				<dd>
 					<pre>$ node install.js</pre>
@@ -92,6 +103,34 @@
 					<figure>
 						<img alt="Web page that ran by a frame 'sample'" src="#{var.resourcesUrl}/gettingstarted/sample_site.png" style="width: 100%;">
 						<figcaption>Web page that ran by a frame "sample"</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Sign in</dt>
+				<dd>
+					<p>Imboard has a login page. If you click a login button, moved to login page on the frame "sample".</p>
+					<p>You access to login page visit following url. <code>http://localhost:3000/signin</code></p>
+					<p>You can login by admin account or OAuth of facebook, twitter, google. If you want to use OAuth, enter a information to config.json. For more information, see document.</p>
+					<p>This example use a admin account. default value of admin account is <code>admin/admin</code>.</p>
+					<p>We will develop a feature register email account.</p>
+					<figure>
+						<img alt="Login page" src="#{var.resourcesUrl}/gettingstarted/signin.png" style="width: 400px;">
+						<figcaption>Login page</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>Admin dashboard</dt>
+				<dd>
+					<p>Already we develop a dashboard can manage a data, board or menu, etc. if you click a button "Admin dashboard", moved to admin dashboard page on frame "sample".</p>
+					<p>You can access to admin dashboard by following url. <code>http://localhost:3000/settings</code></p>
+					<p>Only admin user who has a level under 0, can access to dashboard.</p>
+					<p>If you add or edit a board, apply list of board on index page.</p>
+					<p>For more information, see document.</p>
+					<figure>
+						<img alt="Admin dashboard" src="#{var.resourcesUrl}/gettingstarted/admin_dashboard.png" style="width: 400px;">
+						<figcaption>Admin dashboard</figcaption>
 					</figure>
 				</dd>
 			</dl>

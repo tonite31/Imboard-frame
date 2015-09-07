@@ -75,6 +75,17 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>포트설정</dt>
+				<dd>
+					<p>어플리케이션을 구동할 서버의 포트를 설정합니다. 기본값은 3000이며 만약 포트를 변경하려고 한다면 server메뉴를 선택한 후 포트를 입력하십시오.</p>
+					<p>이 예제에서는 기본값인 3000을 사용합니다.</p>
+					<figure>
+						<img alt="포트설정 이미지" src="#{var.resourcesUrl}/gettingstarted/configuration_port.png" style="width: 500px;">
+						<figcaption>포트설정</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
 				<dt>초기데이터입력</dt>
 				<dd>
 					<pre>$ node install.js</pre>
@@ -92,6 +103,34 @@
 					<figure>
 						<img alt="sample프레임으로 구동된 웹페이지" src="#{var.resourcesUrl}/gettingstarted/sample_site.png" style="width: 100%;">
 						<figcaption>sample프레임으로 구동된 웹페이지</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>로그인</dt>
+				<dd>
+					<p>임보드는 로그인페이지를 내장하고 있습니다. sample 프레임에서는 시작화면의 로그인 버튼을 클릭하면 로그인페이지로 이동됩니다.</p>
+					<p>로그인페이지는 다음 URL로 접근할 수 있습니다. <code>http://localhost:3000/signin</code></p>
+					<p>관리자 계정으로 직접 로그인하거나 페이스북, 트위터, 구글의 OAuth를 활용하여 로그인을 할 수 있습니다. OAuth를 사용하기 위해서는 config.json파일의 OAuth정보를 입력해야합니다. 자세한 정보는 문서를 참조하십시오.</p>
+					<p>이 예제에서는 관리자 계정으로 직접 로그인합니다. 관리자 계정의 초기 아이디와 비밀번호는 다음과 같습니다. <code>admin/admin</code></p>
+					<p>추후에 이메일을 활용한 회원등록 기능이 추가될 예정입니다.</p>
+					<figure>
+						<img alt="로그인페이지" src="#{var.resourcesUrl}/gettingstarted/signin.png" style="width: 400px;">
+						<figcaption>로그인페이지</figcaption>
+					</figure>
+				</dd>
+			</dl>
+			<dl>
+				<dt>관리자 대쉬보드</dt>
+				<dd>
+					<p>게시판, 메뉴와 같은 데이터를 쉽게 관리할 수 있는 관리자 대쉬보드가 준비되어있습니다. sample 프레임에서는 시작화면의 관리자 대쉬보드 버튼을 클릭하면 이동됩니다.</p>
+					<p>다음 URL로도 접근할 수 있습니다. <code>http://localhost:3000/settings</code>.</p>
+					<p>레벨이 0 미만인 관리자들만 대쉬보드에 접근할 수 있습니다.</p>
+					<p>게시판을 추가하거나 수정하면 시작화면의 게시판 목록에 반영됩니다.</p>
+					<p>각 메뉴별 사용법은 문서를 참고하십시오.</p>
+					<figure>
+						<img alt="관리자 대쉬보드" src="#{var.resourcesUrl}/gettingstarted/admin_dashboard.png" style="width: 400px;">
+						<figcaption>관리자 대쉬보드</figcaption>
 					</figure>
 				</dd>
 			</dl>

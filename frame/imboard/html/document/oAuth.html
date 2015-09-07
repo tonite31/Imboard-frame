@@ -1,21 +1,28 @@
 <h2 class="page-header">5. 페이스북 로그인 사용방법</h2>
 <p>임보드는 페이스북 트위터, 구글의 OAuth를 활용하여 로그인을 할 수 있습니다. 이 기능을 사용하기 위해서는 각 프로바이더의 AppId와 Secret key가 필요합니다.</p>
 <p><strong>/resources/properties/config.json</strong> 파일을 열어서 OAuth부분에 각 프로바이더의 AppId와 Secret key를 입력합니다.</p>
+<p>calkback은 로그인 후 redirect될 URL입니다. localhost:3000 부분은 환경에 맞게 수정해서 사용하십시오.</p>
 <pre>"OAuth": {
-	"facebook": {
-	    "appId": "appId",
-	    "secret": "secret"
-	},
-	"twitter": {
-	    "appId": "appId",
-	    "secret": "secret"
-	},
-	"google": {
-	    "appId": "appId",
-	    "secret": "secret"
+	"facebook":
+	{
+		"appId": "appId",
+		"secret": "secret",
+		"callback": "http://localhost:3000/auth/facebook/callback"
+    },
+    "twitter":
+    {
+		"appId": "appId",
+		"secret": "secret",
+		"callback": "http://localhost:3000/auth/twitter/callback"
+    },
+	"google":
+	{
+  	    "appId": "appId",
+      	"secret": "secret",
+		"callback": "http://localhost:3000/auth/google/callback"
 	}
 }</pre>
-<p>각 프로바이더 로그인버튼 구현방법</p>
+<p>임보드의 로그인페이지에 각 로그인 버튼이 구현되어있지만 만약 직접 구현하길 원한다면 다음 코드를 참조 하십시오.</p>
 <pre>&lt;a href="/auth/facebook"&gt;페이스북&lt;/a&gt;</pre>
 <pre>&lt;a href="/auth/twitter"&gt;트위터&lt;/a&gt;</pre>
 <pre>&lt;a href="/auth/google"&gt;구글&lt;/a&gt;</pre>
