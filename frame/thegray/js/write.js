@@ -1,13 +1,34 @@
 $(document).ready(function()
 {
-//	CKEDITOR.replace("ckeditor", {height: 400});
-	
 	TypeWriter.compile({selector : "#typewriter"});
+	
+	if($.query.boardId)
+	{
+		var target = $("#boardList a[data-value='" + $.query.boardId + "']");
+		if(target.length > 0)
+		{
+			target.attr("data-name", "boardId");
+			$(".dropdown-toggle").html($(target).text() + ' <span class="caret"></span>');
+		}
+	}
+	
+	$("#boardList a").on("click", function()
+	{
+		$("#boardList a").removeAttr("data-name");
+		$(this).attr("data-name", "boardId");
+		
+		$(".dropdown-toggle").html($(this).text() + ' <span class="caret"></span>');
+	});
 
 	$("#writeForm").compile(function(data)
 	{
-		data.boardId = "article";
-		data.content = CKEDITOR.instances.ckeditor.getData();
+		if(!data.boardId)
+		{
+			$("#boardIdSelect").makeValidationMessage("게시판을 선택하세요.");
+			return;
+		}
+		
+		data.content = TypeWriter.instances.typewriter.getData().content;
 
 		data.tag = "";
 

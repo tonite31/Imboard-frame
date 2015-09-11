@@ -1,14 +1,24 @@
 <div>
 	<form data-component="form" id="writeForm" data-bind="article" data-param='{"boardId" : "article", "seq" : "#{query.seq}"}'>
-		<p>
+		<div class="dropdown" id="boardIdSelect">
+ 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  				게시판 선택
+   				<span class="caret"></span>
+ 				</button>
+ 				<ul class="dropdown-menu" data-bind="boardList" id="boardList">
+ 				{{#if boardList}}
+ 				{{#each boardList}}
+	   				<li><a href="#" data-value="{{id}}">{{name}}</a></li>
+	   			{{/each}}
+	   			{{/if}}
+ 				</ul>
+		</div>
+		<p style="margin-top: 10px;">
 			<input type="hidden" name="seq" value="{{seq}}"/>
 			<input type="text" name="subject" class="textinput" placeholder="제목" value="{{subject}}" autofocus="autofocus" required="required"/>
 		</p>
-		<p>
-			<div id="typewriter"></div>
-<!-- 			<textarea id="ckeditor" style="margin-top:10px; height: 400px;">{{{content}}}</textarea> -->
-		</p>
-		<p>
+		<div id="typewriter"></div>
+		<p style="margin-top: 10px;">
 			<input type="text" id="tag" name="tag" placeholder="태그를 입력하세요" style="vertical-align: middle; width: 200px; padding: 5px 10px;" class="textinput"/>
 			<input type="button" class="btn btn-default" id="addTag" value="태그 입력"/>
 			<small>태그를 클릭하면 삭제할 수 있습니다.</small>

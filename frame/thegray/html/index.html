@@ -83,24 +83,24 @@
                 <p><a href="#" class="thumbnail" data-bind="user" data-param='{"id" : "admin"}'><img src="{{profileImgUrl}}"></a></p>
                 <p data-bind="signedUser" style="text-align: center;">
                     {{#test user " &amp;&amp; " user.level " &lt; 0"}}
-                    <a class="textButton" href="?fragment=write">글쓰기</a>
+                    <a class="textButton" href="?fragment=write&boardId=#{query.boardId}">글쓰기</a>
                     <a class="textButton" href="/settings">관리자</a>
                     <a class="textButton" href="/signout.do">로그아웃</a>
                     {{else}}
                     <a href="/signin">로그인</a>
                     {{/test}}
                 </p>
-                <ul class="tagList list-group" data-bind="articleTagList" data-param='{"boardId" : "article"}'>
-                	<li class="list-group-item active"><a href="/">모든글</a><span class="badge" data-bind="articleListCount" data-param='{"boardId" : "article"}'>{{count}}</span></li>
-                {{#if tagList}}
-                {{#each tagList}}
-                	<li class="list-group-item"><a href="?tag={{tag}}">#{{tag}}</a><span class="badge">{{count}}</span></li>
+                <ul class="tagList list-group" data-bind="boardList">
+                	<li class="list-group-item active"><a href="/">모든글</a><span class="badge" data-bind="articleListCount">{{count}}</span></li>
+                {{#if boardList}}
+                {{#each boardList}}
+                	<li class="list-group-item"><a href="?boardId={{id}}">{{name}}</a><span class="badge" data-bind="articleListCount" data-param='{"boardId" : "{{id}}"}'>{{count}}</span></li>
                 {{/each}}
                 {{/if}}
                 </ul>
             </div>
         </div>
-        <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "article", "searchData" : {"withContent" : "true", "tag" : "#{query.tag}"}}'>
+        <div data-fragment="fragment" class="col-xs-9" data-bind="articleComponent" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"withContent" : "true", "tag" : "#{query.tag}"}}'>
             <div data-parts="body" data-template-id="articleComponentTemplate"></div>
             <div style="clear:both;" data-parts="pagination" data-template-id="articleComponentPagingTemplate"></div>
         </div>
