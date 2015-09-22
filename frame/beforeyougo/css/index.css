@@ -1,0 +1,107 @@
+.title
+{
+	text-align: center;
+	padding: 72px 0 52px 0;
+}
+
+.title h1
+{
+	font-size: 50px;
+}
+
+.nav-tabs
+{
+	text-align: center;
+	width: 100%;
+}
+
+.nav-tabs > li
+{
+	float:none;
+	display: inline-block;
+}
+
+.nav-tabs>li>a
+{
+	border-radius: 0;
+}
+
+.container
+{
+	position: relative;
+	padding-top: 30px;
+}
+
+.container > .row
+{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.container > .row > div
+{
+	padding:0 5px;
+}
+
+.article-container
+{
+	border: 1px solid #dfdfdf;
+}
+
+.article-subject
+{
+	padding: 15px;
+	border-bottom: 1px solid #dfdfdf;
+	background-color: #f7f7f7;
+	
+	position: relative;
+}
+
+.article-tag
+{
+	background-color: #f7f7f7;
+	padding: 5px;
+	border-top: 1px solid #dfdfdf;
+}
+
+.article-subject h2
+{
+	font-size: 18px;
+	margin: 0;
+}
+
+.icons
+{
+	float: right;
+	margin: -2px -8px 5px 5px;
+}
+
+.icons span
+{
+	padding: 0 2px;
+	font-size: 12px;
+}
+
+.article-content
+{
+	overflow: hidden;
+	padding: 10px;
+}
+
+.article-content img
+{
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.article-tag span
+{
+	padding: 5px;
+}
+
+.card
+{
+	width: 33.33333%;
+	position: absolute;
+	display: none;
+}
