@@ -26,12 +26,49 @@
 		<h1>Before you go.</h1>
 	</div>
 	<div>
-		<ul class="nav nav-tabs">
-		  <li role="presentation" class="active"><a href="/">홈</a></li>
-		  <li role="presentation"><a href="?fragment=blog">영화</a></li>
+		<ul class="nav nav-tabs" data-bind="boardList">
+			<li role="presentation" class="active"><a href="/">표지</a></li>
+			{{#if boardList}}
+			{{#each boardList}}
+			<li role="presentation"><a href="?fragment=list">{{name}}</a></li>
+			{{/each}}
+			{{/if}}
 		</ul>
 	</div>
 	<div class="container" data-fragment="fragment">
+		<div class="col-xs-7" data-bind="articleList" data-param='{"boardId" : "celebrity", "searchData" : {"startIndex" : 0, "endIndex" : 1}}'>
+		{{#each articleList}}
+			<h2 class="model-title">{{boardName}}</h2>
+			<img src="{{thumbnailUrl}}" class="thumbnail-image" />
+		{{/each}}
+		</div>
+		<div class="col-xs-5" data-bind="boardList">
+		{{#if boardList}}
+		{{#each boardList}}
+		{{#notequals id "celebrity"}}
+		<div class="category">
+			<h2>{{name}}</h2>
+			<div data-bind="articleList" data-param='{"boardId" : "{{id}}", "searchData" : {"startIndex" : 0, "endIndex" : 5}}'>
+				<h3>{{subject}}</h3>
+			</div>
+		</div>
+		{{/notequals}}
+		{{/each}}
+		{{/if}}
+		</div>
+	</div>
+	<div class="signin-container" data-bind="signedUser">
+	{{#if user}}
+	{{#sign user.level "lt" 0}}
+		<a href="?fragment=write">글쓰기</a>
+		<a href="/settings">관리자</a>
+		<a href="/signout.do">로그아웃</a>
+	{{else}}
+		<a href="/signin">로그인</a>
+	{{/sign}}
+	{{else}}
+		<a href="/signin">로그인</a>
+	{{/if}}
 	</div>
 </body>
 </html>

@@ -1,0 +1,22 @@
+.textinput
+{
+    width: 100%;
+    padding: 10px;
+    font-size:17px;
+}
+
+.tag
+{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.tagList
+{
+	margin-top: 20px;
+}
+
+.list-group .active a
+{
+	color: white;
+}

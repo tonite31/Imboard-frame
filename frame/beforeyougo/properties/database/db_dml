@@ -1,0 +1,5 @@
+INSERT INTO IMB_BOARD (ID, NAME, PRIORITY, DESCRIPTION, USE_YN, CREATOR) VALUES ('celebrity', 'Celebrity', 0, 'Celebrity', 'Y', 'admin');
+INSERT INTO IMB_ARTICLE (BOARD_ID, SEQ, GROUP_ID, THUMBNAIL_URL) VALUES ('celebrity', 1, 1, 'http://image.tvdaily.co.kr/upimages/gisaimg/201501/1421106808_833942.jpg')
+
+INSERT INTO IMB_URL_AUTH (URL, LEVEL, USE_YN, EDITABLE) VALUES ('body=registerTeacher', -1, 'Y', 'Y');
+INSERT INTO IMB_URL_AUTH (URL, LEVEL, USE_YN, EDITABLE) VALUES ('body=writeArticle', -1, 'Y', 'Y');

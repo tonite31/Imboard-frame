@@ -1,0 +1,33 @@
+<div class="col-xs-6" style="float:none; margin: 0 auto;">
+	<form data-component="form" id="writeForm" data-bind="article" data-param='{"boardId" : "article", "seq" : "#{query.seq}"}'>
+		<div class="dropdown" id="boardIdSelect">
+ 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  				게시판 선택
+   				<span class="caret"></span>
+ 				</button>
+ 				<ul class="dropdown-menu" data-bind="boardList" id="boardList">
+ 				{{#if boardList}}
+ 				{{#each boardList}}
+	   				<li><a href="#" data-value="{{id}}">{{name}}</a></li>
+	   			{{/each}}
+	   			{{/if}}
+ 				</ul>
+		</div>
+		<p style="margin-top: 10px;">
+			<input type="hidden" name="seq" value="{{seq}}"/>
+			<input type="text" name="subject" class="textinput" placeholder="제목" value="{{subject}}" autofocus="autofocus" required="required"/>
+		</p>
+		<div id="typewriter"></div>
+		<p style="margin-top: 10px;">
+			<input type="text" id="tag" name="tag" placeholder="태그를 입력하세요" style="vertical-align: middle; width: 200px; padding: 5px 10px;" class="textinput"/>
+			<input type="button" class="btn btn-default" id="addTag" value="태그 입력"/>
+			<small>태그를 클릭하면 삭제할 수 있습니다.</small>
+		</p>
+		<div id="tag-area">
+			<p>{{{parseTag tag}}}</p>
+		</div>
+		<p style="text-align: center; margin-top: 30px;">
+			<input type="submit" class="btn btn-default" style="padding: 10px 15px; font-size:15px;" value="저장"/>
+		</p>
+	</form>
+</div>

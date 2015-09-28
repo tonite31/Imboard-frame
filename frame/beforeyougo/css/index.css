@@ -34,76 +34,59 @@
 	padding-top: 30px;
 }
 
-.container > .row
-{
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-.container > .row > div
-{
-	padding:0 5px;
-}
-
-.article-container
-{
-	border: 1px solid #dfdfdf;
-}
-
-.article-subject
-{
-	padding: 15px;
-	border-bottom: 1px solid #dfdfdf;
-	background-color: #f7f7f7;
-	
-	position: relative;
-}
-
-.article-tag
-{
-	background-color: #f7f7f7;
-	padding: 5px;
-	border-top: 1px solid #dfdfdf;
-}
-
-.article-subject h2
-{
-	font-size: 18px;
-	margin: 0;
-}
-
-.icons
-{
-	float: right;
-	margin: -2px -8px 5px 5px;
-}
-
-.icons span
-{
-	padding: 0 2px;
-	font-size: 12px;
-}
-
-.article-content
-{
-	overflow: hidden;
-	padding: 10px;
-}
-
-.article-content img
+.thumbnail-image
 {
 	width: 100%;
-	margin-bottom: 15px;
 }
 
-.article-tag span
+.model-title
 {
-	padding: 5px;
-}
-
-.card
-{
-	width: 33.33333%;
+	font-size: 28px;
+	padding: 5px 35px;
 	position: absolute;
-	display: none;
+	left: 5px;
+	top: 5px;
+
+	border: 1px solid #555;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	
+	cursor: pointer;	
+	
+	-moz-transform: rotate(-20deg);
+	-webkit-transform: rotate(-20deg);
+	-o-transform: rotate(-20deg);
+	-ms-transform: rotate(-20deg);
+	transform: rotate(-20deg);
+}
+
+.model-title:HOVER {
+	background-color: black;
+}
+
+.category
+{
+	margin-bottom: 60px;
+}
+
+.category h2, .category h3
+{
+	color: #333;
+}
+
+.category h3
+{
+	font-size: 20px;
+}
+
+.signin-container
+{
+	position: absolute;
+	right: 25px;
+	top: 15px;
+}
+
+.signin-container a
+{
+	margin: 0 5px;
 }
