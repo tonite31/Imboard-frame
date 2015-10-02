@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-	console.log("머야 : ", $.query.fragment);
 	if($.query.fragment)
 	{
 		$(".nav-tabs li").removeAttr("class");

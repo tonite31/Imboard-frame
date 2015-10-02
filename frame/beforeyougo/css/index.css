@@ -1,3 +1,13 @@
+a, a:VISITED
+{
+	color: #333;
+}
+
+a:HOVER
+{
+	color: #337ab7;
+}
+
 .title
 {
 	text-align: center;
@@ -7,6 +17,12 @@
 .title h1
 {
 	font-size: 50px;
+}
+
+.title h1 a:HOVER
+{
+	text-decoration: none;
+	color: black;
 }
 
 .nav-tabs
