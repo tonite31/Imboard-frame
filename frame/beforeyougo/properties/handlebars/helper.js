@@ -33,7 +33,7 @@ Handlebars.registerHelper("parseTag", function(tag)
 		var html = "";
 		for(var i=0; i<split.length; i++)
 		{
-			html += "<span class='tag label label-primary'>" + split[i] + "</span>";
+			html += "<span>#" + split[i] + "</span>";
 		}
 
 		return html;

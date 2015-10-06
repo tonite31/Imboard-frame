@@ -1,145 +1,32 @@
+
+<div data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10}}'>
+{{#if articleList}}
+{{#each articleList}}
 <div class="card">
 	<div class="article-container">
 		<div class="article-subject">
 			<h2>
 				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
+					<span class="glyphicon glyphicon-eye-open"></span><span>{{hit}}</span>
+					<span class="glyphicon glyphicon-bullhorn"></span><span>{{commentCount}}</span>
 				</span>
-				월터의 상상은 현실이 된다.
+				{{subject}}
 			</h2>
 		</div>
 		<div class="article-content">
-			<img src="http://api.wisdo.me/files/118967">
-			<article>
-				<p>해본 것 없음, 가본 곳 없음, 특별한 일 없음! 아직도 상상만 하고 계신가요?</p>
-				<p>자신의 꿈은 접어둔 채 16년째 ‘라이프’ 잡지사에서 포토 에디터로 일하고 있는 월터 미티.</p> 
-				<p>해본 것도, 가본 곳도, 특별한 일도 없는 월터의 유일한 취미는 바로 상상! </p>
-			</article>
+			{{#if thumbnailUrl}}
+			<img src="{{thumbnailUrl}}">
+			{{/if}}
+			<article>{{{textThumbnail content}}}</article>
 		</div>
+		{{#if tag}}
 		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
+			{{parseTag tag}}
 		</div>
+		{{/if}}
 	</div>
 	<a class="article-corver" href="#"></a>
 </div>
-<div class="card">
-	<div class="article-container">
-		<div class="article-subject">
-			<h2>
-				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
-				</span>
-				소셜네트워크
-			</h2>
-		</div>
-		<div class="article-content">
-			<img src="https://attachment.namu.wiki/socialnetworkmovie.jpg">
-			<article>
-				<p>5억명의 온라인 친구, 전세계 최연소 억만장자, 하버드 천재가 창조한 소셜 네트워크 혁명!</p>
-				<p>| You don't get to 500 million friends without making a few enemies</p>
-				<p>5억 명의 ‘친구’가 생긴 순간 진짜 친구들은 적이 되었다!</p>
-			</article>
-		</div>
-		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
-		</div>
-	</div>
-</div>
-<div class="card">
-	<div class="article-container">
-		<div class="article-subject">
-			<h2>
-				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
-				</span>
-				비긴어게인
-			</h2>
-		</div>
-		<div class="article-content">
-			<img src="http://i.ytimg.com/vi/FO0UDlUsxBk/maxresdefault.jpg">
-			<article>
-				<p>“다시 시작해, 너를 빛나게 할 노래를!”</p>
-				<p>싱어송라이터인 ‘그레타’(키이라 나이틀리)는 남자친구 ‘데이브’(애덤 리바인)가 메이저 음반회사와 계약을 하게 되면서 뉴욕으로 오게 된다.</p>
-				<p>그러나 행복도 잠시, 오랜 연인이자 음악적 파트너로서 함께 노래를 만들고 부르는 것이 좋았던 그레타와 달리 스타가 된 데이브의 마음은 어느새 변해버린다.</p>
-			</article>
-		</div>
-		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
-		</div>
-	</div>
-</div>
-<div class="card">
-	<div class="article-container">
-		<div class="article-subject">
-			<h2>
-				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
-				</span>
-				메이즈러너
-			</h2>
-		</div>
-		<div class="article-content">
-			<img src="http://cfile1.uf.tistory.com/image/2442A54C54256F0A393022">
-			<article>
-				<p>삭제된 기억, 거대한 미로로 둘러싸인 낯선 공간</p>
-				<p>모든 기억이 삭제된 채 의문의 장소로 보내진 ‘토마스’(딜런 오브라이언).</p>
-				<p>‘토마스’는 미로에 갇힌 그곳에서 자신과 같은 상황의 사람들을 만난다.</p>
-			</article>
-		</div>
-		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
-		</div>
-	</div>
-</div>
-<div class="card">
-	<div class="article-container">
-		<div class="article-subject">
-			<h2>
-				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
-				</span>
-				굿 윌 헌팅
-			</h2>
-		</div>
-		<div class="article-content">
-			<img src="http://pds20.egloos.com/pds/201007/05/83/a0067083_4c31d93c510b2.jpg">
-			<article>
-				<p>그의 생애 처음으로 인생의 등대를 만난다! | 두남자가 열어가는 감동의 세상</p>
-				<p>윌 헌팅(Will Hunting: 매트 데이몬 분)은 20년을 살아오면서 누구의 간섭도 받아본 적이 없었다.</p>
-				<p>그러한 그도 결코 우습게 상대하지 못할 인생의 스승을 만나게 된다. 보스톤 남쪽의 빈민 거주지역에서 살고 있는 노동자계층의 친구들과 마찬가지로 윌은 비천한 일을 살며 산다.</p>
-				<p>윌은 MIT 공대에서 교실 바닥 청소 일을 할 때 말곤 대학교 정문 근처에도 가본 적이 없다.</p>
-			</article>
-		</div>
-		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
-		</div>
-	</div>
-</div>
-<div class="card">
-	<div class="article-container">
-		<div class="article-subject">
-			<h2>
-				<span class="icons">
-					<span class="glyphicon glyphicon-eye-open"></span><span>1593</span>
-					<span class="glyphicon glyphicon-bullhorn"></span><span>34</span>
-				</span>
-				다크나이트
-			</h2>
-		</div>
-		<div class="article-content">
-			<img src="https://attachment.namu.wiki/%EB%8B%A4%ED%81%AC%20%EB%82%98%EC%9D%B4%ED%8A%B8(%EC%98%81%ED%99%94)__The-Dark-Knight-poster.jpg">
-			<article>
-				<p>마침내, 최강의 적을 만나다</p>
-				<p>이 도시에 정의는 죽었다! 범죄와 부정부패를 제거하여 고담시를 지키려는 배트맨(크리스찬 베일). 그는 짐 고든 형사(게리 올드만)와 패기 넘치는 고담시 지방 검사 하비 덴트(아론 에크하트)와 함께 도시를 범죄 조직으로부터 영원히 구원하고자 한다. 배트맨을 죽여라! 세 명의 의기투합으로 위기에 처한 악당들이 모인 자리에 보라색 양복을 입고 얼굴에 짙게 화장을 한 괴이한 존재가 나타나 ‘배트맨을 죽이자’는 사상 초유의 제안을 한다. 그는 바로 어떠한 룰도, 목적도 없는 사상 최악의 악당 미치광이 살인광대 ‘조커’(히스 레저).</p>
-			</article>
-		</div>
-		<div class="article-tag">
-			<span>#tag</span><span>#tag</span><span>#tag</span><span>#tag</span>
-		</div>
-	</div>
+{{/each}}
+{{/if}}
 </div>

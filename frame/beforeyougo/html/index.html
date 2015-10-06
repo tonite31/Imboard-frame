@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
 <link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css"/>
-<link rel="stylesheet" type="text/css" href="#{path.root}/lib/typewriter/typewriter.css"/>
 
 <script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
 <script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -22,7 +21,7 @@
 <script src="#{path.module}/imboard/js/imboard-ui.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
 
-<script src="#{path.root}/lib/typewriter/typewriter.js"></script>
+<script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div class="title">
@@ -33,7 +32,7 @@
 			<li role="presentation" class="active"><a href="/">표지</a></li>
 			{{#if boardList}}
 			{{#each boardList}}
-			<li role="presentation"><a href="?fragment=list">{{name}}</a></li>
+			<li role="presentation"><a href="?fragment=list&boardId={{id}}">{{name}}</a></li>
 			{{/each}}
 			{{/if}}
 		</ul>
