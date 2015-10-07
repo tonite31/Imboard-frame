@@ -25,21 +25,24 @@ function allocateCard(cardList, i)
 	
 	$(card).css("position", "absolute").css("left", left + "px").css("top", top + "px").css("display", "block");
 	
-	var img = $(card).find("img");
-	if(img.length > 0 && img.css("height") == "0px")
+	setTimeout(function()
 	{
-		img.on("load", function()
+		var img = $(card).find("img");
+		if(img.length > 0 && img.css("height") == "0px")
+		{
+			img.on("load", function()
+			{
+				var height = $(card).css("height");
+				cardPosition[index] = top + new Number(height.replace("px", ""));
+				
+				allocateCard(cardList, i + 1);
+			});
+		}
+		else
 		{
 			var height = $(card).css("height");
 			cardPosition[index] = top + new Number(height.replace("px", ""));
-			
 			allocateCard(cardList, i + 1);
-		});
-	}
-	else
-	{
-		var height = $(card).css("height");
-		cardPosition[index] = top + new Number(height.replace("px", ""));
-		allocateCard(cardList, i + 1);
-	}
+		}
+	}, 10);
 }

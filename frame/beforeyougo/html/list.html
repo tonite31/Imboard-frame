@@ -1,5 +1,5 @@
 
-<div data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10}}'>
+<div data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10, "withContent" : "true"}}'>
 {{#if articleList}}
 {{#each articleList}}
 <div class="card">
@@ -17,11 +17,11 @@
 			{{#if thumbnailUrl}}
 			<img src="{{thumbnailUrl}}">
 			{{/if}}
-			<article>{{{textThumbnail content}}}</article>
+			<article>{{{textThumbnail content "&lt;/p&gt;" 5}}}</article>
 		</div>
 		{{#if tag}}
 		<div class="article-tag">
-			{{parseTag tag}}
+			{{{parseTag tag}}}
 		</div>
 		{{/if}}
 	</div>

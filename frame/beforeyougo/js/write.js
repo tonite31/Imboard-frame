@@ -6,6 +6,12 @@ $(document).ready(function()
 	
 	CKEDITOR.replace("ckeditor", { height: 500 });
 	
+	if($.query.boardId)
+	{
+		$("#boardName").text($("#boardList a[data-value='" + $.query.boardId + "']").text());
+		selectedBoardId = $.query.boardId;
+	}
+	
 	$("#boardList a").on("click", function()
 	{
 		$("#boardList a").removeAttr("data-name");
@@ -48,6 +54,11 @@ $(document).ready(function()
 			param.boardId = selectedBoardId;
 			param.content = CKEDITOR.instances.ckeditor.getData();
 			
+			$("#tag-area span").each(function()
+			{
+				param.tag += $(this).text() + " ";
+			});
+			
 			if(savedSeq != null)
 			{
 				param.seq = savedSeq;
@@ -74,7 +85,7 @@ $(document).ready(function()
 					else if($.query.boardId == "qna")
 						body = "qna";
 					
-					location.href = "?body=" + body + ($.query.boardId ? "&boardId=" + $.query.boardId : "") + ($.query.seq ? "&seq=" + $.query.seq : "");
+					location.href = "?fragment=list&boardId=" + $.query.boardId;
 				}
 			}
 		}
@@ -89,7 +100,7 @@ $(document).ready(function()
 		}
 	});
 	
-	$(".tag").on("click", function()
+	$("#tag-area span").on("click", function()
 	{
 		$(this).remove();
 	});
@@ -152,8 +163,8 @@ $(document).ready(function()
 function addTag()
 {
 	var tag = $("#tag").val();
-	$("#tag-area p:first").append("<span class='tag label label-primary'>" + tag + "</span>");
-	$("#tag-area .tag:last").on("click", function(){
+	$("#tag-area p:first").append("<span class='label label-primary'>" + tag + "</span>");
+	$("#tag-area span:last").on("click", function(){
 		$(this).remove();
 	})
 	$("#tag").val("");

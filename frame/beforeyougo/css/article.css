@@ -12,3 +12,11 @@
 {
 	text-decoration: underline;
 }
+
+.date
+{
+	position: absolute;
+	right:0;
+	bottom:5px;
+	color:#333;
+}

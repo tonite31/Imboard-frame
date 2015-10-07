@@ -6,9 +6,8 @@
     border: 1px solid #dedede;
 }
 
-.tag
+#tag-area span
 {
-    margin-left: 10px;
     cursor: pointer;
 }
 

@@ -14,6 +14,24 @@ Handlebars.registerHelper("textThumbnail", function(content, token, count)
 
 	if(content)
 	{
+		var matchs = content.match("<img[^>]*>");
+		if(matchs)
+		{
+			for(var i=0; i<matchs.length; i++)
+			{
+				content = content.replace(matchs[i], "");
+			}
+		}
+		
+		matchs = content.match("<iframe[^>]*>");
+		if(matchs)
+		{
+			for(var i=0; i<matchs.length; i++)
+			{
+				content = content.replace(matchs[i], "");
+			}
+		}
+		
 		content = content.replace(/<p>&nbsp;<\/p>/gi, "");
 		var split = content.split(token);
 		for(var i=0; i<count && i<split.length; i++)
@@ -33,7 +51,7 @@ Handlebars.registerHelper("parseTag", function(tag)
 		var html = "";
 		for(var i=0; i<split.length; i++)
 		{
-			html += "<span>#" + split[i] + "</span>";
+			html += "<span class='label label-primary'>" + split[i] + "</span> ";
 		}
 
 		return html;
