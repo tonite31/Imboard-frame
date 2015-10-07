@@ -23,7 +23,7 @@ function allocateCard(cardList, i)
 	
 	var top = cardPosition[index] + 30;
 	
-	$(card).css("position", "absolute").css("left", left + "px").css("top", top + "px").show();
+	$(card).css("position", "absolute").css("left", left + "px").css("top", top + "px").css("display", "block");
 	
 	var img = $(card).find("img");
 	if(img.length > 0 && img.css("height") == "0px")

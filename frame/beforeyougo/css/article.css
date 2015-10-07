@@ -1,0 +1,14 @@
+.well
+{
+	background: white;
+}
+
+.function
+{
+	cursor: pointer;
+}
+
+.function:HOVER
+{
+	text-decoration: underline;
+}
