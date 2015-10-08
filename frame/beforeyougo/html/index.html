@@ -50,11 +50,11 @@
 		{{#each boardList}}
 		{{#notequals id "corver"}}
 		<div class="category">
-			<h2>{{name}}</h2>
+			<h2><a href="?fragment=list&boardId={{id}}">{{name}}</a></h2>
 			<div data-bind="articleList" data-param='{"boardId" : "{{id}}"}'>
 			{{#if articleList}}
 			{{#each articleList}}
-				<h3>{{subject}}</h3>
+				<h3><a href="?fragment=article&boardId={{boardId}}&seq={{seq}}">{{subject}}</a></h3>
 			{{/each}}
 			{{/if}}
 			</div>
