@@ -51,8 +51,12 @@
 		{{#notequals id "corver"}}
 		<div class="category">
 			<h2>{{name}}</h2>
-			<div data-bind="articleList" data-param='{"boardId" : "{{id}}", "searchData" : {"startIndex" : 0, "endIndex" : 5}}'>
+			<div data-bind="articleList" data-param='{"boardId" : "{{id}}"}'>
+			{{#if articleList}}
+			{{#each articleList}}
 				<h3>{{subject}}</h3>
+			{{/each}}
+			{{/if}}
 			</div>
 		</div>
 		{{/notequals}}
