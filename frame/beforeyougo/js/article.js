@@ -117,7 +117,7 @@ function bindReplyComment()
 		if(result.code == 1000)
 		{
 			var password = "";
-			if(!result.id)
+			if(!result.data.id)
 				password = '<div class="input-group" style="margin-bottom: 5px;"><input data-type="edit" type="password" class="form-control" name="password" required="required" placeholder="비밀번호를 입력하세요" style="font-size:11px;"/></div>';
 			
 			var groupId = $(this).attr("data-groupid");
@@ -142,49 +142,65 @@ function bindReplyComment()
 	
 	$("*[data-id='deleteComment']").on("click", function()
 	{
-		var editPassword = $(this).parent().parent().find("input[data-type='edit']").get(0);
-		editPassword.parentElement.removeChild(editPassword);
+		var groupId = $(this).attr("data-groupid");
+		var seq = $(this).attr("data-seq");
 		
-		if($(this).prev().attr("type") == "password")
+		var editPassword = $(this).parent().parent().find("input[data-type='edit']").get(0);
+		if(editPassword)
+			editPassword.parentElement.removeChild(editPassword);
+		
+		var result = $.api.user.getSignedUser();
+		if(result.code == 1000 && result.data.id)
 		{
-			var result = $(this).prev().get(0).checkValidity();
-			if(!result)
-			{
-				$(this).next().makeValidationMessage();
-				return;
-			}
-			
-			var groupId = $(this).attr("data-groupid");
-			var seq = $(this).attr("data-seq");
-			
-			var data = {};
-			data.boardId = $.query.boardId;
-			data.articleSeq = $.query.seq;
-			data.groupId = groupId;
-			data.seq = seq;
-			data.password = $(this).next().val();
-			data.isRemove = "Y";
-			
-			var result = $.api.comment.deleteComment(data);
-			if(result.code == 1000)
-			{
-				refresh();
-			}
-			else if(result.code == -9998)
-			{
-				$(this).next().makeValidationMessage("비밀번호가 일치하지 않습니다");
-			}
-			else
-			{
-				console.error(result);
-			}
-			
-			return;
+			deleteArticle(groupId, seq, "");
 		}
 		else
 		{
-			$('<input type="password" data-type="delete" required="required" placeholder="비밀번호 입력 후 삭제 클릭" style="font-size:11px; margin:0 3px; padding:5px;"/>').insertBefore(this);
-			$(this).prev().focus();
+			if($(this).prev().attr("type") == "password")
+			{
+				var result = $(this).prev().get(0).checkValidity();
+				if(!result)
+				{
+					$(this).prev().makeValidationMessage("비밀번호를 입력하세요");
+					return;
+				}
+				
+				if(deleteArticle(groupId, seq, $(this).prev().val()) == -9998)
+				{
+					$(this).prev().makeValidationMessage("비밀번호가 일치하지 않습니다.");
+				}
+			}
+			else
+			{
+				$('<input type="password" data-type="delete" required="required" placeholder="비밀번호 입력 후 삭제 클릭" style="font-size:11px; margin:0 3px; padding:5px;"/>').insertBefore(this);
+				$(this).prev().focus();
+			}
 		}
 	});
+}
+
+function deleteArticle(groupId, seq, password)
+{
+	var data = {};
+	data.boardId = $.query.boardId;
+	data.articleSeq = $.query.seq;
+	data.groupId = groupId;
+	data.seq = seq;
+	data.password = password;
+	data.isRemove = "Y";
+	
+	var result = $.api.comment.deleteComment(data);
+	if(result.code == 1000)
+	{
+		refresh();
+		return true;
+	}
+	else if(result.code == -9998)
+	{
+		return -9998
+	}
+	else
+	{
+		console.error(result);
+	}
 }
