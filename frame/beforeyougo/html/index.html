@@ -67,7 +67,7 @@
 	<div class="signin-container" data-bind="signedUser">
 	{{#if user}}
 	{{#sign user.level "lt" 0}}
-		<a href="?fragment=write">글쓰기</a>
+		<a href="?fragment=write&boardId=#{query.boardId}">글쓰기</a>
 		<a href="/settings">관리자</a>
 		<a href="/signout.do">로그아웃</a>
 	{{else}}
