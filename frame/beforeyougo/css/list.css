@@ -76,6 +76,7 @@
 {
 	overflow: hidden;
 	padding: 10px;
+	max-height: 500px;
 }
 
 .article-content img
