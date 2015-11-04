@@ -1,5 +1,4 @@
-
-<div data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10, "withContent" : "true"}}'>
+<script id="articleListTemplate" type="text/x-handlebars-template" data-precompile="true">
 {{#if articleList}}
 {{#each articleList}}
 <div class="card">
@@ -29,4 +28,6 @@
 </div>
 {{/each}}
 {{/if}}
-</div>
+</script>
+
+<div id="articleList" data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10, "withContent" : "true"}}' data-template-id="articleListTemplate"></div>

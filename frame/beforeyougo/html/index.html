@@ -21,6 +21,7 @@
 <script src="#{path.module}/imboard/js/imboard-api.js"></script>
 <script src="#{path.module}/imboard/js/imboard-ui.js"></script>
 <script src="#{path.module}/imboard/js/handlebars-helper.js"></script>
+<script src="#{path.root}/properties/handlebars/helper.js"></script>
 
 <script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
 </head>
@@ -51,7 +52,7 @@
 		{{#notequals id "corver"}}
 		<div class="category">
 			<h2><a href="?fragment=list&boardId={{id}}">{{name}}</a></h2>
-			<div data-bind="articleList" data-param='{"boardId" : "{{id}}"}'>
+			<div data-bind="articleList" data-param='{"boardId" : "{{id}}", "searchData" : {"startIndex" : 0, "endIndex" : 5}}'>
 			{{#if articleList}}
 			{{#each articleList}}
 				<h3><a href="?fragment=article&boardId={{boardId}}&seq={{seq}}">{{subject}}</a></h3>

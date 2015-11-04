@@ -85,7 +85,10 @@ $(document).ready(function()
 					else if($.query.boardId == "qna")
 						body = "qna";
 					
-					location.href = "?fragment=list&boardId=" + $.query.boardId;
+					if(savedSeq)
+						location.href = "?fragment=article&boardId=" + $.query.boardId + "&seq=" + $.query.seq;
+					else
+						location.href = "?fragment=list&boardId=" + $.query.boardId;
 				}
 			}
 		}
