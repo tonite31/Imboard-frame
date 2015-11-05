@@ -1,0 +1,17 @@
+.article
+{
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.article-subject
+{
+	text-align: center;
+	font-size: 44px;
+}
+
+.article-writer
+{
+	text-align: center;
+	font-size: 25px;
+}

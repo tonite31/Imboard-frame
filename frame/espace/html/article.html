@@ -1,0 +1,76 @@
+<script id="communityCommentTemplate" type="text/x-handlebars-template" data-precompile="true">
+{{#if commentList}}
+{{#each commentList}}
+<form data-component="form" class="commentContainer" {{#notempty parentSeq}}style="margin-left:40px;"{{/notempty}}>
+	<p class="info">
+		{{#if writerName}}
+			{{writerName}}
+		{{else}}
+			익명사용자
+		{{/if}}
+		<small> | {{registerDate}}</small>
+		<small> | </small>
+		<small data-id="editComment" class="function" data-seq="{{seq}}" data-groupid="{{groupId}}">수정</small>
+		<small data-id="deleteComment" class="function" data-role="submit" data-role-type="delete" data-seq="{{seq}}" data-groupid="{{groupId}}">삭제</small>
+		<small data-id="replyComment" class="function" data-seq="{{seq}}" data-groupid="{{groupId}}">덧글</small>
+	</p>
+	<p class="well">{{content}}</p>
+</form>
+{{/each}}
+{{/if}}
+</script>
+
+<script id="commentWriteTemplate" type="text/x-handlebars-template" data-precompile="true">
+{{#test "!'#{user.id}' || '#{user.level}' &gt; 0"}}
+	<div class="input-group" style="margin-bottom: 10px;">
+	  	<input type="text" class="form-control" placeholder="이름" name="writerName" autofocus="autofocus"/>
+	</div>
+	<div class="input-group" style="margin-bottom: 10px;">
+	   	<input type="password" class="form-control" placeholder="비밀번호" name="password" required="required"/>
+	</div>
+{{/test}}
+<div class="input-group">
+	<input type="hidden" name="boardId" value="#{query.boardId}" />
+	<input type="hidden" name="articleSeq" value="#{query.seq}" />
+	<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+	<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+</div>
+</script>
+
+<div class="article" data-bind="article" data-param='{"boardId" : "#{query.boardId}", "seq" : "#{query.seq}"}'>
+	<div>
+		<h2 class="article-subject">Subject</h2>
+		<h3 class="article-writer">by. Alprensia</h3>
+	</div>
+	<div>
+		<img src="http://cfile1.uf.tistory.com/image/216A613C55C71D7C3453CF"/>
+	</div>
+	<div class="page-header" style="clear: both; display:table; width: 100%;">
+		<div class="col-xs-6" style="padding-left: 0;"><span class="label label-default">태그</span> {{{parseTag tag}}}</div>
+		<div class="col-xs-6" style="padding-right: 0;text-align: right;">
+	        {{#equals writerId "#{user.id}"}}
+	        <a href="?fragment=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
+	        <button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
+	        {{/equals}}
+	        <a class="btn btn-default" href="?fragment=list&boardId=#{query.boardId}">목록보기</a>
+		</div>
+    </div>
+	<div id="commentList" style="margin: 30px 0;" data-bind="commentList" data-param='{"boardId" : "#{query.boardId}", "articleSeq" : "#{query.seq}"}' data-template-id="communityCommentTemplate"></div>
+	<p class="page-header"></p>
+    <form data-component="form" id="commentForm">
+    	{{#test "!'#{user.id}' || '#{user.level}' &gt; 0"}}
+	    <div class="input-group" style="margin-bottom: 10px;">
+	    	<input type="text" class="form-control" placeholder="이름" name="writerName"/>
+	    </div>
+	    <div class="input-group" style="margin-bottom: 10px;">
+	    	<input type="password" class="form-control" placeholder="비밀번호" name="password" required="required"/>
+	    </div>
+	    {{/test}}
+		<div class="input-group">
+			<input type="hidden" name="boardId" value="#{query.boardId}" />
+			<input type="hidden" name="articleSeq" value="#{query.seq}" />
+			<textarea class="form-control" placeholder="덧글을 입력하세요" name="content"></textarea>
+			<span class="input-group-addon" style="cursor: pointer;" data-role="submit">작성</span>
+		</div>
+	</form>
+</div>

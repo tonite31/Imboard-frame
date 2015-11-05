@@ -1,0 +1,118 @@
+*, a
+{
+	color: #444;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+.side
+{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 250px;
+	background-color: black;
+}
+
+.main
+{
+	position: absolute;
+	left: 250px;
+	right:0;
+	padding: 20px;
+	min-width: 442px;
+}
+
+.title
+{
+	color: white;
+	text-align: center;
+	font-size: 36px;
+}
+
+.menu
+{
+	padding-left:0;
+	margin-bottom: 20px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.menu-item
+{
+	padding: 10px 15px;
+}
+
+.menu-item > a
+{
+	color: white;
+	font-size: 20px;
+}
+
+.menu-arrow
+{
+	position: absolute;
+	left: 230px;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 20px solid white;
+}
+
+.card
+{
+	width: 400px;
+	position: absolute;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size:0;
+	cursor: pointer;
+	
+	transition: all 1s;
+}
+
+.card-thumbnail
+{
+	width: 100%;
+	-webkit-filter: grayscale(70%);
+	-moz-filter: grayscale(70%);
+  	-ms-filter: grayscale(70%);
+  	-o-filter: grayscale(70%);
+  	filter: grayscale(70%);
+  	filter: url(grayscale.svg); /* Firefox 4+ */
+  	filter: gray; /* IE 6-9 */
+}
+
+.card:HOVER .card-thumbnail
+{
+	filter:none;
+	-webkit-filter:none;
+}
+
+.card-info
+{
+	position: absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 5px 10px;
+}
+
+.card-subject
+{
+	color: white;
+	margin: 0;
+	font-size: 18px;
+}
+
+.card-writer
+{
+	color: white;
+	text-align: right;
+	margin:0;
+	font-size: 14px;
+}
