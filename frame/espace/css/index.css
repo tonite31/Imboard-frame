@@ -1,3 +1,8 @@
+body
+{
+	margin:0;
+}
+
 *, a
 {
 	color: #444;
@@ -18,13 +23,17 @@ a
 	background-color: black;
 }
 
+.side a:HOVER
+{
+	color: #ccc;
+}
+
 .main
 {
 	position: absolute;
 	left: 250px;
 	right:0;
-	padding: 20px;
-	min-width: 442px;
+	min-width: 400px;
 }
 
 .title
@@ -32,6 +41,11 @@ a
 	color: white;
 	text-align: center;
 	font-size: 36px;
+}
+
+.title > a
+{
+	color: white;
 }
 
 .menu
@@ -53,6 +67,11 @@ a
 	font-size: 20px;
 }
 
+.small .menu-item > a
+{
+	font-size: 14px;
+}
+
 .menu-arrow
 {
 	position: absolute;
@@ -64,8 +83,7 @@ a
 
 .card
 {
-	width: 400px;
-	position: absolute;
+	width: 380px;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 	font-size:0;
@@ -74,22 +92,38 @@ a
 	transition: all 1s;
 }
 
+@media (min-width:800px)
+{
+	.card
+	{
+		position: absolute;
+	}	
+}
+
+.card-container
+{
+	position: relative;
+	margin: 20px;
+}
+
 .card-thumbnail
 {
 	width: 100%;
-	-webkit-filter: grayscale(70%);
-	-moz-filter: grayscale(70%);
-  	-ms-filter: grayscale(70%);
-  	-o-filter: grayscale(70%);
-  	filter: grayscale(70%);
-  	filter: url(grayscale.svg); /* Firefox 4+ */
-  	filter: gray; /* IE 6-9 */
+	opacity: 0.7;
+/* 	-webkit-filter: grayscale(50%); */
+/* 	-moz-filter: grayscale(50%); */
+/*   	-ms-filter: grayscale(50%); */
+/*   	-o-filter: grayscale(50%); */
+/*   	filter: grayscale(50%); */
+/*   	filter: url(grayscale.svg); Firefox 4+ */
+/*   	filter: gray; IE 6-9 */
 }
 
 .card:HOVER .card-thumbnail
 {
 	filter:none;
 	-webkit-filter:none;
+	opacity: 1;
 }
 
 .card-info
@@ -98,7 +132,7 @@ a
 	left:0;
 	right:0;
 	bottom:0;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.8);
 	padding: 5px 10px;
 }
 

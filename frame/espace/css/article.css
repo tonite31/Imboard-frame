@@ -1,17 +1,45 @@
 .article
 {
+	width: 80%;
 	max-width: 1000px;
-	margin: 0 auto;
+	margin:0 auto;
+	padding-top: 30px;
 }
 
 .article-subject
 {
 	text-align: center;
-	font-size: 44px;
+	font-size: 24px;
 }
 
 .article-writer
 {
 	text-align: center;
-	font-size: 25px;
+	font-size: 15px;
+}
+
+.article-content
+{
+	position: relative;
+	width: 100%;
+	max-width: 1000px;
+	margin-top: 30px;
+}
+
+.article-content img
+{
+	max-width: 100%;
+}
+
+@media (min-width: 800px)
+{
+	.article-subject
+	{
+		font-size: 44px;
+	}
+	
+	.article-writer
+	{
+		font-size: 25px;
+	}	
 }
