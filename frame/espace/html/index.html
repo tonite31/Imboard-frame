@@ -28,14 +28,14 @@
 		<h2 class="title"><a href="/">ESPACE</a></h2>
 		<ul class="menu">
 			<li class="menu-item"><a href="/">Story</a></li>
-			<li class="menu-item"><a href="?menu=talk">Talk</a></li>
+<!-- 			<li class="menu-item"><a href="?menu=talk">Talk</a></li> -->
 		</ul>
 	</header>
 	<div class="side">
 		<h1 class="title"><a href="/">ESPACE</a></h1>
 		<ul class="menu">
 			<li class="menu-item"><a href="/">Story</a></li>
-			<li class="menu-item"><a href="?menu=talk">Talk</a></li>
+<!-- 			<li class="menu-item"><a href="?menu=talk">Talk</a></li> -->
 		</ul>
 		<ul class="menu small" style="padding-top: 30px;" data-bind="signedUser">
 			{{#if user}}
@@ -57,9 +57,11 @@
 			{{#if articleList}}
 			{{#each articleList}}
 			<div class="card">
-				<a href="?menu=article&boardId={{boardId}}&seq={{seq}}"><img class="card-thumbnail" src="{{thumbnailUrl}}"/></a>
+				<a href="?menu=article&boardId={{boardId}}&seq={{seq}}" class="card-cover"></a>
+				<img class="card-thumbnail" src="{{thumbnailUrl}}"/>
 				<div class="card-info">
 					<h2 class="card-subject">{{subject}}</h2>
+					<p class="card-tag">{{{parseTag tag}}}</p>
 					<p class="card-writer">by. {{writerDisplayId}}</p>
 				</div>
 			</div>

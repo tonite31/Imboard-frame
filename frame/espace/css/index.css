@@ -136,6 +136,15 @@ a
 /*   	filter: gray; IE 6-9 */
 }
 
+.card-cover
+{
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+
 .card:HOVER .card-thumbnail
 {
 	filter:none;
@@ -157,7 +166,17 @@ a
 {
 	color: white;
 	margin: 0;
-	font-size: 18px;
+	padding-bottom: 10px;
+	font-size: 20px;
+}
+
+.card-tag
+{
+	font-size: 14px;
+	margin:0;
+	float:left;
+	display: inline-block;
+	max-width: 70%;
 }
 
 .card-writer
@@ -191,5 +210,10 @@ a
 		min-width: 400px;
 		left: 250px;
 		right: 0;
+	}
+	
+	.card-container
+	{
+		margin: 20px;
 	}
 }

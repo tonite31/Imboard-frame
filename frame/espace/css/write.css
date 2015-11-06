@@ -36,4 +36,9 @@
 	border: 1px solid #ccc;
 	overflow: auto;
 	position: relative;
+	
+	outline:0;
+	padding: 10px;
+	
+	font-size: 16px;
 }

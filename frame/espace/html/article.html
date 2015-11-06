@@ -48,7 +48,7 @@
 		{{{content}}}
 	</div>
 	<div class="page-header" style="clear: both; display:table; width: 100%;">
-		<div class="col-xs-6" style="padding-left: 0;"><span class="label label-default">태그</span> {{{tag}}}</div>
+		<div class="col-xs-6" style="padding-left: 0;"><span class="label label-default">태그</span> {{{parseTag tag}}}</div>
 		<div class="col-xs-6" style="padding-right: 0;text-align: right;">
 	        {{#equals writerId "#{user.id}"}}
 	        <a href="?menu=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>

@@ -135,6 +135,25 @@ $(document).ready(function()
 //			CKEDITOR.instances.ckeditor.insertHtml(html);
 		}
 	});
+	
+	$("#editor").on("focus", function()
+	{
+		$("#editor").css("overflow", "none").css("height", "auto").css("min-height", "500px");
+
+		setTimeout(function()
+		{
+			var node = document.getSelection().anchorNode;
+			if(node.nodeName == "DIV")
+			{
+				$("body").animate({scrollTop : node.getBoundingClientRect().top});
+			}
+		}, 500);
+	});
+	
+	$("#editor").on("blur", function()
+	{
+		$("#editor").css("overflow", "").css("height", "").css("min-height", "");
+	});
 });
 
 function addTag()
