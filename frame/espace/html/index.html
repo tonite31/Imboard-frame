@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 <title>ESPACE</title>
 
@@ -23,6 +24,13 @@
 
 </head>
 <body>
+	<header class="header">
+		<h2 class="title"><a href="/">ESPACE</a></h2>
+		<ul class="menu">
+			<li class="menu-item"><a href="/">Story</a></li>
+			<li class="menu-item"><a href="?menu=talk">Talk</a></li>
+		</ul>
+	</header>
 	<div class="side">
 		<h1 class="title"><a href="/">ESPACE</a></h1>
 		<ul class="menu">
@@ -32,8 +40,8 @@
 		<ul class="menu small" style="padding-top: 30px;" data-bind="signedUser">
 			{{#if user}}
 			{{#sign user.level "lt" 0}}
-				<li class="menu-item"><a href="/">Alprensia</a></li>
-				<li class="menu-item"><a href="/">글쓰기</a></li>
+				<li class="menu-item"><a href="?menu=profile">Alprensia</a></li>
+				<li class="menu-item"><a href="?menu=write&boardId=story">스토리 작성</a></li>
 				<li class="menu-item"><a href="/signout.do">로그아웃</a></li>
 			{{else}}
 				<li class="menu-item"><a href="/signin">로그인</a></li>
@@ -45,63 +53,18 @@
 		<span class="menu-arrow"></span>
 	</div>
 	<div class="main" data-fragment="menu">
-		<div class="card-container">
+		<div class="card-container" data-bind="articleList" data-param='{"boardId" : "story", "searchData" : {"startIndex" : 0, "endIndex" : 20}}'>
+			{{#if articleList}}
+			{{#each articleList}}
 			<div class="card">
-				<a href="?menu=article"><img class="card-thumbnail" src="http://cfile1.uf.tistory.com/image/216A613C55C71D7C3453CF"/></a>
+				<a href="?menu=article&boardId={{boardId}}&seq={{seq}}"><img class="card-thumbnail" src="{{thumbnailUrl}}"/></a>
 				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
+					<h2 class="card-subject">{{subject}}</h2>
+					<p class="card-writer">by. {{writerDisplayId}}</p>
 				</div>
 			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://pds.joins.com/news/component/newsen/201407/16/201407160730190410_1.jpg"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://cfile6.uf.tistory.com/image/2416BA49551F349A19A074"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://pds11.egloos.com/pds/200901/22/45/a0102845_497809b85a5bf.jpg"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://pds10.egloos.com/pds/200901/16/74/a0100274_496fd7f6b3fc7.jpg"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://autotimes.hankyung.com/autotimesdata/images/photo/201309/a46fb6ed05c63d29e52f918f7c878806.jpg"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://cfile23.uf.tistory.com/image/2512313855D56DBD08344E"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
-			<div class="card">
-				<img class="card-thumbnail" src="http://cfile236.uf.daum.net/image/2102834052D29C8202FF9F"/>
-				<div class="card-info">
-					<h2 class="card-subject">Subject</h2>
-					<p class="card-writer">by. Alprensia</p>
-				</div>
-			</div>
+			{{/each}}
+			{{/if}}
 		</div>
 	</div>
 </body>

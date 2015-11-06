@@ -27,7 +27,8 @@ var _cardSystem = {};
 				
 				this.resizeTimer = setTimeout(function()
 				{
-					var temp = parseInt((window.innerWidth) / that.cardWidth); // 한줄에 배치할 수 있는 카드 숫자.
+					var sideWidth = new Number($(".side").css("width").replace("px", ""));
+					var temp = parseInt((window.innerWidth - sideWidth) / that.cardWidth); // 한줄에 배치할 수 있는 카드 숫자.
 					if(that.ccpl != temp)
 					{
 						that.refresh();
@@ -41,8 +42,9 @@ var _cardSystem = {};
 	{
 		if(window.innerWidth >= 800)
 		{
+			var sideWidth = new Number($(".side").css("width").replace("px", ""));
 			this.cardPosition = [];
-			this.ccpl = parseInt(window.innerWidth / this.cardWidth);
+			this.ccpl = parseInt((window.innerWidth - sideWidth) / this.cardWidth);
 			for(var i=0; i<this.ccpl; i++)
 				this.cardPosition[i] = 0;
 			
@@ -113,17 +115,17 @@ $(document).ready(function()
 	var menu = null;
 	if(!$.query.menu || $.query.menu == "article")
 	{
-		menu = $(".menu li:first").get(0);
+		menu = $(".side .menu li:first a").get(0);
 	}
 	else
 	{
-		menu = $(".menu li a[href='?menu=" + $.query.menu + "']").parent().get(0);
+		menu = $(".side .menu li a[href^='?menu=" + $.query.menu + "']").get(0);
 	}
 	
 	if(menu)
 	{
 		var rect = menu.getBoundingClientRect();
-		$(".menu-arrow").css("top", rect.top + 5 + "px");
+		$(".menu-arrow").css("top", rect.top - 10 + "px");
 	}
 	
 	_cardSystem.refresh();

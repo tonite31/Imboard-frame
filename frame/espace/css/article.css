@@ -31,6 +31,21 @@
 	max-width: 100%;
 }
 
+.well
+{
+	background-color: white;
+}
+
+small[data-id]
+{
+	cursor: pointer;
+}
+
+small[data-id]:HOVER
+{
+	text-decoration: underline;	
+}
+
 @media (min-width: 800px)
 {
 	.article-subject

@@ -84,7 +84,11 @@ function bindReplyComment()
 
 		var form = document.createElement("form");
 		form.setAttribute("data-component", "form");
-		$(form).html($("#commentWriteTemplate").html());
+		
+		var signedUser = $.api.user.getSignedUser();
+		
+		var template = Handlebars.compile($("#commentWriteTemplate").html());
+		$(form).html(template({user : (signedUser.code == 1000 ? signedUser.data : null)}));
 
 		parent.append(form);
 
