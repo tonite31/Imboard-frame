@@ -39,13 +39,19 @@
 		</ul>
 		<ul class="menu small" style="padding-top: 30px;" data-bind="signedUser">
 			{{#if user}}
+			<li class="menu-item">
+				<a href="?menu=profile" id="nickname">
+				{{#if user.displayId}}
+					{{user.displayId}}
+				{{else}}
+					프로필을 작성해주세요
+				{{/if}}
+				</a>
+			</li>
 			{{#sign user.level "lt" 0}}
-				<li class="menu-item"><a href="?menu=profile">Alprensia</a></li>
-				<li class="menu-item"><a href="?menu=write&boardId=story">스토리 작성</a></li>
-				<li class="menu-item"><a href="/signout.do">로그아웃</a></li>
-			{{else}}
-				<li class="menu-item"><a href="/signin">로그인</a></li>
+			<li class="menu-item"><a href="?menu=write&boardId=story">스토리 작성</a></li>
 			{{/sign}}
+			<li class="menu-item"><a href="/signout.do">로그아웃</a></li>
 			{{else}}
 				<li class="menu-item"><a href="/signin">로그인</a></li>
 			{{/if}}

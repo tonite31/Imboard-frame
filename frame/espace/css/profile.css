@@ -1,0 +1,42 @@
+.profile-container
+{
+	position: fixed;
+	top:0;
+	left: 250px;
+	right:0;
+	bottom:0;
+}
+
+.textinput
+{
+	width: 100%;
+	padding: 10px 15px;
+	font-size:20px;
+}
+
+.vertical-bar
+{
+	display: inline-block;
+	vertical-align: middle;
+	width:0;
+	height: 100%;
+}
+
+.input-container
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 99%;
+}
+
+.input-container label
+{
+	font-size: 17px;
+}
+
+.input-row
+{
+	width: 50%;
+	margin:0 auto;
+	padding: 10px 0;
+}
