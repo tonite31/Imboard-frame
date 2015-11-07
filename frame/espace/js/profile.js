@@ -11,7 +11,7 @@ $(document).ready(function()
 			setTimeout(function()
 			{
 				$("#result").hide();
-			}, 1000);
+			}, 5000);
 		}
 	});
 });
