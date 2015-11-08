@@ -42,3 +42,13 @@
 	
 	font-size: 16px;
 }
+
+.toolbar
+{
+	padding: 10px 0;
+}
+
+#imageWidth, #imageHeight
+{
+	width: 80px;
+}

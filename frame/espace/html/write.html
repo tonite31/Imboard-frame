@@ -9,6 +9,13 @@
 			<button id="uploadImage" data-component="fileUploader" type="button" class="btn btn-default">이미지</button>
 			<button id="uploadYoutube" type="button" class="btn btn-default">유투브</button>
 		</p>
+		<div class="toolbar">
+			<p>
+				<span class="label label-primary">이미지 편집</span>
+				<input type="text" id="imageWidth" placeholder="가로" />px
+				<input type="text" id="imageHeight" placeholder="세로" />px
+			</p>
+		</div>
 		<div contenteditable="true" class="editor" id="editor">{{{content}}}</div>
 		<p style="margin-top: 10px;">
 			<input type="text" id="tag" name="tag" placeholder="태그를 입력하세요" style="vertical-align: middle; width: 200px; padding: 5px 10px;" class="textinput"/>
