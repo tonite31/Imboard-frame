@@ -126,14 +126,6 @@ a
 {
 	width: 100%;
 	opacity: 0.7;
-	min-height: 300px;
-/* 	-webkit-filter: grayscale(50%); */
-/* 	-moz-filter: grayscale(50%); */
-/*   	-ms-filter: grayscale(50%); */
-/*   	-o-filter: grayscale(50%); */
-/*   	filter: grayscale(50%); */
-/*   	filter: url(grayscale.svg); Firefox 4+ */
-/*   	filter: gray; IE 6-9 */
 }
 
 .card-cover
@@ -168,15 +160,16 @@ a
 	margin: 0;
 	padding-bottom: 10px;
 	font-size: 20px;
+	max-width: 70%;
 }
 
 .card-tag
 {
-	font-size: 14px;
+	font-size: 12px;
 	margin:0;
 	float:left;
 	display: inline-block;
-	max-width: 70%;
+	max-width: 50%;
 }
 
 .card-writer
@@ -184,7 +177,7 @@ a
 	color: white;
 	text-align: right;
 	margin:0;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 @media (min-width:800px)
