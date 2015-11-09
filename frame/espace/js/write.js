@@ -2,6 +2,10 @@ var savedSeq = null;
 
 var selectedResource = null;
 
+var thumbnailUrl = null;
+
+var setThumbnailMode = false;
+
 $(document).ready(function()
 {
 	savedSeq = $.query.seq;
@@ -16,16 +20,22 @@ $(document).ready(function()
 		}
 		else
 		{
-			var firstImg = $("#editor").find("img:first");
-			
-			if(firstImg.length > 0)
+			if(!thumbnailUrl)
 			{
-				var urls = firstImg.attr('src');
-				param.thumbnailUrl = urls;
+				var firstImg = $("#editor").find("img:first");
+				if(firstImg.length > 0)
+				{
+					var urls = firstImg.attr('src');
+					param.thumbnailUrl = urls;
+				}
+				
+				if(!param.thumbnailUrl)
+					param.thumbnailUrl = $("#editor").find("iframe[data-thumbnail-url]:first").attr("data-thumbnail-url");
 			}
-			
-			if(!param.thumbnailUrl)
-				param.thumbnailUrl = $("#editor").find("iframe[data-thumbnail-url]:first").attr("data-thumbnail-url");
+			else
+			{
+				param.thumbnailUrl = thumbnailUrl;
+			}
 			
 			param.boardId = $.query.boardId;
 			param.content = $("#editor").html();
@@ -116,6 +126,15 @@ $(document).ready(function()
 						
 						$(img).on("click load", function()
 						{
+							if(setThumbnailMode)
+							{
+								$(this).parent().find(".thumbnail-image").removeClass("thumbnail-image");
+								$(this).addClass("thumbnail-image");
+								thumbnailUrl = this.src;
+								
+								setThumbnailMode = false;
+							}
+							
 							selectResource(this);
 						});
 						
@@ -134,7 +153,6 @@ $(document).ready(function()
 		};
 
 		var result = $.api.article.uploadFile(param);
-		console.log("결과 : ", result);
 	});
 	
 	$("#uploadFile").compile(function(e)
@@ -197,6 +215,15 @@ $(document).ready(function()
 			
 			$(iframe).on("click load", function(e)
 			{
+				if(setThumbnailMode)
+				{
+					$(this).parent().find(".thumbnail-image").removeClass("thumbnail-image");
+					$(this).addClass("thumbnail-image");
+					thumbnailUrl = "http://img.youtube.com/vi/" + v + "/mqdefault.jpg";
+					
+					setThumbnailMode = false;
+				}
+				
 				selectResource(this);
 				e.preventDefault();
 				e.stopPropagation();
@@ -232,25 +259,21 @@ $(document).ready(function()
 		}
 	});
 	
+	$("#setThumbnail").on("click", function()
+	{
+		setThumbnailMode = true;
+	});
+	
 	$('[data-toggle="tooltip"]').tooltip();
 	
 	$("#editor").on("focus", function()
 	{
 		$("#editor").css("overflow", "none").css("height", "auto").css("min-height", "700px");
-
-		setTimeout(function()
-		{
-			var node = document.getSelection().anchorNode;
-			if(node && node.nodeName == "DIV")
-			{
-				$("body").animate({scrollTop : node.getBoundingClientRect().top});
-			}
-		}, 500);
 	});
 	
 	$("#editor").on("blur", function(e)
 	{
-		if(e.relatedTarget && $(e.relatedTarget).parent().attr("id") != "toolbar")
+		if(!e.relatedTarget || $(e.relatedTarget).parent().attr("id") != "toolbar")
 			$("#editor").css("overflow", "").css("height", "").css("min-height", "");
 	});
 	
@@ -389,6 +412,8 @@ var getSelectedNode = function(editor)
 			}
 		}
 	}
+	
+	return {};
 };
 
 var contains = function(a, b)

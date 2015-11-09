@@ -43,6 +43,11 @@
 	font-size: 16px;
 }
 
+.editor .thumbnail-image
+{
+	outline: 2px dashed #337ab7;
+}
+
 #toolbar
 {
 	text-align: center;
