@@ -5,17 +5,28 @@
 			<input type="hidden" name="seq" value="{{seq}}"/>
 			<input type="text" name="subject" class="textinput" placeholder="제목" value="{{subject}}" autofocus="autofocus" required="required"/>
 		</p>
-		<p>
-			<button id="uploadImage" data-component="fileUploader" type="button" class="btn btn-default">이미지</button>
-			<button id="uploadYoutube" type="button" class="btn btn-default">유투브</button>
+		<p id="toolbar">
+			<button type="button" id="uploadFile" class="btn btn-default" data-component="fileUploader" data-toggle="tooltip" data-placement="bottom" title="파일 삽입"><span class="glyphicon glyphicon-paperclip"></span></button>
+			<button type="button" id="uploadImage" class="btn btn-default" data-component="fileUploader" data-toggle="tooltip" data-placement="bottom" title="이미지 삽입"><span class="glyphicon glyphicon-picture"></span></button>
+			<button type="button" id="uploadYoutube" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="유투브 동영상 삽입"><span class="glyphicon glyphicon-film"></span></button>
+			<button type="button" id="uploadLink" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="링크 삽입"><span class="glyphicon glyphicon-link"></span></button>
+			
+			<span class="bar"></span>
+			
+<!-- 			<button type="button" class="btn btn-default" data-toggle="tooltip" data-tool-id="bold" data-placement="bottom" title="굵게"><span class="glyphicon glyphicon-bold"></span></button> -->
+<!-- 			<button type="button" class="btn btn-default" data-toggle="tooltip" data-tool-id="changeSize" data-placement="bottom" title="크기변경"><span class="glyphicon glyphicon-text-size"></span></button> -->
+			
+<!-- 			<span class="bar"></span> -->
+			
+<!-- 			<button type="button" class="btn btn-default" data-toggle="tooltip" data-tool-id="alignLeft" data-placement="bottom" title="왼쪽정렬"><span class="glyphicon glyphicon-align-left"></span></button> -->
+<!-- 			<button type="button" class="btn btn-default" data-toggle="tooltip" data-tool-id="alignCenter" data-placement="bottom" title="가운데정렬"><span class="glyphicon glyphicon-align-center"></span></button> -->
+<!-- 			<button type="button" class="btn btn-default" data-toggle="tooltip" data-tool-id="alignRight" data-placement="bottom" title="오른쪽정렬"><span class="glyphicon glyphicon-align-right"></span></button> -->
+			
+<!-- 			<span class="bar"></span> -->
+			
+			<input type="number" class="textinput" id="imageWidth" placeholder="가로" /> px	
+			<input type="number" class="textinput" id="imageHeight" placeholder="세로" /> px
 		</p>
-		<div class="toolbar">
-			<p>
-				<span class="label label-primary">이미지 편집</span>
-				<input type="text" id="imageWidth" placeholder="가로" />px
-				<input type="text" id="imageHeight" placeholder="세로" />px
-			</p>
-		</div>
 		<div contenteditable="true" class="editor" id="editor">{{{content}}}</div>
 		<p style="margin-top: 10px;">
 			<input type="text" id="tag" name="tag" placeholder="태그를 입력하세요" style="vertical-align: middle; width: 200px; padding: 5px 10px;" class="textinput"/>

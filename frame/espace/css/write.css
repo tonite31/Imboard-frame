@@ -32,7 +32,7 @@
 .editor
 {
 	width: 100%;
-	height: 500px;
+	height: 700px;
 	border: 1px solid #ccc;
 	overflow: auto;
 	position: relative;
@@ -43,12 +43,29 @@
 	font-size: 16px;
 }
 
-.toolbar
+#toolbar
 {
-	padding: 10px 0;
+	text-align: center;
+	z-index: 1000;
+	background-color: white;
 }
 
 #imageWidth, #imageHeight
 {
 	width: 80px;
+	padding: 4px;
+	font-size: 14px;
+}
+
+.bar
+{
+	display: inline-block;
+	width: 1px;
+	height: 15px;
+	
+	vertical-align: middle;
+	
+	background-color: #ccc;
+	
+	margin: 0 10px;
 }
