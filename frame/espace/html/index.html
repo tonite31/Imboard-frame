@@ -64,7 +64,11 @@
 			{{#each articleList}}
 			<div class="card">
 				<a href="?menu=article&boardId={{boardId}}&seq={{seq}}" class="card-cover"></a>
-				<img class="card-thumbnail" src="{{thumbnailUrl}}"/>
+				{{#if thumbnailUrl}}
+					<img class="card-thumbnail" src="{{thumbnailUrl}}" />
+				{{else}}
+					<img class="card-thumbnail" style="height:300px;" />
+				{{/if}}
 				<div class="card-info">
 					<h2 class="card-subject">{{subject}}</h2>
 					<p class="card-tag">{{{parseTag tag}}}</p>
