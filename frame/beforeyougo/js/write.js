@@ -14,17 +14,19 @@ $(document).ready(function()
 		$(body).find("img").on("click", function()
 		{
 			if(selectThumbnailMode)
+			{
 				thumbnailUrl = this.src;
-			
-			alert("선택한 이미지가 썸네일로 지정되었습니다");
+				alert("선택한 이미지가 썸네일로 지정되었습니다");
+			}
 		});
 		
 		$(body).find("iframe").on("click", function()
 		{
 			if(selectThumbnailMode)
+			{
 				thumbnailUrl = this.src;
-			
-			alert("선택한 이미지가 썸네일로 지정되었습니다");
+				alert("선택한 이미지가 썸네일로 지정되었습니다");
+			}
 		});
 	});
 	
