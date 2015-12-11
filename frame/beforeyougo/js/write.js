@@ -8,6 +8,26 @@ $(document).ready(function()
 	
 	CKEDITOR.replace("ckeditor", { height: 500 });
 	
+	CKEDITOR.on('instanceReady', function()
+	{
+		var body = CKEDITOR.instances.ckeditor.document.$.body;
+		$(body).find("img").on("click", function()
+		{
+			if(selectThumbnailMode)
+				thumbnailUrl = this.src;
+			
+			alert("선택한 이미지가 썸네일로 지정되었습니다");
+		});
+		
+		$(body).find("iframe").on("click", function()
+		{
+			if(selectThumbnailMode)
+				thumbnailUrl = this.src;
+			
+			alert("선택한 이미지가 썸네일로 지정되었습니다");
+		});
+	});
+	
 	if($.query.boardId)
 	{
 		$("#boardName").text($("#boardList a[data-value='" + $.query.boardId + "']").text());
