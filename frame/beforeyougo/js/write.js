@@ -1,5 +1,7 @@
 var savedSeq = null;
 var selectedBoardId = null;
+var selectThumbnailMode = false;
+var thumbnailUrl = "";
 $(document).ready(function()
 {
 	savedSeq = $.query.seq;
@@ -41,6 +43,9 @@ $(document).ready(function()
 				var urls = firstImg.attr('src');
 				param.thumbnailUrl = urls;
 			}
+			
+			if(thumbnailUrl)
+				param.thumbnailUrl = thumbnailUrl;
 			
 			if(!param.thumbnailUrl)
 				param.thumbnailUrl = $(body).find("iframe[data-thumbnail-url]:first").attr("data-thumbnail-url");
@@ -130,6 +135,8 @@ $(document).ready(function()
 				}
 				else
 				{
+					var body = CKEDITOR.instances.ckeditor.document.$.body;
+					
 					result = result.data;
 					for(var i=0; i<result.length; i++)
 					{
@@ -137,7 +144,16 @@ $(document).ready(function()
 						
 						var img = document.createElement("img");
 						img.src = src.replace(".gif", ".png");
+						img.id = "img-" + new Date().getTime() + "-" + i;
 						CKEDITOR.instances.ckeditor.insertHtml(img.outerHTML);
+						
+						$(body).find("#" + img.id).on("click", function()
+						{
+							if(selectThumbnailMode)
+								thumbnailUrl = this.src;
+							
+							alert("선택한 이미지가 썸네일로 지정되었습니다");
+						});
 					}
 				}
 			},
@@ -156,10 +172,24 @@ $(document).ready(function()
 		var text = prompt("URL을 입력해주세요");
 		if(text)
 		{
+			var id = "img-" + new Date().getTime();
 			var v = text.replace(/http[s]?:\/\/youtu.be\//gi, "").replace(/http[s]?:\/\/www.youtube.com\/watch\?v=/gi, "");
-			var html = "<iframe data-focus='true' style='width:640px; height:360px;' data-thumbnail-url='http://img.youtube.com/vi/" + v + "/mqdefault.jpg' src='//www.youtube.com/embed/" + v + "' frameborder='0' allowfullscreen></iframe>";
+			var html = "<iframe id='" + id + "' data-focus='true' style='width:640px; height:360px;' data-thumbnail-url='http://img.youtube.com/vi/" + v + "/mqdefault.jpg' src='//www.youtube.com/embed/" + v + "' frameborder='0' allowfullscreen></iframe>";
 			CKEDITOR.instances.ckeditor.insertHtml(html);
+			
+			$(body).find("#" + img.id).on("click", function()
+			{
+				if(selectThumbnailMode)
+					thumbnailUrl = "http://img.youtube.com/vi/" + v + "/mqdefault.jpg";
+				
+				alert("선택한 이미지가 썸네일로 지정되었습니다");
+			});
 		}
+	});
+	
+	$("#selectThumbnail").on("click", function()
+	{
+		selectThumbnailMode = !selectThumbnailMode;
 	});
 });
 

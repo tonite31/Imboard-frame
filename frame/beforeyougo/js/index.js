@@ -122,7 +122,7 @@ $(document).ready(function()
 	{
 		if($(window).scrollTop() + $(window).height() == $(document).height())
 		{
-			var result = $.api.article.getArticleList({boardId : $.query.boardId, searchData : {startIndex : (page-1) * cpp, endIndex : cpp, withContent : true}});
+			var result = $.api.article.getArticleList({boardId : "life", searchData : {startIndex : (page-1) * cpp, endIndex : cpp, withContent : true}});
 			if(result && result.code == 1000 && result.data.length > 0)
 			{
 				page++;
