@@ -88,7 +88,7 @@ $(document).ready(function()
 					if(savedSeq)
 						location.href = "?fragment=article&boardId=" + $.query.boardId + "&seq=" + $.query.seq;
 					else
-						location.href = "?fragment=list&boardId=" + $.query.boardId;
+						location.href = "?boardId=" + $.query.boardId;
 				}
 			}
 		}

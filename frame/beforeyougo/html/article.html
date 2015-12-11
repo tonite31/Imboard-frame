@@ -52,7 +52,7 @@
 	        <a href="?fragment=write&boardId={{boardId}}&seq={{seq}}" class="btn btn-default">수정</a>
 	        <button type="button" id="deleteArticle" class="btn btn-default" data-board-id="{{boardId}}" data-seq="{{seq}}">삭제</button>
 	        {{/equals}}
-	        <a class="btn btn-default" href="?fragment=list&boardId=#{query.boardId}">목록보기</a>
+	        <a class="btn btn-default" href="?boardId=#{query.boardId}">목록보기</a>
 		</div>
     </div>
 	<div id="commentList" style="margin: 30px 0;" data-bind="commentList" data-param='{"boardId" : "#{query.boardId}", "articleSeq" : "#{query.seq}"}' data-template-id="communityCommentTemplate"></div>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="#{path.root}/lib/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="#{path.module}/imboard/css/imboard-ui.css" />
 <link rel="stylesheet" type="text/css" href="#{path.root}/css/index.css"/>
+<link rel="stylesheet" type="text/css" href="#{path.root}/css/list.css"/>
 
 <script src="#{path.lib}/jquery/jquery-1.10.2.js"></script>
 <script src="#{path.root}/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -24,6 +25,37 @@
 <script src="#{path.root}/properties/handlebars/helper.js"></script>
 
 <script src="#{path.root}/lib/ckeditor/ckeditor.js"></script>
+<script id="articleListTemplate" type="text/x-handlebars-template" data-precompile="true">
+{{#if articleList}}
+{{#each articleList}}
+<div class="card">
+	<div class="article-container">
+		<div class="article-subject">
+			<h2>
+				<span class="icons">
+					<span class="glyphicon glyphicon-eye-open"></span><span>{{hit}}</span>
+					<span class="glyphicon glyphicon-bullhorn"></span><span>{{commentCount}}</span>
+				</span>
+				{{subject}}
+			</h2>
+		</div>
+		<div class="article-content">
+			{{#if thumbnailUrl}}
+			<img src="{{thumbnailUrl}}">
+			{{/if}}
+			<article>{{{textThumbnail content "&lt;/p&gt;" 5}}}</article>
+		</div>
+		{{#if tag}}
+		<div class="article-tag">
+			{{{parseTag tag}}}
+		</div>
+		{{/if}}
+	</div>
+	<a class="article-corver" href="?fragment=article&boardId={{boardId}}&seq={{seq}}"></a>
+</div>
+{{/each}}
+{{/if}}
+</script>
 </head>
 <body>
 	<div class="title">
@@ -31,38 +63,28 @@
 	</div>
 	<div>
 		<ul class="nav nav-tabs" data-bind="boardList">
-			<li role="presentation" class="active"><a href="/">표지</a></li>
+			{{#equals "#{user.id}" "admin"}}
 			{{#if boardList}}
 			{{#each boardList}}
-			<li role="presentation"><a href="?fragment=list&boardId={{id}}">{{name}}</a></li>
+			<li role="presentation"><a href="?boardId={{id}}">{{name}}</a></li>
 			{{/each}}
 			{{/if}}
+			{{/equals}}
 		</ul>
 	</div>
 	<div class="container" data-fragment="fragment">
-		<div class="col-xs-7" data-bind="articleList" data-param='{"boardId" : "corver", "searchData" : {"startIndex" : 0, "endIndex" : 1}}'>
-		{{#each articleList}}
-			<h2 class="corver-title">{{subject}}</h2>
-			<a href="?fragment=article&boardId={{boardId}}&seq={{seq}}"><img src="{{thumbnailUrl}}" class="thumbnail-image" /></a>
-		{{/each}}
-		</div>
-		<div class="col-xs-5" data-bind="boardList">
-		{{#if boardList}}
-		{{#each boardList}}
-		{{#notequals id "corver"}}
-		<div class="category">
-			<h2><a href="?fragment=list&boardId={{id}}">{{name}}</a></h2>
-			<div data-bind="articleList" data-param='{"boardId" : "{{id}}", "searchData" : {"startIndex" : 0, "endIndex" : 5}}'>
-			{{#if articleList}}
-			{{#each articleList}}
-				<h3><a href="?fragment=article&boardId={{boardId}}&seq={{seq}}">{{subject}}</a></h3>
-			{{/each}}
-			{{/if}}
+		<div id="articleList">
+			<div class="card" data-bind="articleList" data-param='{"boardId" : "corver", "searchData" : {"startIndex" : 0, "endIndex" : 1}}'>
+				{{#if articleList}}
+				{{#each articleList}}
+					{{#if thumbnailUrl}}
+					<img class="corver-image" src="{{thumbnailUrl}}">
+					{{/if}}
+					<a class="article-corver" href="?fragment=article&boardId={{boardId}}&seq={{seq}}"></a>
+				{{/each}}
+				{{/if}}
 			</div>
-		</div>
-		{{/notequals}}
-		{{/each}}
-		{{/if}}
+			<div data-bind="articleList" data-param='{"boardId" : "#{query.boardId}", "searchData" : {"startIndex" : 0, "endIndex" : 10, "withContent" : "true"}}' data-precompile="true" data-template-id="articleListTemplate"></div>
 		</div>
 	</div>
 	<div class="signin-container" data-bind="signedUser">
